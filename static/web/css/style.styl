@@ -1,0 +1,214 @@
+$odecopack-color_1 = #ed6b00
+$odecopack-color_2 = #211915
+$odecopack-color_3 = #ECEDEF
+$odecopack-color_4 = #5B5B5F
+
+body
+  background-color $odecopack-color_3
+
+.color-1-odecopack
+  background-color $odecopack-color_1 !important
+
+.color-2-odecopack
+  background-color $odecopack-color_2 !important
+
+.color3-odecopack
+  background-color $odecopack-color_3 !important
+
+.color-4-odecopack
+  background-color $odecopack-color_4 !important
+
+.bg-odecopack
+  background-color white !important
+
+.navbar-toggler-icon
+  cursor pointer
+
+.nav-link
+  color black !important
+
+.nav-item
+  &.right-border
+    border-right 1px solid $odecopack-color_1
+
+.navbar
+  box-shadow none
+  margin 0 !important
+  padding 0 !important
+  font-weight bold
+
+.navbar-brand
+  padding 0.2rem !important
+  width 210px !important
+  height 3rem
+  position relative
+  background-color $odecopack-color_1
+  margin-right 3rem
+
+.navbar-brand:after
+  content ''
+  position absolute
+  top 0
+  left 210px
+  border-top 3rem solid $odecopack-color_1
+  border-right 3rem solid white
+  width 3rem
+
+.cabezote
+  .card
+    background rgba(0, 0, 0, 0.4)
+    color white
+  .left
+    position absolute
+    left 0
+  .right
+    position absolute
+    right 0
+  .card-text
+    color white
+
+.jarallax
+  min-height 500px
+
+footer
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  input[type=url],
+  input[type=time],
+  input[type=date],
+  input[type=datetime-local],
+  input[type=tel],
+  input[type=number],
+  input[type=search-md],
+  input[type=search],
+  textarea.md-textarea
+    background-color white
+    margin 0
+    padding 0
+    border-radius 5px
+
+  .md-form
+    margin-bottom 0.5rem
+
+.barra-soluciones
+  margin-top -9rem
+  .botones-soluciones
+    .boton
+      margin 0 !important
+      padding 0 !important
+      text-align center !important
+      .contenido
+        height 100%
+        background-color white
+        color black
+        border 1px solid $odecopack-color_3
+        padding-top 3rem
+        padding-bottom 3rem
+      .contenido:hover
+        border none
+        background-image url("../img/fondo_botones_hover.jpg")
+        background-repeat no-repeat
+        background-size auto
+    a
+      color inherit
+      text-decoration inherit
+
+//.index
+//  h1
+//    margin 0, 0, 0, 0
+//    padding  0, 0, 0, 0
+//    color white
+//    background-color $odecopack-color_1
+
+.index
+  .nav-tabs
+    font-size 0.8rem
+    background-color transparent
+    box-shadow none
+  .nav-link.active
+    background-color $odecopack-color_1 !important
+    color white !important
+  .md-pills
+    li
+      padding 0 !important
+
+.index-empresa
+  p
+    color: #757575;
+  .botones-empresa
+    height 100%
+    .boton
+      padding 1px
+      .contenido
+        height 100%
+        background-color white
+
+hr
+  border-top 1px solid $odecopack-color_1
+
+.path-prueba,
+.icono-svg
+  width 30%
+  fill tomato
+  fill-rule evenodd
+
+/* no underline */
+
+.streak
+  display block
+  position relative
+  overflow hidden
+  background #e5e5e5
+  height 250px
+  &.streak-lg
+    height 400px
+  &.streak-photo
+    background-size cover
+    background-position center
+    background-repeat no-repeat
+  &.no-flex
+    padding-top 3.125rem
+    padding-bottom 3.125rem
+    height auto
+
+@media (max-width: 450px)
+  .streak
+    &.streak-long
+      height 600px
+
+@media (min-width: 1366px)
+  .streak
+    &.streak-photo
+      background-attachment fixed
+
+.streak .flex-center ul, .streak .card-overlay ul, .streak .card .card-circle ul, .card .streak .card-circle ul, .streak .testimonial-carousel .testimonial .avatar ul, .testimonial-carousel .testimonial .streak .avatar ul, .streak .section.team-section .avatar ul, .section.team-section .streak .avatar ul
+  margin-bottom 0
+
+.streak .flex-center ul li:last-child, .streak .card-overlay ul li:last-child, .streak .card .card-circle ul li:last-child, .card .streak .card-circle ul li:last-child, .streak .testimonial-carousel .testimonial .avatar ul li:last-child, .testimonial-carousel .testimonial .streak .avatar ul li:last-child, .streak .section.team-section .avatar ul li:last-child, .section.team-section .streak .avatar ul li:last-child
+  margin-bottom 0
+
+.streak .flex-center ul li h1, .streak .card-overlay ul li h1, .streak .card .card-circle ul li h1, .card .streak .card-circle ul li h1, .streak .testimonial-carousel .testimonial .avatar ul li h1, .testimonial-carousel .testimonial .streak .avatar ul li h1, .streak .section.team-section .avatar ul li h1, .section.team-section .streak .avatar ul li h1, .streak .flex-center ul li h2, .streak .card-overlay ul li h2, .streak .card .card-circle ul li h2, .card .streak .card-circle ul li h2, .streak .testimonial-carousel .testimonial .avatar ul li h2, .testimonial-carousel .testimonial .streak .avatar ul li h2, .streak .section.team-section .avatar ul li h2, .section.team-section .streak .avatar ul li h2, .streak .flex-center ul li h3, .streak .card-overlay ul li h3, .streak .card .card-circle ul li h3, .card .streak .card-circle ul li h3, .streak .testimonial-carousel .testimonial .avatar ul li h3, .testimonial-carousel .testimonial .streak .avatar ul li h3, .streak .section.team-section .avatar ul li h3, .section.team-section .streak .avatar ul li h3, .streak .flex-center ul li h4, .streak .card-overlay ul li h4, .streak .card .card-circle ul li h4, .card .streak .card-circle ul li h4, .streak .testimonial-carousel .testimonial .avatar ul li h4, .testimonial-carousel .testimonial .streak .avatar ul li h4, .streak .section.team-section .avatar ul li h4, .section.team-section .streak .avatar ul li h4, .streak .flex-center ul li h5, .streak .card-overlay ul li h5, .streak .card .card-circle ul li h5, .card .streak .card-circle ul li h5, .streak .testimonial-carousel .testimonial .avatar ul li h5, .testimonial-carousel .testimonial .streak .avatar ul li h5, .streak .section.team-section .avatar ul li h5, .section.team-section .streak .avatar ul li h5
+  margin-bottom 0
+
+.photo-2
+  background-image url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img%20%2818%29.jpg")
+
+.hm-black-strong .mask,
+.hm-black-strong .full-bg-img
+  background-color rgba(0, 0, 0, 0.7)
+
+.logos-panel
+  img
+    max-width 90%
+    margin-left auto
+    margin-right auto
+
+.background-white
+  background-color white
+
+
+.soluciones
+  .lista
+    .item
+      height 100%

@@ -1,0 +1,19 @@
+{% extends 'web/base/base.html' %}
+{% load static %}
+
+{% block title %}
+    Inicio
+{% endblock %}
+
+{% block menu %}
+    {% include 'web/base/menu.html' with es_menu_index=True %}
+{% endblock %}
+
+{% block cabezote %}
+    {% include 'web/base/cabezote.html' with titulo="ODECOPACK 2" texto="With supporting text below as a natural lead-in to additional content." imagen="https://cdn-images-1.medium.com/max/1920/1*8i_QS0FtL6vO181YaXApxg.jpeg" %}
+{% endblock %}
+
+{% block content %}
+    {% include 'web/empresa.html' %}
+    {% include 'web/clientes.html' %}
+{% endblock %}

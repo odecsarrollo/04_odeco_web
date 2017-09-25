@@ -1,0 +1,27 @@
+{% extends 'web/base/base.html' %}
+{% load static %}
+
+{% block title %}
+    Solución
+{% endblock %}
+
+
+{% block cabezote %}
+    {% include 'web/base/cabezote.html' with titulo="EQUIPOS ODECOPACK" texto="With supporting text below as a natural lead-in to additional content." imagen="https://cdn-images-1.medium.com/max/1920/1*8i_QS0FtL6vO181YaXApxg.jpeg" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <section class="section mt-3 soluciones">
+            <div class="flex-center">
+                <div class="row lista justify-content-center">
+                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi fuga fugit in ipsum iusto maxime officiis quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
+                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi." %}
+                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
+                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi fuga fugit in ipsum iusto maxime officiis quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}
