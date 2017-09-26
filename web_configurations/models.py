@@ -1,0 +1,68 @@
+from django.db import models
+from solo.models import SingletonModel
+from tinymce import HTMLField
+from imagekit.models import ProcessedImageField
+from pilkit.processors import ResizeToFit, SmartResize
+
+from web.utils import get_image_name
+
+
+class IndexConfiguration(SingletonModel):
+    def header_imagen_upload_to(instance, filename):
+        new_filename = get_image_name('Header', filename)
+        return "web/img/index/%s" % new_filename
+
+    header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
+    header_text = models.TextField(max_length=150, default='Aqui la descripción')
+    header_imagen = ProcessedImageField(
+        processors=[SmartResize(width=2560, height=588, upscale=False)],
+        format='JPEG',
+        options={'quality': 70},
+        upload_to=header_imagen_upload_to,
+        verbose_name='Imagen Cabezote',
+        null=True,
+        blank=True
+    )
+
+    def __unicode__(self):
+        return "Index"
+
+    class Meta:
+        verbose_name = "Index"
+
+
+class GeneralConfiguration(SingletonModel):
+    direccion = models.CharField(max_length=200, default='Dirección aquí', verbose_name='Dirección')
+    horarios_de_atencion = HTMLField('Horarios de Atención', default='Texto Horarios de Atención aquí')
+    numeros_contacto = HTMLField('Numeros de Contacto', default='Numeros de contacto', null=True, blank=True)
+    correos_contacto = HTMLField('Correos de Contacto', default='Correos de contacto', null=True, blank=True)
+
+    def __unicode__(self):
+        return "General"
+
+    class Meta:
+        verbose_name = "General"
+
+
+class LaEmpresaConfiguration(SingletonModel):
+    def imagen_principal_upload_to(instance, filename):
+        new_filename = get_image_name('La Empresa Principal', filename)
+        return "web/img/empr/%s" % new_filename
+
+    titulo = models.CharField(max_length=150, default='Aqui el titulo')
+    texto = HTMLField('Horarios de Atención', default='Aqui la descripción')
+    imagen_principal = ProcessedImageField(
+        processors=[SmartResize(width=570, height=362, upscale=False)],
+        format='JPEG',
+        options={'quality': 70},
+        upload_to=imagen_principal_upload_to,
+        verbose_name='Imagen Principal',
+        null=True,
+        blank=True
+    )
+
+    def __unicode__(self):
+        return "La Empresa"
+
+    class Meta:
+        verbose_name = "La Empresa"

@@ -1,44 +1,32 @@
-<!-- Footer -->
+{% load solo_tags %}
+{% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 <footer class="page-footer color-4-odecopack center-on-small-only">
-
-    <!-- Footer Links -->
     <div class="container">
         <div class="row">
-
-            <!-- First column -->
             <div class="col-12 col-md-6 col-lg-3 mt-2">
                 <h6 class="title font-bold">Información de Contacto</h6>
-                <p>Here you can use rows and columns here to organize your footer content.</p>
+                <p>{{ general_configuracion.horarios_de_atencion|safe }}</p>
+                <p>{{ general_configuracion.numeros_contacto|safe }}</p>
+                <p>{{ general_configuracion.correos_contacto|safe }}</p>
             </div>
-            <!-- First column -->
-
-            <!-- Second column -->
             <div class="col-12 col-md-6 col-lg-3 mt-2">
-                <!--Google map-->
                 <div id="map-container" class="z-depth-1" style="height: 200px"></div>
+                <p class="text-center"><i class="fa fa-map-marker"
+                                          aria-hidden="true"></i> {{ general_configuracion.direccion }}</p>
             </div>
-            <!-- Second column -->
-
-            <!-- Third column -->
             <div class="col-12 col-md-12 col-lg-6 mt-2">
-                <!--Section: Contact v.2-->
                 <section class="section">
                     <h6 class="title font-bold">Formulario de contacto</h6>
                     <div class="row">
                         <!--Grid column-->
                         <div class="col-md-12 p-0 m-0">
                             <form id="contact-form" name="contact-form" method="POST" class="p-0 m-0">
-                                <!--Grid row-->
-                                <!--Grid column-->
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="name" name="name" class="form-control"
                                                placeholder="nombre">
                                     </div>
                                 </div>
-                                <!--Grid column-->
-
-                                <!--Grid column-->
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <div class="md-form">
@@ -47,15 +35,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--Grid column-->
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="subject" name="subject" class="form-control"
                                                placeholder="asunto">
                                     </div>
                                 </div>
-
-                                <!--Grid column-->
                                 <div class="col-md-12">
                                     <div class="md-form">
                                             <textarea type="text" id="message" name="message"
@@ -63,7 +48,6 @@
                                     </div>
 
                                 </div>
-                                <!--Grid row-->
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">
                                         <a class="btn color-1-odecopack">Enviar</a>
@@ -71,24 +55,14 @@
                                 </div>
                             </form>
                         </div>
-                        <!--Grid column-->
                     </div>
                 </section>
-                <!--Section: Contact v.2-->
             </div>
-            <!-- Third column -->
         </div>
     </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
     <div class="footer-copyright">
         <div class="container-fluid">
             © 2017 Copyright: Odecopack
-
         </div>
     </div>
-    <!-- Copyright -->
-
 </footer>
-<!-- Footer -->

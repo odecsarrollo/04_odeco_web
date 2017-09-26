@@ -1,62 +1,19 @@
-{% load static %}
+{% load static inclusion_tags %}
 <div class="view hm-stylish-light jarallax cabezote" data-jarallax='{"speed": 0.2}'
      style="background-image: url({{ imagen }});">
     <div class="full-bg-img">
         <div class="container flex-center">
             <div class="card right ml-5">
                 <div class="card-header color-1-odecopack lighten-1 white-text">
-                    <h3>{{ titulo }}</h3>
+                    <h3>{{ titulo|upper }}</h3>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">{{ texto }}</p>
-                </div>
+                {% if texto %}
+                    <div class="card-body">
+                        <p class="card-text">{{ texto }}</p>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
-<div class="container barra-soluciones">
-    <section id="soluciones" class="section m-0 p-0">
-        <div class="row botones-soluciones">
-            <div class="col-6 col-sm-3 boton">
-                <a href="{% url 'solucion' %}">
-                    <div class="contenido">
-                        <img class="icono-svg" src="{% static 'web/img/svg/botones-soluciones-factory.svg' %}">
-                        <h6 class="h6-responsive mt-2">
-                            Bandas Transportadoras / Conveyors
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-sm-3 boton">
-                <a href="{% url 'solucion' %}">
-                    <div class="contenido">
-                        <img class="icono-svg" src="{% static 'web/img/svg/botones-soluciones-technology.svg' %}">
-                        <h6 class="h6-responsive mt-2">
-                            Equipos Odecopack
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-sm-3 boton">
-                <a href="{% url 'solucion' %}">
-                    <div class="contenido">
-                        <img class="icono-svg" src="{% static 'web/img/svg/botones-soluciones-factory.svg' %}">
-                        <h6 class="h6-responsive mt-2">
-                            Soluciones Integrales
-                        </h6>
-                    </div>
-                </a>
-            </div>
-            <div class="col-6 col-sm-3 boton">
-                <a href="{% url 'solucion' %}">
-                    <div class="contenido">
-                        <img class="icono-svg" src="{% static 'web/img/svg/botones-soluciones-warehouse.svg' %}">
-                        <h6 class="h6-responsive mt-2">
-                            Bandas y Componenetes para Conveyors
-                        </h6>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-</div>
+{% botones_soluciones %}

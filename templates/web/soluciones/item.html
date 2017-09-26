@@ -1,98 +1,97 @@
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
         <h4 class="card-title">
-            Ave
+            {{ item.nombre }}
         </h4>
-        <div class="row">
-            <div class="col-12 col-md-6">
+        <div class="row mb-4">
+            <div class="col-12">
                 <img class="img-fluid"
-                     src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                     alt="">
+                     src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
+                <p class="card-text text-justify mt-3">
+                    {{ item.descripcion_corta }}
+                </p>
             </div>
-            <div class="col-12 col-md-6">
-                <div class="row">
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                    <div class="col-4 col-lg-3 p-0 m-0">
-                        <img class="img-fluid"
-                             src="http://s3-us-west-2.amazonaws.com/odecopack-wordpress/odecopage/wp-content/uploads/2016/02/26150449/ave-chains-1-1-300x157.png"
-                             alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <p class="card-text text-justify mt-3">
-            {{ text }}
-        </p>
 
-        <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal" data-target="#basicExample">
-            <h5 class="waves-effect p-2">Ver más <i class="fa fa-chevron-right"></i></h5>
-        </a>
+            {% with imagenes_lista=item.mis_imagenes.all %}
+                {% if imagenes_lista %}
+                    <div class="col-12 galeria">
+                        <div class="mdb-lightbox">
+                            <div class="flex-center">
+                                <div class="row justify-content-center">
+                                    {% for imagen in imagenes_lista %}
+                                        <figure class="col-4 col-md-4 p-1 m-0">
+                                            <a href="{{ imagen.imagen.url }}"
+                                               data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                                <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                     alt=""
+                                                >
+                                            </a>
+                                            {% if imagen.descripcion %}
+                                                <div class="caption">
+                                                    <p>{{ imagen.descripcion }}</p>
+                                                </div>
+                                            {% endif %}
+                                        </figure>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% if item.mas %}
+            <a href="#" class="black-text d-flex flex-row-reverse ver_mas" data-toggle="modal"
+               data-target="#itemSolucion{{ item.pk }}">
+                <h5 class="waves-effect p-2">Ver más <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        {% endif %}
     </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade right" id="basicExample" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade right" id="itemSolucion{{ item.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-fluid" role="document">
+    <div class="modal-dialog modal-fluid item" role="document">
         <!--Content-->
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header">
-                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title w-100" id="myModalLabel">{{ item.nombre }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!--Body-->
             <div class="modal-body">
-                <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, asperiores corporis delectus
-                    deleniti dicta doloribus excepturi minus nemo odit perferendis perspiciatis quae quas, recusandae
-                    repellendus repudiandae suscipit unde, vitae voluptatum?
-                </div>
-                <div>Assumenda deserunt dignissimos nesciunt omnis quos sapiente, tempora? Enim facere placeat quam
-                    repellat vel. Error expedita id laboriosam minus nesciunt perspiciatis quo sint voluptatum.
-                    Blanditiis dolores necessitatibus quod sapiente veritatis?
-                </div>
-                <div>Accusantium beatae consequatur dolor dolores dolorum, eius et illum, incidunt ipsum necessitatibus
-                    porro provident quam quidem ratione recusandae reiciendis reprehenderit repudiandae sint vitae
-                    voluptate? Inventore officia officiis quae quos veniam.
-                </div>
-                <div>Adipisci aut, beatae cum dolore doloremque inventore labore minus, molestias odio possimus quis,
-                    voluptate? Ab aliquam culpa debitis ducimus iste maxime nam necessitatibus rem similique sint
-                    suscipit tempore veniam, voluptatum.
-                </div>
-                <div>Cupiditate fugit labore officiis. Consequatur ducimus exercitationem fugiat minima modi quam quo
-                    quos rem vero voluptates? Animi consequatur cum error esse facilis nam, porro rem saepe sunt ut
-                    vitae voluptatum.
-                </div>
+                {{ item.mas|safe }}
+                {% with imagenes_lista=item.mis_imagenes.all %}
+                    <div class="mdb-lightbox">
+                        <div class="flex-center galeria">
+                            <div class="row justify-content-center">
+                                {% for imagen in imagenes_lista %}
+                                    <figure class="col-4 col-md-2 p-1 m-0">
+                                        <a href="{{ imagen.imagen.url }}"
+                                           data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                 alt=""
+                                            >
+                                        </a>
+                                        {% if imagen.descripcion %}
+                                            <div class="caption">
+                                                <p>{{ imagen.descripcion }}</p>
+                                            </div>
+                                        {% endif %}
+                                    </figure>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">Close</button>
+                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
         <!--/.Content-->

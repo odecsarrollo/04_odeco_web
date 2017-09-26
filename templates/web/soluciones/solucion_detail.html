@@ -2,26 +2,41 @@
 {% load static %}
 
 {% block title %}
-    Solución
+    {{ solucion_objeto.nombre }}
 {% endblock %}
 
 
 {% block cabezote %}
-    {% include 'web/base/cabezote.html' with titulo="EQUIPOS ODECOPACK" texto="With supporting text below as a natural lead-in to additional content." imagen="https://cdn-images-1.medium.com/max/1920/1*8i_QS0FtL6vO181YaXApxg.jpeg" %}
+    {% include 'web/base/cabezote.html' with titulo=solucion_objeto.nombre texto=solucion_objeto.descripcion_corta imagen=solucion_objeto.header_imagen.url %}
 {% endblock %}
 
 
 {% block content %}
-    <div class="container">
-        <section class="section mt-3 soluciones">
-            <div class="flex-center">
-                <div class="row lista justify-content-center">
-                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi fuga fugit in ipsum iusto maxime officiis quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
-                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi." %}
-                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
-                    {% include 'web/soluciones/item.html' with text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, assumenda autem consectetur earum eius excepturi fuga fugit in ipsum iusto maxime officiis quis quisquam sapiente suscipit undeut, veritatis voluptatibus." %}
+    {% with items_list=solucion_objeto.mis_items.all %}
+        {% if items_list %}
+            <div class="container">
+                <div id="mdb-lightbox-ui">
+                    <!-- Root element of PhotoSwipe. Must have class pswp. -->
                 </div>
+                <section class="section mt-3 soluciones">
+                    <div class="flex-center">
+                        <div class="row lista justify-content-center">
+                            {% for item in items_list %}
+                                {% include 'web/soluciones/item.html' with item=item %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
-    </div>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
+
+<script>
+    {% block final_scripts %}
+        {{ block.super }}
+        $(function () {
+            $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+        });
+    {% endblock %}
+</script>

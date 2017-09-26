@@ -1,12 +1,16 @@
-{% load static %}
+{% load static solo_tags %}
+{% get_solo 'web_configurations.LaEmpresaConfiguration' as empresa_configuracion %}
+
 <div class="container index">
     <section id="empresa" class="section mt-3">
-        <h1 class="section-heading h1 pt-4 left">ODECOPACK</h1>
+        <h1 class="section-heading h1 pt-4 left">{{ empresa_configuracion.titulo }}</h1>
 
         <div class="row index-empresa">
-            <div class="col-12 col-sm-6 p-0 m-0">
-                <img class="img-fluid" src="{% static 'web/img/1-fachada-odecopack1.jpg' %}" alt="">
-            </div>
+            {% if empresa_configuracion.imagen_principal %}
+                <div class="col-12 col-sm-6 p-0 m-0">
+                    <img class="img-fluid" src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
+                </div>
+            {% endif %}
             <div class="col-12 col-sm-6 botones-empresa">
                 <div>
                     <div class="row">
@@ -46,17 +50,8 @@
         </div>
         <div class="col-12">
 
-            <p class="text-center p-2 p-md-3">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem beatae blanditiis dignissimos eos
-                et
-                facilis inventore ipsa laboriosam laborum magni modi, molestias nisi praesentium quam rem rerum
-                sapiente,
-                temporibus.
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A autem beatae blanditiis dignissimos eos
-                et
-                facilis inventore ipsa laboriosam laborum magni modi, molestias nisi praesentium quam rem rerum
-                sapiente,
-                temporibus.
+            <p class="text-center p-2 p-md-3 green-text">
+                {{ empresa_configuracion.texto|safe }}
             </p>
         </div>
 
@@ -207,51 +202,25 @@
 </div>
 
 
-<div class="streak streak-photo streak-long view photo-2 mt-4">
-    <div class="hm-black-strong">
-        <div class="mask flex-center">
-            <div class="container justify-content-center">
 
-                <h4 class="text-center text-white mb-2 font-up font-bold wow fadeIn" data-wow-delay="0.2s">
-                    NUESTROS ALIADOS</h4>
-                <!--First row-->
-                <div class="row text-white text-center wow fadeIn" data-wow-delay="0.2s">
-                    <!--First column-->
-                    <!--First column-->
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-ALLEN-BRADLEY-11.png' %}" class="img-fluid">
+{% with aliados_lista=aliados_list %}
+    {% if aliados_lista %}
+        <div class="streak streak-photo streak-long view photo-2 mt-4">
+            <div class="hm-black-strong">
+                <div class="mask">
+                    <h4 class="text-center text-white mb-2 font-up font-bold wow fadeIn mt-2" data-wow-delay="0.2s">
+                        NUESTROS ALIADOS</h4>
+                    <div class="container flex-center">
+                        <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
+                            {% for aliado in aliados_lista %}
+                                <div class="col-lg-2 col-md-3 col-4">
+                                    <img src="{{ aliado.logo.url }}" alt="{{ aliado.logo.nombre }}" class="img-fluid">
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <!--/First column-->
-
-                    <!--Second column-->
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-MAKITA1.png' %}" class="img-fluid">
-                    </div>
-                    <!--/Second column-->
-
-                    <!--Third column-->
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-OLFLEX1.png' %}" class="img-fluid">
-                    </div>
-                    <!--/Third column-->
-
-                    <!--Fourth column-->
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-SIEMENS1.png' %}" class="img-fluid">
-                    </div>
-                    <!--/Fourth column-->
-
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-SOLIDWORKS1.png' %}" class="img-fluid">
-                    </div>
-
-                    <div class="col-lg-2 col-md-3 col-4">
-                        <img src="{% static 'web/img/aliado-SEW-EURODRIVE1.png' %}" class="img-fluid">
-                    </div>
-                    <!--/First column-->
                 </div>
-                <!--/First row-->
             </div>
         </div>
-    </div>
-</div>
+    {% endif %}
+{% endwith %}

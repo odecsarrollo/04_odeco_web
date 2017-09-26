@@ -57,10 +57,16 @@ DJANGO_APPS = [
 ]
 MY_APPS = [
     'web',
+    'web_configurations',
+    'web_soluciones',
+    'web_empresa',
+    'web_clientes',
 ]
 
 THIRD_PART_APPS = [
-
+    'solo',
+    'tinymce',
+    'imagekit',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -145,9 +151,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
-
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -160,9 +163,22 @@ STATICFILES_DIRS = [
     os.path.normpath(os.path.join(SITE_ROOT, "static"))
 ]
 ########## END STATIC FILE CONFIGURATION
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
-
 ADMIN_SITE_HEADER = 'Administración Odecopack'
 ADMIN_SITE_TITLE = 'Odecopack'
 ADMIN_INDEX_TITLE = 'Panel'
+
+############ TINYMCE CONFIGURATION
+TINYMCE_DEFAULT_CONFIG = {
+    'selector': 'textarea',
+    'height': 300,
+    'theme': 'modern',
+    'plugins': [
+        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+        'searchreplace wordcount visualblocks visualchars code fullscreen',
+        'insertdatetime media nonbreaking save table contextmenu directionality',
+        'emoticons template paste textcolor colorpicker textpattern imagetools',
+        'autoresize'
+    ],
+    'toolbar1': 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+}
+############ END TINYMCE CONFIGURATION

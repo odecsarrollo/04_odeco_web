@@ -257,3 +257,11 @@ hr {
 .soluciones .lista .item {
   height: 100%;
 }
+.soluciones .lista .item .galeria .caption {
+  display: none;
+}
+.soluciones .lista .ver_mas {
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+}

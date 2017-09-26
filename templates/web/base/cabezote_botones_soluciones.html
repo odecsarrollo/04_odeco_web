@@ -1,0 +1,22 @@
+{% with soluciones_lista=soluciones_list %}
+    {% if soluciones_lista %}
+        <div class="container barra-soluciones">
+            <section id="soluciones" class="section m-0 p-0">
+                <div class="row botones-soluciones">
+                    {% for solucion in soluciones_lista %}
+                        <div class="col-6 col-sm-3 boton">
+                            <a href="{{ solucion.get_absolute_url }}">
+                                <div class="contenido">
+                                    <img class="icono-svg" src="{{ solucion.boton_soluciones.url }}">
+                                    <h6 class="h6-responsive mt-2">
+                                        <strong>{{ solucion.nombre }}</strong>
+                                    </h6>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    {% endif %}
+{% endwith %}
