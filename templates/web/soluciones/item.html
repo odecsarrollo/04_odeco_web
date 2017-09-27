@@ -14,17 +14,19 @@
 
             {% with imagenes_lista=item.mis_imagenes.all %}
                 {% if imagenes_lista %}
-                    <div class="col-12 galeria">
-                        <div class="mdb-lightbox">
-                            <div class="flex-center">
-                                <div class="row justify-content-center">
+                    <div class="col-12 pl-4 pr-4">
+                        <div class="galeria">
+                            <div class="mdb-lightbox">
+                                <div class="row">
                                     {% for imagen in imagenes_lista %}
                                         <figure class="col-4 col-md-4 p-1 m-0">
                                             <a href="{{ imagen.imagen.url }}"
                                                data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
-                                                <img src="{{ imagen.imagen_thumbnail.url }}"
-                                                     alt=""
-                                                >
+                                                <div class="view overlay hm-white-slight z-depth-2">
+                                                    <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                         alt=""
+                                                    >
+                                                </div>
                                             </a>
                                             {% if imagen.descripcion %}
                                                 <div class="caption">
@@ -52,7 +54,7 @@
 <!-- Modal -->
 <div class="modal fade right" id="itemSolucion{{ item.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-fluid item" role="document">
+    <div class="modal-dialog modal-lg item" role="document">
         <!--Content-->
         <div class="modal-content">
             <!--Header-->
@@ -66,27 +68,31 @@
             <div class="modal-body">
                 {{ item.mas|safe }}
                 {% with imagenes_lista=item.mis_imagenes.all %}
-                    <div class="mdb-lightbox">
-                        <div class="flex-center galeria">
-                            <div class="row justify-content-center">
-                                {% for imagen in imagenes_lista %}
-                                    <figure class="col-4 col-md-2 p-1 m-0">
-                                        <a href="{{ imagen.imagen.url }}"
-                                           data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
-                                            <img src="{{ imagen.imagen_thumbnail.url }}"
-                                                 alt=""
-                                            >
-                                        </a>
-                                        {% if imagen.descripcion %}
-                                            <div class="caption">
-                                                <p>{{ imagen.descripcion }}</p>
-                                            </div>
-                                        {% endif %}
-                                    </figure>
-                                {% endfor %}
+                    {% if imagenes_lista %}
+                        <div class="pl-4 pr-4">
+                            <div class="galeria">
+                                <div class="mdb-lightbox">
+                                    <div class="row">
+                                        {% for imagen in imagenes_lista %}
+                                            <figure class="col-4 col-md-2 p-1 m-0">
+                                                <a href="{{ imagen.imagen.url }}"
+                                                   data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                                    <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                         alt=""
+                                                    >
+                                                </a>
+                                                {% if imagen.descripcion %}
+                                                    <div class="caption">
+                                                        <p>{{ imagen.descripcion }}</p>
+                                                    </div>
+                                                {% endif %}
+                                            </figure>
+                                        {% endfor %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endwith %}
             </div>
             <!--Footer-->
