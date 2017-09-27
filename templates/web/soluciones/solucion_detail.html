@@ -15,9 +15,6 @@
     {% with items_list=solucion_objeto.mis_items.all %}
         {% if items_list %}
             <div class="container">
-                <div id="mdb-lightbox-ui">
-                    <!-- Root element of PhotoSwipe. Must have class pswp. -->
-                </div>
                 <section class="section mt-3 soluciones">
                     <div class="flex-center">
                         <div class="row lista justify-content-center">
@@ -31,12 +28,3 @@
         {% endif %}
     {% endwith %}
 {% endblock %}
-
-<script>
-    {% block final_scripts %}
-        {{ block.super }}
-        $(function () {
-            $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-        });
-    {% endblock %}
-</script>

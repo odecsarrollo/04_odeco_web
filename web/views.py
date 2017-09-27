@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView
 
-from web_empresa.models import Aliado
+from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
 
 
@@ -11,6 +11,7 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['aliados_list'] = Aliado.objects.all()
         context['clientes_list'] = Cliente.objects.all().order_by('orden')
+        context['galeria_fotos_empresa_list'] = GaleriaFotoEmpresa.objects.all().order_by('orden')
         return context
 
 

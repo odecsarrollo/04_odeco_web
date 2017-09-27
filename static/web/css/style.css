@@ -254,11 +254,11 @@ hr {
 .background-white {
   background-color: #fff;
 }
+.galeria .caption {
+  display: none;
+}
 .soluciones .lista .item {
   height: 100%;
-}
-.soluciones .lista .item .galeria .caption {
-  display: none;
 }
 .soluciones .lista .ver_mas {
   position: absolute;

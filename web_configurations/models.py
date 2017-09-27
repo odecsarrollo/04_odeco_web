@@ -36,6 +36,10 @@ class GeneralConfiguration(SingletonModel):
     horarios_de_atencion = HTMLField('Horarios de Atención', default='Texto Horarios de Atención aquí')
     numeros_contacto = HTMLField('Numeros de Contacto', default='Numeros de contacto', null=True, blank=True)
     correos_contacto = HTMLField('Correos de Contacto', default='Correos de contacto', null=True, blank=True)
+    facebook = models.CharField(max_length=200, null=True, blank=True)
+    instagram = models.CharField(max_length=200, null=True, blank=True)
+    youtube = models.CharField(max_length=200, null=True, blank=True)
+    twitter = models.CharField(max_length=200, null=True, blank=True)
 
     def __unicode__(self):
         return "General"

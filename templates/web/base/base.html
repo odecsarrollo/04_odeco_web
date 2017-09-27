@@ -27,6 +27,9 @@
     {% endblock %}
 </header>
 <!--Main Navigation-->
+<div id="mdb-lightbox-ui">
+
+</div>
 
 {% block cabezote %}
 
@@ -53,6 +56,9 @@
 <script src="https://maps.google.com/maps/api/js"></script>
 
 <script>
+    $(function () {
+        $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+    });
     {% block final_scripts %}
 
     {% endblock %}

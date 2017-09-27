@@ -13,7 +13,7 @@ class Solucion(models.Model):
         return "web/img/solu/%s" % new_filename
 
     def imagen_boton_upload_to(instance, filename):
-        new_filename = get_image_name(instance.nombre, filename)
+        new_filename = get_image_name('Boton Solucion', filename)
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
@@ -56,8 +56,7 @@ class Solucion(models.Model):
 
 class ItemSolucion(models.Model):
     def imagen_principal_upload_to(instance, filename):
-        clase = ('%s %s %s') % ('Imagen principal', instance.nombre, instance.solucion.nombre)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name('Solucion Imagen principal', filename)
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
@@ -82,8 +81,7 @@ class ItemSolucion(models.Model):
 
 class ItemSolucionImagen(models.Model):
     def imagen_upload_to(instance, filename):
-        clase = ('%s %s %s') % ('Imagen', instance.item_solucion.nombre, instance.pk)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name('Imagen Solucion', filename)
         return "web/img/solu/%s" % new_filename
 
     item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes', on_delete=models.PROTECT)

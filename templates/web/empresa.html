@@ -56,148 +56,84 @@
         </div>
 
 
-        <!--First row-->
-        <div class="row">
-
-            <!--First column-->
-            <div class="col-xl-2 col-md-3">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#panel41" role="tab"><i
-                                class="fa fa-glass fa-2x"></i><br>25 Años</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#panel42" role="tab"><i
-                                class="fa fa-wrench fa-2x"></i><br>Andinapack 2015</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#panel43" role="tab"><i
-                                class="fa fa-clock-o fa-2x"></i><br>Historia</a>
-                    </li>
-                </ul>
-            </div>
-            <!--/First column-->
-
-            <!--Second column-->
-            <div class="col-xl-10 col-md-9">
-                <!-- Tab panels -->
-                <div class="tab-content vertical">
-
-                    <!--Panel 1-->
-                    <div class="tab-pane fade show in active" id="panel41" role="tabpanel">
-                        <br>
-
-                        <!--First row-->
-                        <div class="row">
-                            <!--Second column-->
-                            <div class="col-md-6 col-12">
-
-                                <!--Featured images-->
-                                <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                </div>
-
-                                <!--/Featured images-->
-
-                            </div>
-                            <!--/Second column-->
-
-
-                            <div class="col-md-6 col-12">
-                                <div class="row">
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                    <div class="col-4 col-lg-3 m-0 p-1">
-                                        <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                            <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2817%29.jpg">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!--/First row-->
-
+        {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
+            {% if galeria_fotos_list %}
+                <div class="row">
+                    <div class="col-xl-2 col-md-3">
+                        <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
+                            {% for galeria in galeria_fotos_list %}
+                                <li class="nav-item">
+                                    <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab"
+                                       href="#galeria-{{ galeria.pk }}"
+                                       role="tab"><i
+                                            class="fa {{ galeria.icono }} fa-2x"></i><br>{{ galeria.nombre }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <!--/.Panel 1-->
 
-                    <!--Panel 2-->
-                    <div class="tab-pane fade" id="panel42" role="tabpanel">
-                        <br>
+                    <div class="col-xl-10 col-md-9">
+                        <div class="tab-content vertical">
+                            {% for galeria in galeria_fotos_list %}
+                                <div class="tab-pane fade show in {% if forloop.first %}active{% endif %}"
+                                     id="galeria-{{ galeria.pk }}"
+                                     role="tabpanel">
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-6 col-12">
+                                            <figure class="m-0 p-0">
+                                                <img src="{{ galeria.imagen_thumbnail.url }}" alt="">
+                                            </figure>
+                                        </div>
+                                        <div class="col-md-6 col-12 galeria">
+                                            <div class="mdb-lightbox">
+                                                <div class="row">
+                                                    <figure class="col-4 col-lg-3 m-0 p-1">
+                                                        <a href="{{ galeria.imagen.url }}"
+                                                           data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
+                                                            <div class="view overlay hm-white-slight z-depth-2">
+                                                                <img src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                     alt=""
+                                                                >
+                                                            </div>
+                                                        </a>
+                                                    </figure>
 
-                        <!--First row-->
-                        <div class="row">
-                            <!--Second column-->
-                            <div class="col-lg-6 col-md-12">
-
-                                <!--Featured images-->
-                                <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2812%29.jpg">
+                                                    {% with mis_imagenes_list=galeria.mis_imagenes.all %}
+                                                        {% if mis_imagenes_list %}
+                                                            {% for imagen in mis_imagenes_list %}
+                                                                <figure class="col-4 col-lg-3 m-0 p-1">
+                                                                    <a href="{{ imagen.imagen.url }}"
+                                                                       data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                                                        <div class="view overlay hm-white-slight z-depth-2">
+                                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                 alt=""
+                                                                            >
+                                                                        </div>
+                                                                    </a>
+                                                                    {% if imagen.descripcion %}
+                                                                        <div class="caption">
+                                                                            <p>{{ imagen.descripcion }}</p>
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </figure>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <!--/Featured images-->
-
-                            </div>
-                            <!--/Second column-->
-
+                            {% endfor %}
                         </div>
-                        <!--/First row-->
-
                     </div>
-                    <!--/.Panel 2-->
-
-                    <!--Panel 3-->
-                    <div class="tab-pane fade" id="panel43" role="tabpanel">
-                        <br>
-                        <!--First row-->
-                        <div class="row">
-                            <div class="col-lg-6 col-md-12">
-
-                                <!--Featured images-->
-                                <div class="view overlay hm-white-slight z-depth-2 mb-1">
-                                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20%2810%29.jpg">
-                                </div>
-
-                                <!--/Featured images-->
-
-                            </div>
-                            <!--/Second column-->
-
-                        </div>
-                        <!--/First row-->
-
-                    </div>
-                    <!--/.Panel 3-->
-
+                    <!--/Second column-->
                 </div>
-            </div>
-            <!--/Second column-->
-        </div>
-        <!--/First row-->
+                <!--/First row-->
+            {% endif %}
+        {% endwith %}
+
     </section>
 </div>
 

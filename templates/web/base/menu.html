@@ -1,4 +1,5 @@
-{% load static %}
+{% load static solo_tags %}
+{% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 
 <nav class="navbar fixed-top navbar-expand-lg bg-odecopack scrolling-navbar">
     <a class="navbar-brand" href="#">
@@ -24,7 +25,7 @@
                 <a class="nav-link" href="#soluciones" data-offset="100">SOLUCIONES</a>
             </li>
         </ul>
-        <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %} mr-auto">
+        <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %}">
             <li class="nav-item right-border">
                 <a class="nav-link" href="{% if es_menu_index == False %}{% url 'index' %}{% endif %}#clientes"
                    data-offset="70">CLIENTES</a>
@@ -34,15 +35,27 @@
             </li>
         </ul>
         <ul class="navbar-nav nav-flex-icons">
-            <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-instagram"></i></a>
-            </li>
+            {% if general_configuracion.facebook %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ general_configuracion.facebook }}"><i class="fa fa-facebook"></i></a>
+                </li>
+            {% endif %}
+            {% if general_configuracion.twitter %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ general_configuracion.twitter }}"><i class="fa fa-twitter"></i></a>
+                </li>
+            {% endif %}
+            {% if general_configuracion.youtube %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ general_configuracion.youtube }}"><i
+                            class="fa fa-youtube-play"></i></a>
+                </li>
+            {% endif %}
+            {% if general_configuracion.instagram %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ general_configuracion.instagram }}"><i class="fa fa-instagram"></i></a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

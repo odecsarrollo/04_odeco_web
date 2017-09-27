@@ -8,9 +8,11 @@
                 {% with clientes_lista=clientes_list %}
                     <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
                         {% for cliente in clientes_lista %}
-                            <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
-                                <img src="{{ cliente.logo.url }}" class="img-fluid">
-                            </div>
+                            {% if cliente.logo %}
+                                <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
+                                    <img src="{{ cliente.logo.url }}" class="img-fluid">
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endwith %}
