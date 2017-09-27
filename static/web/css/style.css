@@ -1,14 +1,15 @@
 body {
-  background-color: #ecedef;
+  background-color: #fff;
 }
 .color-1-odecopack {
   background-color: #ed6b00 !important;
+  color: #fff !important;
 }
 .color-2-odecopack {
   background-color: #211915 !important;
 }
 .color3-odecopack {
-  background-color: #ecedef !important;
+  background-color: #fff !important;
 }
 .color-4-odecopack {
   background-color: #5b5b5f !important;
@@ -99,8 +100,6 @@ footer .md-form {
   background-color: #fff;
   color: #000;
   border: 1px solid #ecedef;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 .barra-soluciones .botones-soluciones .boton .contenido:hover {
   border: none;

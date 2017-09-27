@@ -3,7 +3,7 @@
 
 <div class="container index">
     <section id="empresa" class="section mt-3">
-        <h1 class="section-heading h1 pt-4 left">{{ empresa_configuracion.titulo }}</h1>
+        <h1 class="section-heading h1 pt-4 left">{{ empresa_configuracion.titulo|upper }}</h1>
 
         <div class="row index-empresa">
             {% if empresa_configuracion.imagen_principal %}
@@ -97,6 +97,11 @@
                                                                 >
                                                             </div>
                                                         </a>
+                                                        <div class="caption">
+                                                            <h3>
+                                                                {{ galeria.nombre }}
+                                                            </h3>
+                                                        </div>
                                                     </figure>
 
                                                     {% with mis_imagenes_list=galeria.mis_imagenes.all %}
@@ -111,11 +116,14 @@
                                                                             >
                                                                         </div>
                                                                     </a>
-                                                                    {% if imagen.descripcion %}
-                                                                        <div class="caption">
+                                                                    <div class="caption">
+                                                                        <h3>
+                                                                            {{ galeria.nombre }}
+                                                                        </h3>
+                                                                        {% if imagen.descripcion %}
                                                                             <p>{{ imagen.descripcion }}</p>
-                                                                        </div>
-                                                                    {% endif %}
+                                                                        {% endif %}
+                                                                    </div>
                                                                 </figure>
                                                             {% endfor %}
                                                         {% endif %}
@@ -141,12 +149,12 @@
 
 {% with aliados_lista=aliados_list %}
     {% if aliados_lista %}
-        <div class="streak streak-photo streak-long view photo-2 mt-4">
+        <div class="streak streak-photo view photo-2 mt-4">
             <div class="hm-black-strong">
                 <div class="mask">
-                    <h4 class="text-center text-white mb-2 font-up font-bold wow fadeIn mt-2" data-wow-delay="0.2s">
+                    <h4 class="text-center text-white mb-1 font-up font-bold wow fadeIn mt-2" data-wow-delay="0.2s">
                         NUESTROS ALIADOS</h4>
-                    <div class="container flex-center">
+                    <div class="container flex-center mb-4">
                         <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
                             {% for aliado in aliados_lista %}
                                 <div class="col-lg-2 col-md-3 col-4">

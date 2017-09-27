@@ -28,11 +28,14 @@
                                                     >
                                                 </div>
                                             </a>
-                                            {% if imagen.descripcion %}
-                                                <div class="caption">
+                                            <div class="caption">
+                                                <h3>
+                                                    {{ item.nombre }}
+                                                </h3>
+                                                {% if imagen.descripcion %}
                                                     <p>{{ imagen.descripcion }}</p>
-                                                </div>
-                                            {% endif %}
+                                                {% endif %}
+                                            </div>
                                         </figure>
                                     {% endfor %}
                                 </div>
@@ -58,7 +61,7 @@
         <!--Content-->
         <div class="modal-content">
             <!--Header-->
-            <div class="modal-header">
+            <div class="modal-header color-1-odecopack">
                 <h4 class="modal-title w-100" id="myModalLabel">{{ item.nombre }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -81,11 +84,14 @@
                                                          alt=""
                                                     >
                                                 </a>
-                                                {% if imagen.descripcion %}
-                                                    <div class="caption">
+                                                <div class="caption">
+                                                    <h3>
+                                                        {{ item.nombre }}
+                                                    </h3>
+                                                    {% if imagen.descripcion %}
                                                         <p>{{ imagen.descripcion }}</p>
-                                                    </div>
-                                                {% endif %}
+                                                    {% endif %}
+                                                </div>
                                             </figure>
                                         {% endfor %}
                                     </div>
