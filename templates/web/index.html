@@ -11,7 +11,12 @@
 
 {% block cabezote %}
     {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-    {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen=index_configuracion.header_imagen.url %}
+    {% if index_configuracion.header_imagen %}
+        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen=index_configuracion.header_imagen.url %}
+    {% else %}
+        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen="https://media.licdn.com/media/p/5/005/076/247/00da2ac.png" %}
+    {% endif %}
+
 {% endblock %}
 
 {% block content %}
