@@ -13,7 +13,7 @@ class IndexConfiguration(SingletonModel):
         return "web/img/index/%s" % new_filename
 
     header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
-    header_text = models.TextField(max_length=150, default='Aqui la descripción')
+    header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
     header_imagen = ProcessedImageField(
         processors=[SmartResize(width=2560, height=588, upscale=False)],
         format='JPEG',

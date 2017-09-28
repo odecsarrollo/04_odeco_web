@@ -1,11 +1,12 @@
 {% load static %}
 <section id="clientes" class="section background-white pt-4">
-    <div class="container-fluid">
-        <div class="container py-3" id="opinions">
-            <h1 class="text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn" data-wow-delay="0.2s">
-                CLIENTES</h1>
-            <div class="flex-center logos-panel">
-                {% with clientes_lista=clientes_list %}
+    {% with clientes_lista=clientes_list %}
+        <div class="container-fluid">
+            <div class="container py-3" id="opinions">
+                <h1 class="text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn" data-wow-delay="0.2s">
+                    CLIENTES</h1>
+                <div class="flex-center logos-panel">
+
                     <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
                         {% for cliente in clientes_lista %}
                             {% if cliente.logo %}
@@ -15,8 +16,9 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                {% endwith %}
+
+                </div>
             </div>
         </div>
-    </div>
+    {% endwith %}
 </section>
