@@ -1,9 +1,12 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.gzip import gzip_page
 from django.views.generic import TemplateView
 
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
 
 
+@method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 
