@@ -1,4 +1,4 @@
-{% load static %}
+{% load static google_analytics %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +17,9 @@
     <link href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="{% static 'web/css/style.min.css' %}" rel="stylesheet">
+
+    {% google_analytics %}
+
 </head>
 
 <body>

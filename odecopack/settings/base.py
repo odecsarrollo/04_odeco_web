@@ -67,6 +67,7 @@ THIRD_PART_APPS = [
     'solo',
     'tinymce',
     'imagekit',
+    'analytical',
 ]
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -163,9 +164,7 @@ STATICFILES_DIRS = [
     os.path.normpath(os.path.join(SITE_ROOT, "static"))
 ]
 ########## END STATIC FILE CONFIGURATION
-ADMIN_SITE_HEADER = 'Administración Odecopack'
-ADMIN_SITE_TITLE = 'Odecopack'
-ADMIN_INDEX_TITLE = 'Panel'
+
 
 ############ TINYMCE CONFIGURATION
 TINYMCE_DEFAULT_CONFIG = {
@@ -182,3 +181,6 @@ TINYMCE_DEFAULT_CONFIG = {
     'toolbar1': 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
 }
 ############ END TINYMCE CONFIGURATION
+
+
+GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-107233875-1'

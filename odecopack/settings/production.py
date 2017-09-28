@@ -126,3 +126,4 @@ EMAIL_USE_SSL = str_to_bool(os.environ["EMAIL_USE_SSL"])
 
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
 ########## END EMAIL CONFIGURATION
+

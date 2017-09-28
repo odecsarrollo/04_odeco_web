@@ -1,24 +1,26 @@
 {% load static %}
 <section id="clientes" class="section background-white pt-4">
     {% with clientes_lista=clientes_list %}
-        <div class="container-fluid">
-            <div class="container py-3" id="opinions">
-                <h1 class="text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn" data-wow-delay="0.2s">
-                    CLIENTES</h1>
-                <div class="flex-center logos-panel">
+        {% if clientes_lista %}
+            <div class="container-fluid">
+                <div class="container py-3" id="opinions">
+                    <h1 class="text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn" data-wow-delay="0.2s">
+                        CLIENTES</h1>
+                    <div class="flex-center logos-panel">
 
-                    <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
-                        {% for cliente in clientes_lista %}
-                            {% if cliente.logo %}
-                                <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
-                                    <img src="{{ cliente.logo.url }}" class="img-fluid">
-                                </div>
-                            {% endif %}
-                        {% endfor %}
+                        <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
+                            {% for cliente in clientes_lista %}
+                                {% if cliente.logo %}
+                                    <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
+                                        <img src="{{ cliente.logo.url }}" class="img-fluid">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
                     </div>
-
                 </div>
             </div>
-        </div>
+        {% endif %}
     {% endwith %}
 </section>
