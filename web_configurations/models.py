@@ -19,7 +19,7 @@ class IndexConfiguration(SingletonModel):
         format='JPEG',
         options={'quality': 70},
         upload_to=header_imagen_upload_to,
-        verbose_name='Imagen Cabezote',
+        verbose_name='Imagen Cabezote (2560 x 588)',
         null=True,
         blank=True
     )
@@ -60,7 +60,7 @@ class LaEmpresaConfiguration(SingletonModel):
         format='JPEG',
         options={'quality': 70},
         upload_to=imagen_principal_upload_to,
-        verbose_name='Imagen Principal',
+        verbose_name='Imagen Principal (570x362)',
         null=True,
         blank=True
     )

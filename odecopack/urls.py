@@ -8,7 +8,8 @@ from web.views import IndexView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^soluciones/', include('web_soluciones.urls', namespace='web')),
+    url(r'^soluciones/', include('web_soluciones.urls', namespace='web_soluciones')),
+    url(r'^web/', include('web.urls', namespace='web')),
     url(r'^tinymce/', include('tinymce.urls')),
 ]
 

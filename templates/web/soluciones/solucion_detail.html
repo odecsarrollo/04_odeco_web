@@ -12,16 +12,30 @@
 
 
 {% block content %}
-    {% with items_list=solucion_objeto.mis_items.all %}
+    {% with items_list=solucion_objeto.mis_items.all|dictsort:"categoria" %}
+        {% regroup items_list by categoria as categoria_list %}
         {% if items_list %}
             <div class="container">
                 <section class="section mt-3 soluciones">
-                    <div class="flex-center">
-                        <div class="row lista justify-content-center">
-                            {% for item in items_list %}
-                                {% include 'web/soluciones/item.html' with item=item %}
-                            {% endfor %}
-                        </div>
+                    <div class="row">
+                        {% for categoria in categoria_list %}
+                            <div id="{{ categoria.grouper }}" class="col-12 mb-3">
+                                {% if categoria.grouper %}
+                                    <h2 class="h2-responsive text-center text-sm-left">{{ categoria.grouper }}</h2>
+                                {% endif %}
+                                {% regroup categoria.list by categoria_dos as categoria_dos_list %}
+                                {% for categoria_dos in categoria_dos_list %}
+                                    {% if categoria_dos.grouper %}
+                                        <h4 class="h4-responsive text-center text-sm-left pl-0 pl-sm-2">{{ categoria_dos.grouper }}</h4>
+                                    {% endif %}
+                                    <div class="row lista pl-0 pl-sm-4 pr-1">
+                                        {% for item in categoria_dos.list %}
+                                            {% include 'web/soluciones/item.html' with item=item %}
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </section>
             </div>

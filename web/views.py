@@ -1,6 +1,7 @@
+from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.gzip import gzip_page
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
@@ -20,3 +21,37 @@ class IndexView(TemplateView):
 
 class SolucionView(TemplateView):
     template_name = 'web/soluciones/solucion_detail.html'
+
+
+class SendContactenosView(View):
+    def post(self, request, *args, **kwargs):
+        # form = MensajeContactoForm(self.request.POST)
+        #
+        # if form.is_valid():
+        #     form.save()
+        #
+        #     instancia_contactenos = form.instance
+        #
+        #     mensaje = 'Mensaje Id: %s \r\n Asunto: %s \r\n De: %s \r\n Correo: %s \r\n Celular: %s \r\n \r\n Mensaje: \r\n \r\n %s' % (
+        #         instancia_contactenos.id,
+        #         instancia_contactenos.asunto_contacto.nombre,
+        #         instancia_contactenos.nombres,
+        #         instancia_contactenos.email,
+        #         instancia_contactenos.celular,
+        #         instancia_contactenos.mensaje
+        #     )
+        #
+        #     email = EmailMessage(
+        #         subject=instancia_contactenos.asunto_contacto.nombre,
+        #         body=mensaje,
+        #         from_email='Contactenos Dr. Amor<contactenos@clinicadramor.com>',
+        #         to=['contactenos@clinicadramor.com'],
+        #         reply_to=[instancia_contactenos.email],
+        #         headers={'Message-ID': instancia_contactenos.id}
+        #     )
+        #
+        #     email.send()
+        #
+        #     messages.info(self.request, "Su mensaje fué enviado correctamente")
+
+        return redirect('index')

@@ -1,18 +1,20 @@
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
-        <h4 class="card-title">
-            {{ item.nombre }}
-        </h4>
+        <h5 class="card-title">
+            {{ item.nombre|upper }}
+        </h5>
         <div class="row mb-4">
+            <div class="col-12 text-center">
+                <img class="img-fluid" src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
+            </div>
+
             <div class="col-12">
-                <img class="img-fluid"
-                     src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
-                <p class="card-text text-justify mt-3">
+                <p class="card-text text-justify">
                     {{ item.descripcion_corta }}
                 </p>
             </div>
 
-            {% with imagenes_lista=item.mis_imagenes.all %}
+            {% with imagenes_lista=item.mis_imagenes.all|slice:":3" %}
                 {% if imagenes_lista %}
                     <div class="col-12 pl-4 pr-4">
                         <div class="galeria">
@@ -45,12 +47,16 @@
                 {% endif %}
             {% endwith %}
         </div>
+
         {% if item.mas %}
-            <a href="#" class="black-text d-flex flex-row-reverse ver_mas" data-toggle="modal"
-               data-target="#itemSolucion{{ item.pk }}">
-                <h5 class="waves-effect p-2">Ver más <i class="fa fa-chevron-right"></i></h5>
-            </a>
+            <div>
+                <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
+                   data-target="#itemSolucion{{ item.pk }}">
+                    <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
+                </a>
+            </div>
         {% endif %}
+
     </div>
 </div>
 

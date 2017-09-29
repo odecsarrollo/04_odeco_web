@@ -28,8 +28,8 @@ class ItemSolucionImagenInline(admin.TabularInline):
 
 
 class ItemSolucionAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'solucion', 'orden']
-    list_editable = ['orden', ]
+    list_display = ['nombre', 'solucion', 'orden', 'categoria', 'categoria_dos']
+    list_editable = ['orden', 'categoria', 'categoria_dos']
 
     inlines = [ItemSolucionImagenInline, ]
 

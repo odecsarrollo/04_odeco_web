@@ -43,8 +43,8 @@ class Solucion(models.Model):
 
     def get_absolute_url(self):
         if self.slug:
-            return reverse('web:solucion_detail_slug', kwargs={"slug": self.slug})
-        return reverse('web:solucion_detail', kwargs={"pk": self.pk})
+            return reverse('web_soluciones:solucion_detail_slug', kwargs={"slug": self.slug})
+        return reverse('web_soluciones:solucion_detail', kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.nombre
@@ -64,12 +64,14 @@ class ItemSolucion(models.Model):
     descripcion_corta = models.TextField()
     mas = HTMLField('Texto Soluciones', default='Descripción de este Item', null=True, blank=True)
     orden = models.PositiveIntegerField(default=0)
+    categoria = models.CharField(max_length=120, default='', blank=True)
+    categoria_dos = models.CharField(max_length=120, default='', blank=True)
     imagen_principal = ProcessedImageField(
-        processors=[SmartResize(width=420, height=420, upscale=False)],
+        processors=[ResizeToFit(width=400, height=200, upscale=False)],
         format='JPEG',
         options={'quality': 80},
         upload_to=imagen_principal_upload_to,
-        verbose_name='Imagen Item Solución',
+        verbose_name='Imagen Item Solución (400x200)',
         null=True,
         blank=True
     )
