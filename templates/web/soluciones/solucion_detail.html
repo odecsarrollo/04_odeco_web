@@ -17,16 +17,39 @@
         {% if items_list %}
             <div class="container">
                 <section class="section mt-3 soluciones">
-                    <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
-                        <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
-                            {% for categoria in categoria_list %}
-                                <li class="nav-item">
-                                    <a class="color-1-odecopack nav-link-soluciones" data-offset="100"
-                                       href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    </nav>
+                    {% if categoria_list|length > 1 %}
+                        <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                            <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
+                                {% for categoria in categoria_list %}
+                                    <li class="nav-item">
+                                        <a class="color-1-odecopack nav-link-soluciones" data-offset="100"
+                                           href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+
+                        <div class="fixed-action-btn d-md-none" style="bottom: 45px; right: 24px;">
+                            <a class="btn-floating btn-large color-1-odecopack waves-effect waves-light">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <ul class="smooth-scroll">
+                                {% for categoria in categoria_list %}
+                                    <li>
+                                        <a class="btn-floating btn-floating-categoria waves-effect waves-light"
+                                           data-offset="100"
+                                           href="#{{ categoria.grouper|slugify }}"
+                                           style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
+                                        >
+                                            {{ categoria.grouper|title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+
                     <div class="row">
                         {% for categoria in categoria_list %}
                             <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
@@ -51,4 +74,5 @@
             </div>
         {% endif %}
     {% endwith %}
+
 {% endblock %}

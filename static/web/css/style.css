@@ -289,6 +289,19 @@ hr {
   -moz-border-radius: 25px;
   border-radius: 25px;
 }
+.soluciones .btn-floating-categoria {
+  right: 210px;
+  font-size: 0.8rem;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  padding: 0.5rem;
+  margin: 0;
+  width: 300px !important;
+  height: 100% !important;
+  background-color: #ed6b00;
+  color: #fff !important;
+}
 .formulario .texto-legal {
   font-size: 0.7rem;
 }
