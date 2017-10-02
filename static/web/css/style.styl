@@ -4,8 +4,21 @@ $odecopack-color_3 = white
 $odecopack-color_4 = #5B5B5F
 $odecopack-color_5 = #ECEDEF
 
+border-radius(n)
+  -webkit-border-radius n
+  -moz-border-radius n
+  border-radius n
+
+flex-direction(n)
+  -webkit-flex-direction n
+  -ms-flex-direction n
+  flex-direction n
+
 body
   background-color $odecopack-color_3
+
+.texto-color-1-odecopack
+  color $odecopack-color_1
 
 .color-1-odecopack
   background-color $odecopack-color_1 !important
@@ -88,7 +101,7 @@ footer
     background-color white
     margin 0
     padding 0
-    border-radius 5px
+    border-radius(5px)
 
   .md-form
     margin-bottom 0.5rem
@@ -218,7 +231,20 @@ hr
     .ver_mas
       position absolute
       right 10px
-      bottom 0px
+      bottom 0
+  .navbar-soluciones
+    font-size 0.7rem
+    color white !important
+    position fixed
+    top 60px
+    z-index 1000000
+    .navbar-nav-soluciones
+      flex-direction (inherit)
+      .nav-link-soluciones
+        padding 0.5rem
+        margin-left 0.5rem
+        font-style normal
+        border-radius (25px)
 
 .formulario
   .texto-legal

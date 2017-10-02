@@ -17,16 +17,26 @@
         {% if items_list %}
             <div class="container">
                 <section class="section mt-3 soluciones">
+                    <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                        <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
+                            {% for categoria in categoria_list %}
+                                <li class="nav-item">
+                                    <a class="color-1-odecopack nav-link-soluciones" data-offset="100"
+                                       href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
                     <div class="row">
                         {% for categoria in categoria_list %}
-                            <div id="{{ categoria.grouper }}" class="col-12 mb-3">
+                            <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
                                 {% if categoria.grouper %}
-                                    <h2 class="h2-responsive text-center text-sm-left">{{ categoria.grouper }}</h2>
+                                    <h2 class="h2-responsive text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
                                 {% endif %}
                                 {% regroup categoria.list by categoria_dos as categoria_dos_list %}
                                 {% for categoria_dos in categoria_dos_list %}
                                     {% if categoria_dos.grouper %}
-                                        <h4 class="h4-responsive text-center text-sm-left pl-0 pl-sm-2">{{ categoria_dos.grouper }}</h4>
+                                        <h4 class="h4-responsive text-center text-sm-left pl-0 pl-sm-2">{{ categoria_dos.grouper|title }}</h4>
                                     {% endif %}
                                     <div class="row lista pl-0 pl-sm-4 pr-1">
                                         {% for item in categoria_dos.list %}

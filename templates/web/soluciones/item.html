@@ -4,11 +4,13 @@
             {{ item.nombre|upper }}
         </h5>
         <div class="row mb-4">
-            <div class="col-12 text-center">
-                <img class="img-fluid" src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
-            </div>
+            {% if item.imagen_principal %}
+                <div class="col-12 text-center">
+                    <img class="img-fluid" src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
+                </div>
+            {% endif %}
 
-            <div class="col-12">
+            <div class="col-12 mt-2 mb-2">
                 <p class="card-text text-justify">
                     {{ item.descripcion_corta }}
                 </p>
@@ -68,7 +70,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header color-1-odecopack">
-                <h4 class="modal-title w-100" id="myModalLabel">{{ item.nombre }}</h4>
+                <h4 class="modal-title w-100" id="myModalLabel">{{ item.nombre|upper }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

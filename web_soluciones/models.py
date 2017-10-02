@@ -61,7 +61,7 @@ class ItemSolucion(models.Model):
 
     nombre = models.CharField(max_length=120)
     solucion = models.ForeignKey(Solucion, related_name='mis_items', on_delete=models.PROTECT)
-    descripcion_corta = models.TextField()
+    descripcion_corta = models.TextField(null=True, blank=True)
     mas = HTMLField('Texto Soluciones', default='Descripción de este Item', null=True, blank=True)
     orden = models.PositiveIntegerField(default=0)
     categoria = models.CharField(max_length=120, default='', blank=True)

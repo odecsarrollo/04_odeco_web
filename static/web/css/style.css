@@ -1,6 +1,9 @@
 body {
   background-color: #fff;
 }
+.texto-color-1-odecopack {
+  color: #ed6b00;
+}
 .color-1-odecopack {
   background-color: #ed6b00 !important;
   color: #fff !important;
@@ -82,6 +85,8 @@ footer textarea.md-textarea {
   background-color: #fff;
   margin: 0;
   padding: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 footer .md-form {
@@ -262,7 +267,27 @@ hr {
 .soluciones .lista .ver_mas {
   position: absolute;
   right: 10px;
-  bottom: 0px;
+  bottom: 0;
+}
+.soluciones .navbar-soluciones {
+  font-size: 0.7rem;
+  color: #fff !important;
+  position: fixed;
+  top: 60px;
+  z-index: 1000000;
+}
+.soluciones .navbar-soluciones .navbar-nav-soluciones {
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
+}
+.soluciones .navbar-soluciones .navbar-nav-soluciones .nav-link-soluciones {
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  font-style: normal;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
 }
 .formulario .texto-legal {
   font-size: 0.7rem;
