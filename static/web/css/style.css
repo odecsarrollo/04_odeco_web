@@ -266,7 +266,7 @@ hr {
 }
 .soluciones .lista .ver_mas {
   position: absolute;
-  right: 10px;
+  left: 10px;
   bottom: 0;
 }
 .soluciones .navbar-soluciones {

@@ -1,4 +1,5 @@
-from django.shortcuts import redirect
+from django.core.mail import EmailMessage
+from django.shortcuts import redirect, HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.gzip import gzip_page
 from django.views.generic import TemplateView, View
@@ -25,33 +26,43 @@ class SolucionView(TemplateView):
 
 class SendContactenosView(View):
     def post(self, request, *args, **kwargs):
-        # form = MensajeContactoForm(self.request.POST)
-        #
-        # if form.is_valid():
-        #     form.save()
-        #
-        #     instancia_contactenos = form.instance
-        #
-        #     mensaje = 'Mensaje Id: %s \r\n Asunto: %s \r\n De: %s \r\n Correo: %s \r\n Celular: %s \r\n \r\n Mensaje: \r\n \r\n %s' % (
-        #         instancia_contactenos.id,
-        #         instancia_contactenos.asunto_contacto.nombre,
-        #         instancia_contactenos.nombres,
-        #         instancia_contactenos.email,
-        #         instancia_contactenos.celular,
-        #         instancia_contactenos.mensaje
-        #     )
-        #
-        #     email = EmailMessage(
-        #         subject=instancia_contactenos.asunto_contacto.nombre,
-        #         body=mensaje,
-        #         from_email='Contactenos Dr. Amor<contactenos@clinicadramor.com>',
-        #         to=['contactenos@clinicadramor.com'],
-        #         reply_to=[instancia_contactenos.email],
-        #         headers={'Message-ID': instancia_contactenos.id}
-        #     )
-        #
-        #     email.send()
-        #
-        #     messages.info(self.request, "Su mensaje fué enviado correctamente")
+        correo = request.POST.get('correo', None)
+        nombre = request.POST.get('nombre', None)
+        asunto = request.POST.get('asunto', None)
+        texto = request.POST.get('texto', None)
 
-        return redirect('index')
+        mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\n\r\nMensaje:\r\n%s' % (
+            asunto,
+            nombre,
+            correo,
+            texto
+        )
+
+        mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
+            'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente',
+            asunto,
+            nombre,
+            correo,
+            texto,
+            'Pronto estaremos en contacto.'
+        )
+
+        email = EmailMessage(
+            subject=asunto,
+            body=mensaje,
+            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
+            to=['fabio.garcia.sanchez@gmail.com'],
+            reply_to=[correo]
+        )
+
+        email.send()
+
+        email2 = EmailMessage(
+            subject='Su envío de correo a Odecopack',
+            body=mensaje2,
+            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
+            to=[correo]
+        )
+        email2.send()
+
+        return HttpResponseRedirect(request.META['HTTP_REFERER'])

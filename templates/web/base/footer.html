@@ -38,37 +38,39 @@
                     <div class="row">
                         <!--Grid column-->
                         <div class="col-md-12 p-0 m-0">
-                            <form id="contact-form" name="contact-form" method="POST" class="p-0 m-0">
+                            <form id="contact-form" action="{% url 'web:send_contactenos' %}"
+                                  method="POST" class="p-0 m-0">
+                                {% csrf_token %}
                                 <div class="col-md-12">
                                     <div class="md-form">
-                                        <input type="text" id="name" name="name" class="form-control"
+                                        <input type="text" id="name" name="nombre" class="form-control"
                                                placeholder="nombre">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <div class="md-form">
-                                            <input type="text" id="email" name="email" class="form-control"
+                                            <input type="text" id="email" name="correo" class="form-control"
                                                    placeholder="correo">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
-                                        <input type="text" id="subject" name="subject" class="form-control"
+                                        <input type="text" id="subject" name="asunto" class="form-control"
                                                placeholder="asunto">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
-                                            <textarea type="text" id="message" name="message"
-                                                      class="md-textarea" placeholder="mensaje"></textarea>
+                                        <textarea type="text" id="message" name="texto" style="min-height: 100px"
+                                                  class="md-textarea" placeholder="mensaje"></textarea>
                                     </div>
 
                                 </div>
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">
-                                        <a class="btn color-1-odecopack">Enviar</a>
+                                        <button type="submit" class="btn mb-2 color-1-odecopack">Enviar</button>
                                     </div>
                                 </div>
                             </form>
