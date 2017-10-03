@@ -1,4 +1,4 @@
-{% load static solo_tags %}
+{% load static solo_tags imagekit %}
 {% get_solo 'web_configurations.LaEmpresaConfiguration' as empresa_configuracion %}
 
 <div class="container index">
@@ -8,7 +8,7 @@
         <div class="row index-empresa">
             {% if empresa_configuracion.imagen_principal %}
                 <div class="col-12 col-sm-6 p-0 m-0">
-                    <img class="img-fluid" src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
+                    {% generateimage 'webpage:watermark_orange' source=empresa_configuracion.imagen_principal %}
                 </div>
             {% endif %}
             <div class="col-12 col-sm-6 botones-empresa">
@@ -89,7 +89,8 @@
                                             <div class="mdb-lightbox">
                                                 <div class="row">
                                                     <figure class="col-4 col-lg-3 m-0 p-1">
-                                                        <a href="{{ galeria.imagen.url }}"
+                                                        {% generateimage 'webpage:watermark_orange' source=galeria.imagen as imagen_procesada %}
+                                                        <a href="{{ imagen_procesada.url }}"
                                                            data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
                                                             <div class="view overlay hm-white-slight z-depth-2">
                                                                 <img src="{{ galeria.imagen_thumbnail_galeria.url }}"
@@ -108,12 +109,19 @@
                                                         {% if mis_imagenes_list %}
                                                             {% for imagen in mis_imagenes_list %}
                                                                 <figure class="col-4 col-lg-3 m-0 p-1">
-                                                                    <a href="{{ imagen.imagen.url }}"
+
+                                                                    {% if imagen.marca_agua == 1 %}
+                                                                        {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                                                    {% elif imagen.marca_agua == 2 %}
+                                                                        {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                                                    {% else %}
+                                                                        {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                                    {% endif %}
+
+                                                                    <a href="{{ imagen_procesada.url }}"
                                                                        data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
-                                                                                 alt=""
-                                                                            >
+                                                                            <img src="{{ imagen.imagen_thumbnail.url }}" alt="">
                                                                         </div>
                                                                     </a>
                                                                     <div class="caption">

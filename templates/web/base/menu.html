@@ -2,8 +2,8 @@
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 
 <nav class="navbar fixed-top navbar-expand-lg bg-odecopack scrolling-navbar">
-    <a class="navbar-brand" href="#">
-        <img width="210px" src="{% static 'web/img/logo-odecopack2.png' %}" alt="">
+    <a class="navbar-brand" href="{% url 'index' %}">
+        <img width="210px" src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

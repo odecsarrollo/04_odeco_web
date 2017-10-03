@@ -183,4 +183,20 @@ TINYMCE_DEFAULT_CONFIG = {
 ############ END TINYMCE CONFIGURATION
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_web_default',
+    },
+    'imagekit': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache_web_imagekit',
+    }
+}
+
+IMAGEKIT_WATERMARK_IMAGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua.png')
+IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua_orange.png')
+IMAGEKIT_CACHE_BACKEND = 'imagekit'
+IMAGEKIT_CACHE_PREFIX = 'imagekit:'
+
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-107233875-1'
