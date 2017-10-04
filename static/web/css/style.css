@@ -24,16 +24,62 @@ body {
   cursor: pointer;
 }
 .nav-link {
-  color: #000 !important;
+  color: #000;
 }
 .nav-item.right-border {
   border-right: 1px solid #ed6b00;
+}
+header .view {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+}
+header .hm-black-strong-1,
+header .full-bg-img {
+  background-color: rgba(0,0,0,0.6);
+}
+header .barra-soluciones {
+  margin-top: -300px;
 }
 .navbar {
   box-shadow: none;
   margin: 0 !important;
   padding: 0 !important;
   font-weight: bold;
+  background-color: #fff;
+}
+.navbar-soluciones {
+  background-color: transparent;
+}
+.intro {
+  min-height: inherit !important;
+}
+.index .navbar {
+  background-color: transparent;
+}
+.index .navbar-toggler-icon {
+  cursor: pointer;
+}
+.index .nav-link {
+  color: #fff;
+}
+.index .nav-item.right-border {
+  border-right: 1px solid #fff;
+}
+.index .navbar-toggler-icon {
+  color: #fff;
+}
+.index .top-nav-collapse {
+  background-color: #fff;
+}
+.index .top-nav-collapse .nav-link {
+  color: #000 !important;
+}
+.index .top-nav-collapse .navbar-toggler-icon {
+  color: #000 !important;
+}
+.index .top-nav-collapse .nav-item.right-border {
+  border-right: 1px solid #ed6b00;
 }
 .navbar-brand {
   padding: 0.2rem !important;
@@ -49,7 +95,7 @@ body {
   top: 0;
   left: 210px;
   border-top: 3rem solid #ed6b00;
-  border-right: 3rem solid #fff;
+  border-right: 3rem solid transparent;
   width: 3rem;
 }
 .cabezote .card {

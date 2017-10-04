@@ -40,17 +40,57 @@ body
   cursor pointer
 
 .nav-link
-  color black !important
+  color black
 
 .nav-item
   &.right-border
     border-right 1px solid $odecopack-color_1
+
+header
+  .view
+    background-size cover
+    background-repeat no-repeat
+    height 100%
+  .hm-black-strong-1
+  .full-bg-img
+    background-color rgba(0, 0, 0, 0.6)
+  .barra-soluciones
+    margin-top -300px
 
 .navbar
   box-shadow none
   margin 0 !important
   padding 0 !important
   font-weight bold
+  background-color white
+
+.navbar-soluciones
+  background-color transparent
+
+.intro
+  min-height inherit !important
+
+.index
+  .navbar
+    background-color transparent
+  .navbar-toggler-icon
+    cursor pointer
+  .nav-link
+    color white
+  .nav-item
+    &.right-border
+      border-right 1px solid white
+  .navbar-toggler-icon
+    color white
+  .top-nav-collapse
+    background-color white
+    .nav-link
+      color black !important
+    .navbar-toggler-icon
+      color black !important
+    .nav-item
+      &.right-border
+        border-right 1px solid $odecopack-color_1
 
 .navbar-brand
   padding 0.2rem !important
@@ -66,7 +106,7 @@ body
   top 0
   left 210px
   border-top 3rem solid $odecopack-color_1
-  border-right 3rem solid white
+  border-right 3rem solid transparent
   width 3rem
 
 .cabezote

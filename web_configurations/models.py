@@ -15,11 +15,11 @@ class IndexConfiguration(SingletonModel):
     header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
     header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
     header_imagen = ProcessedImageField(
-        processors=[SmartResize(width=2560, height=588, upscale=False)],
+        processors=[SmartResize(width=2560, height=1500, upscale=False)],
         format='JPEG',
-        options={'quality': 70},
+        options={'quality': 50},
         upload_to=header_imagen_upload_to,
-        verbose_name='Imagen Cabezote (2560 x 588)',
+        verbose_name='Imagen Cabezote (2560 x 1500)',
         null=True,
         blank=True
     )

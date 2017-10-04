@@ -1,7 +1,7 @@
 {% load static google_analytics %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="{% block html_class %}{% endblock %}">
 
 <head>
     <meta charset="utf-8">
@@ -38,7 +38,7 @@
 {% endblock %}
 
 <main>
-{{ request.HTTP_USER_AGENT }}
+    {{ request.HTTP_USER_AGENT }}
     {% block content %}
 
     {% endblock %}

@@ -1,25 +1,59 @@
 {% extends 'web/base/base.html' %}
-{% load static solo_tags %}
+{% load static solo_tags inclusion_tags %}
 
 {% block title %}
     Inicio
 {% endblock %}
 
+{% block html_class %}
+    full-height
+{% endblock %}
+
 {% block menu %}
+    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+    <!--Navigation & Intro-->
     {% include 'web/base/menu.html' with es_menu_index=True %}
+    <!--Mask-->
+    <div class="view intro" style="background-image: url({{ index_configuracion.header_imagen.url }})" id="home">
+        <div class="hm-black-strong-1">
+            <div class="full-bg-img flex-center">
+                <div class="container">
+                    <div class="row smooth-scroll">
+                        <div class="col-md-12 text-center smooth-scroll wow fadeIn" data-wow-delay="0.2s">
+                            <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>
+                            <div class="hr-m">
+                                <hr class="hr-lgt w-100 mb-1-half">
+                            </div>
+{#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
+                            <h2 class="white-text font-bold mb-2">{{ index_configuracion.header_text }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Mask-->
+    <div class="pl-3 pr-3 pl-sm-0 pr-sm-0">
+        {% botones_soluciones %}
+    </div>
+
 {% endblock %}
 
 {% block cabezote %}
-    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-    {% if index_configuracion.header_imagen %}
-        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen=index_configuracion.header_imagen.url %}
-    {% else %}
-        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen="https://media.licdn.com/media/p/5/005/076/247/00da2ac.png" %}
-    {% endif %}
+    {#    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}#}
+    {#    {% if index_configuracion.header_imagen %}#}
+    {#        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen=index_configuracion.header_imagen.url %}#}
+    {#    {% else %}#}
+    {#        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen="https://media.licdn.com/media/p/5/005/076/247/00da2ac.png" %}#}
+    {#    {% endif %}#}
 
 {% endblock %}
 
 {% block content %}
-    {% include 'web/empresa.html' %}
-    {% include 'web/clientes.html' %}
+    <div class="container-fluid">
+        {% include 'web/empresa.html' %}
+    </div>
+    <div class="container-fluid">
+        {% include 'web/clientes.html' %}
+    </div>
 {% endblock %}
