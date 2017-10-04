@@ -82,10 +82,17 @@ class ItemSolucion(models.Model):
 
 
 class ItemSolucionImagen(models.Model):
+    CHOICES_MARCA_AGUA = (
+        (0, 'Ninguna'),
+        (1, 'Blanca'),
+        (2, 'Naranja')
+    )
+
     def imagen_upload_to(instance, filename):
         new_filename = get_image_name('Imagen Solucion', filename)
         return "web/img/solu/%s" % new_filename
 
+    marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
     descripcion = models.TextField(null=True, blank=True)

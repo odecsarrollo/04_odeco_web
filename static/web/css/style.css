@@ -272,9 +272,7 @@ hr {
 .soluciones .navbar-soluciones {
   font-size: 0.7rem;
   color: #fff !important;
-  position: fixed;
-  top: 60px;
-  z-index: 1000000;
+  z-index: 100;
 }
 .soluciones .navbar-soluciones .navbar-nav-soluciones {
   -webkit-flex-direction: inherit;

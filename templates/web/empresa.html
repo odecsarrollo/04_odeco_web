@@ -8,7 +8,9 @@
         <div class="row index-empresa">
             {% if empresa_configuracion.imagen_principal %}
                 <div class="col-12 col-sm-6 p-0 m-0">
-                    {% generateimage 'webpage:watermark_orange' source=empresa_configuracion.imagen_principal %}
+                    <figure>
+                        <img src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
+                    </figure>
                 </div>
             {% endif %}
             <div class="col-12 col-sm-6 botones-empresa">
@@ -75,6 +77,14 @@
                     <div class="col-xl-10 col-md-9">
                         <div class="tab-content vertical">
                             {% for galeria in galeria_fotos_list %}
+                                {% if galeria.marca_agua == 1 %}
+                                    {% generateimage 'webpage:watermark' source=galeria.imagen as imagen_procesada %}
+                                {% elif galeria.marca_agua == 2 %}
+                                    {% generateimage 'webpage:watermark_orange' source=galeria.imagen as imagen_procesada %}
+                                {% else %}
+                                    {% generateimage 'webpage:normal' source=galeria.imagen as imagen_procesada %}
+                                {% endif %}
+
                                 <div class="tab-pane fade show in {% if forloop.first %}active{% endif %}"
                                      id="galeria-{{ galeria.pk }}"
                                      role="tabpanel">
@@ -89,7 +99,6 @@
                                             <div class="mdb-lightbox">
                                                 <div class="row">
                                                     <figure class="col-4 col-lg-3 m-0 p-1">
-                                                        {% generateimage 'webpage:watermark_orange' source=galeria.imagen as imagen_procesada %}
                                                         <a href="{{ imagen_procesada.url }}"
                                                            data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
                                                             <div class="view overlay hm-white-slight z-depth-2">
@@ -121,7 +130,8 @@
                                                                     <a href="{{ imagen_procesada.url }}"
                                                                        data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                                            <img src="{{ imagen.imagen_thumbnail.url }}" alt="">
+                                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                 alt="">
                                                                         </div>
                                                                     </a>
                                                                     <div class="caption">

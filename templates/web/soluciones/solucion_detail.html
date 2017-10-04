@@ -22,7 +22,7 @@
                             <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
                                 {% for categoria in categoria_list %}
                                     <li class="nav-item">
-                                        <a class="color-1-odecopack nav-link-soluciones" data-offset="100"
+                                        <a class="color-1-odecopack nav-link-soluciones" data-offset="120"
                                            href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
                                     </li>
                                 {% endfor %}
@@ -48,8 +48,6 @@
                             </ul>
                         </div>
                     {% endif %}
-
-
                     <div class="row">
                         {% for categoria in categoria_list %}
                             <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
@@ -76,3 +74,8 @@
     {% endwith %}
 
 {% endblock %}
+<script>
+    {% block final_scripts %}
+        $(".navbar-soluciones").sticky({topSpacing:80});
+    {% endblock %}
+</script>

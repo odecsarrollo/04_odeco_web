@@ -1,3 +1,4 @@
+{% load imagekit %}
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
         <h5 class="card-title">
@@ -23,9 +24,18 @@
                             <div class="mdb-lightbox">
                                 <div class="row">
                                     {% for imagen in imagenes_lista %}
+
+                                        {% if imagen.marca_agua == 1 %}
+                                            {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                        {% elif imagen.marca_agua == 2 %}
+                                            {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                        {% else %}
+                                            {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                        {% endif %}
+
                                         <figure class="col-4 col-md-4 p-1 m-0">
-                                            <a href="{{ imagen.imagen.url }}"
-                                               data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                            <a href="{{ imagen_procesada.url }}"
+                                               data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                 <div class="view overlay hm-white-slight z-depth-2">
                                                     <img src="{{ imagen.imagen_thumbnail.url }}"
                                                          alt=""

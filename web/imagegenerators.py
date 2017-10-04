@@ -2,6 +2,7 @@ import PIL
 from PIL import Image
 from django.conf import settings
 from imagekit import ImageSpec, register
+from pilkit.processors import AddBorder
 
 
 def add_watermark(image, watermark):
@@ -59,7 +60,7 @@ class Watermark(ImageSpec):
 
 
 class WatermarkOrange(ImageSpec):
-    processors = [WatermarkProcessorOrange()]
+    processors = [WatermarkProcessorOrange(), AddBorder(thickness=5, color=(237, 107, 0))]
     format = 'PNG'
     options = {'quality': 100}
 

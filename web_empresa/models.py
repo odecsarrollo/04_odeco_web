@@ -26,11 +26,18 @@ class Aliado(models.Model):
 
 
 class GaleriaFotoEmpresa(models.Model):
+    CHOICES_MARCA_AGUA = (
+        (0, 'Ninguna'),
+        (1, 'Blanca'),
+        (2, 'Naranja')
+    )
+
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Galeria', instance.nombre)
         new_filename = get_image_name(clase, filename)
         return "web/img/empr/%s" % new_filename
 
+    marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     nombre = models.CharField(max_length=20)
     icono = models.CharField(max_length=40, help_text='Encontrar en http://fontawesome.io/')
     orden = models.PositiveIntegerField(default=0)
@@ -80,7 +87,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
     galeria = models.ForeignKey(GaleriaFotoEmpresa, related_name='mis_imagenes')
     orden = models.PositiveIntegerField(default=0)
     descripcion = models.TextField(null=True, blank=True)
-    marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=0)
+    marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
         format='JPEG',

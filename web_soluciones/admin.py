@@ -20,7 +20,7 @@ admin.site.register(Solucion, SolucionAdmin)
 class ItemSolucionImagenInline(admin.TabularInline):
     model = ItemSolucionImagen
 
-    fields = ['admin_imagen_thumbnail', 'descripcion', 'orden', 'imagen']
+    fields = ['admin_imagen_thumbnail', 'descripcion', 'orden', 'imagen','marca_agua']
     admin_imagen_thumbnail = AdminThumbnail(image_field='imagen_thumbnail')
     readonly_fields = ['admin_imagen_thumbnail']
 
