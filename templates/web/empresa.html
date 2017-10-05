@@ -50,9 +50,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-12">
-
-            <p class="text-center p-2 p-md-3 green-text">
+        <div class="col-12 dark-grey-text">
+            <p class="text-center p-2 p-md-3">
                 {{ empresa_configuracion.texto|safe }}
             </p>
         </div>
@@ -60,12 +59,13 @@
 
         {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
             {% if galeria_fotos_list %}
-                <div class="row">
+                <div class="row galeria-menu">
                     <div class="col-xl-2 col-md-3">
                         <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
                             {% for galeria in galeria_fotos_list %}
                                 <li class="nav-item">
-                                    <a class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab"
+                                    <a class="nav-link dark-grey-text {% if forloop.first %}active{% endif %}"
+                                       data-toggle="tab"
                                        href="#galeria-{{ galeria.pk }}"
                                        role="tab"><i
                                             class="fa {{ galeria.icono }} fa-2x"></i><br>{{ galeria.nombre }}</a>

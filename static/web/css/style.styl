@@ -4,6 +4,12 @@ $odecopack-color_3 = white
 $odecopack-color_4 = #5B5B5F
 $odecopack-color_5 = #ECEDEF
 
+@font-face
+  font-family: 'FontOdecopack'
+  src: url('../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.eot') format('embedded-opentype'), url('../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff2') format('woff2'), url('../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff') format('woff'), url('../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.ttf') format('truetype'), url('../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.svg') format('svg');
+  font-weight normal
+  font-style normal
+
 border-radius(n)
   -webkit-border-radius n
   -moz-border-radius n
@@ -13,6 +19,15 @@ flex-direction(n)
   -webkit-flex-direction n
   -ms-flex-direction n
   flex-direction n
+
+.btn
+  font-family FontOdecopack
+
+h1, h2, h3, h4
+  font-family FontOdecopack !important
+
+.odeco-font
+  font-family FontOdecopack !important
 
 body
   background-color $odecopack-color_3
@@ -41,6 +56,7 @@ body
 
 .nav-link
   color black
+  font-family FontOdecopack
 
 .nav-item
   &.right-border
@@ -50,12 +66,10 @@ header
   .view
     background-size cover
     background-repeat no-repeat
-    height 100%
+    background-position center
   .hm-black-strong-1
   .full-bg-img
     background-color rgba(0, 0, 0, 0.6)
-  .barra-soluciones
-    margin-top -300px
 
 .navbar
   box-shadow none
@@ -65,23 +79,46 @@ header
   background-color white
 
 .navbar-soluciones
-  background-color transparent
+  padding-top 10px !important
 
 .intro
   min-height inherit !important
+  .barra-soluciones
+    font-family FontOdecopack
+    .botones-soluciones
+      .boton
+        margin 0 !important
+        padding 0 !important
+        text-align center !important
+        .contenido
+          height 100%
+          color white
+          img
+            display inline !important
+        .contenido:hover
+          border none
+          background-image url("../img/fondo_botones_hover.jpg")
+          background-repeat no-repeat
+          background-size auto
+      a
+        color inherit
+        text-decoration inherit
 
 .index
   .navbar
     background-color transparent
   .navbar-toggler-icon
     cursor pointer
-  .nav-link
-    color white
   .nav-item
     &.right-border
       border-right 1px solid white
   .navbar-toggler-icon
     color white
+  .nav-link
+    color white
+  .galeria-menu
+    .nav-link
+      color black
   .top-nav-collapse
     background-color white
     .nav-link
@@ -92,22 +129,23 @@ header
       &.right-border
         border-right 1px solid $odecopack-color_1
 
-.navbar-brand
-  padding 0.2rem !important
-  width 210px !important
-  height 3rem
-  position relative
-  background-color $odecopack-color_1
-  margin-right 3rem
+.menu-odeco
+  .navbar-brand
+    padding 0.2rem !important
+    width 210px !important
+    height 3rem
+    position relative
+    background-color $odecopack-color_1
+    margin-right 3rem
 
-.navbar-brand:after
-  content ''
-  position absolute
-  top 0
-  left 210px
-  border-top 3rem solid $odecopack-color_1
-  border-right 3rem solid transparent
-  width 3rem
+  .navbar-brand:after
+    content ''
+    position absolute
+    top 0
+    left 210px
+    border-top 3rem solid $odecopack-color_1
+    border-right 3rem solid transparent
+    width 3rem
 
 .cabezote
   .card
@@ -121,6 +159,28 @@ header
     right 0
   .card-text
     color white
+  .barra-soluciones
+    margin-top -9rem
+    .botones-soluciones
+      .boton
+        margin 0 !important
+        padding 0 !important
+        text-align center !important
+        .contenido
+          height 100%
+          background-color white
+          color black
+          border 1px solid $odecopack-color_5
+        .contenido:hover
+          border none
+          background-image url("../img/fondo_botones_hover.jpg")
+          background-repeat no-repeat
+          background-size auto
+      a
+        color inherit
+        text-decoration inherit
+      .icono-svg
+        width 30%
 
 .jarallax
   min-height 500px
@@ -145,27 +205,6 @@ footer
 
   .md-form
     margin-bottom 0.5rem
-
-.barra-soluciones
-  margin-top -9rem
-  .botones-soluciones
-    .boton
-      margin 0 !important
-      padding 0 !important
-      text-align center !important
-      .contenido
-        height 100%
-        background-color white
-        color black
-        border 1px solid $odecopack-color_5
-      .contenido:hover
-        border none
-        background-image url("../img/fondo_botones_hover.jpg")
-        background-repeat no-repeat
-        background-size auto
-    a
-      color inherit
-      text-decoration inherit
 
 //.index
 //  h1
@@ -199,14 +238,6 @@ footer
 
 hr
   border-top 1px solid $odecopack-color_1
-
-.path-prueba,
-.icono-svg
-  width 30%
-  fill tomato
-  fill-rule evenodd
-
-/* no underline */
 
 .streak
   display block

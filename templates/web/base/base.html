@@ -17,6 +17,8 @@
     <!-- Your custom styles (optional) -->
     <link href="{% static 'web/css/style.min.css' %}" rel="stylesheet">
 
+    <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
+
     {% google_analytics %}
 
 </head>
@@ -60,6 +62,7 @@
     $(function () {
         $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
     });
+    new WOW().init();
     {% block final_scripts %}
 
     {% endblock %}

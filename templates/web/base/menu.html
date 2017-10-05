@@ -2,7 +2,7 @@
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 {#<nav class="navbar fixed-top navbar-expand-lg bg-odecopack scrolling-navbar">#}
 <div {% if es_menu_index == True %}class="index"{% endif %}>
-    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar {% if es_menu_index == True %}navbar-toggleable-md{% endif %}">
+    <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar menu-odeco {% if es_menu_index == True %}navbar-toggleable-md{% endif %}">
         <a class="navbar-brand" href="{% url 'index' %}">
             <img width="210px" src="{% static 'web/img/logo-odecopack2.png' %}" alt="">
         </a>

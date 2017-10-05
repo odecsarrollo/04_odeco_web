@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'FontOdecopack';
+  src: url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.eot") format('embedded-opentype'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff2") format('woff2'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff") format('woff'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.ttf") format('truetype'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.svg") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.btn {
+  font-family: FontOdecopack;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: FontOdecopack !important;
+}
+.odeco-font {
+  font-family: FontOdecopack !important;
+}
 body {
   background-color: #fff;
 }
@@ -25,6 +43,7 @@ body {
 }
 .nav-link {
   color: #000;
+  font-family: FontOdecopack;
 }
 .nav-item.right-border {
   border-right: 1px solid #ed6b00;
@@ -32,14 +51,11 @@ body {
 header .view {
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
+  background-position: center;
 }
 header .hm-black-strong-1,
 header .full-bg-img {
   background-color: rgba(0,0,0,0.6);
-}
-header .barra-soluciones {
-  margin-top: -300px;
 }
 .navbar {
   box-shadow: none;
@@ -49,10 +65,35 @@ header .barra-soluciones {
   background-color: #fff;
 }
 .navbar-soluciones {
-  background-color: transparent;
+  padding-top: 10px !important;
 }
 .intro {
   min-height: inherit !important;
+}
+.intro .barra-soluciones {
+  font-family: FontOdecopack;
+}
+.intro .barra-soluciones .botones-soluciones .boton {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+.intro .barra-soluciones .botones-soluciones .boton .contenido {
+  height: 100%;
+  color: #fff;
+}
+.intro .barra-soluciones .botones-soluciones .boton .contenido img {
+  display: inline !important;
+}
+.intro .barra-soluciones .botones-soluciones .boton .contenido:hover {
+  border: none;
+  background-image: url("../img/fondo_botones_hover.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.intro .barra-soluciones .botones-soluciones a {
+  color: inherit;
+  text-decoration: inherit;
 }
 .index .navbar {
   background-color: transparent;
@@ -60,14 +101,17 @@ header .barra-soluciones {
 .index .navbar-toggler-icon {
   cursor: pointer;
 }
-.index .nav-link {
-  color: #fff;
-}
 .index .nav-item.right-border {
   border-right: 1px solid #fff;
 }
 .index .navbar-toggler-icon {
   color: #fff;
+}
+.index .nav-link {
+  color: #fff;
+}
+.index .galeria-menu .nav-link {
+  color: #000;
 }
 .index .top-nav-collapse {
   background-color: #fff;
@@ -81,7 +125,7 @@ header .barra-soluciones {
 .index .top-nav-collapse .nav-item.right-border {
   border-right: 1px solid #ed6b00;
 }
-.navbar-brand {
+.menu-odeco .navbar-brand {
   padding: 0.2rem !important;
   width: 210px !important;
   height: 3rem;
@@ -89,7 +133,7 @@ header .barra-soluciones {
   background-color: #ed6b00;
   margin-right: 3rem;
 }
-.navbar-brand:after {
+.menu-odeco .navbar-brand:after {
   content: '';
   position: absolute;
   top: 0;
@@ -112,6 +156,33 @@ header .barra-soluciones {
 }
 .cabezote .card-text {
   color: #fff;
+}
+.cabezote .barra-soluciones {
+  margin-top: -9rem;
+}
+.cabezote .barra-soluciones .botones-soluciones .boton {
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+.cabezote .barra-soluciones .botones-soluciones .boton .contenido {
+  height: 100%;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ecedef;
+}
+.cabezote .barra-soluciones .botones-soluciones .boton .contenido:hover {
+  border: none;
+  background-image: url("../img/fondo_botones_hover.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
+}
+.cabezote .barra-soluciones .botones-soluciones a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.cabezote .barra-soluciones .botones-soluciones .icono-svg {
+  width: 30%;
 }
 .jarallax {
   min-height: 500px;
@@ -137,30 +208,6 @@ footer textarea.md-textarea {
 }
 footer .md-form {
   margin-bottom: 0.5rem;
-}
-.barra-soluciones {
-  margin-top: -9rem;
-}
-.barra-soluciones .botones-soluciones .boton {
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-}
-.barra-soluciones .botones-soluciones .boton .contenido {
-  height: 100%;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ecedef;
-}
-.barra-soluciones .botones-soluciones .boton .contenido:hover {
-  border: none;
-  background-image: url("../img/fondo_botones_hover.jpg");
-  background-repeat: no-repeat;
-  background-size: auto;
-}
-.barra-soluciones .botones-soluciones a {
-  color: inherit;
-  text-decoration: inherit;
 }
 .index .nav-tabs {
   font-size: 0.8rem;
@@ -190,13 +237,6 @@ footer .md-form {
 hr {
   border-top: 1px solid #ed6b00;
 }
-.path-prueba,
-.icono-svg {
-  width: 30%;
-  fill: #ff6347;
-  fill-rule: evenodd;
-}
-/* no underline */
 .streak {
   display: block;
   position: relative;

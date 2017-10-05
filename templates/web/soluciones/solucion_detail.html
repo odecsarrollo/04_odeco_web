@@ -16,7 +16,7 @@
         {% regroup items_list by categoria as categoria_list %}
         {% if items_list %}
             <div class="container">
-                <section class="section mt-3 soluciones">
+                <section class="section soluciones">
                     {% if categoria_list|length > 1 %}
                         <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
                             <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
@@ -52,7 +52,7 @@
                         {% for categoria in categoria_list %}
                             <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
                                 {% if categoria.grouper %}
-                                    <h2 class="h2-responsive text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
+                                    <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
                                 {% endif %}
                                 {% regroup categoria.list by categoria_dos as categoria_dos_list %}
                                 {% for categoria_dos in categoria_dos_list %}
@@ -76,6 +76,6 @@
 {% endblock %}
 <script>
     {% block final_scripts %}
-        $(".navbar-soluciones").sticky({topSpacing:80});
+        $(".navbar-soluciones").sticky({topSpacing:48});
     {% endblock %}
 </script>

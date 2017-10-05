@@ -194,9 +194,14 @@ CACHES = {
     }
 }
 
-IMAGEKIT_WATERMARK_IMAGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua.png')
-IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua_orange.png')
+SOLO_CACHE = 'default'
+SOLO_CACHE_TIMEOUT = None
+SOLO_CACHE_PREFIX = 'solo'
+
 IMAGEKIT_CACHE_BACKEND = 'imagekit'
 IMAGEKIT_CACHE_PREFIX = 'imagekit:'
+
+IMAGEKIT_WATERMARK_IMAGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua.png')
+IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua_orange.png')
 
 GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-107233875-1'

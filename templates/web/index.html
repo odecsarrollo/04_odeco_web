@@ -18,24 +18,31 @@
         <div class="hm-black-strong-1">
             <div class="full-bg-img flex-center">
                 <div class="container">
-                    <div class="row smooth-scroll">
-                        <div class="col-md-12 text-center smooth-scroll wow fadeIn" data-wow-delay="0.2s">
-                            <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>
-                            <div class="hr-m">
-                                <hr class="hr-lgt w-100 mb-1-half">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-6">
+                            <figure>
+                                <img class="img-fluid" src="{% static 'web/img/marca_agua.png' %}" alt="">
+                            </figure>
+                        </div>
+                        <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
+                            <div class="d-none d-sm-block">
+                                {#                                <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>#}
+                                {#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
+                                <h3 class="white-text font-bold odeco-font mb-2">{{ index_configuracion.header_text }}</h3>
                             </div>
-{#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
-                            <h2 class="white-text font-bold mb-2">{{ index_configuracion.header_text }}</h2>
+                        </div>
+                        <div class="col-12">
+                            {% botones_soluciones %}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Mask-->
-    <div class="pl-3 pr-3 pl-sm-0 pr-sm-0">
-        {% botones_soluciones %}
-    </div>
+    {#    <!--Mask-->#}
+    {#    <div class="pl-3 pr-3 pl-sm-0 pr-sm-0">#}
+    {#        {% botones_soluciones %}#}
+    {#    </div>#}
 
 {% endblock %}
 

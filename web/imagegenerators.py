@@ -32,8 +32,6 @@ def add_watermark(image, watermark):
 
 
 class WatermarkProcessorNormal(object):
-    watermark = Image.open(settings.IMAGEKIT_WATERMARK_IMAGE)
-
     def process(self, image):
         return image
 
