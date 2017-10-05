@@ -28,6 +28,15 @@ class Solucion(models.Model):
         null=True,
         blank=True
     )
+    boton_soluciones_index = ProcessedImageField(
+        processors=[SmartResize(width=85, height=85, upscale=False)],
+        format='PNG',
+        options={'quality': 70},
+        upload_to=imagen_boton_upload_to,
+        verbose_name='Imagen Boton Index',
+        null=True,
+        blank=True
+    )
     orden = models.PositiveIntegerField(default=0)
     slug = models.SlugField(null=True, blank=True)
 
