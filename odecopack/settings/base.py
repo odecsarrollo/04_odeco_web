@@ -194,10 +194,6 @@ CACHES = {
     }
 }
 
-SOLO_CACHE = 'default'
-SOLO_CACHE_TIMEOUT = None
-SOLO_CACHE_PREFIX = 'solo'
-
 IMAGEKIT_CACHE_BACKEND = 'imagekit'
 IMAGEKIT_CACHE_PREFIX = 'imagekit:'
 
