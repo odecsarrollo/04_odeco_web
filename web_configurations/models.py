@@ -82,7 +82,7 @@ class CacheConfiguration(SingletonModel):
                                              default='cache inicial clientes'
                                              )
     tiempo_cache_clientes = models.PositiveIntegerField(verbose_name='Clientes Tiempo Cache', default=86400)
-    nombre_cache_index_header = models.CharField(max_length=40, verbose_name='Index Header Nombre Cache',
+    nombre_cache_index_header = models.CharField(max_length=40, verbose_name='Index Header',
                                                  help_text='Cambiar por cada cambio en Index Header',
                                                  default='cache inicial Index Header'
                                                  )
