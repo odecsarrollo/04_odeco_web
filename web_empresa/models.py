@@ -14,7 +14,7 @@ class Aliado(models.Model):
     logo = ProcessedImageField(
         processors=[ResizeToFit(width=190, height=101, upscale=False)],
         format='PNG',
-        options={'quality': 70},
+        options={'quality': 60},
         upload_to=imagen_upload_to,
         verbose_name='Logo Aliado',
         null=True,
