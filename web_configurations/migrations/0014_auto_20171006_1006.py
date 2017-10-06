@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cacheconfiguration',
             name='nombre_cache_index_header',
-            field=models.CharField(default='cache inicial Index Header', help_text='Cambiar por cada cambio en Index Header', max_length=40, verbose_name='Index Header Nombre Cache'),
+            field=models.CharField(default='Index Header', help_text='Cambiar por cada cambio en Index Header', max_length=40, verbose_name='Index Header Nombre Cache'),
         ),
     ]
