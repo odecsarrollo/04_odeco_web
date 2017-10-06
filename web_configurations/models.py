@@ -73,20 +73,8 @@ class LaEmpresaConfiguration(SingletonModel):
 
 
 class CacheConfiguration(SingletonModel):
-    nombre_cache_empresa = models.CharField(max_length=40, verbose_name='Empresa Nombre Cache',
-                                            help_text='Cambiar por cada cambio en Empresa, Aliados o Galeria Empresa',
-                                            default='cache inicial empresa')
-    tiempo_cache_empresa = models.PositiveIntegerField(verbose_name='Empresa Tiempo Cache', default=86400)
-    nombre_cache_clientes = models.CharField(max_length=40, verbose_name='Clientes Nombre Cache',
-                                             help_text='Cambiar por cada cambio en Clientes',
-                                             default='cache inicial clientes'
-                                             )
-    tiempo_cache_clientes = models.PositiveIntegerField(verbose_name='Clientes Tiempo Cache', default=86400)
-    nombre_cache_index_header = models.CharField(max_length=40, verbose_name='Index Header Nombre Cache',
-                                                 help_text='Cambiar por cada cambio en Index Header',
-                                                 default='Index Header'
-                                                 )
-    tiempo_cache_index_header = models.PositiveIntegerField(verbose_name='Index Header Tiempo Cache', default=86400)
+    empresa_update = models.DateTimeField(null=True, blank=True)
+    clientes_update = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):
         return "Caches Index"

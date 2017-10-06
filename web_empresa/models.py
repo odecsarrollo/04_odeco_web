@@ -1,10 +1,29 @@
 from django.db import models
+from django.utils import timezone
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFit, ResizeToFill
 from web.utils import get_image_name
 
+from model_utils.models import TimeStampedModel
 
-class Aliado(models.Model):
+from web_configurations.models import CacheConfiguration
+
+
+class MixingCacheConfiguration(object):
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        cache = CacheConfiguration.objects.get()
+        cache.empresa_update = timezone.now()
+        cache.save()
+
+    def delete(self, using=None, keep_parents=False):
+        cache = CacheConfiguration.objects.get()
+        cache.empresa_update = timezone.now()
+        cache.save()
+        return super().delete(using, keep_parents)
+
+
+class Aliado(MixingCacheConfiguration, models.Model):
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Aliado', instance.nombre)
         new_filename = get_image_name(clase, filename)
@@ -25,7 +44,7 @@ class Aliado(models.Model):
         return self.nombre
 
 
-class GaleriaFotoEmpresa(models.Model):
+class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     CHOICES_MARCA_AGUA = (
         (0, 'Ninguna'),
         (1, 'Blanca'),
@@ -104,3 +123,11 @@ class GaleriaFotoEmpresaImagen(models.Model):
         ],
         format='JPEG'
     )
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.galeria.save()
+
+    def delete(self, using=None, keep_parents=False):
+        self.galeria.save()
+        return super().delete(using, keep_parents)

@@ -1,7 +1,11 @@
+from django.utils import timezone
+
 from django.db import models
 from imagekit.models import ProcessedImageField
 from pilkit.processors import ResizeToFit
 from web.utils import get_image_name
+
+from web_configurations.models import CacheConfiguration
 
 
 class Cliente(models.Model):
@@ -20,6 +24,18 @@ class Cliente(models.Model):
         null=True,
         blank=True
     )
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        cache = CacheConfiguration.objects.get()
+        cache.clientes_update = timezone.now()
+        cache.save()
+
+    def delete(self, using=None, keep_parents=False):
+        cache = CacheConfiguration.objects.get()
+        cache.clientes_update = timezone.now()
+        cache.save()
+        return super().delete(using, keep_parents)
 
     orden = models.PositiveIntegerField(default=0)
 
