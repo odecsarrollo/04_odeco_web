@@ -1,5 +1,5 @@
 {% extends 'web/base/base.html' %}
-{% load static solo_tags inclusion_tags %}
+{% load static solo_tags inclusion_tags cache %}
 
 {% block title %}
     Inicio
@@ -10,35 +10,38 @@
 {% endblock %}
 
 {% block menu %}
-    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-    <!--Navigation & Intro-->
-    {% include 'web/base/menu.html' with es_menu_index=True %}
-    <!--Mask-->
-    <div class="view intro" style="background-image: url({{ index_configuracion.header_imagen.url }})" id="home">
-        <div class="hm-black-strong-1">
-            <div class="full-bg-img flex-center">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-8 col-sm-6">
-                            <figure>
-                                <img class="img-fluid" src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
-                            <div class="d-none d-sm-block">
-                                {#                                <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>#}
-                                {#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
-                                <h3 class="white-text font-bold odeco-font mb-2">{{ index_configuracion.header_text }}</h3>
+    {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
+    {% cache cache_configuracion.tiempo_cache_index_header index_cache_header cache_configuracion.nombre_cache_index_header %}
+        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+        <!--Navigation & Intro-->
+        {% include 'web/base/menu.html' with es_menu_index=True %}
+        <!--Mask-->
+        <div class="view intro" style="background-image: url({{ index_configuracion.header_imagen.url }})" id="home">
+            <div class="hm-black-strong-1">
+                <div class="full-bg-img flex-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-8 col-sm-6">
+                                <figure>
+                                    <img class="img-fluid" src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
+                                </figure>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            {% botones_soluciones %}
+                            <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
+                                <div class="d-none d-sm-block">
+                                    {#                                <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>#}
+                                    {#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
+                                    <h3 class="white-text font-bold odeco-font mb-2">{{ index_configuracion.header_text }}</h3>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                {% botones_soluciones %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endcache %}
     {#    <!--Mask-->#}
     {#    <div class="pl-3 pr-3 pl-sm-0 pr-sm-0">#}
     {#        {% botones_soluciones %}#}
@@ -58,9 +61,14 @@
 
 {% block content %}
     <div class="container-fluid">
-        {% include 'web/empresa.html' %}
+        {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
+        {% cache cache_configuracion.tiempo_cache_empresa index_cache_empresa cache_configuracion.nombre_cache_empresa %}
+            {% include 'web/empresa.html' %}
+        {% endcache %}
     </div>
     <div class="container-fluid">
-        {% include 'web/clientes.html' %}
+        {% cache cache_configuracion.tiempo_cache_clientes index_cache_clientes cache_configuracion.nombre_cache_clientes %}
+            {% include 'web/clientes.html' %}
+        {% endcache %}
     </div>
 {% endblock %}
