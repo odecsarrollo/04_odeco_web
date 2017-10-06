@@ -4,10 +4,12 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 from tinymce import HTMLField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
 
+from model_utils.models import TimeStampedModel
+
 from web.utils import get_image_name
 
 
-class Solucion(models.Model):
+class Solucion(TimeStampedModel):
     def header_imagen_upload_to(instance, filename):
         new_filename = get_image_name('Header', filename)
         return "web/img/solu/%s" % new_filename
@@ -85,6 +87,10 @@ class ItemSolucion(models.Model):
         blank=True
     )
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.solucion.save()
+
     class Meta:
         verbose_name = 'Item Solución'
         verbose_name_plural = 'Items Soluciones'
@@ -100,6 +106,10 @@ class ItemSolucionImagen(models.Model):
     def imagen_upload_to(instance, filename):
         new_filename = get_image_name('Imagen Solucion', filename)
         return "web/img/solu/%s" % new_filename
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.item_solucion.solucion.save()
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes', on_delete=models.PROTECT)

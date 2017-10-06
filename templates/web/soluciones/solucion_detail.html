@@ -1,5 +1,5 @@
 {% extends 'web/base/base.html' %}
-{% load static %}
+{% load cache static %}
 
 {% block title %}
     {{ solucion_objeto.nombre }}
@@ -12,70 +12,71 @@
 
 
 {% block content %}
-    {% with items_list=solucion_objeto.mis_items.all|dictsort:"categoria" %}
-        {% regroup items_list by categoria as categoria_list %}
-        {% if items_list %}
-            <div class="container">
-                <section class="section soluciones">
-                    {% if categoria_list|length > 1 %}
-                        <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
-                            <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
-                                {% for categoria in categoria_list %}
-                                    <li class="nav-item">
-                                        <a class="color-1-odecopack nav-link-soluciones" data-offset="120"
-                                           href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </nav>
+    {% cache 86400 cache_solucion solucion_objeto.pk solucion_objeto.modified %}
+        {% with items_list=mis_items.all|dictsort:"categoria" %}
+            {% regroup items_list by categoria as categoria_list %}
+            {% if items_list %}
+                <div class="container">
+                    <section class="section soluciones">
+                        {% if categoria_list|length > 1 %}
+                            <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                                <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
+                                    {% for categoria in categoria_list %}
+                                        <li class="nav-item">
+                                            <a class="color-1-odecopack nav-link-soluciones" data-offset="120"
+                                               href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </nav>
 
-                        <div class="fixed-action-btn d-md-none" style="bottom: 45px; right: 24px;">
-                            <a class="btn-floating btn-large color-1-odecopack waves-effect waves-light">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            <ul class="smooth-scroll">
-                                {% for categoria in categoria_list %}
-                                    <li>
-                                        <a class="btn-floating btn-floating-categoria waves-effect waves-light"
-                                           data-offset="100"
-                                           href="#{{ categoria.grouper|slugify }}"
-                                           style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
-                                        >
-                                            {{ categoria.grouper|title }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
-                    <div class="row">
-                        {% for categoria in categoria_list %}
-                            <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
-                                {% if categoria.grouper %}
-                                    <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
-                                {% endif %}
-                                {% regroup categoria.list by categoria_dos as categoria_dos_list %}
-                                {% for categoria_dos in categoria_dos_list %}
-                                    {% if categoria_dos.grouper %}
-                                        <h4 class="h4-responsive text-center text-sm-left pl-0 pl-sm-2">{{ categoria_dos.grouper|title }}</h4>
-                                    {% endif %}
-                                    <div class="row lista pl-0 pl-sm-4 pr-1">
-                                        {% for item in categoria_dos.list %}
-                                            {% include 'web/soluciones/item.html' with item=item %}
-                                        {% endfor %}
-                                    </div>
-                                {% endfor %}
+                            <div class="fixed-action-btn d-md-none" style="bottom: 45px; right: 24px;">
+                                <a class="btn-floating btn-large color-1-odecopack waves-effect waves-light">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                                <ul class="smooth-scroll">
+                                    {% for categoria in categoria_list %}
+                                        <li>
+                                            <a class="btn-floating btn-floating-categoria waves-effect waves-light"
+                                               data-offset="100"
+                                               href="#{{ categoria.grouper|slugify }}"
+                                               style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
+                                            >
+                                                {{ categoria.grouper|title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
-                        {% endfor %}
-                    </div>
-                </section>
-            </div>
-        {% endif %}
-    {% endwith %}
-
+                        {% endif %}
+                        <div class="row">
+                            {% for categoria in categoria_list %}
+                                <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
+                                    {% if categoria.grouper %}
+                                        <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
+                                    {% endif %}
+                                    {% regroup categoria.list by categoria_dos as categoria_dos_list %}
+                                    {% for categoria_dos in categoria_dos_list %}
+                                        {% if categoria_dos.grouper %}
+                                            <h4 class="h4-responsive text-center text-sm-left pl-0 pl-sm-2">{{ categoria_dos.grouper|title }}</h4>
+                                        {% endif %}
+                                        <div class="row lista pl-0 pl-sm-4 pr-1">
+                                            {% for item in categoria_dos.list %}
+                                                {% include 'web/soluciones/item.html' with item=item %}
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+            {% endif %}
+        {% endwith %}
+    {% endcache %}
 {% endblock %}
 <script>
     {% block final_scripts %}
-        $(".navbar-soluciones").sticky({topSpacing:48});
+        $(".navbar-soluciones").sticky({topSpacing: 48});
     {% endblock %}
 </script>

@@ -23,12 +23,6 @@ def get_secret(setting, variable, secrets=secrets):
 
 ############### END SECRET FILE
 
-
-MIDDLEWARE += MIDDLEWARE + [
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
-]
-
-
 ########## MANAGER CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
@@ -74,9 +68,8 @@ INSTALLED_APPS = INSTALLED_APPS + THIRD_PART_APPS
 # }
 # ######### END CACHE CONFIGURATION
 
-
-########## DATABASE CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
+# ########## DATABASE CONFIGURATION
+# # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 # DATABASES = {
 #     'default': {
 #         'ENGINE': get_secret("DATABASE_LOCAL", "ENGINE"),
@@ -87,8 +80,7 @@ INSTALLED_APPS = INSTALLED_APPS + THIRD_PART_APPS
 #         'PORT': get_secret("DATABASE_LOCAL", "PORT")
 #     }
 # }
-
-########## END DATABASE CONFIGURATION
+# ########## END DATABASE CONFIGURATION
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders

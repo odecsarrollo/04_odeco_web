@@ -16,7 +16,9 @@
         <!--Navigation & Intro-->
         {% include 'web/base/menu.html' with es_menu_index=True %}
         <!--Mask-->
-        <div class="view intro" style="background-image: url({{ index_configuracion.header_imagen.url }})" id="home">
+        <div class="view intro"
+             style="{% if index_configuracion.header_imagen %}background-image: url({{ index_configuracion.header_imagen.url }}){% endif %}"
+             id="home">
             <div class="hm-black-strong-1">
                 <div class="full-bg-img flex-center">
                     <div class="container">
