@@ -63,6 +63,9 @@
         $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
     });
     new WOW().init();
+    $('.navbar-nav>li>a').on('click', function () {
+        $('.navbar-collapse').collapse('hide');
+    });
     {% block final_scripts %}
 
     {% endblock %}

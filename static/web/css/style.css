@@ -222,7 +222,7 @@ header .full-bg-img {
 .cabezote .barra-soluciones .botones-soluciones .boton .contenido {
   height: 100%;
   background-color: #fff;
-  color: #000;
+  color: #808080;
   border: 1px solid #ecedef;
 }
 .cabezote .barra-soluciones .botones-soluciones .boton .contenido:hover {
@@ -416,6 +416,7 @@ hr {
   z-index: 100;
 }
 .soluciones .navbar-soluciones .navbar-nav-soluciones {
+  font-family: FontOdecopack;
   -webkit-flex-direction: inherit;
   -ms-flex-direction: inherit;
   flex-direction: inherit;
@@ -429,8 +430,10 @@ hr {
   border-radius: 25px;
 }
 .soluciones .btn-floating-categoria {
+  font-family: FontOdecopack;
+  font-weight: bold;
   right: 210px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 25px;
