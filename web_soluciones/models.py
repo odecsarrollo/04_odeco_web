@@ -19,26 +19,9 @@ class Solucion(TimeStampedModel):
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
+    icono_class = models.CharField(default='', max_length=100)
     texto = HTMLField('Texto Soluciones', default='Descripción de esta solución', null=True, blank=True)
     descripcion_corta = models.TextField(null=True, blank=True)
-    boton_soluciones = ProcessedImageField(
-        processors=[SmartResize(width=85, height=85, upscale=False)],
-        format='PNG',
-        options={'quality': 70},
-        upload_to=imagen_boton_upload_to,
-        verbose_name='Imagen Boton',
-        null=True,
-        blank=True
-    )
-    boton_soluciones_index = ProcessedImageField(
-        processors=[SmartResize(width=85, height=85, upscale=False)],
-        format='PNG',
-        options={'quality': 70},
-        upload_to=imagen_boton_upload_to,
-        verbose_name='Imagen Boton Index',
-        null=True,
-        blank=True
-    )
     orden = models.PositiveIntegerField(default=0)
     slug = models.SlugField(null=True, blank=True)
 

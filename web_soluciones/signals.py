@@ -9,13 +9,11 @@ from .models import Solucion, ItemSolucion, ItemSolucionImagen
 @receiver(pre_delete, sender=Solucion)
 def header_imagen_solucion_pre_delete(sender, instance, **kwargs):
     instance.header_imagen.delete(False)
-    instance.boton_soluciones.delete(False)
 
 
 @receiver(post_init, sender=Solucion)
 def backup_header_imagen_solucion_path(sender, instance, **kwargs):
     instance._current_imagen = instance.header_imagen
-    instance._current_imagen_boton = instance.boton_soluciones
 
 
 @receiver(post_save, sender=Solucion)
@@ -23,9 +21,6 @@ def delete_header_imagen_solucion(sender, instance, **kwargs):
     if hasattr(instance, '_current_imagen'):
         if instance._current_imagen != instance.header_imagen:
             instance._current_imagen.delete(save=False)
-    if hasattr(instance, '_current_imagen_boton'):
-        if instance._current_imagen_boton != instance.boton_soluciones:
-            instance._current_imagen_boton.delete(save=False)
 
 
 # endregion
