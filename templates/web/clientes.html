@@ -1,26 +1,29 @@
-{% load static %}
+{% load static cache solo_tags %}
+{% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 <section id="clientes" class="section background-white pt-4">
-    {% with clientes_lista=clientes_list %}
-        {% if clientes_lista %}
-            <div class="container-fluid">
-                <div class="container py-3" id="opinions">
-                    <h1 class="section-heading h1 pt-4 text-center text-sm-left">
-                        CLIENTES</h1>
-                    <div class="flex-center logos-panel">
+    {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
+        {% with clientes_lista=clientes_list %}
+            {% if clientes_lista %}
+                <div class="container-fluid">
+                    <div class="container py-3" id="opinions">
+                        <h1 class="section-heading h1 pt-4 text-center text-sm-left">
+                            CLIENTES</h1>
+                        <div class="flex-center logos-panel">
+                            <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
 
-                        <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
-                            {% for cliente in clientes_lista %}
-                                {% if cliente.logo %}
-                                    <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
-                                        <img src="{{ cliente.logo.url }}" class="img-fluid">
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
+
+                                {% for cliente in clientes_lista %}
+                                    {% if cliente.logo %}
+                                        <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
+                                            <img src="{{ cliente.logo.url }}" class="img-fluid">
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endwith %}
+            {% endif %}
+        {% endwith %}
+    {% endcache %}
 </section>

@@ -65,8 +65,6 @@
         {% include 'web/empresa.html' %}
     </div>
     <div class="container-fluid">
-        {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
-            {% include 'web/clientes.html' %}
-        {% endcache %}
+        {% include 'web/clientes.html' %}
     </div>
 {% endblock %}

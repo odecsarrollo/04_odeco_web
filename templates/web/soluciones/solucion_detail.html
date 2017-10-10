@@ -15,9 +15,12 @@
     {% cache 86400 cache_solucion solucion_objeto.pk solucion_objeto.modified %}
         {% with items_list=mis_items.all|dictsort:"categoria" %}
             {% regroup items_list by categoria as categoria_list %}
-            {% if items_list %}
-                <div class="container">
-                    <section class="section soluciones">
+            <div class="container">
+                <section class="section soluciones">
+                    <div class="mt-4">
+                        {{ solucion_objeto.texto|safe }}
+                    </div>
+                    {% if items_list %}
                         {% if categoria_list|length > 1 %}
                             <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
                                 <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
@@ -69,9 +72,9 @@
                                 </div>
                             {% endfor %}
                         </div>
-                    </section>
-                </div>
-            {% endif %}
+                    {% endif %}
+                </section>
+            </div>
         {% endwith %}
     {% endcache %}
 {% endblock %}
