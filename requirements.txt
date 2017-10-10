@@ -10,6 +10,8 @@ django-appconf==1.0.2
 django-debug-toolbar==1.8
 django-imagekit==4.0.1
 django-model-utils==3.0.0
+django-redis==4.8.0
+django-redisboard==3.0.2
 django-solo==1.1.2
 django-storages==1.6.5
 django-tinymce4-lite==1.5.2
@@ -27,6 +29,7 @@ Pillow==4.2.1
 python-dateutil==2.6.1
 pytz==2017.2
 PyYAML==3.12
+redis==2.10.6
 requests==2.9.1
 s3transfer==0.1.11
 semantic-version==2.5.0

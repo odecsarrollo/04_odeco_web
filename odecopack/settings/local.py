@@ -132,3 +132,24 @@ DEFAULT_FROM_EMAIL = get_secret("EMAIL_SERVER", "DEFAULT_FROM_EMAIL")
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 INTERNAL_IPS = '127.0.0.1'
 ######### END TOOLBAR CONFIGURATION CONFIGURATION
+
+
+########## CACHE ###################
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'COMPRESSOR_CLASS': 'redis_cache.compressors.BZip2Compressor',
+        }
+    }
+}
+IMAGEKIT_CACHE_BACKEND = 'default'
+IMAGEKIT_CACHE_PREFIX = 'imagekit-odeco:'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = "default"
+SOLO_CACHE_TIMEOUT = None
+SOLO_CACHE_PREFIX = 'sol'
+SOLO_CACHE = 'default'

@@ -8,7 +8,7 @@ from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
 
 
-@method_decorator(gzip_page, name='dispatch')
+#@method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 

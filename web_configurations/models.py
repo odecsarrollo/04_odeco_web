@@ -74,6 +74,7 @@ class LaEmpresaConfiguration(SingletonModel):
 
 class CacheConfiguration(SingletonModel):
     empresa_update = models.DateTimeField(null=True, blank=True)
+    soluciones_update = models.DateTimeField(null=True, blank=True)
     clientes_update = models.DateTimeField(null=True, blank=True)
 
     def __unicode__(self):

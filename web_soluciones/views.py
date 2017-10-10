@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from .models import Solucion, ItemSolucion
 
 
-@method_decorator(gzip_page, name='dispatch')
+#@method_decorator(gzip_page, name='dispatch')
 class SolucionDetailView(DetailView):
     model = Solucion
     template_name = 'web/soluciones/solucion_detail.html'

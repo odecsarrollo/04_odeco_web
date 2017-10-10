@@ -127,3 +127,23 @@ EMAIL_USE_SSL = str_to_bool(os.environ["EMAIL_USE_SSL"])
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
 ########## END EMAIL CONFIGURATION
 
+
+########## CACHE ###################
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": 'redis://%s:%s/1' % (os.environ['REDIS_HOST'], int(os.environ['REDIS_PORT'])),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            'COMPRESSOR_CLASS': 'redis_cache.compressors.BZip2Compressor',
+        }
+    }
+}
+IMAGEKIT_CACHE_BACKEND = 'default'
+IMAGEKIT_CACHE_PREFIX = 'imagekit:'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = "default"
+SOLO_CACHE = 'default'
+SOLO_CACHE_TIMEOUT = None
+SOLO_CACHE_PREFIX = 'solo'
