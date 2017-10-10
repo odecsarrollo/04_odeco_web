@@ -61,11 +61,8 @@
 {% endblock %}
 
 {% block content %}
-    {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
     <div class="container-fluid p-0 m-0">
-        {% cache 86400 index_cache_empresa cache_configuracion.empresa_update %}
-            {% include 'web/empresa.html' %}
-        {% endcache %}
+        {% include 'web/empresa.html' %}
     </div>
     <div class="container-fluid">
         {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
