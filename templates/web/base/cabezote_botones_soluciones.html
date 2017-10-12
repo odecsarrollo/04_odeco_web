@@ -1,27 +1,27 @@
 {% load solo_tags cache %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
-{#{% cache 86400 index_cache_botones_soluciones cache_configuracion.soluciones_update %}#}
-{% with soluciones_lista=soluciones_list %}
-    {% if soluciones_lista %}
-        <div class="container barra-soluciones">
-            <section id="soluciones" class="section m-0 p-0 flex-center">
-                <div class="row botones-soluciones justify-content-center">
-                    {% for solucion in soluciones_lista %}
-                        <div class="col-6 col-sm-3 boton">
-                            <a href="{{ solucion.get_absolute_url }}">
-                                <div class="contenido pt-2 pb-2 pl-2 pr-2 pt-md-5 pb-md-5">
-                                    <div class="icon {{ solucion.icono_class }}" style="font-size: 3rem">
+{% cache 86400 index_cache_botones_soluciones cache_configuracion.soluciones_update %}
+    {% with soluciones_lista=soluciones_list %}
+        {% if soluciones_lista %}
+            <div class="container barra-soluciones">
+                <section id="soluciones" class="section m-0 p-0 flex-center">
+                    <div class="row botones-soluciones justify-content-center">
+                        {% for solucion in soluciones_lista %}
+                            <div class="col-6 col-sm-3 boton">
+                                <a href="{{ solucion.get_absolute_url }}">
+                                    <div class="contenido pt-2 pb-2 pl-2 pr-2 pt-md-5 pb-md-5">
+                                        <div class="icon {{ solucion.icono_class }}" style="font-size: 3rem">
+                                        </div>
+                                        <h6 class="h6-responsive">
+                                            <strong>{{ solucion.nombre }}</strong>
+                                        </h6>
                                     </div>
-                                    <h6 class="h6-responsive">
-                                        <strong>{{ solucion.nombre }}</strong>
-                                    </h6>
-                                </div>
-                            </a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </section>
-        </div>
-    {% endif %}
-{% endwith %}
-{#{% endcache %}#}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+        {% endif %}
+    {% endwith %}
+{% endcache %}
