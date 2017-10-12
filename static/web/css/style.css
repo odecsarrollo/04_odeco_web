@@ -122,29 +122,62 @@ header .full-bg-img {
 .navbar-soluciones {
   padding-top: 10px !important;
 }
-.intro {
-  min-height: inherit !important;
-}
-.intro .barra-soluciones {
+.barra-soluciones {
   font-family: FontOdecopack;
 }
-.intro .barra-soluciones .botones-soluciones .boton {
+.barra-soluciones .botones-soluciones .boton {
   margin: 0 !important;
   padding: 0 !important;
   text-align: center !important;
 }
-.intro .barra-soluciones .botones-soluciones .boton .contenido {
+.barra-soluciones .botones-soluciones .boton .contenido {
   height: 100%;
-  color: #fff;
+  background-color: #fff;
+  color: #808080;
+  border: 1px solid #ecedef;
 }
-.intro .barra-soluciones .botones-soluciones .boton .contenido img {
-  display: inline !important;
-}
-.intro .barra-soluciones .botones-soluciones .boton .contenido:hover {
+.barra-soluciones .botones-soluciones .boton .contenido:hover {
   border: none;
   background-image: url("../img/fondo_botones_hover.jpg");
   background-repeat: no-repeat;
   background-size: auto;
+  color: #fff !important;
+}
+.barra-soluciones .botones-soluciones a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.cabezote {
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  min-height: 500px;
+}
+.cabezote .card {
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+}
+.cabezote .left {
+  position: absolute;
+  left: 0;
+}
+.cabezote .right {
+  position: absolute;
+  right: 0;
+}
+.cabezote .card-text {
+  color: #fff;
+}
+.intro {
+  min-height: inherit !important;
+}
+.intro .barra-soluciones .botones-soluciones .boton .contenido {
+  color: #fff;
+  background-color: inherit;
+  border: none;
+}
+.intro .barra-soluciones .botones-soluciones .boton .contenido img {
+  display: inline !important;
 }
 .intro .barra-soluciones .botones-soluciones a {
   color: inherit;
@@ -194,53 +227,6 @@ header .full-bg-img {
   border-top: 3rem solid #ed6b00;
   border-right: 3rem solid transparent;
   width: 3rem;
-}
-.cabezote .card {
-  background: rgba(0,0,0,0.4);
-  color: #fff;
-}
-.cabezote .left {
-  position: absolute;
-  left: 0;
-}
-.cabezote .right {
-  position: absolute;
-  right: 0;
-}
-.cabezote .card-text {
-  color: #fff;
-}
-.cabezote .barra-soluciones {
-  margin-top: -9rem;
-  font-family: FontOdecopack;
-}
-.cabezote .barra-soluciones .botones-soluciones .boton {
-  margin: 0 !important;
-  padding: 0 !important;
-  text-align: center !important;
-}
-.cabezote .barra-soluciones .botones-soluciones .boton .contenido {
-  height: 100%;
-  background-color: #fff;
-  color: #808080;
-  border: 1px solid #ecedef;
-}
-.cabezote .barra-soluciones .botones-soluciones .boton .contenido:hover {
-  border: none;
-  background-image: url("../img/fondo_botones_hover.jpg");
-  background-repeat: no-repeat;
-  background-size: auto;
-  color: #fff !important;
-}
-.cabezote .barra-soluciones .botones-soluciones a {
-  color: inherit;
-  text-decoration: inherit;
-}
-.cabezote .barra-soluciones .botones-soluciones .icono-svg {
-  width: 30%;
-}
-.jarallax {
-  min-height: 500px;
 }
 footer input[type=text],
 footer input[type=password],
@@ -311,6 +297,19 @@ hr {
   padding-top: 3.125rem;
   padding-bottom: 3.125rem;
   height: auto;
+}
+@media (max-width: 576px) {
+  .cabezote {
+    min-height: 250px;
+  }
+  .cabezote h3 {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 577px) {
+  .soluciones .barra-soluciones {
+    margin-top: -9rem !important;
+  }
 }
 @media (max-width: 450px) {
   .streak.streak-long {

@@ -7,9 +7,12 @@
         <div class="row mb-4">
             {% if item.imagen_principal %}
                 <div class="col-12 text-center">
-                    <img class="img-fluid" src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
+                    <a href="#" data-toggle="modal" data-target="#itemSolucion{{ item.pk }}">
+                        <img class="img-fluid" src={{ item.imagen_principal.url }} alt="{{ item.nombre }}">
+                    </a>
                 </div>
             {% endif %}
+
 
             <div class="col-12 mt-2 mb-2">
                 <p class="card-text text-justify">
@@ -33,7 +36,7 @@
                                             {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
                                         {% endif %}
 
-                                        <figure class="col-4 col-md-4 p-1 m-0">
+                                        <figure class="col-4 col-md-4 p-1 m-0 d-none d-sm-block">
                                             <a href="{{ imagen_procesada.url }}"
                                                data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                 <div class="view overlay hm-white-slight z-depth-2">
@@ -59,15 +62,12 @@
                 {% endif %}
             {% endwith %}
         </div>
-
-        {% if item.mas %}
-            <div class="ver_mas">
-                <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
-                   data-target="#itemSolucion{{ item.pk }}">
-                    <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
-                </a>
-            </div>
-        {% endif %}
+        <div class="ver_mas">
+            <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
+               data-target="#itemSolucion{{ item.pk }}">
+                <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        </div>
 
     </div>
 </div>

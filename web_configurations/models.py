@@ -40,6 +40,7 @@ class GeneralConfiguration(SingletonModel):
     instagram = models.CharField(max_length=200, null=True, blank=True)
     youtube = models.CharField(max_length=200, null=True, blank=True)
     twitter = models.CharField(max_length=200, null=True, blank=True)
+    version_css_cache = models.CharField(max_length=20, default='')
 
     def __unicode__(self):
         return "General"

@@ -1,10 +1,9 @@
-{% load static inclusion_tags %}
-<div class="view hm-stylish-light jarallax cabezote" data-jarallax='{"speed": 0.2}'
-     style="background-image: url({{ imagen }});">
+{% load static %}
+<div class="view hm-stylish-light cabezote" style="background-image: url({{ imagen }});">
     <div class="full-bg-img">
         <div class="container flex-center">
             <div class="card right ml-5">
-                <div class="card-header color-1-odecopack lighten-1 white-text">
+                <div class="card-header color-1-odecopack lighten-1 white-text titulo-seccion">
                     <h3>{{ titulo|upper }}</h3>
                 </div>
                 {% if texto %}
@@ -15,7 +14,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="pl-3 pr-3 pl-sm-0 pr-sm-0 cabezote">
-    {% botones_soluciones %}
 </div>

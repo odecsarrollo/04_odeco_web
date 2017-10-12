@@ -12,9 +12,9 @@
 {% block menu %}
 
     {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-    <!--Navigation & Intro-->
     {% include 'web/base/menu.html' with es_menu_index=True %}
-    <!--Mask-->
+
+
     <div class="view intro"
          style="{% if index_configuracion.header_imagen %}background-image: url({{ index_configuracion.header_imagen.url }}){% endif %}"
          id="home">
@@ -22,19 +22,19 @@
             <div class="full-bg-img flex-center">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-8 col-sm-6">
-                            <figure>
+                        <div class="col-8 col-sm-6 d-none d-sm-block wow fadeIn">
+                            <figure class="flex-center">
                                 <img class="img-fluid" src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
                             </figure>
                         </div>
                         <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
-                            <div class="d-none d-sm-block">
+                            <div>
                                 {#                                <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>#}
                                 {#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
                                 <h3 class="white-text font-bold odeco-font mb-2">{{ index_configuracion.header_text }}</h3>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
                             {% botones_soluciones %}
                         </div>
                     </div>
@@ -43,20 +43,9 @@
         </div>
     </div>
 
-    {#    <!--Mask-->#}
-    {#    <div class="pl-3 pr-3 pl-sm-0 pr-sm-0">#}
-    {#        {% botones_soluciones %}#}
-    {#    </div>#}
-
 {% endblock %}
 
 {% block cabezote %}
-    {#    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}#}
-    {#    {% if index_configuracion.header_imagen %}#}
-    {#        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen=index_configuracion.header_imagen.url %}#}
-    {#    {% else %}#}
-    {#        {% include 'web/base/cabezote.html' with titulo=index_configuracion.header_titulo texto=index_configuracion.header_text imagen="https://media.licdn.com/media/p/5/005/076/247/00da2ac.png" %}#}
-    {#    {% endif %}#}
 
 {% endblock %}
 
