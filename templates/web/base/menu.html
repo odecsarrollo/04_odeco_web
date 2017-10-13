@@ -37,24 +37,26 @@
             <ul class="navbar-nav nav-flex-icons">
                 {% if general_configuracion.facebook %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ general_configuracion.facebook }}"><i
+                        <a class="nav-link" target="_blank" href="{{ general_configuracion.facebook }}"><i
                                 class="fa fa-facebook"></i></a>
                     </li>
                 {% endif %}
                 {% if general_configuracion.twitter %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ general_configuracion.twitter }}"><i class="fa fa-twitter"></i></a>
+                        <a class="nav-link" target="_blank" href="{{ general_configuracion.twitter }}"><i
+                                class="fa fa-twitter"></i></a>
                     </li>
                 {% endif %}
                 {% if general_configuracion.youtube %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ general_configuracion.youtube }}"><i
+                        <a class="nav-link" target="_blank" href="{{ general_configuracion.youtube }}"><i
                                 class="fa fa-youtube-play"></i></a>
                     </li>
                 {% endif %}
                 {% if general_configuracion.instagram %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ general_configuracion.instagram }}"><i class="fa fa-instagram"></i></a>
+                        <a class="nav-link" target="_blank" href="{{ general_configuracion.instagram }}"><i
+                                class="fa fa-instagram"></i></a>
                     </li>
                 {% endif %}
             </ul>
