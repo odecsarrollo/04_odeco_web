@@ -2,7 +2,7 @@
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
         <h5 class="card-title">
-            {{ item.nombre|upper }}
+            {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
         </h5>
         <div class="row mb-4">
             {% if item.imagen_principal %}
@@ -80,7 +80,7 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header color-1-odecopack">
-                <h4 class="modal-title w-100" id="myModalLabel">{{ item.nombre|upper }}</h4>
+                <h5 class="modal-title w-100 h5-responsive" id="myModalLabel">{{ item.nombre|upper }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

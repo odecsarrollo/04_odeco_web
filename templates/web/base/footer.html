@@ -37,7 +37,7 @@
                     <h6 class="title font-bold">Formulario de contacto</h6>
                     <div class="row">
                         <!--Grid column-->
-                        <div class="col-md-12 p-0 m-0">
+                        <div class="col-md-12 p-0 m-0 formulario">
                             <form id="contact-form" action="{% url 'web:send_contactenos' %}"
                                   method="POST" class="p-0 m-0">
                                 {% csrf_token %}
@@ -67,6 +67,11 @@
                                                   class="md-textarea" placeholder="mensaje"></textarea>
                                     </div>
 
+                                </div>
+                                <div class="options text-center mt-1 texto-legal">
+                                    ODECOPACK SAS le informa que los datos personales que se recolectan
+                                    a través de este formulario serán tratados de manera segura y confiable de acuerdo
+                                    con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
                                 </div>
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">

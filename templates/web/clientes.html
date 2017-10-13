@@ -1,6 +1,6 @@
-{% load static cache solo_tags %}
+{% load static cache solo_tags custom_operators %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
-<section id="clientes" class="section background-white pt-4">
+<section id="clientes" class="section background-white pt-4 clientes">
     {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
         {% with clientes_lista=clientes_list %}
             {% if clientes_lista %}
@@ -8,18 +8,55 @@
                     <div class="container py-3" id="opinions">
                         <h1 class="section-heading h1 pt-4 text-center text-sm-left">
                             CLIENTES</h1>
-                        <div class="flex-center logos-panel">
-                            <div class="row justify-content-center mb-2 wow fadeIn" data-wow-delay="0.4s">
-
-
+                        <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
                                 {% for cliente in clientes_lista %}
-                                    {% if cliente.logo %}
-                                        <div class="col-lg-2 col-md-3 col-4 m-0 p-0">
-                                            <img src="{{ cliente.logo.url }}" class="img-fluid">
-                                        </div>
+                                    {% if forloop.counter0|divisibleby:6 or forloop.first %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <div class="view">
+                                        <div class="flex-center">
+                                        <div class="row justify-content-center">
                                     {% endif %}
+
+                                <div class="col-4 col-sm-3">
+                                    <img src="{{ cliente.logo.url }}" class="img-fluid">
+                                </div>
+
+                                {% if forloop.counter|divisibleby:6 or forloop.last %}
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                {% endif %}
                                 {% endfor %}
                             </div>
+                            <a class="carousel-control-prev d-none d-sm-flex" href="#carousel-clientes" role="button"
+                               data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                            <a class="carousel-control-next d-none d-sm-flex" href="#carousel-clientes" role="button"
+                               data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+
+                            <div class="controls-top d-sm-none">
+                                <a class="btn-floating" href="#carousel-clientes" data-slide="prev"><i
+                                        class="fa fa-chevron-left"></i></a>
+                                <a class="btn-floating" href="#carousel-clientes" data-slide="next"><i
+                                        class="fa fa-chevron-right"></i></a>
+                            </div>
+
+                            <ol class="carousel-indicators d-none d-sm-flex">
+                                {% for cliente in clientes_lista %}
+                                    {% if forloop.counter0|divisibleby:6 or forloop.first %}
+                                        <li data-target="#carousel-clientes"
+                                            data-slide-to="{{ forloop.counter0|carrousel_indicator_index:'6' }}"
+                                            {% if forloop.first %}class="active"{% endif %}></li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ol>
                         </div>
                     </div>
                 </div>

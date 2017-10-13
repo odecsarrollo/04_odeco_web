@@ -449,3 +449,16 @@ hr {
 .formulario .texto-legal {
   font-size: 0.7rem;
 }
+.clientes .controls-top .fa {
+  background-color: #ed6b00;
+}
+.clientes .carousel-control-prev-icon,
+.clientes .carousel-control-next-icon {
+  background-color: #ed6b00;
+}
+.clientes .carousel-indicators li {
+  background-color: #211915;
+}
+.clientes .carousel-indicators .active {
+  background-color: #ed6b00;
+}
