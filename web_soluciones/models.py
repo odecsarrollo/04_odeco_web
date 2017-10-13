@@ -109,7 +109,7 @@ class ItemSolucionImagen(models.Model):
         self.item_solucion.solucion.save()
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
-    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes', on_delete=models.PROTECT)
+    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes')
     orden = models.PositiveIntegerField(default=0)
     descripcion = models.TextField(null=True, blank=True)
     imagen = ProcessedImageField(
