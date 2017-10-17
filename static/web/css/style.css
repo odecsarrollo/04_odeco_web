@@ -462,3 +462,9 @@ hr {
 .clientes .carousel-indicators .active {
   background-color: #ed6b00;
 }
+.carousel-control-next {
+  right: -4rem;
+}
+.carousel-control-prev {
+  left: -4rem;
+}
