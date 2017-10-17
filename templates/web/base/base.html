@@ -16,7 +16,8 @@
     <!-- Material Design Bootstrap -->
     <link href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola" rel="stylesheet">
+    <link href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
+          rel="stylesheet">
 
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
 
@@ -69,6 +70,19 @@
     $('.navbar-nav>li>a').on('click', function () {
         $('.navbar-collapse').collapse('hide');
     });
+
+
+    function init() {
+        var vidDefer = document.getElementsByTagName('iframe');
+        for (var i = 0; i < vidDefer.length; i++) {
+            if (vidDefer[i].getAttribute('data-src')) {
+                vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
+            }
+        }
+    }
+
+    window.onload = init;
+
     {% block final_scripts %}
 
     {% endblock %}

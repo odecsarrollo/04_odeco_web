@@ -6,29 +6,36 @@
     <section id="empresa" class="section mt-3">
         <h1 class="section-heading h1 pt-4 text-center text-sm-left">{{ empresa_configuracion.titulo|upper }}</h1>
         <div class="row index-empresa">
+            {% if empresa_configuracion.video %}
+                <div class="col-12 col-sm-6 p-0 m-0 m-auto">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item p-0"
+                                data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="col-12 col-sm-6 m-0 p-0 {% if not empresa_configuracion.video %} m-auto {% endif %}">
+                <div class="contenido">
+                    <img class="img-fluid" src="{% static 'web/img/datos-empresa2.png' %}" alt="">
+                </div>
+            </div>
+            <div class="col-12 col-md-7 col-lg-8 mt-3 mt-sm-0 dark-grey-text" style="margin: auto !important;">
+                {{ empresa_configuracion.texto|safe }}
+            </div>
             {% if empresa_configuracion.imagen_principal %}
-                <div class="col-12 col-sm-6 p-0 m-0">
+                <div class="col-12 col-md-5 col-lg-4 p-0 m-auto">
                     <figure>
                         <img src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
                     </figure>
                 </div>
             {% endif %}
-            <div class="col-12 col-sm-6 m-0 botones-empresa">
-                <div class="contenido">
-                    <img class="img-fluid" src="{% static 'web/img/datos-empresa.png' %}" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="col-12 dark-grey-text">
-            <p class="text-center p-2 p-md-3">
-                {{ empresa_configuracion.texto|safe }}
-            </p>
         </div>
 
         {% cache 86400 index_cache_empresa cache_configuracion.empresa_update %}
             {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
                 {% if galeria_fotos_list %}
-                    <div class="row galeria-menu">
+                    <div class="row galeria-menu mb-5 mt-5 mt-sm-0">
                         <div class="col-xl-2 col-md-3">
                             <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
                                 {% for galeria in galeria_fotos_list %}
@@ -62,29 +69,33 @@
                                              role="tabpanel">
                                             <br>
                                             <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <figure class="m-0 p-0">
-                                                        <img src="{{ galeria.imagen_thumbnail.url }}" alt="">
-                                                    </figure>
-                                                </div>
+                                                {% if galeria.imagen_thumbnail %}
+                                                    <div class="col-md-6 col-12 flex-center">
+                                                        <figure class="m-0 p-0">
+                                                            <img src="{{ galeria.imagen_thumbnail.url }}" alt="">
+                                                        </figure>
+                                                    </div>
+                                                {% endif %}
                                                 <div class="col-md-6 col-12 galeria">
                                                     <div class="mdb-lightbox">
                                                         <div class="row">
-                                                            <figure class="col-4 col-lg-3 m-0 p-1">
-                                                                <a href="{{ imagen_procesada.url }}"
-                                                                   data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
-                                                                    <div class="view overlay hm-white-slight z-depth-2">
-                                                                        <img src="{{ galeria.imagen_thumbnail_galeria.url }}"
-                                                                             alt=""
-                                                                        >
+                                                            {% if galeria.imagen_thumbnail %}
+                                                                <figure class="col-4 col-lg-3 m-0 p-1">
+                                                                    <a href="{{ imagen_procesada.url }}"
+                                                                       data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
+                                                                        <div class="view overlay hm-white-slight z-depth-2">
+                                                                            <img src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                                 alt=""
+                                                                            >
+                                                                        </div>
+                                                                    </a>
+                                                                    <div class="caption">
+                                                                        <h3>
+                                                                            {{ galeria.nombre }}
+                                                                        </h3>
                                                                     </div>
-                                                                </a>
-                                                                <div class="caption">
-                                                                    <h3>
-                                                                        {{ galeria.nombre }}
-                                                                    </h3>
-                                                                </div>
-                                                            </figure>
+                                                                </figure>
+                                                            {% endif %}
 
                                                             {% with mis_imagenes_list=galeria.mis_imagenes.all %}
                                                                 {% if mis_imagenes_list %}
@@ -143,8 +154,9 @@
     {% if aliados_lista %}
         <div class="container-fluid background-grey">
             <div class="container py-3" id="opinions">
-                <h4 class="text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn" data-wow-delay="0.2s">
-                    NUESTROS ALIADOS</h4>
+                <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
+                    data-wow-delay="0.2s">
+                    NUESTROS ALIADOS</h2>
                 <div class="flex-center logos-panel">
                     <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
                         {% cache 86400 index_cache_empresa_aliados cache_configuracion.empresa_update %}

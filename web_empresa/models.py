@@ -81,7 +81,7 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     imagen_thumbnail_galeria = ImageSpecField(
         source='imagen',
         processors=[
-            ResizeToFill(123, 82),
+            ResizeToFill(162, 108),
         ],
         format='JPEG'
     )
@@ -119,7 +119,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
     imagen_thumbnail = ImageSpecField(
         source='imagen',
         processors=[
-            ResizeToFill(123, 82),
+            ResizeToFill(162, 108),
         ],
         format='JPEG'
     )

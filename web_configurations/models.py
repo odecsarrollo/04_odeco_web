@@ -2,7 +2,7 @@ from django.db import models
 from solo.models import SingletonModel
 from tinymce import HTMLField
 from imagekit.models import ProcessedImageField
-from pilkit.processors import ResizeToFit, SmartResize
+from pilkit.processors import SmartResize
 
 from web.utils import get_image_name
 
@@ -65,6 +65,7 @@ class LaEmpresaConfiguration(SingletonModel):
         null=True,
         blank=True
     )
+    video = models.CharField(max_length=500, null=True, blank=True)
 
     def __unicode__(self):
         return "La Empresa"
