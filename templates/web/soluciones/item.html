@@ -20,13 +20,13 @@
                 </p>
             </div>
 
-            {% with imagenes_lista=item.mis_imagenes.all|slice:":3" %}
+            {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden"|slice:":3" %}
                 {% if imagenes_lista %}
                     <div class="col-12 pl-4 pr-4">
                         <div class="galeria">
                             <div class="mdb-lightbox">
                                 <div class="row">
-                                    {% for imagen in imagenes_lista|dictsort:"orden" %}
+                                    {% for imagen in imagenes_lista %}
 
                                         {% if imagen.marca_agua == 1 %}
                                             {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
