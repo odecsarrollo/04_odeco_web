@@ -61,7 +61,7 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     icono = models.CharField(max_length=40, help_text='Encontrar en http://fontawesome.io/')
     orden = models.PositiveIntegerField(default=0)
     imagen = ProcessedImageField(
-        processors=[ResizeToFit(width=1024, height=768, upscale=False)],
+        processors=[ResizeToFit(width=1920, height=1080, upscale=False)],
         format='JPEG',
         options={'quality': 71},
         upload_to=imagen_upload_to,
@@ -108,7 +108,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
     descripcion = models.TextField(null=True, blank=True)
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     imagen = ProcessedImageField(
-        processors=[ResizeToFit(width=1024, height=768, upscale=False)],
+        processors=[ResizeToFit(width=1920, height=1080, upscale=False)],
         format='JPEG',
         options={'quality': 71},
         upload_to=imagen_upload_to,
