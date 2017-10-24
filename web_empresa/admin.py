@@ -15,6 +15,9 @@ class GaleriaFotoEmpresaImagenInline(admin.TabularInline):
 
     extra = 1
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('orden')
+
 
 class GaleriaFotoEmpresaAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'orden']

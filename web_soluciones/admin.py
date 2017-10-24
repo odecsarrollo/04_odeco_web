@@ -26,6 +26,9 @@ class ItemSolucionImagenInline(admin.TabularInline):
 
     extra = 1
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('orden')
+
 
 class ItemSolucionAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria', 'categoria_dos']

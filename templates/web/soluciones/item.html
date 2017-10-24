@@ -26,7 +26,7 @@
                         <div class="galeria">
                             <div class="mdb-lightbox">
                                 <div class="row">
-                                    {% for imagen in imagenes_lista %}
+                                    {% for imagen in imagenes_lista|dictsort:"orden" %}
 
                                         {% if imagen.marca_agua == 1 %}
                                             {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
@@ -88,7 +88,7 @@
             <!--Body-->
             <div class="modal-body">
                 {{ item.mas|safe }}
-                {% with imagenes_lista=item.mis_imagenes.all %}
+                {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
                     {% if imagenes_lista %}
                         <div class="pl-4 pr-4">
                             <div class="galeria">
