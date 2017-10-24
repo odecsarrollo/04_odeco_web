@@ -62,8 +62,8 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     orden = models.PositiveIntegerField(default=0)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
-        format='PNG',
-        options={'quality': 90},
+        format='JPEG',
+        options={'quality': 70},
         upload_to=imagen_upload_to,
         verbose_name='Imagen principal galería',
         null=True,
@@ -109,8 +109,8 @@ class GaleriaFotoEmpresaImagen(models.Model):
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
-        format='PNG',
-        options={'quality': 90},
+        format='JPEG',
+        options={'quality': 70},
         upload_to=imagen_upload_to,
         verbose_name='Imagen Item Solución',
         null=True,
