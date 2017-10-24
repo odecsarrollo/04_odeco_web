@@ -97,7 +97,7 @@
                                                                 </figure>
                                                             {% endif %}
 
-                                                            {% with mis_imagenes_list=galeria.mis_imagenes.all %}
+                                                            {% with mis_imagenes_list=galeria.mis_imagenes.all|dictsort:"orden" %}
                                                                 {% if mis_imagenes_list %}
                                                                     {% for imagen in mis_imagenes_list %}
                                                                         <figure class="col-4 col-lg-3 m-0 p-1">
