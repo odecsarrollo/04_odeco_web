@@ -63,7 +63,7 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
         format='JPEG',
-        options={'quality': 70},
+        options={'quality': 90},
         upload_to=imagen_upload_to,
         verbose_name='Imagen principal galería',
         null=True,
@@ -110,7 +110,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
         format='JPEG',
-        options={'quality': 70},
+        options={'quality': 90},
         upload_to=imagen_upload_to,
         verbose_name='Imagen Item Solución',
         null=True,
