@@ -13,11 +13,11 @@ def add_watermark(image, watermark):
 
     if image_x > image_y:
         escala_y = watermark_y / watermark_x
-        nuevo_watermark_x = image_x * 0.3
+        nuevo_watermark_x = image_x * 0.2
         nuevo_watermark_y = nuevo_watermark_x * escala_y
     else:
         escala_y = watermark_y / watermark_x
-        nuevo_watermark_x = image_x * 0.4
+        nuevo_watermark_x = image_x * 0.3
         nuevo_watermark_y = nuevo_watermark_x * escala_y
 
     new_size = (int(nuevo_watermark_x), int(nuevo_watermark_y))
