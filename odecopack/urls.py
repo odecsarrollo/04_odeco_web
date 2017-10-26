@@ -3,11 +3,12 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
-from web.views import IndexView
+from web.views import IndexView, RedisListView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^redis/', RedisListView.as_view(), name='redis'),
     url(r'^soluciones/', include('web_soluciones.urls', namespace='web_soluciones')),
     url(r'^web/', include('web.urls', namespace='web')),
     url(r'^tinymce/', include('tinymce.urls')),

@@ -1,0 +1,17 @@
+{% extends 'web/base/base.html' %}
+
+{% block title %}
+    Redis
+{% endblock %}
+
+{% block cabezote %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid p-0 m-0">
+        <section class="section">
+            <a href="{% url 'redis' %}?borrar_todo=borrar_todo">Borrar Cache</a>
+        </section>
+    </div>
+{% endblock %}

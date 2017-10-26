@@ -1,3 +1,5 @@
+from django_redis import get_redis_connection
+
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -22,6 +24,17 @@ class IndexView(TemplateView):
 
 class SolucionView(TemplateView):
     template_name = 'web/soluciones/solucion_detail.html'
+
+
+class RedisListView(TemplateView):
+    template_name = 'web/redis/keys_list.html'
+
+    # def get(self, request, *args, **kwargs):
+    #     borrar_todo = self.request.GET.get('borrar_todo', None)
+    #     if borrar_todo:
+    #         conexion = get_redis_connection(borrar_todo)
+    #         conexion.flushall()
+    #     return super().get(request, *args, **kwargs)
 
 
 class SendContactenosView(View):
