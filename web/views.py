@@ -29,12 +29,12 @@ class SolucionView(TemplateView):
 class RedisListView(TemplateView):
     template_name = 'web/redis/keys_list.html'
 
-    # def get(self, request, *args, **kwargs):
-    #     borrar_todo = self.request.GET.get('borrar_todo', None)
-    #     if borrar_todo:
-    #         conexion = get_redis_connection(borrar_todo)
-    #         conexion.flushall()
-    #     return super().get(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        borrar_todo = self.request.GET.get('borrar_todo', None)
+        if borrar_todo:
+            conexion = get_redis_connection(borrar_todo)
+            conexion.flushall()
+        return super().get(request, *args, **kwargs)
 
 
 class SendContactenosView(View):
