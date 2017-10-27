@@ -74,6 +74,7 @@ class ItemSolucion(models.Model):
     orden = models.PositiveIntegerField(default=0)
     categoria = models.CharField(max_length=120, default='', blank=True)
     categoria_dos = models.CharField(max_length=120, default='', blank=True)
+    activo = models.BooleanField(default=False)
     imagen_principal = ProcessedImageField(
         processors=[ResizeToFit(width=400, height=200, upscale=False)],
         format='JPEG',
