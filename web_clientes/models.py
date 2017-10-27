@@ -20,7 +20,7 @@ class Cliente(models.Model):
         format='PNG',
         options={'quality': 70},
         upload_to=imagen_upload_to,
-        verbose_name='Logo Aliado',
+        verbose_name='Logo Cliente',
         null=True,
         blank=True
     )

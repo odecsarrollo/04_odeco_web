@@ -189,6 +189,9 @@ header .full-bg-img {
 .index .navbar {
   background-color: transparent;
 }
+.index .navbar .show {
+  background-color: #ed6b00;
+}
 .index .navbar-toggler-icon {
   cursor: pointer;
   color: #fff;
@@ -204,6 +207,9 @@ header .full-bg-img {
 }
 .index .top-nav-collapse {
   background-color: #fff;
+}
+.index .top-nav-collapse .show {
+  background-color: #fff !important;
 }
 .index .top-nav-collapse .nav-link {
   color: #000 !important;
@@ -463,10 +469,10 @@ hr {
   background-color: #ed6b00;
 }
 .carousel-control-next {
-  right: -4rem;
+  right: -2rem;
 }
 .carousel-control-prev {
-  left: -4rem;
+  left: -2rem;
 }
 #overlay {
   position: fixed;
