@@ -79,6 +79,10 @@
                 vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
             }
         }
+
+        {% block onLoadScript %}
+
+        {% endblock %}
     }
 
     window.onload = init;
