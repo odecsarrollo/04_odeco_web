@@ -9,11 +9,13 @@ from .models import IndexConfiguration, LaEmpresaConfiguration
 @receiver(pre_delete, sender=IndexConfiguration)
 def header_imagen_index_cofiguration_pre_delete(sender, instance, **kwargs):
     instance.header_imagen.delete(False)
+    instance.overlay_publicidad.delete(False)
 
 
 @receiver(post_init, sender=IndexConfiguration)
 def backup_header_imagen_index_cofiguration_path(sender, instance, **kwargs):
     instance._current_imagen = instance.header_imagen
+    instance._current_imagen_overlay_publicidad = instance.overlay_publicidad
 
 
 @receiver(post_save, sender=IndexConfiguration)
@@ -21,6 +23,9 @@ def delete_header_imagen_index_cofiguration(sender, instance, **kwargs):
     if hasattr(instance, '_current_imagen'):
         if instance._current_imagen != instance.header_imagen:
             instance._current_imagen.delete(save=False)
+    if hasattr(instance, '_current_imagen_overlay_publicidad'):
+        if instance._current_imagen_overlay_publicidad != instance.overlay_publicidad:
+            instance._current_imagen_overlay_publicidad.delete(save=False)
 
 
 # endregion

@@ -2,7 +2,7 @@ from django.db import models
 from solo.models import SingletonModel
 from tinymce import HTMLField
 from imagekit.models import ProcessedImageField
-from pilkit.processors import SmartResize
+from pilkit.processors import SmartResize, ResizeToFit
 
 from web.utils import get_image_name
 
@@ -23,6 +23,16 @@ class IndexConfiguration(SingletonModel):
         null=True,
         blank=True
     )
+    overlay_publicidad = ProcessedImageField(
+        processors=[ResizeToFit(width=1024, height=768, upscale=False)],
+        format='JPEG',
+        options={'quality': 70},
+        upload_to=header_imagen_upload_to,
+        verbose_name='Imagen Overlay Publicidad (1024 x 768)',
+        null=True,
+        blank=True
+    )
+    overlay_url = models.URLField(blank=True, null=True)
 
     def __unicode__(self):
         return "Index"

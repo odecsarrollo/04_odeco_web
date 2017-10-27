@@ -14,7 +14,25 @@
     {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
     {% include 'web/base/menu.html' with es_menu_index=True %}
 
-
+    {% if index_configuracion.overlay_publicidad %}
+        <div id="overlay" onclick="off()">
+            <div class="flex-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-8 wow fadeIn">
+                            <figure class="flex-center">
+                                {% if index_configuracion.overlay_url %}
+                                    <a href="{{ index_configuracion.overlay_url }}" target="_blank">{% endif %}
+                                <img class="img-fluid" src="{{ index_configuracion.overlay_publicidad.url }}"
+                                     alt="">
+                                {% if index_configuracion.overlay_url %}</a>{% endif %}
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="view intro"
          style="{% if index_configuracion.header_imagen %}background-image: url({{ index_configuracion.header_imagen.url }}){% endif %}"
          id="home">
@@ -49,6 +67,22 @@
 
 {% endblock %}
 
+<script>
+    {% block final_scripts %}
+        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+        {% if index_configuracion.overlay_publicidad %}
+            function on() {
+                document.getElementById("overlay").style.display = "block";
+            }
+
+            function off() {
+                document.getElementById("overlay").style.display = "none";
+            }
+
+            window.onload = on;
+        {% endif %}
+    {% endblock %}
+</script>
 {% block content %}
     <div class="container-fluid p-0 m-0">
         {% include 'web/empresa.html' %}
