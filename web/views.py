@@ -9,6 +9,8 @@ from django.views.generic import TemplateView, View
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
 
+from django.conf import settings
+
 
 @method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
@@ -63,8 +65,8 @@ class SendContactenosView(View):
         email = EmailMessage(
             subject=asunto,
             body=mensaje,
-            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
-            to=['fabio.garcia.sanchez@gmail.com'],
+            from_email='Contactenos Odecopack SAS<odecopack@odecopack.com>',
+            to=['odecopack@odecopack.com'],
             reply_to=[correo]
         )
 
@@ -73,7 +75,7 @@ class SendContactenosView(View):
         email2 = EmailMessage(
             subject='Su envío de correo a Odecopack',
             body=mensaje2,
-            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
+            from_email='Contactenos Odecopack SAS<odecopack@odecopack.com>',
             to=[correo]
         )
         email2.send()
