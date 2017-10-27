@@ -42,7 +42,7 @@ class ItemSolucionAdmin(admin.ModelAdmin):
 
     inlines = [ItemSolucionImagenInline, ]
 
-    list_filter = ['solucion', 'categoria', 'categoria_dos']
+    list_filter = ['solucion', 'categoria', 'categoria_dos','activo']
 
 
 admin.site.register(ItemSolucion, ItemSolucionAdmin)

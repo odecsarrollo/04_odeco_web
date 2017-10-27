@@ -18,7 +18,7 @@ class IndexView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['aliados_list'] = Aliado.objects.all()
         context['clientes_list'] = Cliente.objects.all().order_by('orden')
-        context['galeria_fotos_empresa_list'] = GaleriaFotoEmpresa.objects.all().order_by('orden')
+        context['galeria_fotos_empresa_list'] = GaleriaFotoEmpresa.objects.filter(activo=True).order_by('orden')
         return context
 
 

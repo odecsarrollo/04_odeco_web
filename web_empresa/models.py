@@ -60,6 +60,7 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
     nombre = models.CharField(max_length=20)
     icono = models.CharField(max_length=40, help_text='Encontrar en http://fontawesome.io/')
     orden = models.PositiveIntegerField(default=0)
+    activo = models.BooleanField(default=False)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1920, height=1080, upscale=False)],
         format='JPEG',

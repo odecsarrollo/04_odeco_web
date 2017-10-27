@@ -20,8 +20,8 @@ class GaleriaFotoEmpresaImagenInline(admin.TabularInline):
 
 
 class GaleriaFotoEmpresaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'orden']
-    list_editable = ['orden', ]
+    list_display = ['nombre', 'orden', 'activo']
+    list_editable = ['orden', 'activo']
 
     inlines = [GaleriaFotoEmpresaImagenInline, ]
 
