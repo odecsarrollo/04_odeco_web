@@ -10,22 +10,38 @@
 {% endblock %}
 
 {% block menu %}
+    <style>
+        .overlayPlubicidadClose {
+            text-align: center;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: white;
+            width: 2rem;
+            border: black solid 1px;
+            cursor: pointer;
+        }
+    </style>
 
     {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
     {% include 'web/base/menu.html' with es_menu_index=True %}
 
     {% if index_configuracion.overlay_publicidad %}
-        <div id="overlay" onclick="offOverlayPublicidad()">
+        <div id="overlay">
             <div class="flex-center">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-6 wow fadeIn">
                             <figure class="flex-center">
-                                <a href="{{ index_configuracion.overlay_url }}">
+                                {% if index_configuracion.overlay_url %}<a
+                                    href="{{ index_configuracion.overlay_url }}"{% endif %}>
                                     <img class="img-fluid" src="{{ index_configuracion.overlay_publicidad.url }}"
                                          alt="">
-                                </a>
+                                    {% if index_configuracion.overlay_url %}
+                                        </a>
+                                    {% endif %}
                             </figure>
+                            <div class="overlayPlubicidadClose" onclick="offOverlayPublicidad()">x</div>
                         </div>
                     </div>
                 </div>
