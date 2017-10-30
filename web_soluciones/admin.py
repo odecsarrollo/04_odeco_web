@@ -1,7 +1,20 @@
 from django.contrib import admin
 from imagekit.admin import AdminThumbnail
 
-from web_soluciones.models import Solucion, ItemSolucion, ItemSolucionImagen
+from web_soluciones.models import Solucion, ItemSolucion, ItemSolucionImagen, Documento
+
+
+class DocumentoAdmin(admin.ModelAdmin):
+    list_display = [
+        'nombre',
+        'documento',
+        'orden',
+        'icono',
+        'activo'
+    ]
+
+
+admin.site.register(Documento, DocumentoAdmin)
 
 
 class SolucionAdmin(admin.ModelAdmin):
@@ -42,7 +55,7 @@ class ItemSolucionAdmin(admin.ModelAdmin):
 
     inlines = [ItemSolucionImagenInline, ]
 
-    list_filter = ['solucion', 'categoria', 'categoria_dos','activo']
+    list_filter = ['solucion', 'categoria', 'categoria_dos', 'activo']
 
 
 admin.site.register(ItemSolucion, ItemSolucionAdmin)

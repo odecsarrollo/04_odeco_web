@@ -92,6 +92,7 @@
                 {{ item.mas|safe }}
                 {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
                     {% if imagenes_lista %}
+                        <h4 class="h4-responsive mt-2">Galería</h4>
                         <div class="pl-4 pr-4">
                             <div class="galeria">
                                 <div class="mdb-lightbox">
@@ -129,6 +130,25 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
+                    {% if documentos_list %}
+                        <h4 class="h4-responsive mt-2">Recursos</h4>
+                        <div class="row text-center">
+                            {% for documento in documentos_list %}
+                                <div class="col-4 col-md-2 p-1 mt-2">
+                                    <a href="{{ documento.documento.url }}" target="_blank">
+                                        <div>
+                                            <i class="{{ documento.icono }}" aria-hidden="true"></i>
+                                        </div>
+                                        <div>
+                                            {{ documento.nombre }}
+                                        </div>
+                                    </a>
+                                </div>
+                            {% endfor %}
                         </div>
                     {% endif %}
                 {% endwith %}

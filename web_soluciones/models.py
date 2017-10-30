@@ -89,6 +89,9 @@ class ItemSolucion(models.Model):
         super().save(force_insert, force_update, using, update_fields)
         self.solucion.save()
 
+    def __str__(self):
+        return '%s - %s' % (self.solucion.nombre, self.nombre)
+
     class Meta:
         verbose_name = 'Item Solución'
         verbose_name_plural = 'Items Soluciones'
@@ -129,3 +132,24 @@ class ItemSolucionImagen(models.Model):
         ],
         format='JPEG'
     )
+
+
+class Documento(models.Model):
+    def documento_upload(instance, filename):
+        return "web/img/solu/docu/%s" % filename
+
+    documento = models.FileField(upload_to=documento_upload)
+    nombre = models.CharField(max_length=120)
+    orden = models.PositiveIntegerField(default=0)
+    icono = models.CharField(max_length=120)
+    item_solucion = models.ManyToManyField(ItemSolucion, related_name='mis_documentos')
+    activo = models.BooleanField(default=False)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        for solucion in self.item_solucion.all():
+            solucion.save()
+
+    class Meta:
+        verbose_name = 'Documento'
+        verbose_name_plural = 'Documentos'
