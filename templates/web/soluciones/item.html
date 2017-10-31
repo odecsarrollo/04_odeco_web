@@ -146,6 +146,9 @@
                                         <div>
                                             {{ documento.nombre }}
                                         </div>
+                                        <div>
+                                            <small>({{ documento.documento.size|filesizeformat }})</small>
+                                        </div>
                                     </a>
                                 </div>
                             {% endfor %}
