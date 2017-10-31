@@ -145,6 +145,9 @@ class Documento(models.Model):
     item_solucion = models.ManyToManyField(ItemSolucion, related_name='mis_documentos')
     activo = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.nombre
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)
         for solucion in self.item_solucion.all():

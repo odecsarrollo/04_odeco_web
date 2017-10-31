@@ -13,8 +13,15 @@ class DocumentoAdmin(admin.ModelAdmin):
         'activo'
     ]
 
+    filter_horizontal = ['item_solucion', ]
+
 
 admin.site.register(Documento, DocumentoAdmin)
+
+
+class DocumentoInline(admin.TabularInline):
+    model = Documento.item_solucion.through
+    extra = 0
 
 
 class SolucionAdmin(admin.ModelAdmin):
@@ -53,7 +60,7 @@ class ItemSolucionAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria', 'categoria_dos', 'activo']
     list_editable = ['nombre', 'orden', 'categoria', 'categoria_dos', 'activo']
 
-    inlines = [ItemSolucionImagenInline, ]
+    inlines = [ItemSolucionImagenInline, DocumentoInline]
 
     list_filter = ['solucion', 'categoria', 'categoria_dos', 'activo']
 

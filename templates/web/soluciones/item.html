@@ -136,23 +136,17 @@
                 {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
                     {% if documentos_list %}
                         <h4 class="h4-responsive mt-2">Recursos</h4>
-                        <div class="row text-center">
+                        <ul>
                             {% for documento in documentos_list %}
-                                <div class="col-4 col-md-2 p-1 mt-2">
+                                <li>
                                     <a href="{{ documento.documento.url }}" target="_blank">
-                                        <div>
-                                            <i class="{{ documento.icono }}" aria-hidden="true"></i>
-                                        </div>
-                                        <div>
-                                            {{ documento.nombre }}
-                                        </div>
-                                        <div>
-                                            <small>({{ documento.documento.size|filesizeformat }})</small>
-                                        </div>
+                                        {{ documento.nombre|title }} - <i class="{{ documento.icono }}"
+                                                                          aria-hidden="true"></i>
+                                        <small>({{ documento.documento.size|filesizeformat }})</small>
                                     </a>
-                                </div>
+                                </li>
                             {% endfor %}
-                        </div>
+                        </ul>
                     {% endif %}
                 {% endwith %}
             </div>
