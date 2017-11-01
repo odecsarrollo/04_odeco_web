@@ -162,7 +162,8 @@
                         {% cache 86400 index_cache_empresa_aliados cache_configuracion.empresa_update %}
                             {% for aliado in aliados_lista %}
                                 <div class="col-lg-2 col-md-3 col-4">
-                                    <img src="{{ aliado.logo.url }}" alt="{{ aliado.logo.nombre }}" class="img-fluid">
+                                    <img src="{{ aliado.logo.url }}" alt="{{ aliado.nombre }} es aliado de Odecopack"
+                                         class="img-fluid">
                                 </div>
                             {% endfor %}
                         {% endcache %}
