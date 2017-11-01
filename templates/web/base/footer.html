@@ -14,7 +14,7 @@
                 </div>
                 <script>
                     function initMap() {
-                        var uluru = {lat: 3.4643184, lng: -76.5108136};
+                        var uluru = {lat: 3.464009, lng: -76.510884};
                         var map = new google.maps.Map(document.getElementById('map-container'), {
                             zoom: 15,
                             center: uluru
@@ -43,21 +43,27 @@
                                 {% csrf_token %}
                                 <div class="col-md-12">
                                     <div class="md-form">
-                                        <input type="text" id="name" name="nombre" class="form-control"
+                                        <input type="text" id="name" name="nombre"
                                                placeholder="nombre">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <div class="md-form">
-                                            <input type="text" id="email" name="correo" class="form-control"
+                                            <input type="text" id="email" name="correo"
                                                    placeholder="correo">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
-                                        <input type="text" id="subject" name="asunto" class="form-control"
+                                        <input type="text" id="empresa" name="empresa"
+                                               placeholder="empresa">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="md-form">
+                                        <input type="text" id="subject" name="asunto"
                                                placeholder="asunto">
                                     </div>
                                 </div>

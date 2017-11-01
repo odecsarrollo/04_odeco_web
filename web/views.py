@@ -43,19 +43,22 @@ class SendContactenosView(View):
         nombre = request.POST.get('nombre', None)
         asunto = request.POST.get('asunto', None)
         texto = request.POST.get('texto', None)
+        empresa = request.POST.get('empresa', None)
 
-        mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\n\r\nMensaje:\r\n%s' % (
+        mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
             asunto,
             nombre,
             correo,
+            empresa,
             texto
         )
 
-        mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
+        mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
             'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente',
             asunto,
             nombre,
             correo,
+            empresa,
             texto,
             'Pronto estaremos en contacto.'
         )

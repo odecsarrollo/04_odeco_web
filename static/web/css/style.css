@@ -455,6 +455,10 @@ hr {
 .formulario .texto-legal {
   font-size: 0.7rem;
 }
+.formulario input,
+.formulario textarea {
+  padding-left: 10px !important;
+}
 .clientes .controls-top .fa {
   background-color: #ed6b00;
 }
