@@ -108,6 +108,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
     orden = models.PositiveIntegerField(default=0)
     descripcion = models.TextField(null=True, blank=True)
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
+    alt_seo = models.CharField(max_length=125, default='', blank=True, null=True)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1920, height=1080, upscale=False)],
         format='JPEG',

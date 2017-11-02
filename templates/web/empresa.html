@@ -114,7 +114,10 @@
                                                                                data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                                 <div class="view overlay hm-white-slight z-depth-2">
                                                                                     <img src="{{ imagen.imagen_thumbnail.url }}"
-                                                                                         alt="">
+                                                                                            {% if imagen.alt_seo %}
+                                                                                         alt="{{ imagen.alt_seo }}"
+                                                                                            {% endif %}
+                                                                                    >
                                                                                 </div>
                                                                             </a>
                                                                             <div class="caption">

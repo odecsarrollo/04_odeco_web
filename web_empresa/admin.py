@@ -9,7 +9,7 @@ admin.site.register(Aliado)
 class GaleriaFotoEmpresaImagenInline(admin.TabularInline):
     model = GaleriaFotoEmpresaImagen
 
-    fields = ['admin_imagen_thumbnail', 'descripcion', 'orden', 'imagen', 'marca_agua']
+    fields = ['admin_imagen_thumbnail', 'descripcion', 'alt_seo', 'orden', 'imagen', 'marca_agua']
     admin_imagen_thumbnail = AdminThumbnail(image_field='imagen_thumbnail')
     readonly_fields = ['admin_imagen_thumbnail']
 
