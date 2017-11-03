@@ -61,6 +61,7 @@ MY_APPS = [
     'web_soluciones',
     'web_empresa',
     'web_clientes',
+    'web_contactos',
 ]
 
 THIRD_PART_APPS = [
