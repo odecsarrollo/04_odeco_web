@@ -1,12 +1,13 @@
-from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic.edit import CreateView
 
 from .models import ClienteContacto
+from braces.views import LoginRequiredMixin
 
 
-class RecoleccionContactoView(CreateView):
+class RecoleccionContactoView(LoginRequiredMixin,CreateView):
     model = ClienteContacto
+    login_url = "/admin/login/"
     fields = '__all__'
     template_name = 'web/formulario_recoleccion_contactos.html'
 
