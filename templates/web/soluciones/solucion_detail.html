@@ -18,7 +18,7 @@
             <div class="col-12 pl-3 pr-3 pl-sm-0 pr-sm-0 order-2 order-sm-1">
                 {% botones_soluciones %}
             </div>
-{#            {% cache 86400 cache_solucion solucion_objeto.pk solucion_objeto.modified %}#}
+            {% cache 86400 cache_solucion solucion_objeto.pk solucion_objeto.modified %}
                 {% with items_list=mis_items.all|dictsort:"categoria" %}
                     {% regroup items_list by categoria as categoria_list %}
                     <div class="col-12 order-1 order-sm-2">
@@ -82,7 +82,7 @@
                         </section>
                     </div>
                 {% endwith %}
-{#            {% endcache %}#}
+            {% endcache %}
         </div>
     </div>
 {% endblock %}
