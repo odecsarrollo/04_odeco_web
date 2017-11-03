@@ -64,6 +64,7 @@ MY_APPS = [
 ]
 
 THIRD_PART_APPS = [
+    'import_export',
     'solo',
     'tinymce',
     'imagekit',
