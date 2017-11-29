@@ -1,7 +1,7 @@
 from django.contrib import admin
 from imagekit.admin import AdminThumbnail
 
-from web_soluciones.models import Solucion, ItemSolucion, ItemSolucionImagen, Documento
+from web_soluciones.models import Solucion, ItemSolucion, ItemSolucionImagen, Documento, ItemSolucionVideo
 
 
 class DocumentoAdmin(admin.ModelAdmin):
@@ -57,11 +57,23 @@ class ItemSolucionImagenInline(admin.TabularInline):
         return super().get_queryset(request).order_by('orden')
 
 
+class ItemSolucionVideoInline(admin.TabularInline):
+    model = ItemSolucionVideo
+    fields = [
+        'orden',
+        'video'
+    ]
+    extra = 1
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('orden')
+
+
 class ItemSolucionAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria', 'categoria_dos', 'activo']
     list_editable = ['nombre', 'orden', 'categoria', 'categoria_dos', 'activo']
 
-    inlines = [ItemSolucionImagenInline, DocumentoInline]
+    inlines = [ItemSolucionImagenInline, ItemSolucionVideoInline, DocumentoInline]
 
     list_filter = ['solucion', 'categoria', 'categoria_dos', 'activo']
 

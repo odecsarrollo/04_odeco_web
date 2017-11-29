@@ -490,3 +490,8 @@ hr {
   background-color: rgba(0,0,0,0.5);
   z-index: 9999999;
 }
+.modal iframe {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}

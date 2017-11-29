@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from .models import Solucion, ItemSolucion
 
 
-@method_decorator(gzip_page, name='dispatch')
+#@method_decorator(gzip_page, name='dispatch')
 class SolucionDetailView(DetailView):
     model = Solucion
     template_name = 'web/soluciones/solucion_detail.html'
@@ -15,5 +15,5 @@ class SolucionDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['mis_items'] = ItemSolucion.objects.filter(solucion=self.object, activo=True).prefetch_related(
-            'mis_imagenes').all()
+            'mis_imagenes', 'mis_documentos', 'mis_videos').all()
         return context

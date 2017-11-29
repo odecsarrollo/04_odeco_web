@@ -135,6 +135,16 @@ class ItemSolucionImagen(models.Model):
     )
 
 
+class ItemSolucionVideo(models.Model):
+    video = models.CharField(max_length=500)
+    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_videos')
+    orden = models.PositiveIntegerField(default=0)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.item_solucion.solucion.save()
+
+
 class Documento(models.Model):
     def documento_upload(instance, filename):
         return "web/img/solu/docu/%s" % filename

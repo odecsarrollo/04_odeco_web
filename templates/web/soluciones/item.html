@@ -146,6 +146,23 @@
                         </div>
                     {% endif %}
                 {% endwith %}
+                {% with videos_list=item.mis_videos.all|dictsort:"orden" %}
+                    {% if videos_list %}
+                        <h4 class="h4-responsive mt-2">Videos</h4>
+                        <div class="row">
+                            {% for video in videos_list %}
+                                <div class="col-12 col-md-6 col-lg-3 p-1 m-0">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item p-0"
+                                                data-src="{{ video.video }}?rel=0&amp;showinfo=0"
+                                                frameborder="0"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
                 {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
                     {% if documentos_list %}
                         <h4 class="h4-responsive mt-2">Recursos</h4>
