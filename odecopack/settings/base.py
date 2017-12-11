@@ -25,7 +25,7 @@ def str_to_bool(s):
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
@@ -38,8 +38,6 @@ SITE_NAME = os.path.basename(DJANGO_ROOT)
 # name in our dotted import paths:
 path.append(DJANGO_ROOT)
 ########## END PATH CONFIGURATION
-
-
 
 
 # Application definition

@@ -11,7 +11,6 @@ from django.core.exceptions import ImproperlyConfigured
 with open("secretsLocal.json") as f:
     secrets = json.loads(f.read())
 
-
 def get_secret(setting, variable, secrets=secrets):
     """ Get the environment setting or return exception """
     try:
