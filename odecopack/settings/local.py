@@ -11,6 +11,7 @@ from django.core.exceptions import ImproperlyConfigured
 with open("secretsLocal.json") as f:
     secrets = json.loads(f.read())
 
+
 def get_secret(setting, variable, secrets=secrets):
     """ Get the environment setting or return exception """
     try:
@@ -126,6 +127,11 @@ EMAIL_USE_SSL = str_to_bool(get_secret("EMAIL_SERVER", "EMAIL_USE_SSL"))
 DEFAULT_FROM_EMAIL = get_secret("EMAIL_SERVER", "DEFAULT_FROM_EMAIL")
 
 ########## END EMAIL CONFIGURATION
+
+########MAILCHIMP##############
+MAILCHIMP_API_KEY = get_secret("MAILCHIMP", "MAILCHIMP_API_KEY")
+MAILCHIMP_USERNAME = get_secret("MAILCHIMP", "MAILCHIMP_USERNAME")
+MAILCHIMP_LIST_ID = get_secret("MAILCHIMP", "MAILCHIMP_LIST_ID")
 
 ######### DEBUG TOOLBAR CONFIGURATION CONFIGURATION
 MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]

@@ -96,7 +96,6 @@ DATABASES = {
 ########## END DATABASE CONFIGURATION
 
 
-
 ########## EMAIL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -127,6 +126,11 @@ EMAIL_USE_SSL = str_to_bool(os.environ["EMAIL_USE_SSL"])
 DEFAULT_FROM_EMAIL = os.environ["DEFAULT_FROM_EMAIL"]
 ########## END EMAIL CONFIGURATION
 
+
+########MAILCHIMP##############
+MAILCHIMP_API_KEY = os.environ["MAILCHIMP_API_KEY"]
+MAILCHIMP_USERNAME = os.environ["MAILCHIMP_USERNAME"]
+MAILCHIMP_LIST_ID = os.environ["MAILCHIMP_LIST_ID"]
 
 ########## CACHE ###################
 CACHES = {

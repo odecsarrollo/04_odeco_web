@@ -1,13 +1,17 @@
-from django_redis import get_redis_connection
+from django.conf import settings
 
 from django.core.mail import EmailMessage
-from django.shortcuts import redirect, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.gzip import gzip_page
 from django.views.generic import TemplateView, View
 
+from django_redis import get_redis_connection
+
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
+
+from mailchimp3 import MailChimp
 
 
 @method_decorator(gzip_page, name='dispatch')
@@ -62,6 +66,17 @@ class SendContactenosView(View):
             texto,
             'Pronto estaremos en contacto.'
         )
+
+        client = MailChimp(settings.MAILCHIMP_USERNAME, settings.MAILCHIMP_API_KEY)
+        client.lists.members.create_or_update(settings.MAILCHIMP_LIST_ID, correo, {
+            'email_address': correo,
+            'status': 'subscribed',
+            'status_if_new': 'subscribed',
+            'merge_fields': {
+                'FNAME': nombre,
+                'COMPANY': empresa
+            },
+        })
 
         email = EmailMessage(
             subject=asunto,
