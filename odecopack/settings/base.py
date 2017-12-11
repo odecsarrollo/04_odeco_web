@@ -62,6 +62,7 @@ MY_APPS = [
     'web_empresa',
     'web_clientes',
     'web_contactos',
+    'web_casos_exito',
 ]
 
 THIRD_PART_APPS = [
@@ -69,7 +70,6 @@ THIRD_PART_APPS = [
     'solo',
     'tinymce',
     'imagekit',
-    'analytical',
     'redisboard',
 ]
 
@@ -188,5 +188,3 @@ TINYMCE_DEFAULT_CONFIG = {
 
 IMAGEKIT_WATERMARK_IMAGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua.png')
 IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/marca_agua_orange.png')
-
-GOOGLE_ANALYTICS_PROPERTY_ID = 'UA-107233875-1'

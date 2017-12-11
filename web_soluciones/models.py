@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from imagekit.models import ProcessedImageField, ImageSpecField
 from tinymce import HTMLField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
 
 from model_utils.models import TimeStampedModel

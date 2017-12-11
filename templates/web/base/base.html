@@ -1,4 +1,4 @@
-{% load static solo_tags google_analytics %}
+{% load static solo_tags %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 
 <!DOCTYPE html>
@@ -25,11 +25,11 @@
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
 
     {% if user.is_anonymous %}
-        {% google_analytics %}
+        {% include 'web/base/google_analitics.html' %}
     {% else %}
         {% if user.is_authenticated and user.tercero %}
             {% if user.tercero.es_cliente %}
-                {% google_analytics %}
+                {% include 'web/base/google_analitics.html' %}
             {% endif %}
         {% endif %}
     {% endif %}
