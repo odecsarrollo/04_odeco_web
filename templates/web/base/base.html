@@ -122,12 +122,26 @@
     });
 
     $('.modal').on('show.bs.modal', function (e) {
-        ga('send', {
-            hitType: 'event',
-            eventCategory: e.target.title,
-            eventAction: 'click',
-            eventLabel: e.target.id
-        });
+
+        {% if user.is_anonymous %}
+            ga('send', {
+                hitType: 'event',
+                eventCategory: e.target.title,
+                eventAction: 'click',
+                eventLabel: e.target.id
+            });
+        {% else %}
+            {% if user.is_authenticated and user.tercero %}
+                {% if user.tercero.es_cliente %}
+                    ga('send', {
+                        hitType: 'event',
+                        eventCategory: e.target.title,
+                        eventAction: 'click',
+                        eventLabel: e.target.id
+                    });
+                {% endif %}
+            {% endif %}
+        {% endif %}
     });
 
 
