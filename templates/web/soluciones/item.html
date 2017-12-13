@@ -7,7 +7,7 @@
         <div class="row mb-4">
             {% if item.imagen_principal %}
                 <div class="col-12 text-center">
-                    <a href="#" data-toggle="modal" data-target="#itemSolucion{{ item.pk }}">
+                    <a href="#" data-toggle="modal" data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
                         <img
                                 class="img-fluid"
                                 src="{{ item.imagen_principal.url }}"
@@ -76,7 +76,7 @@
         </div>
         <div class="ver_mas">
             <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
-               data-target="#itemSolucion{{ item.pk }}">
+               data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
                 <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
             </a>
         </div>
@@ -85,8 +85,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade right" id="itemSolucion{{ item.pk }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
+<div class="modal fade right" id="{{ item.id|slugify }}-{{ item.nombre|slugify }}"
+     title="{{ item.solucion.nombre|slugify }}" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true"
+>
     <div class="modal-dialog modal-lg item" role="document">
         <!--Content-->
         <div class="modal-content">
