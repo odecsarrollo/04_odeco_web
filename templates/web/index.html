@@ -96,7 +96,10 @@
     {% endblock %}
 
     {% block onLoadScript %}
-        onOverlayPublicidad();
+        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+        {% if index_configuracion.overlay_publicidad %}
+            onOverlayPublicidad();
+        {% endif %}
     {% endblock %}
 </script>
 {% block content %}
