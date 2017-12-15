@@ -5,29 +5,47 @@ from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
 
 from web.utils import get_image_name
+from web_clientes.models import Cliente
+
+
+class IndustriaCasoExito(models.Model):
+    nombre = models.CharField(max_length=120)
+    icono = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = 'Industria'
+        verbose_name_plural = 'Industrias'
 
 
 class CasoExito(models.Model):
     def imagen_principal_upload_to(instance, filename):
-        new_filename = get_image_name('Solucion Imagen principal', filename)
+        new_filename = get_image_name('Caso Exito principal', filename)
         return "web/img/casexi/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
     descripcion_corta = models.TextField(null=True, blank=True)
     descripcion = HTMLField('Descripción', default='Descripción de este Caso de Éxito', null=True, blank=True)
     orden = models.PositiveIntegerField(default=0)
-    categoria = models.CharField(max_length=120, default='', blank=True)
-    categoria_dos = models.CharField(max_length=120, default='', blank=True)
+    industria = models.ForeignKey(IndustriaCasoExito, related_name='mis_casos_exito')
+    fecha_entrega = models.DateField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True)
+    cliente = models.ForeignKey(Cliente, related_name='mis_casos_exito', null=True, blank=True)
     activo = models.BooleanField(default=False)
     imagen_principal = ProcessedImageField(
         processors=[ResizeToFit(width=400, height=200, upscale=False)],
         format='JPEG',
         options={'quality': 80},
         upload_to=imagen_principal_upload_to,
-        verbose_name='Imagen Item Solución (400x200)',
+        verbose_name='Imagen Caso Éxito (400x200)',
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return self.slug
 
     # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
     #     super().save(force_insert, force_update, using, update_fields)
@@ -37,11 +55,11 @@ class CasoExito(models.Model):
     #     return '%s - %s' % (self.solucion.nombre, self.nombre)
 
     class Meta:
-        verbose_name = 'Item Solución'
-        verbose_name_plural = 'Items Soluciones'
+        verbose_name = 'Caso de Éxito'
+        verbose_name_plural = 'Casos de Éxito'
 
 
-class ItemSolucionImagen(models.Model):
+class CasoExitoImagen(models.Model):
     CHOICES_MARCA_AGUA = (
         (0, 'Ninguna'),
         (1, 'Blanca'),
@@ -49,7 +67,7 @@ class ItemSolucionImagen(models.Model):
     )
 
     def imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Imagen Solucion', filename)
+        new_filename = get_image_name('Imagen Caso Exito', filename)
         return "web/img/casexi/%s" % new_filename
 
     # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
@@ -79,7 +97,7 @@ class ItemSolucionImagen(models.Model):
     )
 
 
-class ItemSolucionVideo(models.Model):
+class CasoExitoVideo(models.Model):
     video = models.CharField(max_length=500)
     caso_exito = models.ForeignKey(CasoExito, related_name='mis_videos')
     orden = models.PositiveIntegerField(default=0)
@@ -87,3 +105,11 @@ class ItemSolucionVideo(models.Model):
     # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
     #     super().save(force_insert, force_update, using, update_fields)
     #     self.item_solucion.solucion.save()
+
+
+class CasoExitoTestimonio(models.Model):
+    caso_exito = models.ForeignKey(CasoExito, related_name='mis_testimonios')
+    nombre_persona = models.CharField(max_length=200)
+    cargo = models.CharField(max_length=200, null=True, blank=True)
+    testimonio = models.TextField()
+    orden = models.PositiveIntegerField(default=0)

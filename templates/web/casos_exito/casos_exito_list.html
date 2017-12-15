@@ -1,0 +1,79 @@
+{% extends 'web/base/base.html' %}
+{% load cache static inclusion_tags %}
+
+{% block title %}
+    Casos de Éxito
+{% endblock %}
+
+
+
+{% block cabezote %}
+    {% include 'web/base/cabezote.html' with titulo="Prueba de Titulo" texto="Prueba de descripción corta" imagen=solucion_objeto.header_imagen.url %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container soluciones">
+        <div class="row">
+            <div class="col-12 pl-3 pr-3 pl-sm-0 pr-sm-0 order-2 order-sm-1">
+                {% botones_soluciones %}
+            </div>
+            <div class="col-12 order-1 order-sm-2">
+                {% with casos_exito_list=casos_exito_lista.all|dictsort:"industria.nombre" %}
+                    <section class="section">
+                        <div class="mt-4">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur corporis
+                            cumque
+                            cupiditate deserunt ex facere fuga fugiat hic itaque laudantium mollitia nam necessitatibus
+                            odit
+                            tempore,
+                            totam ullam veniam, veritatis.
+                        </div>
+                        {% regroup casos_exito_list by industria.nombre as industria_list %}
+
+                        <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                            <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
+                                {% for industria in industria_list %}
+                                    <li class="nav-item">
+                                        <a class="color-1-odecopack nav-link-soluciones" data-offset="120"
+                                           href="#{{ industria.grouper|slugify }}">{{ industria.grouper|upper }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </nav>
+
+
+                        <div class="fixed-action-btn d-md-none p-0" style="bottom: 45px; right: 24px">
+                            <a class="btn-floating btn-large m-0 color-1-odecopack waves-effect waves-light">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            <ul class="smooth-scroll" style="width: 1px">
+                                {% for industria in industria_list %}
+                                    <li>
+                                        <a class="btn-floating btn-floating-categoria waves-effect waves-light"
+                                           data-offset="100"
+                                           href="#{{ industria.grouper|slugify }}"
+                                           style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
+                                        >
+                                            {{ industria.grouper|title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+
+                        <div class="row">
+                            {% for industria in industria_list %}
+                                <div id="{{ industria.grouper|slugify }}" class="col-12 mb-3">
+                                    <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ industria.grouper|upper }}</h2>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    </section>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

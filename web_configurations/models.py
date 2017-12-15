@@ -41,6 +41,30 @@ class IndexConfiguration(SingletonModel):
         verbose_name = "Index"
 
 
+class CasosExitoConfiguration(SingletonModel):
+    def header_imagen_upload_to(instance, filename):
+        new_filename = get_image_name('Header', filename)
+        return "web/img/casexi/%s" % new_filename
+
+    header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
+    header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
+    header_imagen = ProcessedImageField(
+        processors=[SmartResize(width=2560, height=1500, upscale=False)],
+        format='JPEG',
+        options={'quality': 50},
+        upload_to=header_imagen_upload_to,
+        verbose_name='Imagen Cabezote (2560 x 1500)',
+        null=True,
+        blank=True
+    )
+
+    def __unicode__(self):
+        return "Casos Exito"
+
+    class Meta:
+        verbose_name = "Casos Exito"
+
+
 class GeneralConfiguration(SingletonModel):
     direccion = models.CharField(max_length=200, default='Dirección aquí', verbose_name='Dirección')
     horarios_de_atencion = HTMLField('Horarios de Atención', default='Texto Horarios de Atención aquí')
