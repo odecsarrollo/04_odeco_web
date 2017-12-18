@@ -1,0 +1,218 @@
+{% load imagekit %}
+<div class="col-12 col-md-6 col-lg-4 p-1">
+    <div class="card card-body item">
+        <h5 class="card-title">
+            {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
+        </h5>
+        <div class="row mb-4">
+            {% if item.imagen_principal %}
+                <div class="col-12 text-center">
+                    <a href="#" data-toggle="modal" data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
+                        <img
+                                class="img-fluid"
+                                src="{{ item.imagen_principal.url }}"
+                                alt="Imagen perfil item solución de {{ item.nombre }}"
+                        >
+                    </a>
+                </div>
+            {% endif %}
+
+
+            <div class="col-12 mt-2 mb-2">
+                <p class="card-text text-justify">
+                    {{ item.descripcion_corta }}
+                </p>
+            </div>
+
+            {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden"|slice:":3" %}
+                {% if imagenes_lista %}
+                    <div class="col-12 pl-4 pr-4">
+                        <div class="galeria">
+                            <div class="mdb-lightbox">
+                                <div class="row">
+                                    {% for imagen in imagenes_lista %}
+                                        {% if imagen.imagen %}
+                                            {% if imagen.marca_agua == 1 %}
+                                                {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                            {% elif imagen.marca_agua == 2 %}
+                                                {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                            {% else %}
+                                                {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                            {% endif %}
+
+                                            <figure class="col-4 col-md-4 p-1 m-0 d-none d-sm-block">
+                                                <a href="{{ imagen_procesada.url }}"
+                                                   data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
+                                                    <div class="view overlay hm-white-slight z-depth-2">
+                                                        <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                                {% if imagen.alt_seo %}
+                                                             alt="{{ imagen.alt_seo }}"
+                                                                {% endif %}
+                                                        >
+                                                    </div>
+                                                </a>
+                                                <div class="caption">
+                                                    <h3>
+                                                        {{ item.nombre }}
+                                                    </h3>
+                                                    {% if imagen.descripcion %}
+                                                        <p>{{ imagen.descripcion }}</p>
+                                                    {% endif %}
+                                                </div>
+                                            </figure>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="ver_mas">
+            <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
+               data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
+                <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade right" id="{{ item.id|slugify }}-{{ item.nombre|slugify }}"
+     title="{{ item.solucion.nombre|slugify }}" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg item" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header color-1-odecopack">
+                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel"><strong>{{ item.nombre|upper }}</strong>
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4 col-lg-2 flex-center">
+                        {% if item.cliente %}
+                            {% if item.cliente.logo %}
+                                <img class="img-fluid align-content-center" src="{{ item.cliente.logo.url }}"
+                                     alt="Logo de {{ item.cliente.nombre }}">
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="col-8 col-lg-3 flex-center">
+                        {% if item.fecha_entrega %}
+                            <p class="align-content-center float-left">
+                                <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
+                                <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
+                                <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                                <strong>Cliente:</strong> {{ item.cliente.nombre }}
+                            </p>
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+
+                        <figure>
+                            <img class="clear img-fluid float-sm-none float-md-right m-1" style="max-width: 300px" src="{{ item.imagen_principal.url }}"
+                                 alt="">
+                        </figure>
+                        <p>
+                            {{ item.descripcion|safe }}
+                        </p>
+                    </div>
+                </div>
+                {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
+                    {% if imagenes_lista %}
+                        <h4 class="h4-responsive mt-2">Galería</h4>
+                        <div class="pl-4 pr-4">
+                            <div class="galeria">
+                                <div class="mdb-lightbox">
+                                    <div class="row">
+                                        {% for imagen in imagenes_lista %}
+                                            {% if imagen.imagen %}
+                                                {% if imagen.marca_agua == 1 %}
+                                                    {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                                {% elif imagen.marca_agua == 2 %}
+                                                    {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                                {% else %}
+                                                    {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                {% endif %}
+
+                                                <figure class="col-4 col-md-2 p-1 m-0">
+                                                    <a href="{{ imagen_procesada.url }}"
+                                                       data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
+                                                        <div class="view overlay hm-white-slight z-depth-2">
+                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                                    {% if imagen.alt_seo %}
+                                                                 alt="{{ imagen.alt_seo }}"
+                                                                    {% endif %}
+                                                            >
+                                                        </div>
+                                                    </a>
+                                                    <div class="caption">
+                                                        <h3>
+                                                            {{ item.nombre }}
+                                                        </h3>
+                                                        {% if imagen.descripcion %}
+                                                            <p>{{ imagen.descripcion }}</p>
+                                                        {% endif %}
+                                                    </div>
+                                                </figure>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with videos_list=item.mis_videos.all|dictsort:"orden" %}
+                    {% if videos_list %}
+                        <h4 class="h4-responsive mt-2">Videos</h4>
+                        <div class="row">
+                            {% for video in videos_list %}
+                                <div class="col-12 col-md-6 col-lg-4 p-1 m-0">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item p-0"
+                                                data-src="{{ video.video }}?rel=0&amp;showinfo=0"
+                                                frameborder="0"
+                                                allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
+                    {% if documentos_list %}
+                        <h4 class="h4-responsive mt-2">Recursos</h4>
+                        <ul>
+                            {% for documento in documentos_list %}
+                                <li>
+                                    <a href="{{ documento.documento.url }}" target="_blank">
+                                        {{ documento.nombre|title }} - <i class="{{ documento.icono }}"
+                                                                          aria-hidden="true"></i>
+                                        <small>({{ documento.documento.size|filesizeformat }})</small>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal -->
