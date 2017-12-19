@@ -16,58 +16,23 @@
                     </a>
                 </div>
             {% endif %}
-
-
             <div class="col-12 mt-2 mb-2">
                 <p class="card-text text-justify">
                     {{ item.descripcion_corta }}
                 </p>
             </div>
-
-            {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden"|slice:":3" %}
-                {% if imagenes_lista %}
-                    <div class="col-12 pl-4 pr-4">
-                        <div class="galeria">
-                            <div class="mdb-lightbox">
-                                <div class="row">
-                                    {% for imagen in imagenes_lista %}
-                                        {% if imagen.imagen %}
-                                            {% if imagen.marca_agua == 1 %}
-                                                {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
-                                            {% elif imagen.marca_agua == 2 %}
-                                                {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
-                                            {% else %}
-                                                {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
-                                            {% endif %}
-
-                                            <figure class="col-4 col-md-4 p-1 m-0 d-none d-sm-block">
-                                                <a href="{{ imagen_procesada.url }}"
-                                                   data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
-                                                    <div class="view overlay hm-white-slight z-depth-2">
-                                                        <img src="{{ imagen.imagen_thumbnail.url }}"
-                                                                {% if imagen.alt_seo %}
-                                                             alt="{{ imagen.alt_seo }}"
-                                                                {% endif %}
-                                                        >
-                                                    </div>
-                                                </a>
-                                                <div class="caption">
-                                                    <h3>
-                                                        {{ item.nombre }}
-                                                    </h3>
-                                                    {% if imagen.descripcion %}
-                                                        <p>{{ imagen.descripcion }}</p>
-                                                    {% endif %}
-                                                </div>
-                                            </figure>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
+            <div class="col-12">
+                <p>
+                    {% if item.fecha_entrega %}
+                        <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
+                        <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
+                    {% endif %}
+                    <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                    {% if item.cliente %}
+                        <strong>Cliente:</strong> {{ item.cliente.nombre }}
+                    {% endif %}
+                </p>
+            </div>
         </div>
         <div class="ver_mas">
             <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
@@ -108,19 +73,22 @@
                         {% endif %}
                     </div>
                     <div class="col-8 col-lg-3 flex-center">
-                        {% if item.fecha_entrega %}
-                            <p class="align-content-center float-left">
+                        <p class="align-content-center float-left">
+                            {% if item.fecha_entrega %}
                                 <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
                                 <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
-                                <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                            {% endif %}
+                            <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                            {% if item.cliente %}
                                 <strong>Cliente:</strong> {{ item.cliente.nombre }}
-                            </p>
-                        {% endif %}
+                            {% endif %}
+                        </p>
                     </div>
                     <div class="col-12">
 
                         <figure>
-                            <img class="clear img-fluid float-sm-none float-md-right m-1" style="max-width: 300px" src="{{ item.imagen_principal.url }}"
+                            <img class="clear img-fluid float-sm-none float-md-right m-1" style="max-width: 300px"
+                                 src="{{ item.imagen_principal.url }}"
                                  alt="">
                         </figure>
                         <p>
@@ -128,6 +96,46 @@
                         </p>
                     </div>
                 </div>
+
+                {% with testimonios_lista=item.mis_testimonios.all|dictsort:"orden" %}
+                    {% if testimonios_lista %}
+                        <section class="section text-center pb-5">
+                            <h4 class="h4-responsive mt-2">Testimonios</h4>
+                            <div id="carousel-testimonios-{{ item.id }}"
+                                 class="carousel no-flex testimonial-carousel slide carousel-fade"
+                                 data-ride="carousel" data-interval="false">
+                                <div class="carousel-inner" role="listbox">
+                                    {% for testimonio in testimonios_lista %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <div class="testimonial">
+                                                <p><i class="fa fa-quote-left"></i>
+                                                    {{ testimonio.testimonio }}
+                                                </p>
+                                                <h4 class="h4-responsive mb-0">{{ testimonio.nombre_persona }}</h4>
+                                                <h6 class="mt-0">{{ testimonio.cargo }}</h6>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-item-prev left carousel-control"
+                                   href="#carousel-testimonios-{{ item.id }}"
+                                   role="button"
+                                   data-slide="prev">
+                                    <span class="icon-prev" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-item-next right carousel-control"
+                                   href="#carousel-testimonios-{{ item.id }}"
+                                   role="button"
+                                   data-slide="next">
+                                    <span class="icon-next" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </section>
+                    {% endif %}
+                {% endwith %}
+
                 {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
                     {% if imagenes_lista %}
                         <h4 class="h4-responsive mt-2">Galería</h4>
@@ -188,22 +196,6 @@
                                 </div>
                             {% endfor %}
                         </div>
-                    {% endif %}
-                {% endwith %}
-                {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
-                    {% if documentos_list %}
-                        <h4 class="h4-responsive mt-2">Recursos</h4>
-                        <ul>
-                            {% for documento in documentos_list %}
-                                <li>
-                                    <a href="{{ documento.documento.url }}" target="_blank">
-                                        {{ documento.nombre|title }} - <i class="{{ documento.icono }}"
-                                                                          aria-hidden="true"></i>
-                                        <small>({{ documento.documento.size|filesizeformat }})</small>
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
                     {% endif %}
                 {% endwith %}
             </div>

@@ -2,10 +2,12 @@ from django.db import models
 
 from tinymce import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
-from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
+from pilkit.processors import ResizeToFill, ResizeToFit
 
 from web.utils import get_image_name
 from web_clientes.models import Cliente
+
+from model_utils.models import TimeStampedModel
 
 
 class IndustriaCasoExito(models.Model):
@@ -20,7 +22,7 @@ class IndustriaCasoExito(models.Model):
         verbose_name_plural = 'Industrias'
 
 
-class CasoExito(models.Model):
+class CasoExito(TimeStampedModel):
     def imagen_principal_upload_to(instance, filename):
         new_filename = get_image_name('Caso Exito principal', filename)
         return "web/img/casexi/%s" % new_filename
@@ -47,13 +49,6 @@ class CasoExito(models.Model):
     def __str__(self):
         return self.slug
 
-    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-    #     super().save(force_insert, force_update, using, update_fields)
-    #     self.solucion.save()
-    #
-    # def __str__(self):
-    #     return '%s - %s' % (self.solucion.nombre, self.nombre)
-
     class Meta:
         verbose_name = 'Caso de Éxito'
         verbose_name_plural = 'Casos de Éxito'
@@ -70,9 +65,9 @@ class CasoExitoImagen(models.Model):
         new_filename = get_image_name('Imagen Caso Exito', filename)
         return "web/img/casexi/%s" % new_filename
 
-    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-    #     super().save(force_insert, force_update, using, update_fields)
-    #     self.item_solucion.solucion.save()
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.caso_exito.save()
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
     caso_exito = models.ForeignKey(CasoExito, related_name='mis_imagenes')
@@ -102,9 +97,9 @@ class CasoExitoVideo(models.Model):
     caso_exito = models.ForeignKey(CasoExito, related_name='mis_videos')
     orden = models.PositiveIntegerField(default=0)
 
-    # def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-    #     super().save(force_insert, force_update, using, update_fields)
-    #     self.item_solucion.solucion.save()
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        self.caso_exito.save()
 
 
 class CasoExitoTestimonio(models.Model):

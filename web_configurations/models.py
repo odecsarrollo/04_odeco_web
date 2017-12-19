@@ -57,6 +57,7 @@ class CasosExitoConfiguration(SingletonModel):
         null=True,
         blank=True
     )
+    descripcion = HTMLField('Texto Casos Éxito', default='Descripción casos Éxito', null=True, blank=True)
 
     def __unicode__(self):
         return "Casos Exito"

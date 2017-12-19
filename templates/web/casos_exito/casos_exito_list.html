@@ -18,6 +18,7 @@
 
 
 {% block content %}
+    {% get_solo 'web_configurations.CasosExitoConfiguration' as casos_exito_configuracion %}
     <div class="container soluciones">
         <div class="row">
             <div class="col-12 pl-3 pr-3 pl-sm-0 pr-sm-0 order-2 order-sm-1">
@@ -27,12 +28,7 @@
                 {% with casos_exito_list=casos_exito_lista.all|dictsort:"industria.nombre" %}
                     <section class="section">
                         <div class="mt-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium consequuntur corporis
-                            cumque
-                            cupiditate deserunt ex facere fuga fugiat hic itaque laudantium mollitia nam necessitatibus
-                            odit
-                            tempore,
-                            totam ullam veniam, veritatis.
+                            {{ casos_exito_configuracion.descripcion|safe }}
                         </div>
                         {% regroup casos_exito_list by industria as industria_list %}
 
@@ -91,3 +87,9 @@
         </div>
     </div>
 {% endblock %}
+
+<script>
+    {% block final_scripts %}
+        $(".navbar-soluciones").sticky({topSpacing: 48});
+    {% endblock %}
+</script>
