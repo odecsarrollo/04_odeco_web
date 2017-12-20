@@ -14,6 +14,16 @@ class SolucionDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['mis_items'] = ItemSolucion.objects.filter(solucion=self.object, activo=True).prefetch_related(
-            'mis_imagenes', 'mis_documentos', 'mis_videos').all()
+        id = self.object.pk
+        qs_mis_items = ItemSolucion.objects.filter(
+            solucion__id=id,
+            activo=True
+        ).select_related(
+            'solucion'
+        ).prefetch_related(
+            'mis_imagenes',
+            'mis_documentos',
+            'mis_videos'
+        ).all()
+        context['mis_items'] = qs_mis_items
         return context

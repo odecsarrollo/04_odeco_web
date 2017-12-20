@@ -27,9 +27,9 @@
                         <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
                         <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
                     {% endif %}
-                    <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                    <strong>Industria:</strong> {{ item.industria.nombre|title }}<br>
                     {% if item.cliente %}
-                        <strong>Cliente:</strong> {{ item.cliente.nombre }}
+                        <strong>Cliente:</strong> {{ item.cliente.nombre|title }}
                     {% endif %}
                 </p>
             </div>
@@ -78,9 +78,9 @@
                                 <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
                                 <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
                             {% endif %}
-                            <strong>Industria:</strong> {{ item.industria.nombre }}<br>
+                            <strong>Industria:</strong> {{ item.industria.nombre|title }}<br>
                             {% if item.cliente %}
-                                <strong>Cliente:</strong> {{ item.cliente.nombre }}
+                                <strong>Cliente:</strong> {{ item.cliente.nombre|title }}
                             {% endif %}
                         </p>
                     </div>
