@@ -25,7 +25,7 @@ class Solucion(TimeStampedModel):
     nombre_en = models.CharField(max_length=120, verbose_name='Nombre en ingles', default='Nombre en Ingles')
     icono_class = models.CharField(default='', max_length=100)
     texto = HTMLField('Texto Soluciones', default='Descripción de esta solución', null=True, blank=True)
-    descripcion_corta = models.TextField(null=True, blank=True)
+    texto_en = HTMLField('Texto Soluciones Ingles', default='Descripción de esta solución en Ingles', null=True, blank=True)
     orden = models.PositiveIntegerField(default=0)
     slug = models.SlugField(null=True, blank=True)
 
