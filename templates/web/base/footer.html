@@ -1,11 +1,16 @@
-{% load solo_tags %}
+{% load solo_tags i18n %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 <footer class="page-footer color-4-odecopack center-on-small-only">
+    {% get_current_language as LANGUAGE_CODE %}
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3 mt-2">
-                <h6 class="title font-bold">Información de Contacto</h6>
-                <p>{{ general_configuracion.horarios_de_atencion|safe }}</p>
+                <h6 class="title font-bold">{% trans 'Información de Contacto' %}</h6>
+                {% if LANGUAGE_CODE == 'en' %}
+                    <p>{{ general_configuracion.horarios_de_atencion_en|safe }}</p>
+                {% else %}
+                    <p>{{ general_configuracion.horarios_de_atencion|safe }}</p>
+                {% endif %}
                 <p>{{ general_configuracion.numeros_contacto|safe }}</p>
                 <p>{{ general_configuracion.correos_contacto|safe }}</p>
             </div>
@@ -34,7 +39,7 @@
             </div>
             <div class="col-12 col-md-12 col-lg-6 mt-2">
                 <section class="section">
-                    <h6 class="title font-bold">Formulario de contacto</h6>
+                    <h6 class="title font-bold">{% trans 'Formulario de contacto' %}</h6>
                     <div class="row">
                         <!--Grid column-->
                         <div class="col-md-12 p-0 m-0 formulario">
@@ -44,44 +49,49 @@
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="name" name="nombre"
-                                               placeholder="nombre">
+                                               placeholder="{% trans 'Nombre'|title %}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <div class="md-form">
                                             <input type="text" id="email" name="correo"
-                                                   placeholder="correo">
+                                                   placeholder="{% trans 'correo'|title %}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="empresa" name="empresa"
-                                               placeholder="empresa">
+                                               placeholder="{% trans 'EMPRESA'|title %}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="subject" name="asunto"
-                                               placeholder="asunto">
+                                               placeholder="{% trans 'asunto'|title %}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <textarea type="text" id="message" name="texto" style="min-height: 100px"
-                                                  class="md-textarea" placeholder="mensaje"></textarea>
+                                                  class="md-textarea"
+                                                  placeholder="{% trans 'mensaje'|title %}"></textarea>
                                     </div>
 
                                 </div>
                                 <div class="options text-center mt-1 texto-legal">
-                                    ODECOPACK SAS le informa que los datos personales que se recolectan
-                                    a través de este formulario serán tratados de manera segura y confiable de acuerdo
-                                    con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
+                                    {% blocktrans %}
+                                        ODECOPACK SAS le informa que los datos personales que se recolectan
+                                        a través de este formulario serán tratados de manera segura y confiable de
+                                        acuerdo
+                                        con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
+                                    {% endblocktrans %}
                                 </div>
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">
-                                        <button type="submit" class="btn mb-2 color-1-odecopack">Enviar</button>
+                                        <button type="submit"
+                                                class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %}</button>
                                     </div>
                                 </div>
                             </form>

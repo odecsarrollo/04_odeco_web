@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-27 15:40-0500\n"
-"PO-Revision-Date: 2017-12-27 15:40-0456\n"
+"POT-Creation-Date: 2017-12-28 10:44-0500\n"
+"PO-Revision-Date: 2017-12-28 10:46-0456\n"
 "Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -26,9 +26,66 @@ msgstr "English"
 msgid "Español"
 msgstr "Spanish"
 
+#: templates/web/base/contactenos.html:11 templates/web/base/menu.html:45
+msgid "CONTÁCTENOS"
+msgstr "CONTACT"
+
+#: templates/web/base/contactenos.html:25 templates/web/base/footer.html:52
+#: web_soluciones/models.py:24
+msgid "Nombre"
+msgstr "Name"
+
+#: templates/web/base/contactenos.html:31 templates/web/base/footer.html:59
+msgid "correo"
+msgstr "Email"
+
+#: templates/web/base/contactenos.html:37 templates/web/base/footer.html:66
 #: templates/web/base/menu.html:20
 msgid "EMPRESA"
 msgstr "COMPANY"
+
+#: templates/web/base/contactenos.html:43 templates/web/base/footer.html:72
+msgid "asunto"
+msgstr "subject"
+
+#: templates/web/base/contactenos.html:51 templates/web/base/footer.html:79
+msgid "mensaje"
+msgstr "message"
+
+#: templates/web/base/contactenos.html:54
+msgid ""
+"\n"
+"                            ODECOPACK SAS le informa que los datos personales que se recolectan\n"
+"                            a través de este formulario serán tratados de manera segura y confiable de acuerdo\n"
+"                            con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.\n"
+"                        "
+msgstr ""
+"\n"
+"Texto en ingles de políticas de datos personales para colocar en ingles"
+
+#: templates/web/base/contactenos.html:62 templates/web/base/footer.html:94
+msgid "Enviar"
+msgstr "send"
+
+#: templates/web/base/footer.html:8
+msgid "Información de Contacto"
+msgstr "Contact Information"
+
+#: templates/web/base/footer.html:42
+msgid "Formulario de contacto"
+msgstr "Contact Form"
+
+#: templates/web/base/footer.html:84
+msgid ""
+"\n"
+"                                        ODECOPACK SAS le informa que los datos personales que se recolectan\n"
+"                                        a través de este formulario serán tratados de manera segura y confiable de\n"
+"                                        acuerdo\n"
+"                                        con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.\n"
+"                                    "
+msgstr ""
+"\n"
+"Texto en ingles de políticas de datos personales para colocar en ingles"
 
 #: templates/web/base/menu.html:25
 msgid "SOLUCIONES"
@@ -38,17 +95,10 @@ msgstr "SOLUTIONS"
 msgid "CLIENTES"
 msgstr "CUSTOMERS"
 
-#: templates/web/base/menu.html:37
+#: templates/web/base/menu.html:38
 msgid "CASOS ÉXITO"
 msgstr "SUCCESS STORIES"
 
-#: templates/web/base/menu.html:44
-msgid "CONTÁCTENOS"
-msgstr "CONTACT"
-
-#: web_soluciones/models.py:24
-msgid "Nombre"
-msgstr "Name"
-
-#~ msgid "COSA"
-#~ msgstr "Thing"
+#: templates/web/empresa.html:167
+msgid "NUESTROS ALIADOS"
+msgstr "OUR PARTNERS"

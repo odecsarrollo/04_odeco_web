@@ -1,3 +1,4 @@
+{% load i18n %}
 <!--Modal: Contact form-->
 <div class="modal fade formulario" id="contactenos_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -7,7 +8,7 @@
 
             <!--Header-->
             <div class="modal-header darken-3 white-text color-1-odecopack">
-                <h4 class="title"><i class="fa fa-pencil"></i>Contactanos</h4>
+                <h4 class="title"><i class="fa fa-pencil"></i>{% trans "CONTÁCTENOS" %}</h4>
                 <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -21,25 +22,25 @@
                     <div class="md-form form-sm">
                         <i class="fa fa-envelope prefix"></i>
                         <input name="nombre" type="text" id="form19" class="form-control" required>
-                        <label for="form19">Nombre</label>
+                        <label for="form19">{% trans 'Nombre'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
                         <i class="fa fa-envelope prefix"></i>
                         <input name="correo" type="email" id="form20" class="form-control" required>
-                        <label for="form20">Correo</label>
+                        <label for="form20">{% trans 'correo'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
                         <i class="fa fa-tag prefix"></i>
                         <input name="empresa" type="text" id="form44" class="form-control" required>
-                        <label for="form44">Empresa</label>
+                        <label for="form44">{% trans 'EMPRESA'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
                         <i class="fa fa-tag prefix"></i>
                         <input name="asunto" type="text" id="form21" class="form-control" required>
-                        <label for="form21">Asunto</label>
+                        <label for="form21">{% trans 'asunto'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
@@ -47,16 +48,19 @@
                         <textarea name="texto" style="min-height: 150px" rows="40" type="text" id="form8"
                                   class="md-textarea mb-0"
                                   required></textarea>
-                        <label for="form8">Mensaje</label>
+                        <label for="form8">{% trans 'mensaje'|title %}</label>
                     </div>
                     <div class="options text-center mt-1 texto-legal">
-                        ODECOPACK SAS le informa que los datos personales que se recolectan
-                        a través de este formulario serán tratados de manera segura y confiable de acuerdo
-                        con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
+                        {% blocktrans %}
+                            ODECOPACK SAS le informa que los datos personales que se recolectan
+                            a través de este formulario serán tratados de manera segura y confiable de acuerdo
+                            con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
+                        {% endblocktrans %}
                     </div>
 
                     <div class="text-center mt-1-half">
-                        <button type="submit" class="btn mb-2 color-1-odecopack">Enviar <i class="fa fa-send ml-1"></i>
+                        <button type="submit" class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %} <i
+                                class="fa fa-send ml-1"></i>
                         </button>
                     </div>
                 </form>
