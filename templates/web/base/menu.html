@@ -1,4 +1,4 @@
-{% load static solo_tags %}
+{% load static solo_tags i18n %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 <div {% if es_menu_index == True %}class="index"{% endif %}>
     <nav class="navbar fixed-top navbar-expand-lg scrolling-navbar menu-odeco {% if es_menu_index == True %}navbar-toggleable-md{% endif %}">
@@ -17,30 +17,32 @@
             <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %}">
                 <li class="nav-item right-border">
                     <a class="nav-link" href="{% if es_menu_index == False %}{% url 'index' %}{% endif %}#empresa"
-                       data-offset="70">EMPRESA <span class="sr-only">(current)</span></a>
+                       data-offset="70">{% trans "EMPRESA" %} <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <ul class="navbar-nav smooth-scroll">
                 <li class="nav-item right-border">
-                    <a class="nav-link" href="#soluciones" data-offset="150">SOLUCIONES</a>
+                    <a class="nav-link" href="#soluciones" data-offset="150">{% trans "SOLUCIONES" %}</a>
                 </li>
             </ul>
             <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %}">
                 <li class="nav-item right-border">
                     <a class="nav-link" href="{% if es_menu_index == False %}{% url 'index' %}{% endif %}#clientes"
-                       data-offset="30">CLIENTES</a>
+                       data-offset="30">{% trans "CLIENTES" %} </a>
                 </li>
             </ul>
             {% if user.is_authenticated %}
                 <ul class="navbar-nav">
                     <li class="nav-item right-border">
-                        <a class="nav-link" href="{% url 'web_casos_exito:lista' %}" data-offset="150">CASOS ÉXITO</a>
+                        <a class="nav-link" href="{% url 'web_casos_exito:lista' %}"
+                           data-offset="150">{% trans "CASOS ÉXITO" %}</a>
                     </li>
                 </ul>
             {% endif %}
             <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %}">
                 <li class="nav-item">
-                    <a data-toggle="modal" data-target="#contactenos_form" class="nav-link" href="#">CONTÁCTENOS</a>
+                    <a data-toggle="modal" data-target="#contactenos_form" class="nav-link"
+                       href="#">{% trans "CONTÁCTENOS" %}</a>
                 </li>
             </ul>
             <ul class="navbar-nav nav-flex-icons">
@@ -69,6 +71,30 @@
                     </li>
                 {% endif %}
             </ul>
+            {% if user.is_authenticated %}
+                {% get_current_language as LANGUAGE_CODE %}
+                <form action="{% url 'set_language' %}" method="post">
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    {% csrf_token %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    <ul class="navbar-nav nav-flex-icons">
+                        {% for l in languages %}
+                            {% if l.code != LANGUAGE_CODE %}
+                                <li class="nav-item">
+                                    <button
+                                            title="{{ l.name_local|title }}"
+                                            name="language"
+                                            class="btn btn-link m-0 p-0"
+                                            value={{ l.code }}
+                                    >
+                                        <span class="nav-link">{{ l.name_local | title }}</span>
+                                    </button>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </form>
+            {% endif %}
         </div>
     </nav>
 </div>

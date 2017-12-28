@@ -4,6 +4,7 @@ from django.utils import timezone
 from tinymce import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
+from django.utils.translation import gettext_lazy as _
 
 from model_utils.models import TimeStampedModel
 
@@ -20,7 +21,7 @@ class Solucion(TimeStampedModel):
         new_filename = get_image_name('Boton Solucion', filename)
         return "web/img/solu/%s" % new_filename
 
-    nombre = models.CharField(max_length=120)
+    nombre = models.CharField(max_length=120, verbose_name=_('Nombre'))
     icono_class = models.CharField(default='', max_length=100)
     texto = HTMLField('Texto Soluciones', default='Descripción de esta solución', null=True, blank=True)
     descripcion_corta = models.TextField(null=True, blank=True)

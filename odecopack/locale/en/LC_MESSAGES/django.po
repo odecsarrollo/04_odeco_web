@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-27 15:40-0500\n"
+"PO-Revision-Date: 2017-12-27 15:40-0456\n"
+"Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Translated-Using: django-rosetta 0.7.14\n"
+
+#: odecopack/settings/base.py:157
+msgid "English"
+msgstr "English"
+
+#: odecopack/settings/base.py:158
+msgid "Español"
+msgstr "Spanish"
+
+#: templates/web/base/menu.html:20
+msgid "EMPRESA"
+msgstr "COMPANY"
+
+#: templates/web/base/menu.html:25
+msgid "SOLUCIONES"
+msgstr "SOLUTIONS"
+
+#: templates/web/base/menu.html:31 templates/web/clientes.html:10
+msgid "CLIENTES"
+msgstr "CUSTOMERS"
+
+#: templates/web/base/menu.html:37
+msgid "CASOS ÉXITO"
+msgstr "SUCCESS STORIES"
+
+#: templates/web/base/menu.html:44
+msgid "CONTÁCTENOS"
+msgstr "CONTACT"
+
+#: web_soluciones/models.py:24
+msgid "Nombre"
+msgstr "Name"
+
+#~ msgid "COSA"
+#~ msgstr "Thing"

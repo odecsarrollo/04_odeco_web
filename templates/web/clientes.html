@@ -1,4 +1,4 @@
-{% load static cache solo_tags custom_operators %}
+{% load i18n static cache solo_tags custom_operators %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 <section id="clientes" class="section background-white pt-4 clientes">
     {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
@@ -7,7 +7,7 @@
                 <div class="container-fluid">
                     <div class="container py-3" id="opinions">
                         <h1 class="section-heading h1 pt-4 text-center text-sm-left">
-                            CLIENTES</h1>
+                            {% trans "CLIENTES" %}</h1>
                         <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 {% for cliente in clientes_lista %}

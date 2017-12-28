@@ -13,8 +13,7 @@ from web_clientes.models import Cliente
 
 from mailchimp3 import MailChimp
 
-
-@method_decorator(gzip_page, name='dispatch')
+#@method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 

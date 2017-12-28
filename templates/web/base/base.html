@@ -1,8 +1,8 @@
-{% load static solo_tags %}
+{% load i18n static solo_tags %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 
 <!DOCTYPE html>
-<html lang="en" class="{% block html_class %}{% endblock %}">
+<html lang="{{ LANGUAGE_CODE }}" class="{% block html_class %}{% endblock %}">
 
 <head>
     <!-- Google Tag Manager -->

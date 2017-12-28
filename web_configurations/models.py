@@ -90,7 +90,8 @@ class LaEmpresaConfiguration(SingletonModel):
         return "web/img/empr/%s" % new_filename
 
     titulo = models.CharField(max_length=150, default='Aqui el titulo')
-    texto = HTMLField('Horarios de Atención', default='Aqui la descripción')
+    texto = HTMLField('Descripcion Empresa', default='Aqui la descripción')
+    texto_en = HTMLField('Descripcion Empresa Ingles', default='Aqui la descripción en ingles')
     imagen_principal = ProcessedImageField(
         processors=[SmartResize(width=570, height=362, upscale=False)],
         format='JPEG',

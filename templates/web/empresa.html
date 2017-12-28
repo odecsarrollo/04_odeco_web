@@ -1,8 +1,9 @@
-{% load static cache solo_tags imagekit %}
+{% load static cache solo_tags imagekit i18n %}
 {% get_solo 'web_configurations.LaEmpresaConfiguration' as empresa_configuracion %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 
 <div class="container index">
+    {% get_current_language as LANGUAGE_CODE %}
     <section id="empresa" class="section mt-3">
         <h1 class="section-heading h1 pt-4 text-center text-sm-left">{{ empresa_configuracion.titulo|upper }}</h1>
         <div class="row index-empresa">
@@ -21,7 +22,11 @@
                 </div>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-3 mt-sm-0 dark-grey-text" style="margin: auto !important;">
-                {{ empresa_configuracion.texto|safe }}
+                {% if LANGUAGE_CODE == 'en' %}
+                    {{ empresa_configuracion.texto_en|safe }}
+                {% else %}
+                    {{ empresa_configuracion.texto|safe }}
+                {% endif %}
             </div>
             {% if empresa_configuracion.imagen_principal %}
                 <div class="col-12 col-md-5 col-lg-4 p-0 m-auto">

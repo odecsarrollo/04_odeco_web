@@ -6,6 +6,7 @@ from django.conf.urls.static import static
 from web.views import IndexView, RedisListView
 
 urlpatterns = [
+    url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^redis/', RedisListView.as_view(), name='redis'),
@@ -14,6 +15,7 @@ urlpatterns = [
     url(r'^web/', include('web.urls', namespace='web')),
     url(r'^feria/', include('web_contactos.urls', namespace='contactos')),
     url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^rosetta/', include('rosetta.urls')),
 ]
 
 if settings.DEBUG:
