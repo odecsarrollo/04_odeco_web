@@ -1,6 +1,7 @@
-{% load solo_tags cache %}
+{% load solo_tags cache i18n %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
-{% cache 86400 index_cache_botones_soluciones cache_configuracion.soluciones_update %}
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 86400 index_cache_botones_soluciones cache_configuracion.soluciones_update LANGUAGE_CODE %}
     {% with soluciones_lista=soluciones_list %}
         {% if soluciones_lista %}
             <div class="container barra-soluciones">
@@ -13,7 +14,11 @@
                                         <div class="icon {{ solucion.icono_class }}" style="font-size: 3rem">
                                         </div>
                                         <h6 class="h6-responsive">
-                                            <strong>{{ solucion.nombre }}</strong>
+                                            {% if LANGUAGE_CODE == 'en' %}
+                                                <strong>{{ solucion.nombre_en }}</strong>
+                                            {% else %}
+                                                <strong>{{ solucion.nombre }}</strong>
+                                            {% endif %}
                                         </h6>
                                     </div>
                                 </a>
