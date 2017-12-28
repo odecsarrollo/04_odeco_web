@@ -4,6 +4,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.views.decorators.gzip import gzip_page
+from django.utils import translation
 from django.views.generic import TemplateView, View
 
 from django_redis import get_redis_connection
@@ -13,7 +14,8 @@ from web_clientes.models import Cliente
 
 from mailchimp3 import MailChimp
 
-#@method_decorator(gzip_page, name='dispatch')
+
+# @method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 
@@ -57,13 +59,14 @@ class SendContactenosView(View):
         )
 
         mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
-            'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente',
+            translation.ugettext(
+                'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente'),
             asunto,
             nombre,
             correo,
             empresa,
             texto,
-            'Pronto estaremos en contacto.'
+            translation.ugettext('Pronto estaremos en contacto.')
         )
 
         client = MailChimp(settings.MAILCHIMP_USERNAME, settings.MAILCHIMP_API_KEY)
@@ -88,9 +91,9 @@ class SendContactenosView(View):
         email.send()
 
         email2 = EmailMessage(
-            subject='Su envío de correo a Odecopack',
+            subject=translation.ugettext('Su envío de correo a Odecopack'),
             body=mensaje2,
-            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
+            from_email='%s Odecopack SAS<webmaster@odecopack.co>' % (translation.ugettext('CONTÁCTENOS').title()),
             to=[correo]
         )
         email2.send()

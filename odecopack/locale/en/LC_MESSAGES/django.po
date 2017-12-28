@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 10:44-0500\n"
-"PO-Revision-Date: 2017-12-28 10:46-0456\n"
+"POT-Creation-Date: 2017-12-28 11:09-0500\n"
+"PO-Revision-Date: 2017-12-28 11:11-0456\n"
 "Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,6 +27,7 @@ msgid "Español"
 msgstr "Spanish"
 
 #: templates/web/base/contactenos.html:11 templates/web/base/menu.html:45
+#: web/views.py:96
 msgid "CONTÁCTENOS"
 msgstr "CONTACT"
 
@@ -91,7 +92,7 @@ msgstr ""
 msgid "SOLUCIONES"
 msgstr "SOLUTIONS"
 
-#: templates/web/base/menu.html:31 templates/web/clientes.html:10
+#: templates/web/base/menu.html:31 templates/web/clientes.html:9
 msgid "CLIENTES"
 msgstr "CUSTOMERS"
 
@@ -102,3 +103,17 @@ msgstr "SUCCESS STORIES"
 #: templates/web/empresa.html:167
 msgid "NUESTROS ALIADOS"
 msgstr "OUR PARTNERS"
+
+#: web/views.py:63
+msgid ""
+"Su mensaje con la siguiente información, para Odecopack, se ha enviado "
+"correctamente"
+msgstr "Your message with the follow information has been sent successfully"
+
+#: web/views.py:69
+msgid "Pronto estaremos en contacto."
+msgstr "We will contact you as soon as possible."
+
+#: web/views.py:94
+msgid "Su envío de correo a Odecopack"
+msgstr "Your sent message"

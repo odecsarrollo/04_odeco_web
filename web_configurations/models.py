@@ -14,6 +14,7 @@ class IndexConfiguration(SingletonModel):
 
     header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
     header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
+    header_text_en = models.TextField(max_length=150, default='Aqui la descripción Ingles', null=True, blank=True)
     header_imagen = ProcessedImageField(
         processors=[SmartResize(width=2560, height=1500, upscale=False)],
         format='JPEG',

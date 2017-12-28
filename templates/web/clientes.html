@@ -1,13 +1,14 @@
 {% load i18n static cache solo_tags custom_operators %}
+{% get_current_language as LANGUAGE_CODE %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 <section id="clientes" class="section background-white pt-4 clientes">
-    {% with clientes_lista=clientes_list %}
-        {% if clientes_lista %}
-            <div class="container-fluid">
-                <div class="container py-3" id="opinions">
-                    <h1 class="section-heading h1 pt-4 text-center text-sm-left">
-                        {% trans "CLIENTES" %}</h1>
-                    {% cache 86400 index_cache_clientes cache_configuracion.clientes_update %}
+    {% cache 86400 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}
+        {% with clientes_lista=clientes_list %}
+            {% if clientes_lista %}
+                <div class="container-fluid">
+                    <div class="container py-3" id="opinions">
+                        <h1 class="section-heading h1 pt-4 text-center text-sm-left">
+                            {% trans "CLIENTES" %}</h1>
                         <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 {% for cliente in clientes_lista %}
@@ -57,9 +58,9 @@
                                 {% endfor %}
                             </ol>
                         </div>
-                    {% endcache %}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endwith %}
+            {% endif %}
+        {% endwith %}
+    {% endcache %}
 </section>

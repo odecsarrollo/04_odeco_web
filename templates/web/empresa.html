@@ -1,9 +1,8 @@
 {% load static cache solo_tags imagekit i18n %}
 {% get_solo 'web_configurations.LaEmpresaConfiguration' as empresa_configuracion %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
-
+{% get_current_language as LANGUAGE_CODE %}
 <div class="container index">
-    {% get_current_language as LANGUAGE_CODE %}
     <section id="empresa" class="section mt-3">
         <h1 class="section-heading h1 pt-4 text-center text-sm-left">{{ empresa_configuracion.titulo|upper }}</h1>
         <div class="row index-empresa">
@@ -157,27 +156,26 @@
 </div>
 
 
-
-{% with aliados_lista=aliados_list %}
-    {% if aliados_lista %}
-        <div class="container-fluid background-grey">
-            <div class="container py-3" id="opinions">
-                <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
-                    data-wow-delay="0.2s">
-                    {% trans 'NUESTROS ALIADOS' %}</h2>
-                <div class="flex-center logos-panel">
-                    <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
-                        {% cache 86400 index_cache_empresa_aliados cache_configuracion.empresa_update %}
+{% cache 86400 index_cache_empresa_aliados cache_configuracion.empresa_update LANGUAGE_CODE %}
+    {% with aliados_lista=aliados_list %}
+        {% if aliados_lista %}
+            <div class="container-fluid background-grey">
+                <div class="container py-3" id="opinions">
+                    <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
+                        data-wow-delay="0.2s">
+                        {% trans 'NUESTROS ALIADOS' %}</h2>
+                    <div class="flex-center logos-panel">
+                        <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
                             {% for aliado in aliados_lista %}
                                 <div class="col-lg-2 col-md-3 col-4">
                                     <img src="{{ aliado.logo.url }}" alt="{{ aliado.nombre }} es aliado de Odecopack"
                                          class="img-fluid">
                                 </div>
                             {% endfor %}
-                        {% endcache %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endif %}
-{% endwith %}
+        {% endif %}
+    {% endwith %}
+{% endcache %}
