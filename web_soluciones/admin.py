@@ -10,7 +10,16 @@ from web_soluciones.models import (
     CategoriaItemSolucion
 )
 
-admin.site.register(CategoriaItemSolucion)
+
+class CategoriaItemSolucionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'nombre', 'nombre_en', 'orden']
+    list_editable = ['orden', 'nombre', 'nombre_en']
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).order_by('orden')
+
+
+admin.site.register(CategoriaItemSolucion, CategoriaItemSolucionAdmin)
 
 
 class DocumentoAdmin(admin.ModelAdmin):
@@ -79,7 +88,7 @@ class ItemSolucionVideoInline(admin.TabularInline):
 
 
 class ItemSolucionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria_item', 'activo']
+    list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria', 'categoria_item', 'activo']
     list_editable = ['nombre', 'orden', 'categoria_item', 'activo']
 
     inlines = [ItemSolucionImagenInline, ItemSolucionVideoInline, DocumentoInline]

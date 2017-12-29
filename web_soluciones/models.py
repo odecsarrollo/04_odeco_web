@@ -13,12 +13,15 @@ from web_configurations.models import CacheConfiguration
 
 
 class CategoriaItemSolucion(models.Model):
-    orden = models.PositiveIntegerField(default=0)
-    nombre = models.CharField(max_length=120)
-    nombre_en = models.CharField(max_length=120, null=True, blank=True)
+    orden = models.PositiveIntegerField(default=0, unique=True)
+    nombre = models.CharField(max_length=120, default=' ', null=True, blank=True, unique=True)
+    nombre_en = models.CharField(max_length=120, default=' ', null=True, blank=True, unique=True)
 
     def __str__(self):
-        return self.nombre
+        if self.nombre:
+            return self.nombre
+        else:
+            return ''
 
     class Meta:
         verbose_name = 'Categoría Item Solucion'
