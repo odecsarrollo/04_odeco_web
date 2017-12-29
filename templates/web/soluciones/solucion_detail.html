@@ -23,7 +23,7 @@
             <div class="col-12 pl-3 pr-3 pl-sm-0 pr-sm-0 order-2 order-sm-1">
                 {% botones_soluciones %}
             </div>
-            {% cache 86400 cache_solucion solucion_objeto.pk solucion_objeto.modified LANGUAGE_CODE %}
+            {% cache 345600 cache_solucion solucion_objeto.pk solucion_objeto.modified LANGUAGE_CODE %}
                 {% with items_list=mis_items.all|dictsort:"categoria_item.orden"|dictsort:"orden" %}
                     {% if LANGUAGE_CODE == 'en' %}
                         {% regroup items_list by categoria_item.nombre_en as categoria_list %}
