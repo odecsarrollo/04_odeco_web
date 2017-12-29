@@ -28,7 +28,7 @@
     {% include 'web/base/menu.html' with es_menu_index=True %}
 
     {% if index_configuracion.overlay_publicidad %}
-        <div id="overlay">
+        <div id="overlay" onclick="offOverlayPublicidad()">
             <div class="flex-center">
                 <div class="container">
                     <div class="row justify-content-center">
