@@ -1,7 +1,16 @@
 from django.contrib import admin
 from imagekit.admin import AdminThumbnail
 
-from web_soluciones.models import Solucion, ItemSolucion, ItemSolucionImagen, Documento, ItemSolucionVideo
+from web_soluciones.models import (
+    Solucion,
+    ItemSolucion,
+    ItemSolucionImagen,
+    Documento,
+    ItemSolucionVideo,
+    CategoriaItemSolucion
+)
+
+admin.site.register(CategoriaItemSolucion)
 
 
 class DocumentoAdmin(admin.ModelAdmin):
@@ -25,8 +34,8 @@ class DocumentoInline(admin.TabularInline):
 
 
 class SolucionAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'orden']
-    list_editable = ['orden', ]
+    list_display = ['id', 'nombre', 'nombre_en', 'orden']
+    list_editable = ['orden', 'nombre', 'nombre_en']
 
     prepopulated_fields = {"slug": ("nombre",)}
 
@@ -70,12 +79,12 @@ class ItemSolucionVideoInline(admin.TabularInline):
 
 
 class ItemSolucionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria', 'categoria_dos', 'activo']
-    list_editable = ['nombre', 'orden', 'categoria', 'categoria_dos', 'activo']
+    list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria_item', 'activo']
+    list_editable = ['nombre', 'orden', 'categoria_item', 'activo']
 
     inlines = [ItemSolucionImagenInline, ItemSolucionVideoInline, DocumentoInline]
 
-    list_filter = ['solucion', 'categoria', 'categoria_dos', 'activo']
+    list_filter = ['solucion', 'categoria_item', 'activo']
 
 
 admin.site.register(ItemSolucion, ItemSolucionAdmin)

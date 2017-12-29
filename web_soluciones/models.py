@@ -12,6 +12,19 @@ from web.utils import get_image_name
 from web_configurations.models import CacheConfiguration
 
 
+class CategoriaItemSolucion(models.Model):
+    orden = models.PositiveIntegerField(default=0)
+    nombre = models.CharField(max_length=120)
+    nombre_en = models.CharField(max_length=120, null=True, blank=True)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name = 'Categoría Item Solucion'
+        verbose_name_plural = 'Categorías Items Soluciones'
+
+
 class Solucion(TimeStampedModel):
     def header_imagen_upload_to(instance, filename):
         new_filename = get_image_name('Header', filename)
@@ -25,7 +38,8 @@ class Solucion(TimeStampedModel):
     nombre_en = models.CharField(max_length=120, verbose_name='Nombre en ingles', default='Nombre en Ingles')
     icono_class = models.CharField(default='', max_length=100)
     texto = HTMLField('Texto Soluciones', default='Descripción de esta solución', null=True, blank=True)
-    texto_en = HTMLField('Texto Soluciones Ingles', default='Descripción de esta solución en Ingles', null=True, blank=True)
+    texto_en = HTMLField('Texto Soluciones Ingles', default='Descripción de esta solución en Ingles', null=True,
+                         blank=True)
     orden = models.PositiveIntegerField(default=0)
     slug = models.SlugField(null=True, blank=True)
 
@@ -70,10 +84,19 @@ class ItemSolucion(models.Model):
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
+    nombre_en = models.CharField(max_length=120, null=True, blank=True)
+
     solucion = models.ForeignKey(Solucion, related_name='mis_items', on_delete=models.PROTECT)
+
     descripcion_corta = models.TextField(null=True, blank=True)
-    mas = HTMLField('Texto Soluciones', default='Descripción de este Item', null=True, blank=True)
+    descripcion_corta_en = models.TextField(null=True, blank=True)
+
+    mas = HTMLField('Texto Item Solución', default='Descripción de este Item', null=True, blank=True)
+    mas_en = HTMLField('Texto Item Solución en Ingles', null=True,
+                       blank=True)
     orden = models.PositiveIntegerField(default=0)
+    categoria_item = models.ForeignKey(CategoriaItemSolucion, related_name='mis_items', null=True, blank=True)
+
     categoria = models.CharField(max_length=120, default='', blank=True)
     categoria_dos = models.CharField(max_length=120, default='', blank=True)
     activo = models.BooleanField(default=False)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 11:09-0500\n"
-"PO-Revision-Date: 2017-12-28 11:11-0456\n"
+"POT-Creation-Date: 2017-12-28 12:46-0500\n"
+"PO-Revision-Date: 2017-12-28 12:46-0456\n"
 "Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "SOLUCIONES"
 msgstr "SOLUTIONS"
 
-#: templates/web/base/menu.html:31 templates/web/clientes.html:9
+#: templates/web/base/menu.html:31 templates/web/clientes.html:11
 msgid "CLIENTES"
 msgstr "CUSTOMERS"
 
@@ -100,9 +100,25 @@ msgstr "CUSTOMERS"
 msgid "CASOS ÉXITO"
 msgstr "SUCCESS STORIES"
 
-#: templates/web/empresa.html:167
+#: templates/web/empresa.html:166
 msgid "NUESTROS ALIADOS"
 msgstr "OUR PARTNERS"
+
+#: templates/web/soluciones/item.html:97
+msgid "Ver más"
+msgstr "More"
+
+#: templates/web/soluciones/item.html:136
+msgid "Galería"
+msgstr "Gallery"
+
+#: templates/web/soluciones/item.html:181
+msgid "Videos"
+msgstr "Videos"
+
+#: templates/web/soluciones/item.html:198
+msgid "Recursos"
+msgstr "Resources"
 
 #: web/views.py:63
 msgid ""
