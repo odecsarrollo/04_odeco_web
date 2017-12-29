@@ -106,8 +106,6 @@ class ItemSolucion(models.Model):
     orden = models.PositiveIntegerField(default=0)
     categoria_item = models.ForeignKey(CategoriaItemSolucion, related_name='mis_items', null=True, blank=True)
 
-    categoria = models.CharField(max_length=120, default='', blank=True)
-    categoria_dos = models.CharField(max_length=120, default='', blank=True)
     activo = models.BooleanField(default=False)
     imagen_principal = ProcessedImageField(
         processors=[ResizeToFit(width=400, height=200, upscale=False)],
