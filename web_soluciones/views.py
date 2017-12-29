@@ -19,7 +19,8 @@ class SolucionDetailView(DetailView):
             solucion__id=id,
             activo=True
         ).select_related(
-            'solucion'
+            'solucion',
+            'categoria_item'
         ).prefetch_related(
             'mis_imagenes',
             'mis_documentos',

@@ -1,8 +1,17 @@
-{% load imagekit %}
+{% load imagekit i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
         <h5 class="card-title">
-            {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if item.nombre_en %}
+                    {% if item.categoria %}{{ item.nombre_en|title }}{% else %}{{ item.nombre_en|upper }}{% endif %}
+                {% else %}
+                    {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
+                {% endif %}
+            {% else %}
+                {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
+            {% endif %}
         </h5>
         <div class="row mb-4">
             {% if item.imagen_principal %}
@@ -20,7 +29,15 @@
 
             <div class="col-12 mt-2 mb-2">
                 <p class="card-text text-justify">
-                    {{ item.descripcion_corta }}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if item.descripcion_corta_en %}
+                            {{ item.descripcion_corta_en }}
+                        {% else %}
+                            {{ item.descripcion_corta }}
+                        {% endif %}
+                    {% else %}
+                        {{ item.descripcion_corta }}
+                    {% endif %}
                 </p>
             </div>
 
@@ -77,7 +94,7 @@
         <div class="ver_mas">
             <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
                data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
-                <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
+                <h5 class="waves-effect">{% trans 'Ver más' %} <i class="fa fa-chevron-right"></i></h5>
             </a>
         </div>
 
@@ -95,7 +112,17 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header color-1-odecopack">
-                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel"><strong>{{ item.nombre|upper }}</strong>
+                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel"><strong>
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if item.nombre_en %}
+                            {{ item.nombre_en|upper }}
+                        {% else %}
+                            {{ item.nombre|upper }}
+                        {% endif %}
+                    {% else %}
+                        {{ item.nombre|upper }}
+                    {% endif %}
+                </strong>
                 </h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -103,10 +130,18 @@
             </div>
             <!--Body-->
             <div class="modal-body">
-                {{ item.mas|safe }}
+                {% if LANGUAGE_CODE == 'en' %}
+                    {% if item.mas_en %}
+                        {{ item.mas_en|safe }}
+                    {% else %}
+                        {{ item.mas|safe }}
+                    {% endif %}
+                {% else %}
+                    {{ item.mas|safe }}
+                {% endif %}
                 {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
                     {% if imagenes_lista %}
-                        <h4 class="h4-responsive mt-2">Galería</h4>
+                        <h4 class="h4-responsive mt-2">{% trans 'Galería' %}</h4>
                         <div class="pl-4 pr-4">
                             <div class="galeria">
                                 <div class="mdb-lightbox">
@@ -151,7 +186,7 @@
                 {% endwith %}
                 {% with videos_list=item.mis_videos.all|dictsort:"orden" %}
                     {% if videos_list %}
-                        <h4 class="h4-responsive mt-2">Videos</h4>
+                        <h4 class="h4-responsive mt-2">{% trans 'Videos' %}</h4>
                         <div class="row">
                             {% for video in videos_list %}
                                 <div class="col-12 col-md-6 col-lg-4 p-1 m-0">
@@ -168,7 +203,7 @@
                 {% endwith %}
                 {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
                     {% if documentos_list %}
-                        <h4 class="h4-responsive mt-2">Recursos</h4>
+                        <h4 class="h4-responsive mt-2">{% trans 'Recursos' %}</h4>
                         <ul>
                             {% for documento in documentos_list %}
                                 <li>
@@ -185,7 +220,7 @@
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">{% trans 'Cerrar' %}</button>
             </div>
         </div>
         <!--/.Content-->

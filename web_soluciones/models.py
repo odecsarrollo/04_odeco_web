@@ -23,6 +23,12 @@ class CategoriaItemSolucion(models.Model):
         else:
             return ''
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+        qs_soluciones = self.mis_items.select_related('solucion').distinct()
+        for solucion in qs_soluciones.all():
+            solucion.save()
+
     class Meta:
         verbose_name = 'Categoría Item Solucion'
         verbose_name_plural = 'Categorías Items Soluciones'
