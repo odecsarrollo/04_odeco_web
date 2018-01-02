@@ -88,8 +88,8 @@ class ItemSolucionVideoInline(admin.TabularInline):
 
 
 class ItemSolucionAdmin(admin.ModelAdmin):
-    list_display = ['id', 'nombre', 'solucion', 'orden', 'categoria_item', 'activo']
-    list_editable = ['nombre', 'orden', 'categoria_item', 'activo']
+    list_display = ['id', 'nombre', 'nombre_en', 'solucion', 'orden', 'categoria_item', 'activo']
+    list_editable = ['nombre', 'orden', 'categoria_item', 'activo', 'nombre_en']
 
     inlines = [ItemSolucionImagenInline, ItemSolucionVideoInline, DocumentoInline]
 
