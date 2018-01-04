@@ -1,8 +1,17 @@
-{% load imagekit %}
+{% load imagekit i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <div class="col-12 col-md-6 col-lg-4 p-1">
     <div class="card card-body item">
         <h5 class="card-title">
-            {% if item.categoria %}{{ item.nombre|title }}{% else %}{{ item.nombre|upper }}{% endif %}
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if item.nombre_en %}
+                    {{ item.nombre_en|upper }}
+                {% else %}
+                    {{ item.nombre }}
+                {% endif %}
+            {% else %}
+                {{ item.nombre|upper }}
+            {% endif %}
         </h5>
         <div class="row mb-4">
             {% if item.imagen_principal %}
@@ -24,12 +33,12 @@
             <div class="col-12">
                 <p>
                     {% if item.fecha_entrega %}
-                        <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
-                        <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
+                        <strong>{% trans 'Año' %}:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
+                        <strong>{% trans 'Mes' %}:</strong> {{ item.fecha_entrega|date:'F' }}<br>
                     {% endif %}
-                    <strong>Industria:</strong> {{ item.industria.nombre|title }}<br>
+                    <strong>{% trans 'Industria' %}:</strong> {{ item.industria.nombre|title }}<br>
                     {% if item.cliente %}
-                        <strong>Cliente:</strong> {{ item.cliente.nombre|title }}
+                        <strong>{% trans 'Cliente' %}:</strong> {{ item.cliente.nombre|title }}
                     {% endif %}
                 </p>
             </div>
@@ -37,7 +46,7 @@
         <div class="ver_mas">
             <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
                data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
-                <h5 class="waves-effect">Ver más <i class="fa fa-chevron-right"></i></h5>
+                <h5 class="waves-effect">{% trans 'Ver más' %} <i class="fa fa-chevron-right"></i></h5>
             </a>
         </div>
 
@@ -64,23 +73,23 @@
             <!--Body-->
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-4 col-lg-2 flex-center">
-                        {% if item.cliente %}
-                            {% if item.cliente.logo %}
+                    {% if item.cliente %}
+                        {% if item.cliente.logo %}
+                            <div class="col-4 col-lg-2 flex-center">
                                 <img class="img-fluid align-content-center" src="{{ item.cliente.logo.url }}"
                                      alt="Logo de {{ item.cliente.nombre }}">
-                            {% endif %}
+                            </div>
                         {% endif %}
-                    </div>
+                    {% endif %}
                     <div class="col-8 col-lg-3 flex-center">
                         <p class="align-content-center float-left">
                             {% if item.fecha_entrega %}
-                                <strong>Año:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
-                                <strong>Mes:</strong> {{ item.fecha_entrega|date:'F' }}<br>
+                                <strong>{% trans 'Año' %}:</strong> {{ item.fecha_entrega|date:'Y' }}<br>
+                                <strong>{% trans 'Mes' %}:</strong> {{ item.fecha_entrega|date:'F' }}<br>
                             {% endif %}
-                            <strong>Industria:</strong> {{ item.industria.nombre|title }}<br>
+                            <strong>{% trans 'Industria' %}:</strong> {{ item.industria.nombre|title }}<br>
                             {% if item.cliente %}
-                                <strong>Cliente:</strong> {{ item.cliente.nombre|title }}
+                                <strong>{% trans 'Cliente' %}:</strong> {{ item.cliente.nombre|title }}
                             {% endif %}
                         </p>
                     </div>
@@ -100,7 +109,7 @@
                 {% with testimonios_lista=item.mis_testimonios.all|dictsort:"orden" %}
                     {% if testimonios_lista %}
                         <section class="section text-center pb-5">
-                            <h4 class="h4-responsive mt-2">Testimonios</h4>
+                            <h4 class="h4-responsive mt-2">{% trans 'Testimonios' %}</h4>
                             <div id="carousel-testimonios-{{ item.id }}"
                                  class="carousel no-flex testimonial-carousel slide carousel-fade"
                                  data-ride="carousel" data-interval="false">
@@ -138,7 +147,7 @@
 
                 {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
                     {% if imagenes_lista %}
-                        <h4 class="h4-responsive mt-2">Galería</h4>
+                        <h4 class="h4-responsive mt-2">{% trans 'Galería' %}</h4>
                         <div class="pl-4 pr-4">
                             <div class="galeria">
                                 <div class="mdb-lightbox">
@@ -183,7 +192,7 @@
                 {% endwith %}
                 {% with videos_list=item.mis_videos.all|dictsort:"orden" %}
                     {% if videos_list %}
-                        <h4 class="h4-responsive mt-2">Videos</h4>
+                        <h4 class="h4-responsive mt-2">{% trans 'Videos' %}</h4>
                         <div class="row">
                             {% for video in videos_list %}
                                 <div class="col-12 col-md-6 col-lg-4 p-1 m-0">
@@ -201,7 +210,7 @@
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">{% trans 'Cerrar' %}</button>
             </div>
         </div>
         <!--/.Content-->

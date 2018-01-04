@@ -12,6 +12,7 @@ from model_utils.models import TimeStampedModel
 
 class IndustriaCasoExito(models.Model):
     nombre = models.CharField(max_length=120)
+    nombre_en = models.CharField(max_length=120, null=True, blank=True, verbose_name='Nombre en Ingles')
     icono = models.CharField(max_length=100)
 
     def __str__(self):
@@ -27,9 +28,15 @@ class CasoExito(TimeStampedModel):
         new_filename = get_image_name('Caso Exito principal', filename)
         return "web/img/casexi/%s" % new_filename
 
-    nombre = models.CharField(max_length=120)
-    descripcion_corta = models.TextField(null=True, blank=True)
+    nombre = models.CharField(max_length=120, verbose_name='Nombre')
+    nombre_en = models.CharField(max_length=120, verbose_name='Nombre en Ingles', null=True, blank=True)
+
+    descripcion_corta = models.TextField(null=True, blank=True, verbose_name='Descripción Corta')
+    descripcion_corta_en = models.TextField(null=True, blank=True, verbose_name='Descripción Corta Ingles')
+
     descripcion = HTMLField('Descripción', default='Descripción de este Caso de Éxito', null=True, blank=True)
+    descripcion_en = HTMLField('Descripción Ingles', null=True, blank=True)
+
     orden = models.PositiveIntegerField(default=0)
     industria = models.ForeignKey(IndustriaCasoExito, related_name='mis_casos_exito')
     fecha_entrega = models.DateField(null=True, blank=True)
