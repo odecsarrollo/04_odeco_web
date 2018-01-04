@@ -3,7 +3,15 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}
-    {{ solucion_objeto.nombre }}
+    {% if LANGUAGE_CODE == 'en' %}
+        {% if solucion_objeto.nombre_en %}
+            {{ solucion_objeto.nombre_en }}
+        {% else %}
+            {{ solucion_objeto.nombre }}
+        {% endif %}
+    {% else %}
+        {{ solucion_objeto.nombre }}
+    {% endif %}
 {% endblock %}
 
 
