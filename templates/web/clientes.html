@@ -2,7 +2,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 <section id="clientes" class="section background-white pt-4 clientes">
-    {% cache 86400 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}
+    {% cache 345600 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}
         {% with clientes_lista=clientes_list %}
             {% if clientes_lista %}
                 <div class="container-fluid">

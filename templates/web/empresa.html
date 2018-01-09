@@ -36,7 +36,7 @@
             {% endif %}
         </div>
 
-        {% cache 86400 index_cache_empresa cache_configuracion.empresa_update %}
+        {% cache 345600 index_cache_empresa cache_configuracion.empresa_update LANGUAGE_CODE %}
             {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
                 {% if galeria_fotos_list %}
                     <div class="row galeria-menu mb-5 mt-5 mt-sm-0">
@@ -58,7 +58,7 @@
                             <div class="tab-content vertical">
                                 {% for galeria in galeria_fotos_list %}
 
-                                    {% cache 86400 cache_galeria galeria.pk galeria.modified %}
+                                    {% cache 345600 cache_galeria galeria.pk galeria.modified LANGUAGE_CODE %}
 
                                         {% if galeria.marca_agua == 1 %}
                                             {% generateimage 'webpage:watermark' source=galeria.imagen as imagen_procesada %}
@@ -156,7 +156,7 @@
 </div>
 
 
-{% cache 86400 index_cache_empresa_aliados cache_configuracion.empresa_update LANGUAGE_CODE %}
+{% cache 345600 index_cache_empresa_aliados cache_configuracion.empresa_update LANGUAGE_CODE %}
     {% with aliados_lista=aliados_list %}
         {% if aliados_lista %}
             <div class="container-fluid background-grey">
