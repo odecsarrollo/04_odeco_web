@@ -64,7 +64,17 @@
         <div class="modal-content">
             <!--Header-->
             <div class="modal-header color-1-odecopack">
-                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel"><strong>{{ item.nombre|upper }}</strong>
+                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel"><strong>
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if item.nombre_en %}
+                            {{ item.nombre_en|upper }}
+                        {% else %}
+                            {{ item.nombre }}
+                        {% endif %}
+                    {% else %}
+                        {{ item.nombre|upper }}
+                    {% endif %}
+                </strong>
                 </h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -101,7 +111,15 @@
                                  alt="">
                         </figure>
                         <p>
-                            {{ item.descripcion|safe }}
+                            {% if LANGUAGE_CODE == 'en' %}
+                                {% if item.descripcion_en %}
+                                    {{ item.descripcion_en|safe }}
+                                {% else %}
+                                    {{ item.descripcion|safe }}
+                                {% endif %}
+                            {% else %}
+                                {{ item.descripcion|safe }}
+                            {% endif %}
                         </p>
                     </div>
                 </div>

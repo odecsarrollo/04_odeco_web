@@ -1,5 +1,6 @@
 {% extends 'web/base/base.html' %}
 {% load cache static inclusion_tags solo_tags i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}
     {% trans 'CASOS ÉXITO'|title %}
@@ -8,11 +9,12 @@
 
 
 {% block cabezote %}
+    {% trans 'Casos de Éxito' as casos_exito_titulo %}
     {% get_solo 'web_configurations.CasosExitoConfiguration' as casos_exito_configuracion %}
     {% if casos_exito_configuracion.header_imagen %}
-        {% include 'web/base/cabezote.html' with titulo=casos_exito_configuracion.header_titulo texto=casos_exito_configuracion.header_text imagen=casos_exito_configuracion.header_imagen.url %}
+        {% include 'web/base/cabezote.html' with titulo=casos_exito_titulo texto=casos_exito_configuracion.header_text imagen=casos_exito_configuracion.header_imagen.url %}
     {% else %}
-        {% include 'web/base/cabezote.html' with titulo=casos_exito_configuracion.header_titulo texto=casos_exito_configuracion.header_text %}
+        {% include 'web/base/cabezote.html' with titulo=casos_exito_titulo texto=casos_exito_configuracion.header_text %}
     {% endif %}
 {% endblock %}
 
@@ -28,7 +30,16 @@
                 {% with casos_exito_list=casos_exito_lista.all|dictsort:"industria.nombre" %}
                     <section class="section">
                         <div class="mt-4">
-                            {{ casos_exito_configuracion.descripcion|safe }}
+
+                            {% if LANGUAGE_CODE == 'en' %}
+                                {% if casos_exito_configuracion.descripcion_en %}
+                                    {{ casos_exito_configuracion.descripcion_en|safe }}
+                                {% else %}
+                                    {{ casos_exito_configuracion.descripcion|safe }}
+                                {% endif %}
+                            {% else %}
+                                {{ casos_exito_configuracion.descripcion|safe }}
+                            {% endif %}
                         </div>
                         {% regroup casos_exito_list by industria as industria_list %}
 
@@ -37,7 +48,18 @@
                                 {% for industria in industria_list %}
                                     <li class="nav-item">
                                         <a class="color-1-odecopack nav-link-soluciones" data-offset="120"
-                                           href="#{{ industria.grouper.nombre|slugify }}">{{ industria.grouper.nombre|upper }}
+                                           href="#{{ industria.grouper.nombre|slugify }}">
+
+                                            {% if LANGUAGE_CODE == 'en' %}
+                                                {% if industria.grouper.nombre_en %}
+                                                    {{ industria.grouper.nombre_en|upper }}
+                                                {% else %}
+                                                    {{ industria.grouper.nombre|upper }}
+                                                {% endif %}
+                                            {% else %}
+                                                {{ industria.grouper.nombre|upper }}
+                                            {% endif %}
+
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -57,7 +79,15 @@
                                            href="#{{ industria.grouper.nombre|slugify }}"
                                            style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
                                         >
-                                            {{ industria.grouper.nombre|title }}
+                                            {% if LANGUAGE_CODE == 'en' %}
+                                                {% if industria.grouper.nombre_en %}
+                                                    {{ industria.grouper.nombre_en|title }}
+                                                {% else %}
+                                                    {{ industria.grouper.nombre|title }}
+                                                {% endif %}
+                                            {% else %}
+                                                {{ industria.grouper.nombre|title }}
+                                            {% endif %}
                                         </a>
                                     </li>
                                 {% endfor %}
@@ -69,7 +99,15 @@
                             {% for industria in industria_list %}
                                 <div id="{{ industria.grouper|slugify }}" class="col-12 mb-3">
                                     <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">
-                                        {{ industria.grouper.nombre|upper }}
+                                        {% if LANGUAGE_CODE == 'en' %}
+                                            {% if industria.grouper.nombre_en %}
+                                                {{ industria.grouper.nombre_en|upper }}
+                                            {% else %}
+                                                {{ industria.grouper.nombre|upper }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ industria.grouper.nombre|upper }}
+                                        {% endif %}
                                         <i class="{{ industria.grouper.icono }}"></i>
                                     </h2>
                                     <div class="row lista pl-0 pl-sm-4 pr-1">

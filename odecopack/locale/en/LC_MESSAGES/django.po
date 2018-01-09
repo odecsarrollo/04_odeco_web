@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-04 08:57-0500\n"
-"PO-Revision-Date: 2018-01-03 10:42-0456\n"
+"POT-Creation-Date: 2018-01-09 10:55-0500\n"
+"PO-Revision-Date: 2018-01-09 09:45-0456\n"
 "Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -112,22 +112,22 @@ msgid "CASOS ÉXITO"
 msgstr "SUCCESS STORIES"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:36
-#: templates/web/casos_exito/caso_exito_item_detail.html:87
+#: templates/web/casos_exito/caso_exito_item_detail.html:97
 msgid "Año"
 msgstr "Year"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:37
-#: templates/web/casos_exito/caso_exito_item_detail.html:88
+#: templates/web/casos_exito/caso_exito_item_detail.html:98
 msgid "Mes"
 msgstr "Month"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:39
-#: templates/web/casos_exito/caso_exito_item_detail.html:90
+#: templates/web/casos_exito/caso_exito_item_detail.html:100
 msgid "Industria"
 msgstr "Industry"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:41
-#: templates/web/casos_exito/caso_exito_item_detail.html:92
+#: templates/web/casos_exito/caso_exito_item_detail.html:102
 msgid "Cliente"
 msgstr "Client"
 
@@ -136,24 +136,28 @@ msgstr "Client"
 msgid "Ver más"
 msgstr "More"
 
-#: templates/web/casos_exito/caso_exito_item_detail.html:112
+#: templates/web/casos_exito/caso_exito_item_detail.html:130
 msgid "Testimonios"
 msgstr "Testimonies"
 
-#: templates/web/casos_exito/caso_exito_item_detail.html:150
+#: templates/web/casos_exito/caso_exito_item_detail.html:168
 #: templates/web/soluciones/item.html:144
 msgid "Galería"
 msgstr "Gallery"
 
-#: templates/web/casos_exito/caso_exito_item_detail.html:195
+#: templates/web/casos_exito/caso_exito_item_detail.html:213
 #: templates/web/soluciones/item.html:189
 msgid "Videos"
 msgstr "Videos"
 
-#: templates/web/casos_exito/caso_exito_item_detail.html:213
+#: templates/web/casos_exito/caso_exito_item_detail.html:231
 #: templates/web/soluciones/item.html:223
 msgid "Cerrar"
 msgstr "Close"
+
+#: templates/web/casos_exito/casos_exito_list.html:11
+msgid "Casos de Éxito"
+msgstr "Success Stories"
 
 #: templates/web/empresa.html:166
 msgid "NUESTROS ALIADOS"

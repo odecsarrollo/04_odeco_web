@@ -47,8 +47,9 @@ class CasosExitoConfiguration(SingletonModel):
         new_filename = get_image_name('Header', filename)
         return "web/img/casexi/%s" % new_filename
 
-    header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
-    header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
+    header_text = models.TextField(max_length=150, verbose_name='Titulo', default='Aqui la descripción', null=True,
+                                   blank=True)
+    header_text_en = models.TextField(max_length=150, verbose_name='Titulo Ingles', null=True, blank=True)
     header_imagen = ProcessedImageField(
         processors=[SmartResize(width=2560, height=1500, upscale=False)],
         format='JPEG',
@@ -59,6 +60,7 @@ class CasosExitoConfiguration(SingletonModel):
         blank=True
     )
     descripcion = HTMLField('Texto Casos Éxito', default='Descripción casos Éxito', null=True, blank=True)
+    descripcion_en = HTMLField('Texto Casos Éxito Ingles', null=True, blank=True)
 
     def __unicode__(self):
         return "Casos Exito"
