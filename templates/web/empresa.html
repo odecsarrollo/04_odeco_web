@@ -168,8 +168,15 @@
                         <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
                             {% for aliado in aliados_lista %}
                                 <div class="col-lg-2 col-md-3 col-4">
-                                    <img src="{{ aliado.logo.url }}" alt="{{ aliado.nombre }} es aliado de Odecopack"
+                                    {% if aliado.url %}
+                                        <a href="{{ aliado.url }}" target="_blank">
+                                    {% endif %}
+                                    <img src="{{ aliado.logo.url }}"
+                                         alt="{{ aliado.nombre }} es aliado de Odecopack"
                                          class="img-fluid">
+                                    {% if aliado.url %}
+                                        </a>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         </div>

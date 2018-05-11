@@ -30,6 +30,7 @@ class Aliado(MixingCacheConfiguration, models.Model):
         return "web/img/empr/%s" % new_filename
 
     nombre = models.CharField(max_length=60)
+    url = models.URLField(null=True, blank=True)
     logo = ProcessedImageField(
         processors=[ResizeToFit(width=190, height=101, upscale=False)],
         format='PNG',
