@@ -159,10 +159,7 @@ LANGUAGES = (
 )
 
 DEFAULT_CHARSET = 'utf-8'
-
-LOCALE_PATHS = (
-    os.path.join(DJANGO_ROOT, 'locale'),
-)
+LOCALE_PATHS = (os.path.join(DJANGO_ROOT, 'locale'),)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
