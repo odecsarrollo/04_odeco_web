@@ -1,0 +1,33 @@
+{% extends 'web/base/base.html' %}
+{% load static solo_tags inclusion_tags cache i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}
+    Terminos Condiciones
+{% endblock %}
+
+{% block cabezote %}
+
+{% endblock %}
+
+{% block menu %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <img width="210px" src="{% static 'web/img/logo-odecopack2.png' %}" alt="">
+            {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
+            {% if LANGUAGE_CODE == 'en' %}
+                {{ general_configuracion.texto_habeas_data_en|safe }}
+            {% else %}
+                {{ general_configuracion.texto_habeas_data|safe }}
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

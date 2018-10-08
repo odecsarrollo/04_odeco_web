@@ -27,6 +27,14 @@ class IndexView(TemplateView):
         return context
 
 
+class TratamientoDatosPersonalesView(TemplateView):
+    template_name = 'web/base/terminos_condiciones_tratamiento_datos.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
 class SolucionView(TemplateView):
     template_name = 'web/soluciones/solucion_detail.html'
 

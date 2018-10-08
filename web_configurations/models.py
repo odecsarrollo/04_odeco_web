@@ -75,6 +75,8 @@ class GeneralConfiguration(SingletonModel):
     horarios_de_atencion_en = HTMLField('Horarios de Atención Ingles', default='Texto Horarios de Atención aquí')
     numeros_contacto = HTMLField('Numeros de Contacto', default='Numeros de contacto', null=True, blank=True)
     correos_contacto = HTMLField('Correos de Contacto', default='Correos de contacto', null=True, blank=True)
+    texto_habeas_data = HTMLField('Habeas Data', default='Información Habeas Data', null=True, blank=True)
+    texto_habeas_data_en = HTMLField('Habeas Data Ingles', default='Información Habeas Data', null=True, blank=True)
     facebook = models.CharField(max_length=200, null=True, blank=True)
     instagram = models.CharField(max_length=200, null=True, blank=True)
     youtube = models.CharField(max_length=200, null=True, blank=True)
