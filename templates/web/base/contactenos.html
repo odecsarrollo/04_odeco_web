@@ -1,5 +1,6 @@
 {% load i18n %}
 <!--Modal: Contact form-->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="modal fade formulario" id="contactenos_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog cascading-modal" role="document">
@@ -68,9 +69,11 @@
                             {% endblocktrans %}
                         </p>
                         <div class="text-center">
-                            <a target="_blank" href="{% url 'web:tratamiento_datos_personales' %}">VER POLITICA DE TRATAMIENTO DE DATOS PERSONALES</a>
+                            <a target="_blank" href="{% url 'web:tratamiento_datos_personales' %}">VER POLITICA DE
+                                TRATAMIENTO DE DATOS PERSONALES</a>
                         </div>
                     </div>
+                    <div class="g-recaptcha" data-sitekey="6Le3hHkUAAAAABDNyS-p8Y2mgf2PSf1oZmCEcKb0"></div>
 
                     <div class="text-center mt-1-half">
                         <button type="submit" class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %} <i

@@ -1,5 +1,6 @@
 {% load solo_tags i18n %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <footer class="page-footer color-4-odecopack center-on-small-only">
     {% get_current_language as LANGUAGE_CODE %}
     <div class="container">
@@ -101,6 +102,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                <div class="g-recaptcha" data-sitekey="6Le3hHkUAAAAABDNyS-p8Y2mgf2PSf1oZmCEcKb0"></div>
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">
                                         <button type="submit"
