@@ -9,6 +9,7 @@ from django.views.generic import TemplateView, View
 
 from django_redis import get_redis_connection
 
+from odecopack.mixin import RecaptchaMixin
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
 from web_clientes.models import Cliente
 
@@ -50,13 +51,15 @@ class RedisListView(TemplateView):
         return super().get(request, *args, **kwargs)
 
 
-class SendContactenosView(View):
+class SendContactenosView(RecaptchaMixin, View):
     def post(self, request, *args, **kwargs):
         correo = request.POST.get('correo', None)
         nombre = request.POST.get('nombre', None)
         asunto = request.POST.get('asunto', None)
         texto = request.POST.get('texto', None)
         empresa = request.POST.get('empresa', None)
+
+        self.revisar_recaptcha()
 
         mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
             asunto,
