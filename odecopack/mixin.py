@@ -14,7 +14,7 @@ class RecaptchaMixin(object):
         r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data)
         result = r.json()
         if result['success']:
-            self.request.recaptcha_is_valid = True
+            return True
         else:
-            self.request.recaptcha_is_valid = False
             messages.error(self.request, 'Invalid reCAPTCHA. Please try again.')
+            return False

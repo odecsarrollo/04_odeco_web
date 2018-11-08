@@ -59,54 +59,53 @@ class SendContactenosView(RecaptchaMixin, View):
         texto = request.POST.get('texto', None)
         empresa = request.POST.get('empresa', None)
 
-        self.revisar_recaptcha()
+        if self.revisar_recaptcha():
 
-        mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
-            asunto,
-            nombre,
-            correo,
-            empresa,
-            texto
-        )
+            mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
+                asunto,
+                nombre,
+                correo,
+                empresa,
+                texto
+            )
 
-        mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
-            translation.ugettext(
-                'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente'),
-            asunto,
-            nombre,
-            correo,
-            empresa,
-            texto,
-            translation.ugettext('Pronto estaremos en contacto.')
-        )
+            mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
+                translation.ugettext(
+                    'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente'),
+                asunto,
+                nombre,
+                correo,
+                empresa,
+                texto,
+                translation.ugettext('Pronto estaremos en contacto.')
+            )
 
-        client = MailChimp(settings.MAILCHIMP_USERNAME, settings.MAILCHIMP_API_KEY)
-        client.lists.members.create_or_update(settings.MAILCHIMP_LIST_ID, correo, {
-            'email_address': correo,
-            'status': 'subscribed',
-            'status_if_new': 'subscribed',
-            'merge_fields': {
-                'FNAME': nombre,
-                'COMPANY': empresa
-            },
-        })
+            client = MailChimp(settings.MAILCHIMP_USERNAME, settings.MAILCHIMP_API_KEY)
+            client.lists.members.create_or_update(settings.MAILCHIMP_LIST_ID, correo, {
+                'email_address': correo,
+                'status': 'subscribed',
+                'status_if_new': 'subscribed',
+                'merge_fields': {
+                    'FNAME': nombre,
+                    'COMPANY': empresa
+                },
+            })
 
-        email = EmailMessage(
-            subject=asunto,
-            body=mensaje,
-            from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
-            to=['odecopack@odecopack.com'],
-            reply_to=[correo]
-        )
+            email = EmailMessage(
+                subject=asunto,
+                body=mensaje,
+                from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
+                to=['odecopack@odecopack.com'],
+                reply_to=[correo]
+            )
 
-        email.send()
+            email.send()
 
-        email2 = EmailMessage(
-            subject=translation.ugettext('Su envío de correo a Odecopack'),
-            body=mensaje2,
-            from_email='%s Odecopack SAS<webmaster@odecopack.co>' % (translation.ugettext('CONTÁCTENOS').title()),
-            to=[correo]
-        )
-        email2.send()
-
+            email2 = EmailMessage(
+                subject=translation.ugettext('Su envío de correo a Odecopack'),
+                body=mensaje2,
+                from_email='%s Odecopack SAS<webmaster@odecopack.co>' % (translation.ugettext('CONTÁCTENOS').title()),
+                to=[correo]
+            )
+            email2.send()
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
