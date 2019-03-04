@@ -79,6 +79,7 @@ class GeneralConfiguration(SingletonModel):
     texto_habeas_data_en = HTMLField('Habeas Data Ingles', default='Información Habeas Data', null=True, blank=True)
     facebook = models.CharField(max_length=200, null=True, blank=True)
     instagram = models.CharField(max_length=200, null=True, blank=True)
+    linkedin = models.CharField(max_length=200, null=True, blank=True)
     youtube = models.CharField(max_length=200, null=True, blank=True)
     twitter = models.CharField(max_length=200, null=True, blank=True)
     version_css_cache = models.CharField(max_length=20, default='')

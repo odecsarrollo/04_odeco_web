@@ -52,6 +52,12 @@
                                 class="fa fa-facebook"></i></a>
                     </li>
                 {% endif %}
+                {% if general_configuracion.linkedin %}
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="{{ general_configuracion.linkedin }}"><i
+                                class="fa fa-linkedin"></i></a>
+                    </li>
+                {% endif %}
                 {% if general_configuracion.twitter %}
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="{{ general_configuracion.twitter }}"><i
