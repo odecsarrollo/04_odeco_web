@@ -155,6 +155,15 @@
                 vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
             }
         }
+        var imgDefer = document.getElementsByTagName('img');
+        for (var i = 0; i < imgDefer.length; i++) {
+            //console.log(imgDefer[i])
+            if (imgDefer[i].getAttribute('data-src')) {
+                console.log(imgDefer[i]);
+                console.log('esa si fue');
+                imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
+            }
+        }
 
         {% block onLoadScript %}
 

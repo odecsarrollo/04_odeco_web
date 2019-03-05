@@ -17,7 +17,7 @@
             {% endif %}
             <div class="col-12 col-sm-6 m-0 p-0 {% if not empresa_configuracion.video %} m-auto {% endif %}">
                 <div class="contenido">
-                    <img class="img-fluid" src="{% static 'web/img/datos-empresa.png' %}" alt="">
+                    <img class="img-fluid" data-src="{% static 'web/img/datos-empresa.png' %}" alt="">
                 </div>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-3 mt-sm-0 dark-grey-text" style="margin: auto !important;">
@@ -30,7 +30,7 @@
             {% if empresa_configuracion.imagen_principal %}
                 <div class="col-12 col-md-5 col-lg-4 p-0 m-auto">
                     <figure>
-                        <img src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
+                        <img data-src="{{ empresa_configuracion.imagen_principal.url }}" alt="">
                     </figure>
                 </div>
             {% endif %}
@@ -76,7 +76,7 @@
                                                 {% if galeria.imagen_thumbnail %}
                                                     <div class="col-md-6 col-12 flex-center">
                                                         <figure class="m-0 p-0">
-                                                            <img src="{{ galeria.imagen_thumbnail.url }}" alt="">
+                                                            <img data-src="{{ galeria.imagen_thumbnail.url }}" alt="">
                                                         </figure>
                                                     </div>
                                                 {% endif %}
@@ -88,7 +88,7 @@
                                                                     <a href="{{ imagen_procesada.url }}"
                                                                        data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
                                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                                            <img src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                            <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
                                                                                  alt=""
                                                                             >
                                                                         </div>
@@ -117,7 +117,7 @@
                                                                             <a href="{{ imagen_procesada.url }}"
                                                                                data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                                 <div class="view overlay hm-white-slight z-depth-2">
-                                                                                    <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                    <img data-src="{{ imagen.imagen_thumbnail.url }}"
                                                                                             {% if imagen.alt_seo %}
                                                                                          alt="{{ imagen.alt_seo }}"
                                                                                             {% endif %}
@@ -171,7 +171,7 @@
                                     {% if aliado.url %}
                                         <a href="{{ aliado.url }}" target="_blank">
                                     {% endif %}
-                                    <img src="{{ aliado.logo.url }}"
+                                    <img data-src="{{ aliado.logo.url }}"
                                          alt="{{ aliado.nombre }} es aliado de Odecopack"
                                          class="img-fluid">
                                     {% if aliado.url %}
