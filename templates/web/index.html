@@ -49,7 +49,7 @@
                                 {% if index_configuracion.overlay_url %}<a
                                     href="{{ index_configuracion.overlay_url }}" rel="noopener"
                                     target="_blank" {% endif %}>
-                                    <img class="img-fluid" src="{{ index_configuracion.overlay_publicidad.url }}"
+                                    <img class="img-fluid" data-src="{{ index_configuracion.overlay_publicidad.url }}"
                                          alt="">
                                     {% if index_configuracion.overlay_url %}
                                         </a>
@@ -69,7 +69,7 @@
                     <div class="row justify-content-center">
                         <div class="col-8 col-sm-6 d-none d-sm-block wow fadeIn">
                             <figure class="flex-center">
-                                <img class="img-fluid" src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
+                                <img class="img-fluid" data-src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
                             </figure>
                         </div>
                         <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">

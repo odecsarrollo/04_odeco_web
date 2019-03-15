@@ -21,7 +21,7 @@
 {% block content %}
     <section>
         <div class="container">
-            <img width="210px" src="{% static 'web/img/logo-odecopack2.png' %}" alt="">
+            <img width="210px" data-src="{% static 'web/img/logo-odecopack2.png' %}" alt="">
             {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
             {% if LANGUAGE_CODE == 'en' %}
                 {{ general_configuracion.texto_habeas_data_en|safe }}

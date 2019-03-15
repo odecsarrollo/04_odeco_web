@@ -19,7 +19,7 @@
                     <a href="#" data-toggle="modal" data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
                         <img
                                 class="img-fluid"
-                                src="{{ item.imagen_principal.url }}"
+                                data-src="{{ item.imagen_principal.url }}"
                                 alt="Imagen perfil item solución de {{ item.nombre }}"
                         >
                     </a>
@@ -61,7 +61,7 @@
                                                 <a href="{{ imagen_procesada.url }}"
                                                    data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                     <div class="view overlay hm-white-slight z-depth-2">
-                                                        <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                        <img data-src="{{ imagen.imagen_thumbnail.url }}"
                                                                 {% if imagen.alt_seo %}
                                                              alt="{{ imagen.alt_seo }}"
                                                                 {% endif %}
@@ -155,7 +155,7 @@
                                                     <a href="{{ imagen_procesada.url }}"
                                                        data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                            <img data-src="{{ imagen.imagen_thumbnail.url }}"
                                                                     {% if imagen.alt_seo %}
                                                                  alt="{{ imagen.alt_seo }}"
                                                                     {% endif %}

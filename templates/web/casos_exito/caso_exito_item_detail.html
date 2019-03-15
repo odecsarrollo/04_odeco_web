@@ -86,7 +86,7 @@
                     {% if item.cliente %}
                         {% if item.cliente.logo %}
                             <div class="col-4 col-lg-2 flex-center">
-                                <img class="img-fluid align-content-center" src="{{ item.cliente.logo.url }}"
+                                <img class="img-fluid align-content-center" data-src="{{ item.cliente.logo.url }}"
                                      alt="Logo de {{ item.cliente.nombre }}">
                             </div>
                         {% endif %}
@@ -107,7 +107,7 @@
 
                         <figure>
                             <img class="clear img-fluid float-sm-none float-md-right m-1" style="max-width: 300px"
-                                 src="{{ item.imagen_principal.url }}"
+                                 data-src="{{ item.imagen_principal.url }}"
                                  alt="">
                         </figure>
                         <p>
@@ -184,7 +184,7 @@
                                                     <a href="{{ imagen_procesada.url }}"
                                                        data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                            <img src="{{ imagen.imagen_thumbnail.url }}"
+                                                            <img data-src="{{ imagen.imagen_thumbnail.url }}"
                                                                     {% if imagen.alt_seo %}
                                                                  alt="{{ imagen.alt_seo }}"
                                                                     {% endif %}
