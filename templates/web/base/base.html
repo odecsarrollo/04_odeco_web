@@ -5,21 +5,6 @@
 <html lang="{{ LANGUAGE_CODE }}" class="{% block html_class %}{% endblock %}">
 
 <head>
-    {#    <!-- Google Tag Manager -->#}
-    {#    <script>(function (w, d, s, l, i) {#}
-    {#        w[l] = w[l] || [];#}
-    {#        w[l].push({#}
-    {#            'gtm.start':#}
-    {#                new Date().getTime(), event: 'gtm.js'#}
-    {#        });#}
-    {#        var f = d.getElementsByTagName(s)[0],#}
-    {#            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';#}
-    {#        j.async = true;#}
-    {#        j.src =#}
-    {#            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;#}
-    {#        f.parentNode.insertBefore(j, f);#}
-    {#    })(window, document, 'script', 'dataLayer', 'GTM-FPBF9LX');</script>#}
-    {#    <!-- End Google Tag Manager -->#}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -27,16 +12,19 @@
           content="Su aliado tecnológico en líneas y procesos de producción. Somos una compania con 25 años de participacion en el mercado nacional e internacional. Involucrandonos en todas las necesidades del proceso productivo de los diferentes sectores industriales.">
 
     <title>Odecopack - {% block title %}{% endblock %}</title>
-    <!-- Font Awesome -->
-    <link media="screen" rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
-    <!-- Bootstrap core CSS -->
-    <link media="screen" href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
     <link media="screen" href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link media="screen"
-          href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
-          rel="stylesheet">
+    <!-- Font Awesome -->
+    <noscript>
+        <link media="screen" rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
+        <!-- Bootstrap core CSS -->
+        <link media="screen" href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link media="screen" href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link media="screen"
+              href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
+              rel="stylesheet">
+    </noscript>
 
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
 
@@ -89,6 +77,14 @@
 <script type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
 
 <script>
+    function defer_css_load(css_file) {
+        var giftofspeed = document.createElement('link');
+        giftofspeed.rel = 'stylesheet';
+        giftofspeed.href = css_file;
+        var godefer = document.getElementsByTagName('link')[0];
+        godefer.parentNode.insertBefore(giftofspeed, godefer);
+    }
+
     function WebpIsSupported(callback) {
         // If the browser doesn't has the method createImageBitmap, you can't display webp format
         if (!window.createImageBitmap) {
@@ -208,13 +204,13 @@
                     imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
                 }
             }
-            var imgSource = document.getElementsByTagName('source');
-            for (var i = 0; i < imgSource.length; i++) {
-                if (imgSource[i].getAttribute('data-srcset')) {
-                    imgSource[i].setAttribute('srcset', imgSource[i].getAttribute('data-srcset'));
-                }
-            }
         }
+
+
+        {#defer_css_load("{% static 'web/sass/mdb.min.css' %}");#}
+        defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
+        defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
+        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
 
         {% block onLoadScript %}
 
