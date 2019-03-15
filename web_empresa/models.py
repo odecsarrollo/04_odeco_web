@@ -41,6 +41,7 @@ class Aliado(MixingCacheConfiguration, models.Model):
         blank=True
     )
     logo_webp = ImageSpecField(
+        processors=[ResizeToFit(width=190, height=101, upscale=False)],
         source='logo',
         format='WEBP',
     )

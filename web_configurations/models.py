@@ -1,7 +1,7 @@
 from django.db import models
 from solo.models import SingletonModel
 from tinymce import HTMLField
-from imagekit.models import ProcessedImageField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFit
 
 from web.utils import get_image_name
@@ -23,6 +23,28 @@ class IndexConfiguration(SingletonModel):
         verbose_name='Imagen Cabezote (2560 x 1500)',
         null=True,
         blank=True
+    )
+    header_imagen_normal = ImageSpecField(
+        processors=[SmartResize(width=1280, height=750, upscale=False)],
+        options={'quality': 50},
+        source='header_imagen',
+        format='JPEG'
+    )
+    header_imagen_webp = ImageSpecField(
+        processors=[SmartResize(width=1280, height=750, upscale=False)],
+        options={'quality': 50},
+        source='header_imagen',
+        format='WEBP'
+    )
+    header_imagen_cell = ImageSpecField(
+        source='header_imagen',
+        processors=[SmartResize(width=412, height=660, upscale=False)],
+        format='JPEG'
+    )
+    header_imagen_cell_webp = ImageSpecField(
+        source='header_imagen',
+        processors=[SmartResize(width=412, height=660, upscale=False)],
+        format='WEBP'
     )
     overlay_publicidad = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],

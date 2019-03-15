@@ -89,15 +89,28 @@
 <script type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
 
 <script>
+    function WebpIsSupported(callback) {
+        // If the browser doesn't has the method createImageBitmap, you can't display webp format
+        if (!window.createImageBitmap) {
+            callback(false);
+            return;
+        }
 
-    {#    (function (d, s, id) {#}
-    {#        var js, fjs = d.getElementsByTagName(s)[0];#}
-    {#        if (d.getElementById(id)) return;#}
-    {#        js = d.createElement(s);#}
-    {#        js.id = id;#}
-    {#        js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.10';#}
-    {#        fjs.parentNode.insertBefore(js, fjs);#}
-    {#    }(document, 'script', 'facebook-jssdk'));#}
+        // Base64 representation of a white point image
+        var webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+
+        // Retrieve the Image in Blob Format
+        fetch(webpdata).then(function (response) {
+            return response.blob();
+        }).then(function (blob) {
+            // If the createImageBitmap method succeeds, return true, otherwise false
+            createImageBitmap(blob).then(function () {
+                callback(true);
+            }, function () {
+                callback(false);
+            });
+        });
+    }
 
 
     $(function () {
