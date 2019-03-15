@@ -31,79 +31,79 @@
             <div class="col-12 pl-3 pr-3 pl-sm-0 pr-sm-0 order-2 order-sm-1">
                 {% botones_soluciones %}
             </div>
-            {#            {% cache 345600 cache_solucion solucion_objeto.pk solucion_objeto.modified LANGUAGE_CODE %}#}
-            {% with items_list=mis_items.all|dictsort:"categoria_item.orden"|dictsort:"orden" %}
-                {% if LANGUAGE_CODE == 'en' %}
-                    {% regroup items_list by categoria_item.nombre_en as categoria_list %}
-                {% else %}
-                    {% regroup items_list by categoria_item.nombre as categoria_list %}
-                {% endif %}
+            {% cache 345600 cache_solucion solucion_objeto.pk solucion_objeto.modified LANGUAGE_CODE %}
+                {% with items_list=mis_items.all|dictsort:"categoria_item.orden"|dictsort:"orden" %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% regroup items_list by categoria_item.nombre_en as categoria_list %}
+                    {% else %}
+                        {% regroup items_list by categoria_item.nombre as categoria_list %}
+                    {% endif %}
 
-                <div class="col-12 order-1 order-sm-2">
-                    <section class="section">
-                        <div class="mt-4">
-                            {% if LANGUAGE_CODE == 'en' %}
-                                {{ solucion_objeto.texto_en|safe }}
-                            {% else %}
-                                {{ solucion_objeto.texto|safe }}
-                            {% endif %}
-                        </div>
-                        {% if items_list %}
-                            {% if categoria_list|length > 1 %}
-                                <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
-                                    <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
-                                        {% for categoria in categoria_list %}
-                                            {% if categoria.grouper %}
-                                                <li class="nav-item">
-                                                    <a class="color-1-odecopack nav-link-soluciones"
-                                                       data-offset="120"
-                                                       href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
-                                                </li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                </nav>
+                    <div class="col-12 order-1 order-sm-2">
+                        <section class="section">
+                            <div class="mt-4">
+                                {% if LANGUAGE_CODE == 'en' %}
+                                    {{ solucion_objeto.texto_en|safe }}
+                                {% else %}
+                                    {{ solucion_objeto.texto|safe }}
+                                {% endif %}
+                            </div>
+                            {% if items_list %}
+                                {% if categoria_list|length > 1 %}
+                                    <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                                        <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
+                                            {% for categoria in categoria_list %}
+                                                {% if categoria.grouper %}
+                                                    <li class="nav-item">
+                                                        <a class="color-1-odecopack nav-link-soluciones"
+                                                           data-offset="120"
+                                                           href="#{{ categoria.grouper|slugify }}">{{ categoria.grouper|upper }}</a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </nav>
 
-                                <div class="fixed-action-btn d-md-none p-0" style="bottom: 45px; right: 24px">
-                                    <a class="btn-floating btn-large m-0 color-1-odecopack waves-effect waves-light">
-                                        <i class="fa fa-search"></i>
-                                    </a>
-                                    <ul class="smooth-scroll" style="width: 1px">
-                                        {% for categoria in categoria_list %}
+                                    <div class="fixed-action-btn d-md-none p-0" style="bottom: 45px; right: 24px">
+                                        <a class="btn-floating btn-large m-0 color-1-odecopack waves-effect waves-light">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                        <ul class="smooth-scroll" style="width: 1px">
+                                            {% for categoria in categoria_list %}
+                                                {% if categoria.grouper %}
+                                                    <li>
+                                                        <a class="btn-floating btn-floating-categoria waves-effect waves-light"
+                                                           data-offset="100"
+                                                           href="#{{ categoria.grouper|slugify }}"
+                                                           style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
+                                                        >
+                                                            {{ categoria.grouper|title }}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    {% for categoria in categoria_list %}
+                                        <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
                                             {% if categoria.grouper %}
-                                                <li>
-                                                    <a class="btn-floating btn-floating-categoria waves-effect waves-light"
-                                                       data-offset="100"
-                                                       href="#{{ categoria.grouper|slugify }}"
-                                                       style="transform: scaleY(0.4) scaleX(0.4) translateY(40px) translateX(0px); opacity: 0;"
-                                                    >
-                                                        {{ categoria.grouper|title }}
-                                                    </a>
-                                                </li>
+                                                <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
                                             {% endif %}
-                                        {% endfor %}
-                                    </ul>
+                                            <div class="row lista pl-0 pl-sm-4 pr-1">
+                                                {% for item in categoria.list %}
+                                                    {% include 'web/soluciones/item.html' with item=item %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             {% endif %}
-                            <div class="row">
-                                {% for categoria in categoria_list %}
-                                    <div id="{{ categoria.grouper|slugify }}" class="col-12 mb-3">
-                                        {% if categoria.grouper %}
-                                            <h2 class="h2-responsive mt-4 text-center text-sm-left texto-color-1-odecopack">{{ categoria.grouper|upper }}</h2>
-                                        {% endif %}
-                                        <div class="row lista pl-0 pl-sm-4 pr-1">
-                                            {% for item in categoria.list %}
-                                                {% include 'web/soluciones/item.html' with item=item %}
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
-                    </section>
-                </div>
-            {% endwith %}
-            {#            {% endcache %}#}
+                        </section>
+                    </div>
+                {% endwith %}
+            {% endcache %}
         </div>
     </div>
 {% endblock %}

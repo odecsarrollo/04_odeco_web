@@ -1,7 +1,7 @@
 {% load solo_tags cache i18n %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 {% get_current_language as LANGUAGE_CODE %}
-{% comment %}{% cache 345600 index_cache_botones_soluciones cache_configuracion.soluciones_update LANGUAGE_CODE %}{% endcomment %}
+{% cache 345600 index_cache_botones_soluciones cache_configuracion.soluciones_update LANGUAGE_CODE %}
     {% with soluciones_lista=soluciones_list %}
         {% if soluciones_lista %}
             <div class="container barra-soluciones">
@@ -29,4 +29,4 @@
             </div>
         {% endif %}
     {% endwith %}
-{#{% endcache %}#}
+{% endcache %}
