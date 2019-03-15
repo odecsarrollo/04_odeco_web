@@ -28,13 +28,14 @@
 
     <title>Odecopack - {% block title %}{% endblock %}</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
+    <link media="screen" rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link media="screen" href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
+    <link media="screen" href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
+    <link media="screen"
+          href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
           rel="stylesheet">
 
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
@@ -52,13 +53,6 @@
 </head>
 
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-FPBF9LX"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-<!--Main Navigation-->
 <header>
     {% block menu %}
         {% include 'web/base/menu.html' with es_menu_index=False %}
@@ -157,7 +151,6 @@
         }
         var imgDefer = document.getElementsByTagName('img');
         for (var i = 0; i < imgDefer.length; i++) {
-            console.log(imgDefer[i])
             if (imgDefer[i].getAttribute('data-src')) {
                 imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
             }

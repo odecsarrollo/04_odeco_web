@@ -165,6 +165,13 @@ class ItemSolucionImagen(models.Model):
         ],
         format='JPEG'
     )
+    imagen_thumbnail_webp = ImageSpecField(
+        source='imagen',
+        processors=[
+            ResizeToFill(128, 76),
+        ],
+        format='WEBP'
+    )
 
 
 class ItemSolucionVideo(models.Model):

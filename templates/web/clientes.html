@@ -6,7 +6,7 @@
         {% with clientes_lista=clientes_list %}
             {% if clientes_lista %}
                 <div class="container-fluid">
-                    <div class="container py-3" id="opinions">
+                    <div class="container py-3">
                         <h1 class="section-heading h1 pt-4 text-center text-sm-left">
                             {% trans "CLIENTES" %}</h1>
                         <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -19,9 +19,13 @@
                                     {% endif %}
 
                                 <div class="col-4 col-sm-3 flex-center">
-                                    <img data-src="{{ cliente.logo.url }}"
-                                         alt="{{ cliente.nombre }} es cliente de Odecopack"
-                                         class="img-fluid">
+                                    <picture>
+                                        <source type="image/webp" srcset="{{ cliente.logo_webp.url }}">
+                                        <source type="image/png" srcset="{{ cliente.logo.url }}">
+                                        <img data-src="{{ cliente.logo.url }}"
+                                             alt="{{ cliente.nombre }} es cliente de Odecopack"
+                                             class="img-fluid"/>
+                                    </picture>
                                 </div>
 
                                 {% if forloop.counter|divisibleby:6 or forloop.last %}

@@ -40,6 +40,10 @@ class Aliado(MixingCacheConfiguration, models.Model):
         null=True,
         blank=True
     )
+    logo_webp = ImageSpecField(
+        source='logo',
+        format='WEBP',
+    )
 
     def __str__(self):
         return self.nombre
@@ -72,6 +76,11 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
         blank=True
     )
 
+    imagen_webp = ImageSpecField(
+        source='imagen',
+        format='WEBP'
+    )
+
     imagen_thumbnail = ImageSpecField(
         source='imagen',
         processors=[
@@ -80,12 +89,27 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
         format='JPEG'
     )
 
+    imagen_thumbnail_webp = ImageSpecField(
+        source='imagen',
+        processors=[
+            ResizeToFill(430, 246),
+        ],
+        format='WEBP'
+    )
+
     imagen_thumbnail_galeria = ImageSpecField(
         source='imagen',
         processors=[
             ResizeToFill(162, 108),
         ],
         format='JPEG'
+    )
+    imagen_thumbnail_galeria_webp = ImageSpecField(
+        source='imagen',
+        processors=[
+            ResizeToFill(162, 108),
+        ],
+        format='WEBP',
     )
 
     class Meta:

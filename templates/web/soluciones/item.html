@@ -69,11 +69,6 @@
                                                     </div>
                                                 </a>
                                                 <div class="caption">
-                                                    {#                                                    <div class="fb-like"#}
-                                                    {#                                                         data-href="www.google.com"#}
-                                                    {#                                                         data-layout="standard" data-action="like" data-size="small"#}
-                                                    {#                                                         data-show-faces="true" data-share="true">#}
-                                                    {#                                                    </div>#}
                                                     <h3>
                                                         {{ item.nombre }}
                                                     </h3>
@@ -192,9 +187,11 @@
                                 <div class="col-12 col-md-6 col-lg-4 p-1 m-0">
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <iframe class="embed-responsive-item p-0"
+                                                title="{{ video.item_solucion.nombre }}-{{ video.id }}"
                                                 data-src="{{ video.video }}?rel=0&amp;showinfo=0"
                                                 frameborder="0"
-                                                allowfullscreen></iframe>
+                                                allowfullscreen>
+                                        </iframe>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -207,7 +204,9 @@
                         <ul>
                             {% for documento in documentos_list %}
                                 <li>
-                                    <a href="{{ documento.documento.url }}" target="_blank">
+                                    <a href="{{ documento.documento.url }}"
+                                       target="_blank"
+                                    >
                                         {{ documento.nombre|title }} - <i class="{{ documento.icono }}"
                                                                           aria-hidden="true"></i>
                                         <small>({{ documento.documento.size|filesizeformat }})</small>

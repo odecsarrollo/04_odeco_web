@@ -1,7 +1,7 @@
 from django.utils import timezone
 
 from django.db import models
-from imagekit.models import ProcessedImageField
+from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFit
 from web.utils import get_image_name
 
@@ -23,6 +23,10 @@ class Cliente(models.Model):
         verbose_name='Logo Cliente',
         null=True,
         blank=True
+    )
+    logo_webp = ImageSpecField(
+        source='logo',
+        format='WEBP',
     )
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

@@ -10,6 +10,7 @@
                 <div class="col-12 col-sm-6 p-0 m-0 m-auto">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item p-0"
+                                title="video_constitucional"
                                 data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
                                 allowfullscreen></iframe>
                     </div>
@@ -57,9 +58,7 @@
                         <div class="col-xl-10 col-md-9">
                             <div class="tab-content vertical">
                                 {% for galeria in galeria_fotos_list %}
-
                                     {% cache 345600 cache_galeria galeria.pk galeria.modified LANGUAGE_CODE %}
-
                                         {% if galeria.marca_agua == 1 %}
                                             {% generateimage 'webpage:watermark' source=galeria.imagen as imagen_procesada %}
                                         {% elif galeria.marca_agua == 2 %}
@@ -76,7 +75,12 @@
                                                 {% if galeria.imagen_thumbnail %}
                                                     <div class="col-md-6 col-12 flex-center">
                                                         <figure class="m-0 p-0">
-                                                            <img data-src="{{ galeria.imagen_thumbnail.url }}" alt="">
+                                                            <picture>
+                                                                <source type="image/webp"
+                                                                        srcset="{{ galeria.imagen_thumbnail_webp.url }}">
+                                                                <img data-src="{{ galeria.imagen_thumbnail.url }}"
+                                                                     alt="">
+                                                            </picture>
                                                         </figure>
                                                     </div>
                                                 {% endif %}
@@ -88,9 +92,12 @@
                                                                     <a href="{{ imagen_procesada.url }}"
                                                                        data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
                                                                         <div class="view overlay hm-white-slight z-depth-2">
-                                                                            <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
-                                                                                 alt=""
-                                                                            >
+                                                                            <picture>
+                                                                                <source type="image/webp"
+                                                                                        srcset="{{ galeria.imagen_thumbnail_galeria_webp.url }}">
+                                                                                <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                                     alt="">
+                                                                            </picture>
                                                                         </div>
                                                                     </a>
                                                                     <div class="caption">
@@ -117,11 +124,15 @@
                                                                             <a href="{{ imagen_procesada.url }}"
                                                                                data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                                 <div class="view overlay hm-white-slight z-depth-2">
-                                                                                    <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                                            {% if imagen.alt_seo %}
-                                                                                         alt="{{ imagen.alt_seo }}"
-                                                                                            {% endif %}
-                                                                                    >
+                                                                                    <picture>
+                                                                                        <source type="image/webp"
+                                                                                                srcset="{{ imagen.imagen_thumbnail_webp.url }}">
+                                                                                        <img data-src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                                {% if imagen.alt_seo %}
+                                                                                             alt="{{ imagen.alt_seo }}"
+                                                                                                {% endif %}
+                                                                                        >
+                                                                                    </picture>
                                                                                 </div>
                                                                             </a>
                                                                             <div class="caption">
@@ -160,7 +171,7 @@
     {% with aliados_lista=aliados_list %}
         {% if aliados_lista %}
             <div class="container-fluid background-grey">
-                <div class="container py-3" id="opinions">
+                <div class="container py-3">
                     <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
                         data-wow-delay="0.2s">
                         {% trans 'NUESTROS ALIADOS' %}</h2>
@@ -169,11 +180,16 @@
                             {% for aliado in aliados_lista %}
                                 <div class="col-lg-2 col-md-3 col-4">
                                     {% if aliado.url %}
-                                        <a href="{{ aliado.url }}" target="_blank">
+                                        <a href="{{ aliado.url }}" rel="noopener" target="_blank">
                                     {% endif %}
-                                    <img data-src="{{ aliado.logo.url }}"
-                                         alt="{{ aliado.nombre }} es aliado de Odecopack"
-                                         class="img-fluid">
+
+                                    <picture>
+                                        <source type="image/webp" srcset="{{ aliado.logo_webp.url }}">
+                                        <source type="image/png" srcset="{{ aliado.logo.url }}">
+                                        <img data-src="{{ aliado.logo.url }}"
+                                             alt="{{ aliado.nombre }} es aliado de Odecopack"
+                                             class="img-fluid">
+                                    </picture>
                                     {% if aliado.url %}
                                         </a>
                                     {% endif %}

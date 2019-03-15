@@ -1,6 +1,6 @@
 {% load solo_tags i18n %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
-<script src='https://www.google.com/recaptcha/api.js'></script>
+<script defer src='https://www.google.com/recaptcha/api.js'></script>
 <footer class="page-footer color-4-odecopack center-on-small-only">
     {% get_current_language as LANGUAGE_CODE %}
     <div class="container">
@@ -18,7 +18,7 @@
             <div class="col-12 col-md-6 col-lg-3 mt-2">
                 <div id="map-container" class="z-depth-1" style="height: 200px">
                 </div>
-                <script>
+                <script defer>
                     function initMap() {
                         var uluru = {lat: 3.464009, lng: -76.510884};
                         var map = new google.maps.Map(document.getElementById('map-container'), {
@@ -31,7 +31,7 @@
                         });
                     }
                 </script>
-                <script async defer
+                <script defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap">
                 </script>
 
