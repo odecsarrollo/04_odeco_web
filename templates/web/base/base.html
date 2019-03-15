@@ -154,27 +154,60 @@
         {% endif %}
     });
 
+    var preloadImage = function (elemento) {
+        elemento.setAttribute('src', elemento.getAttribute('data-src'));
+    };
 
-    function init() {
-        var vidDefer = document.getElementsByTagName('iframe');
-        for (var i = 0; i < vidDefer.length; i++) {
-            if (vidDefer[i].getAttribute('data-src')) {
-                vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
+    var myObserver = new IntersectionObserver(function (entries, self) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                if (entry.target.getAttribute('data-src')) {
+                    preloadImage(entry.target);
+                }
+                self.unobserve(entry.target);
             }
-        }
-        var imgDefer = document.getElementsByTagName('img');
-        for (var i = 0; i < imgDefer.length; i++) {
-            if (imgDefer[i].getAttribute('data-src')) {
-                imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
-            }
-        }
+        })
+    }, {
+        root: null,
+        rootMargin: "300px"
+    });
 
-        {% block onLoadScript %}
-
-        {% endblock %}
+    var elementToObserve = document.getElementsByTagName('img');
+    for (var i = 0; i < elementToObserve.length; i++) {
+        myObserver.observe(elementToObserve[i]);
     }
 
-    window.onload = init;
+    var elementVideoToObserve = document.getElementsByTagName('iframe');
+    for (var i = 0; i < elementVideoToObserve.length; i++) {
+        myObserver.observe(elementVideoToObserve[i]);
+    }
+
+    var elementSourceToObserve = document.getElementsByTagName('source');
+    for (var i = 0; i < elementSourceToObserve.length; i++) {
+        myObserver.observe(elementSourceToObserve[i]);
+    }
+
+
+    function init() {
+        {#var vidDefer = document.getElementsByTagName('iframe');#}
+        {#for (var i = 0; i < vidDefer.length; i++) {#}
+        {#    if (vidDefer[i].getAttribute('data-src')) {#}
+        {#        vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));#}
+        {#    }#}
+        {#}#}
+            {#var imgDefer = document.getElementsByTagName('img');#}
+            {#for (var i = 0; i < imgDefer.length; i++) {#}
+            {#    if (imgDefer[i].getAttribute('data-src')) {#}
+            {#        imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));#}
+            {#    }#}
+            {#}#}
+
+                {% block onLoadScript %}
+
+                {% endblock %}
+            }
+
+            window.onload = init;
 
     {% block final_scripts %}
 
