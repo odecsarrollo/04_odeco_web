@@ -67,7 +67,6 @@
                                         {% else %}
                                             {% generateimage 'webpage:normal' source=galeria.imagen as imagen_procesada %}
                                         {% endif %}
-
                                         <div class="tab-pane fade show in {% if forloop.first %}active{% endif %}"
                                              id="galeria-{{ galeria.pk }}"
                                              role="tabpanel">
@@ -85,70 +84,59 @@
                                                         </figure>
                                                     </div>
                                                 {% endif %}
-                                                <div class="col-md-6 col-12 galeria">
-                                                    <div class="mdb-lightbox">
-                                                        <div class="row">
-                                                            {% if galeria.imagen_thumbnail %}
-                                                                <figure class="col-4 col-lg-3 m-0 p-1">
-                                                                    <a href="{{ imagen_procesada.url }}"
-                                                                       data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
-                                                                        <div class="view overlay hm-white-slight z-depth-2">
-                                                                            <picture>
-                                                                                <source type="image/webp"
-                                                                                        data-srcset="{{ galeria.imagen_thumbnail_galeria_webp.url }}">
-                                                                                <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
-                                                                                     alt="">
-                                                                            </picture>
-                                                                        </div>
-                                                                    </a>
-                                                                    <div class="caption">
-                                                                        <h3>
-                                                                            {{ galeria.nombre }}
-                                                                        </h3>
-                                                                    </div>
-                                                                </figure>
-                                                            {% endif %}
+                                                <div class="col-md-6 col-12 galeria mdb-lightbox">
 
-                                                            {% with mis_imagenes_list=galeria.mis_imagenes.all|dictsort:"orden" %}
-                                                                {% if mis_imagenes_list %}
-                                                                    {% for imagen in mis_imagenes_list %}
-                                                                        <figure class="col-4 col-lg-3 m-0 p-1">
+                                                    <div class="row">
+                                                        {% if galeria.imagen_thumbnail %}
+                                                            <figure class="col-4 col-lg-3 m-0 p-1">
+                                                                <a href="{{ imagen_procesada.url }}"
+                                                                   data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
+                                                                    <picture>
+                                                                        <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                             alt="">
+                                                                    </picture>
+                                                                </a>
+                                                                <div class="caption">
+                                                                    <h3>
+                                                                        {{ galeria.nombre }}
+                                                                    </h3>
+                                                                </div>
+                                                            </figure>
+                                                        {% endif %}
 
-                                                                            {% if imagen.marca_agua == 1 %}
-                                                                                {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
-                                                                            {% elif imagen.marca_agua == 2 %}
-                                                                                {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
-                                                                            {% else %}
-                                                                                {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                        {% with mis_imagenes_list=galeria.mis_imagenes.all|dictsort:"orden" %}
+                                                            {% if mis_imagenes_list %}
+                                                                {% for imagen in mis_imagenes_list %}
+                                                                    <figure class="col-4 col-lg-3 m-0 p-1">
+
+                                                                        {% if imagen.marca_agua == 1 %}
+                                                                            {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                                                        {% elif imagen.marca_agua == 2 %}
+                                                                            {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                                                        {% else %}
+                                                                            {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                                        {% endif %}
+
+                                                                        <a href="{{ imagen_procesada.url }}"
+                                                                           data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
+                                                                            <img data-src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                    {% if imagen.alt_seo %}
+                                                                                 alt="{{ imagen.alt_seo }}"
+                                                                                    {% endif %}
+                                                                            >
+                                                                        </a>
+                                                                        <div class="caption">
+                                                                            <h3>
+                                                                                {{ galeria.nombre }}
+                                                                            </h3>
+                                                                            {% if imagen.descripcion %}
+                                                                                {{ imagen.descripcion }}
                                                                             {% endif %}
-
-                                                                            <a href="{{ imagen_procesada.url }}"
-                                                                               data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
-                                                                                <div class="view overlay hm-white-slight z-depth-2">
-                                                                                    <picture>
-                                                                                        <source type="image/webp"
-                                                                                                data-srcset="{{ imagen.imagen_thumbnail_webp.url }}">
-                                                                                        <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                                                {% if imagen.alt_seo %}
-                                                                                             alt="{{ imagen.alt_seo }}"
-                                                                                                {% endif %}
-                                                                                        >
-                                                                                    </picture>
-                                                                                </div>
-                                                                            </a>
-                                                                            <div class="caption">
-                                                                                <h3>
-                                                                                    {{ galeria.nombre }}
-                                                                                </h3>
-                                                                                {% if imagen.descripcion %}
-                                                                                    <p>{{ imagen.descripcion }}</p>
-                                                                                {% endif %}
-                                                                            </div>
-                                                                        </figure>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endwith %}
-                                                        </div>
+                                                                        </div>
+                                                                    </figure>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% endwith %}
                                                     </div>
                                                 </div>
                                             </div>
