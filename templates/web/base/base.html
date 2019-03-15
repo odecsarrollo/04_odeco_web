@@ -66,16 +66,8 @@
     {% include 'web/base/footer.html' %}
 {% endblock %}
 
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="{% static 'web/js/jquery-3.2.1.min.js' %}"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
-{#<!-- Bootstrap tooltips -->#}
-{#<script defer type="text/javascript" src="{% static 'web/js/popper.min.js' %}"></script>#}
-{#<!-- Bootstrap core JavaScript -->#}
-{#<script defer type="text/javascript" src="{% static 'web/js/bootstrap.min.js' %}"></script>#}
-
+<script defer type="text/javascript" src="{% static 'web/js/jquery-3.2.1.min.js' %}"></script>
+<script async type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
 <script>
     function preventPassiveListener(ev) {
         //ev.preventDefault();
@@ -84,6 +76,7 @@
     function defer_script_load(script_file) {
         var giftofspeed = document.createElement('script');
         giftofspeed.src = script_file;
+        giftofspeed.async = true;
         var godefer = document.getElementsByTagName('script')[0];
         godefer.parentNode.insertBefore(giftofspeed, godefer);
     }
@@ -134,50 +127,49 @@
         return supportsPassive
     }
 
+    function inicial() {
 
-    $(function () {
-        $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-    });
-    new WOW().init();
-    $('.navbar-nav>li>a').on('click', function () {
-        $('.navbar-collapse').collapse('hide');
-    });
+        $(function () {
+            $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+        });
+        new WOW().init();
+        $('.navbar-nav>li>a').on('click', function () {
+            $('.navbar-collapse').collapse('hide');
+        });
 
-    $('.modal').on('hide.bs.modal', function (e) {
-        var $if = $(e.delegateTarget).find('iframe');
-        var src = '';
-        for (i = 0; i < $if.length; i++) {
-            src = $if[i].src;
-            $if[i].src = '/empty.html';
-            $if[i].src = src;
-        }
-    });
+        $('.modal').on('hide.bs.modal', function (e) {
+            var $if = $(e.delegateTarget).find('iframe');
+            var src = '';
+            for (i = 0; i < $if.length; i++) {
+                src = $if[i].src;
+                $if[i].src = '/empty.html';
+                $if[i].src = src;
+            }
+        });
 
-    $('.modal').on('show.bs.modal', function (e) {
+        $('.modal').on('show.bs.modal', function (e) {
 
-        {% if user.is_anonymous %}
-            ga('send', {
-                hitType: 'event',
-                eventCategory: e.target.title,
-                eventAction: 'click',
-                eventLabel: e.target.id
-            });
-        {% else %}
-            {% if user.is_authenticated and user.tercero %}
-                {% if user.tercero.es_cliente %}
-                    ga('send', {
-                        hitType: 'event',
-                        eventCategory: e.target.title,
-                        eventAction: 'click',
-                        eventLabel: e.target.id
-                    });
+            {% if user.is_anonymous %}
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: e.target.title,
+                    eventAction: 'click',
+                    eventLabel: e.target.id
+                });
+            {% else %}
+                {% if user.is_authenticated and user.tercero %}
+                    {% if user.tercero.es_cliente %}
+                        ga('send', {
+                            hitType: 'event',
+                            eventCategory: e.target.title,
+                            eventAction: 'click',
+                            eventLabel: e.target.id
+                        });
+                    {% endif %}
                 {% endif %}
             {% endif %}
-        {% endif %}
-    });
+        });
 
-
-    function inicial() {
 
         var suportPassive = suportPassiveListeners();
         document.addEventListener('touchstart', preventPassiveListener, suportPassive ? {passive: true} : false);
@@ -251,15 +243,13 @@
             }
         }
 
-
+        defer_script_load("{% static 'web/js/popper.min.js' %}");
+        defer_script_load("{% static 'web/js/bootstrap.min.js' %}");
         defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
         defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
         defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
-
         defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap");
         defer_script_load("https://www.google.com/recaptcha/api.js");
-        defer_script_load("{% static 'web/js/popper.min.js' %}");
-        defer_script_load("{% static 'web/js/bootstrap.min.js' %}");
 
         {% block onLoadScript %}
 

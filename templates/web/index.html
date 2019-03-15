@@ -88,6 +88,20 @@
 {% endblock %}
 
 <script>
+    {% block final_scripts %}
+        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+        {% if index_configuracion.overlay_publicidad %}
+            function onOverlayPublicidad() {
+                document.getElementById("overlay").style.display = "block";
+            }
+            function offOverlayPublicidad() {
+                document.getElementById("overlay").style.display = "none";
+            }
+        {% endif %}
+        {% if index_configuracion.overlay_publicidad %}
+            onOverlayPublicidad();
+        {% endif %}
+    {% endblock %}
     {% block onLoadScript %}
         {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
         WebpIsSupported(function (isSupported) {
@@ -109,22 +123,6 @@
                 {% endif %}
             }
         });
-
-
-        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-        {% if index_configuracion.overlay_publicidad %}
-            function onOverlayPublicidad() {
-                document.getElementById("overlay").style.display = "block";
-            }
-            function offOverlayPublicidad() {
-                document.getElementById("overlay").style.display = "none";
-            }
-        {% endif %}
-
-        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-        {% if index_configuracion.overlay_publicidad %}
-            onOverlayPublicidad();
-        {% endif %}
 
     {% endblock %}
 </script>
