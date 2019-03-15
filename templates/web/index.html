@@ -88,7 +88,7 @@
 {% endblock %}
 
 <script>
-    {% block final_scripts %}
+    {% block onLoadScript %}
         {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
         WebpIsSupported(function (isSupported) {
             if (isSupported) {
@@ -120,13 +120,12 @@
                 document.getElementById("overlay").style.display = "none";
             }
         {% endif %}
-    {% endblock %}
 
-    {% block onLoadScript %}
         {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
         {% if index_configuracion.overlay_publicidad %}
             onOverlayPublicidad();
         {% endif %}
+
     {% endblock %}
 </script>
 {% block content %}

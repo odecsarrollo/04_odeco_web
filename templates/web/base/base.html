@@ -69,17 +69,23 @@
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="{% static 'web/js/jquery-3.2.1.min.js' %}"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript" src="{% static 'web/js/popper.min.js' %}"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{% static 'web/js/bootstrap.min.js' %}"></script>
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
+{#<!-- Bootstrap tooltips -->#}
+{#<script defer type="text/javascript" src="{% static 'web/js/popper.min.js' %}"></script>#}
+{#<!-- Bootstrap core JavaScript -->#}
+{#<script defer type="text/javascript" src="{% static 'web/js/bootstrap.min.js' %}"></script>#}
 
 <script>
-
     function preventPassiveListener(ev) {
-        ev.preventDefault();
+        //ev.preventDefault();
+    }
+
+    function defer_script_load(script_file) {
+        var giftofspeed = document.createElement('script');
+        giftofspeed.src = script_file;
+        var godefer = document.getElementsByTagName('script')[0];
+        godefer.parentNode.insertBefore(giftofspeed, godefer);
     }
 
     function defer_css_load(css_file) {
@@ -246,10 +252,14 @@
         }
 
 
-        {#defer_css_load("{% static 'web/sass/mdb.min.css' %}");#}
         defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
         defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
         defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
+
+        defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap");
+        defer_script_load("https://www.google.com/recaptcha/api.js");
+        defer_script_load("{% static 'web/js/popper.min.js' %}");
+        defer_script_load("{% static 'web/js/bootstrap.min.js' %}");
 
         {% block onLoadScript %}
 
@@ -257,9 +267,7 @@
     }
 
     window.onload = inicial;
-
     {% block final_scripts %}
-
     {% endblock %}
 </script>
 

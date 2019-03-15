@@ -1,6 +1,5 @@
 {% load solo_tags i18n %}
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
-<script defer src='https://www.google.com/recaptcha/api.js'></script>
 <footer class="page-footer color-4-odecopack center-on-small-only">
     {% get_current_language as LANGUAGE_CODE %}
     <div class="container">
@@ -30,9 +29,6 @@
                             map: map
                         });
                     }
-                </script>
-                <script defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap">
                 </script>
 
                 <p class="text-center"><i class="fa fa-map-marker"
