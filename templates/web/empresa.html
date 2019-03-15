@@ -9,7 +9,8 @@
             {% if empresa_configuracion.video %}
                 <div class="col-12 col-sm-6 p-0 m-0 m-auto">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item p-0"
+                        <iframe
+                                class="embed-responsive-item p-0"
                                 title="video_constitucional"
                                 data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
                                 allowfullscreen></iframe>
@@ -37,66 +38,101 @@
             {% endif %}
         </div>
 
-        {% cache 345600 index_cache_empresa cache_configuracion.empresa_update LANGUAGE_CODE %}
-            {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
-                {% if galeria_fotos_list %}
-                    <div class="row galeria-menu mb-5 mt-5 mt-sm-0">
-                        <div class="col-xl-2 col-md-3">
-                            <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
-                                {% for galeria in galeria_fotos_list %}
-                                    <li class="nav-item">
-                                        <a class="nav-link dark-grey-text {% if forloop.first %}active{% endif %}"
-                                           data-toggle="tab"
-                                           href="#galeria-{{ galeria.pk }}"
-                                           role="tab"><i
-                                                class="fa {{ galeria.icono }} fa-2x"></i><br>{{ galeria.nombre }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+        {#        {% cache 345600 index_cache_empresa cache_configuracion.empresa_update LANGUAGE_CODE %}#}
+        {% with galeria_fotos_list=galeria_fotos_empresa_list.all %}
+            {% if galeria_fotos_list %}
+                <div class="row galeria-menu mb-5 mt-5 mt-sm-0">
+                    <div class="col-xl-2 col-md-3">
+                        <ul class="nav nav-tabs md-pills pills-secondary flex-center" role="tablist">
+                            {% for galeria in galeria_fotos_list %}
+                                <li class="nav-item">
+                                    <a class="nav-link dark-grey-text {% if forloop.first %}active{% endif %}"
+                                       data-toggle="tab"
+                                       href="#galeria-{{ galeria.pk }}"
+                                       role="tab"><i
+                                            class="fa {{ galeria.icono }} fa-2x"></i><br>{{ galeria.nombre }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
-                        <div class="col-xl-10 col-md-9">
-                            <div class="tab-content vertical">
-                                {% for galeria in galeria_fotos_list %}
-                                    {% cache 345600 cache_galeria galeria.pk galeria.modified LANGUAGE_CODE %}
-                                        {% if galeria.marca_agua == 1 %}
-                                            {% generateimage 'webpage:watermark' source=galeria.imagen as imagen_procesada %}
-                                        {% elif galeria.marca_agua == 2 %}
-                                            {% generateimage 'webpage:watermark_orange' source=galeria.imagen as imagen_procesada %}
-                                        {% else %}
-                                            {% generateimage 'webpage:normal' source=galeria.imagen as imagen_procesada %}
+                    <div class="col-xl-10 col-md-9">
+                        <div class="tab-content vertical">
+                            {% for galeria in galeria_fotos_list %}
+                                {#                                    {% cache 345600 cache_galeria galeria.pk galeria.modified LANGUAGE_CODE %}#}
+                                {% if galeria.marca_agua == 1 %}
+                                    {% generateimage 'webpage:watermark' source=galeria.imagen as imagen_procesada %}
+                                {% elif galeria.marca_agua == 2 %}
+                                    {% generateimage 'webpage:watermark_orange' source=galeria.imagen as imagen_procesada %}
+                                {% else %}
+                                    {% generateimage 'webpage:normal' source=galeria.imagen as imagen_procesada %}
+                                {% endif %}
+
+                                <div class="tab-pane fade show in {% if forloop.first %}active{% endif %}"
+                                     id="galeria-{{ galeria.pk }}"
+                                     role="tabpanel">
+                                    <br>
+                                    <div class="row">
+                                        {% if galeria.imagen_thumbnail %}
+                                            <div class="col-md-6 col-12 flex-center">
+                                                <figure class="m-0 p-0">
+                                                    <picture>
+                                                        <source type="image/webp"
+                                                                data-srcset="{{ galeria.imagen_thumbnail_webp.url }}">
+                                                        <img data-src="{{ galeria.imagen_thumbnail.url }}"
+                                                             alt="">
+                                                    </picture>
+                                                </figure>
+                                            </div>
                                         {% endif %}
-
-                                        <div class="tab-pane fade show in {% if forloop.first %}active{% endif %}"
-                                             id="galeria-{{ galeria.pk }}"
-                                             role="tabpanel">
-                                            <br>
-                                            <div class="row">
-                                                {% if galeria.imagen_thumbnail %}
-                                                    <div class="col-md-6 col-12 flex-center">
-                                                        <figure class="m-0 p-0">
-                                                            <picture>
-                                                                <source type="image/webp"
-                                                                        srcset="{{ galeria.imagen_thumbnail_webp.url }}">
-                                                                <img data-src="{{ galeria.imagen_thumbnail.url }}"
-                                                                     alt="">
-                                                            </picture>
+                                        <div class="col-md-6 col-12 galeria">
+                                            <div class="mdb-lightbox">
+                                                <div class="row">
+                                                    {% if galeria.imagen_thumbnail %}
+                                                        <figure class="col-4 col-lg-3 m-0 p-1">
+                                                            <a href="{{ imagen_procesada.url }}"
+                                                               data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
+                                                                <div class="view overlay hm-white-slight z-depth-2">
+                                                                    <picture>
+                                                                        <source type="image/webp"
+                                                                                data-srcset="{{ galeria.imagen_thumbnail_galeria_webp.url }}">
+                                                                        <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
+                                                                             alt="">
+                                                                    </picture>
+                                                                </div>
+                                                            </a>
+                                                            <div class="caption">
+                                                                <h3>
+                                                                    {{ galeria.nombre }}
+                                                                </h3>
+                                                            </div>
                                                         </figure>
-                                                    </div>
-                                                {% endif %}
-                                                <div class="col-md-6 col-12 galeria">
-                                                    <div class="mdb-lightbox">
-                                                        <div class="row">
-                                                            {% if galeria.imagen_thumbnail %}
+                                                    {% endif %}
+
+                                                    {% with mis_imagenes_list=galeria.mis_imagenes.all|dictsort:"orden" %}
+                                                        {% if mis_imagenes_list %}
+                                                            {% for imagen in mis_imagenes_list %}
                                                                 <figure class="col-4 col-lg-3 m-0 p-1">
+
+                                                                    {% if imagen.marca_agua == 1 %}
+                                                                        {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                                                    {% elif imagen.marca_agua == 2 %}
+                                                                        {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                                                    {% else %}
+                                                                        {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                                    {% endif %}
+
                                                                     <a href="{{ imagen_procesada.url }}"
-                                                                       data-size="{{ galeria.imagen.width|stringformat:"d" }}x{{ galeria.imagen.height|stringformat:"d" }}">
+                                                                       data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
                                                                         <div class="view overlay hm-white-slight z-depth-2">
                                                                             <picture>
                                                                                 <source type="image/webp"
-                                                                                        srcset="{{ galeria.imagen_thumbnail_galeria_webp.url }}">
-                                                                                <img data-src="{{ galeria.imagen_thumbnail_galeria.url }}"
-                                                                                     alt="">
+                                                                                        data-srcset="{{ imagen.imagen_thumbnail_webp.url }}">
+                                                                                <img data-src="{{ imagen.imagen_thumbnail.url }}"
+                                                                                        {% if imagen.alt_seo %}
+                                                                                     alt="{{ imagen.alt_seo }}"
+                                                                                        {% endif %}
+                                                                                >
                                                                             </picture>
                                                                         </div>
                                                                     </a>
@@ -104,101 +140,66 @@
                                                                         <h3>
                                                                             {{ galeria.nombre }}
                                                                         </h3>
+                                                                        {% if imagen.descripcion %}
+                                                                            <p>{{ imagen.descripcion }}</p>
+                                                                        {% endif %}
                                                                     </div>
                                                                 </figure>
-                                                            {% endif %}
-
-                                                            {% with mis_imagenes_list=galeria.mis_imagenes.all|dictsort:"orden" %}
-                                                                {% if mis_imagenes_list %}
-                                                                    {% for imagen in mis_imagenes_list %}
-                                                                        <figure class="col-4 col-lg-3 m-0 p-1">
-
-                                                                            {% if imagen.marca_agua == 1 %}
-                                                                                {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
-                                                                            {% elif imagen.marca_agua == 2 %}
-                                                                                {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
-                                                                            {% else %}
-                                                                                {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
-                                                                            {% endif %}
-
-                                                                            <a href="{{ imagen_procesada.url }}"
-                                                                               data-size="{{ imagen.imagen.width|stringformat:"d" }}x{{ imagen.imagen.height|stringformat:"d" }}">
-                                                                                <div class="view overlay hm-white-slight z-depth-2">
-                                                                                    <picture>
-                                                                                        <source type="image/webp"
-                                                                                                srcset="{{ imagen.imagen_thumbnail_webp.url }}">
-                                                                                        <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                                                {% if imagen.alt_seo %}
-                                                                                             alt="{{ imagen.alt_seo }}"
-                                                                                                {% endif %}
-                                                                                        >
-                                                                                    </picture>
-                                                                                </div>
-                                                                            </a>
-                                                                            <div class="caption">
-                                                                                <h3>
-                                                                                    {{ galeria.nombre }}
-                                                                                </h3>
-                                                                                {% if imagen.descripcion %}
-                                                                                    <p>{{ imagen.descripcion }}</p>
-                                                                                {% endif %}
-                                                                            </div>
-                                                                        </figure>
-                                                                    {% endfor %}
-                                                                {% endif %}
-                                                            {% endwith %}
-                                                        </div>
-                                                    </div>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    {% endwith %}
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
 
-                                    {% endcache %}
-                                {% endfor %}
-                            </div>
+                                {#                                    {% endcache %}#}
+                            {% endfor %}
                         </div>
-                        <!--/Second column-->
                     </div>
-                    <!--/First row-->
-                {% endif %}
-            {% endwith %}
-        {% endcache %}
+                    <!--/Second column-->
+                </div>
+                <!--/First row-->
+            {% endif %}
+        {% endwith %}
+        {#        {% endcache %}#}
     </section>
 </div>
 
 
-{% cache 345600 index_cache_empresa_aliados cache_configuracion.empresa_update LANGUAGE_CODE %}
-    {% with aliados_lista=aliados_list %}
-        {% if aliados_lista %}
-            <div class="container-fluid background-grey">
-                <div class="container py-3">
-                    <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
-                        data-wow-delay="0.2s">
-                        {% trans 'NUESTROS ALIADOS' %}</h2>
-                    <div class="flex-center logos-panel">
-                        <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
-                            {% for aliado in aliados_lista %}
-                                <div class="col-lg-2 col-md-3 col-4">
-                                    {% if aliado.url %}
-                                        <a href="{{ aliado.url }}" rel="noopener" target="_blank">
-                                    {% endif %}
+{#{% cache 345600 index_cache_empresa_aliados cache_configuracion.empresa_update LANGUAGE_CODE %}#}
+{% with aliados_lista=aliados_list %}
+    {% if aliados_lista %}
+        <div class="container-fluid background-grey">
+            <div class="container py-3">
+                <h2 class="h2-responsive text-center mt-3 mb-3 font-up font-bold grey-text-2 wow fadeIn"
+                    data-wow-delay="0.2s">
+                    {% trans 'NUESTROS ALIADOS' %}</h2>
+                <div class="flex-center logos-panel">
+                    <div class="row justify-content-center text-white text-center wow fadeIn" data-wow-delay="0.2s">
+                        {% for aliado in aliados_lista %}
+                            <div class="col-lg-2 col-md-3 col-4">
+                                {% if aliado.url %}
+                                    <a href="{{ aliado.url }}" rel="noopener" target="_blank">
+                                {% endif %}
 
-                                    <picture>
-{#                                        <source type="image/webp" srcset="{{ aliado.logo_webp.url }}">#}
-                                        <source type="image/png" srcset="{{ aliado.logo.url }}">
-                                        <img data-src="{{ aliado.logo.url }}"
-                                             alt="{{ aliado.nombre }} es aliado de Odecopack"
-                                             class="img-fluid">
-                                    </picture>
-                                    {% if aliado.url %}
-                                        </a>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        </div>
+                                <picture>
+                                    {#                                        <source type="image/webp"data-srcset="{{ aliado.logo_webp.url }}">#}
+                                    <source type="image/png" data-srcset="{{ aliado.logo.url }}">
+                                    <img data-src="{{ aliado.logo.url }}"
+                                         alt="{{ aliado.nombre }} es aliado de Odecopack"
+                                         class="img-fluid">
+                                </picture>
+                                {% if aliado.url %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        {% endif %}
-    {% endwith %}
-{% endcache %}
+        </div>
+    {% endif %}
+{% endwith %}
+{#{% endcache %}#}
