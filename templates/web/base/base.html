@@ -28,16 +28,6 @@
 
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
 
-    {% if user.is_anonymous %}
-        {% include 'web/base/google_analitics.html' %}
-    {% else %}
-        {% if user.is_authenticated and user.tercero %}
-            {% if user.tercero.es_cliente %}
-                {% include 'web/base/google_analitics.html' %}
-            {% endif %}
-        {% endif %}
-    {% endif %}
-
 </head>
 
 <body>
@@ -77,7 +67,6 @@
         giftofspeed.src = script_file;
         giftofspeed.defer = defer;
         giftofspeed.async = async;
-        giftofspeed.rel = "preconnect";
         var godefer = document.getElementsByTagName('script')[0];
         if (callback) {
             godefer.addEventListener('load', function (e) {
@@ -258,6 +247,18 @@
         defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
         defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
         defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
+
+        {% if not debug and user.is_anonymous %}
+
+            window.ga = window.ga || function () {
+                (ga.q = ga.q || []).push(arguments)
+            };
+            ga.l = +new Date;
+            ga('create', 'UA-107233875-1', 'auto');
+            ga('send', 'pageview');
+            defer_script_load("{% static "https://www.google-analytics.com/analytics.js" %}", true, false, null);
+
+        {% endif %}
 
         {% block onLoadScript %}
 
