@@ -67,17 +67,22 @@
 {% endblock %}
 
 <script type="text/javascript" src="{% static 'web/js/jquery-3.2.1.min.js' %}"></script>
-<script async type="text/javascript" src="{% static 'web/js/mdb.min.js' %}"></script>
 <script>
     function preventPassiveListener(ev) {
         //ev.preventDefault();
     }
 
-    function defer_script_load(script_file) {
+    function defer_script_load(script_file, defer, async, callback) {
         var giftofspeed = document.createElement('script');
         giftofspeed.src = script_file;
-        giftofspeed.defer = true;
+        giftofspeed.defer = defer;
+        giftofspeed.async = async;
         var godefer = document.getElementsByTagName('script')[0];
+        if (callback) {
+            godefer.addEventListener('load', function (e) {
+                callback(null, e);
+            }, false);
+        }
         godefer.parentNode.insertBefore(giftofspeed, godefer);
     }
 
@@ -132,7 +137,6 @@
         $(function () {
             $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
         });
-        new WOW().init();
         $('.navbar-nav>li>a').on('click', function () {
             $('.navbar-collapse').collapse('hide');
         });
@@ -243,13 +247,16 @@
             }
         }
 
-        defer_script_load("{% static 'web/js/popper.min.js' %}");
-        defer_script_load("{% static 'web/js/bootstrap.min.js' %}");
+        defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
+            new WOW().init();
+        });
+        defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
+        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", true, false, null);
         defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
         defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
         defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
-        defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap");
-        defer_script_load("https://www.google.com/recaptcha/api.js");
+        defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
+        defer_script_load("https://www.google.com/recaptcha/api.js", true, false, null);
 
         {% block onLoadScript %}
 
