@@ -119,6 +119,25 @@
     }
 
     function inicial() {
+        defer_css_load("{% static 'web/sass/mdb.min.css' %}");
+        defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
+            new WOW().init();
+        });
+        defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
+        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
+        defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
+        defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
+        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
+
+        {% if not debug and user.is_anonymous %}
+            window.ga = window.ga || function () {
+                (ga.q = ga.q || []).push(arguments)
+            };
+            ga.l = +new Date;
+            ga('create', 'UA-107233875-1', 'auto');
+            ga('send', 'pageview');
+            defer_script_load("{% static "https://www.google-analytics.com/analytics.js" %}", true, false, null);
+        {% endif %}
 
         $(function () {
             $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
@@ -232,27 +251,9 @@
                 }
             }
         }
-        defer_css_load("{% static 'web/sass/mdb.min.css' %}");
-        defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
-            new WOW().init();
-        });
-        defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
-        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
-        defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
-        defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
-        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
+
         defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
         defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
-
-        {% if not debug and user.is_anonymous %}
-            window.ga = window.ga || function () {
-                (ga.q = ga.q || []).push(arguments)
-            };
-            ga.l = +new Date;
-            ga('create', 'UA-107233875-1', 'auto');
-            ga('send', 'pageview');
-            defer_script_load("{% static "https://www.google-analytics.com/analytics.js" %}", true, false, null);
-        {% endif %}
 
         {% block onLoadScript %}
 

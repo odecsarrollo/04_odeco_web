@@ -64,7 +64,7 @@ GZIP_CONTENT_TYPES = (
 )
 
 AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=7776000',
+    'CacheControl': 'max-age=31536000',
 }
 
 STATICFILES_LOCATION = 'static'
