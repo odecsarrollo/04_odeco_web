@@ -13,6 +13,7 @@
 
 @font-face {
   font-family: "Roboto";
+  font-display: auto;
   src: local(Roboto Light),
   url('#{$roboto-font-path}Roboto-Light.eot');
   src: url("#{$roboto-font-path}Roboto-Light.eot?#iefix") format('embedded-opentype'),
