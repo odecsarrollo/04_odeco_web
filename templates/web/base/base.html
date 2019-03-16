@@ -21,7 +21,7 @@
         <link media="screen" href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
         <!-- Your custom styles (optional) -->
         <link media="screen"
-              href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
+              href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}"
               rel="stylesheet">
     </noscript>
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
@@ -131,15 +131,58 @@
 
 
     function inicial() {
-        defer_css_load("{% static 'web/sass/mdb.min.css' %}");
-        defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
+        defer_css_load("{% static 'web/sass/mdb.min.css' %}?version={{ general_configuracion.version_css_cache }}");
+        defer_script_load("{% static 'web/js/mdb.min.js' %}", true, false, function () {
             new WOW().init();
+            $(".navbar-soluciones").sticky({topSpacing: 48});
+
+
+            $(function () {
+                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+            });
+
+
+            $('.navbar-nav>li>a').on('click', function () {
+                $('.navbar-collapse').collapse('hide');
+            });
+
+            $('.modal').on('hide.bs.modal', function (e) {
+                var $if = $(e.delegateTarget).find('iframe');
+                var src = '';
+                for (i = 0; i < $if.length; i++) {
+                    src = $if[i].src;
+                    $if[i].src = '/empty.html';
+                    $if[i].src = src;
+                }
+            });
+
+            $('.modal').on('show.bs.modal', function (e) {
+                {% if user.is_anonymous %}
+                    ga('send', {
+                        hitType: 'event',
+                        eventCategory: e.target.title,
+                        eventAction: 'click',
+                        eventLabel: e.target.id
+                    });
+                {% else %}
+                    {% if user.is_authenticated and user.tercero %}
+                        {% if user.tercero.es_cliente %}
+                            ga('send', {
+                                hitType: 'event',
+                                eventCategory: e.target.title,
+                                eventAction: 'click',
+                                eventLabel: e.target.id
+                            });
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            });
         });
         defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
-        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
-        defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
-        defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
-        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
+        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", true, false, null);
+        defer_css_load("{% static 'web/css/font-awesome.min.css' %}?version={{ general_configuracion.version_css_cache }}");
+        defer_css_load("{% static 'web/css/bootstrap.min.css' %}?version={{ general_configuracion.version_css_cache }}");
+        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}");
 
         {% if not debug and user.is_anonymous %}
             window.ga = window.ga || function () {
@@ -151,52 +194,13 @@
             defer_script_load("https://www.google-analytics.com/analytics.js", true, false, null);
         {% endif %}
 
-        $(function () {
-            $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-        });
-        $('.navbar-nav>li>a').on('click', function () {
-            $('.navbar-collapse').collapse('hide');
-        });
-
-        $('.modal').on('hide.bs.modal', function (e) {
-            var $if = $(e.delegateTarget).find('iframe');
-            var src = '';
-            for (i = 0; i < $if.length; i++) {
-                src = $if[i].src;
-                $if[i].src = '/empty.html';
-                $if[i].src = src;
-            }
-        });
-
-        $('.modal').on('show.bs.modal', function (e) {
-
-            {% if user.is_anonymous %}
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: e.target.title,
-                    eventAction: 'click',
-                    eventLabel: e.target.id
-                });
-            {% else %}
-                {% if user.is_authenticated and user.tercero %}
-                    {% if user.tercero.es_cliente %}
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: e.target.title,
-                            eventAction: 'click',
-                            eventLabel: e.target.id
-                        });
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-        });
-
 
         var suportPassive = suportPassiveListeners();
         document.addEventListener('touchstart', preventPassiveListener, suportPassive ? {passive: true} : false);
         document.addEventListener('wheel', preventPassiveListener, suportPassive ? {passive: true} : false);
         document.addEventListener('mousewheel', preventPassiveListener, suportPassive ? {passive: true} : false);
         document.addEventListener('touchmove', preventPassiveListener, suportPassive ? {passive: true} : false);
+
 
         if ('IntersectionObserver' in window) {
             var preloadImage = function (elemento) {
@@ -220,7 +224,8 @@
                 })
             }, {
                 root: null,
-                rootMargin: "300px"
+                rootMargin: "300px",
+                threshold: 1
             });
 
             var elementToObserve = document.getElementsByTagName('img');
@@ -265,9 +270,7 @@
         }
 
         defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
-        defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
-
-
+        defer_script_load("https://www.google.com/recaptcha/api.js", true, false, null);
         {% block onLoadScript %}
 
         {% endblock %}

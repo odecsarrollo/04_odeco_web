@@ -2,7 +2,7 @@
 {% get_solo 'web_configurations.GeneralConfiguration' as general_configuracion %}
 <footer class="page-footer color-4-odecopack center-on-small-only">
     {% get_current_language as LANGUAGE_CODE %}
-    <div class="container">
+    <div class="container" id="footer">
         <div class="row">
             <div class="col-12 col-md-6 col-lg-3 mt-2">
                 <h6 class="title font-bold">{% trans 'Información de Contacto' %}</h6>
@@ -33,6 +33,7 @@
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="name" name="nombre"
+                                               aria-label="Nombre"
                                                placeholder="{% trans 'Nombre'|title %}">
                                     </div>
                                 </div>
@@ -40,6 +41,7 @@
                                     <div class="md-form">
                                         <div class="md-form">
                                             <input type="text" id="email" name="correo"
+                                                   aria-label="correo"
                                                    placeholder="{% trans 'correo'|title %}">
                                         </div>
                                     </div>
@@ -47,12 +49,15 @@
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="empresa" name="empresa"
-                                               placeholder="{% trans 'EMPRESA'|title %}">
+                                               aria-label="Empresa"
+                                               placeholder="{% trans 'EMPRESA'|title %}"
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="md-form">
                                         <input type="text" id="subject" name="asunto"
+                                               aria-label="Asunto"
                                                placeholder="{% trans 'asunto'|title %}">
                                     </div>
                                 </div>
