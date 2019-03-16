@@ -920,7 +920,6 @@
         });
     }
 
-
     function inicial() {
         defer_css_load("{% static 'web/sass/mdb.min.css' %}");
         defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
@@ -941,45 +940,8 @@
             ga('send', 'pageview');
             defer_script_load("https://www.google-analytics.com/analytics.js", true, false, null);
         {% endif %}
-
-        $(function () {
-            $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-        });
         $('.navbar-nav>li>a').on('click', function () {
             $('.navbar-collapse').collapse('hide');
-        });
-
-        $('.modal').on('hide.bs.modal', function (e) {
-            var $if = $(e.delegateTarget).find('iframe');
-            var src = '';
-            for (i = 0; i < $if.length; i++) {
-                src = $if[i].src;
-                $if[i].src = '/empty.html';
-                $if[i].src = src;
-            }
-        });
-
-        $('.modal').on('show.bs.modal', function (e) {
-
-            {% if user.is_anonymous %}
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: e.target.title,
-                    eventAction: 'click',
-                    eventLabel: e.target.id
-                });
-            {% else %}
-                {% if user.is_authenticated and user.tercero %}
-                    {% if user.tercero.es_cliente %}
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: e.target.title,
-                            eventAction: 'click',
-                            eventLabel: e.target.id
-                        });
-                    {% endif %}
-                {% endif %}
-            {% endif %}
         });
 
 
@@ -996,16 +958,24 @@
                     if (entry.isIntersecting) {
                         if (entry.target.getAttribute('data-src')) {
                             preloadImage(entry.target);
-                        }
-                        if (entry.target.getAttribute('data-srcset')) {
+                        } else if (entry.target.getAttribute('data-srcset')) {
                             preloadSource(entry.target);
+                        } else if (entry.target.className === 'mdb-lightbox') {
+                            $(function () {
+                                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+                            });
+                        } else if (entry.target.id === 'map-container') {
+                            defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
+                            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
+                        } else if (entry.target.id === 'recaptcha_contactanos') {
+                            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
                         }
                         self.unobserve(entry.target);
                     }
                 })
             }, {
                 root: null,
-                rootMargin: "300px"
+                rootMargin: "100px"
             });
 
             var elementToObserve = document.getElementsByTagName('img');
@@ -1028,6 +998,18 @@
                     myObserver.observe(elementSourceToObserve[i]);
                 }
             }
+
+            var map_container = document.getElementById('map-container');
+            myObserver.observe(map_container);
+
+            var recaptcha_container = document.getElementById('recaptcha_contactanos');
+            myObserver.observe(recaptcha_container);
+
+            var galerias = document.getElementsByClassName('mdb-lightbox');
+            for (var i = 0; i < galerias.length; i++) {
+                myObserver.observe(galerias[i]);
+            }
+
         } else {
             var vidDefer = document.getElementsByTagName('iframe');
             for (var i = 0; i < vidDefer.length; i++) {
@@ -1047,10 +1029,12 @@
                     sourceDefer[i].setAttribute('src', sourceDefer[i].getAttribute('data-srcset'));
                 }
             }
+            $(function () {
+                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+            });
+            defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
+            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
         }
-
-        defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
-        defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
 
 
         {% block onLoadScript %}
