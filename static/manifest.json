@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "short_name": "Odecopack",
+  "name": "Odecopack SAS",
+  "icons": [
+    {
+      "src": "/web/img/favicon.ico",
+      "type": "image/x-icon",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/web/img/icono_192_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/web/img/icono_512_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ECEDEF",
+  "display": "fullscreen",
+  "theme_color": "#ed6b00"
+}
