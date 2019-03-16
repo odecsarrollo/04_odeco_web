@@ -76,7 +76,7 @@
     function defer_script_load(script_file) {
         var giftofspeed = document.createElement('script');
         giftofspeed.src = script_file;
-        giftofspeed.async = true;
+        giftofspeed.defer = true;
         var godefer = document.getElementsByTagName('script')[0];
         godefer.parentNode.insertBefore(giftofspeed, godefer);
     }
