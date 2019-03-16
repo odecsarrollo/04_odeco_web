@@ -10,9 +10,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description"
           content="Su aliado tecnológico en líneas y procesos de producción. Somos una compania con 25 años de participacion en el mercado nacional e internacional. Involucrandonos en todas las necesidades del proceso productivo de los diferentes sectores industriales.">
-
     <title>Odecopack - {% block title %}{% endblock %}</title>
-    <link media="screen" href="{% static 'web/sass/mdb.min.css' %}" rel="stylesheet">
     <!-- Font Awesome -->
     <noscript>
         <link media="screen" rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
@@ -25,9 +23,7 @@
               href="{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola"
               rel="stylesheet">
     </noscript>
-
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
-
 </head>
 
 <body>
@@ -236,7 +232,7 @@
                 }
             }
         }
-
+        defer_css_load("{% static 'web/sass/mdb.min.css' %}");
         defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
             new WOW().init();
         });
@@ -249,7 +245,6 @@
         defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
 
         {% if not debug and user.is_anonymous %}
-
             window.ga = window.ga || function () {
                 (ga.q = ga.q || []).push(arguments)
             };
@@ -257,7 +252,6 @@
             ga('create', 'UA-107233875-1', 'auto');
             ga('send', 'pageview');
             defer_script_load("{% static "https://www.google-analytics.com/analytics.js" %}", true, false, null);
-
         {% endif %}
 
         {% block onLoadScript %}
@@ -269,7 +263,6 @@
     {% block final_scripts %}
     {% endblock %}
 </script>
-
 </body>
 
 </html>
