@@ -818,10 +818,6 @@
         {% include 'web/base/menu.html' with es_menu_index=False %}
     {% endblock %}
 </header>
-<!--Main Navigation-->
-<div id="mdb-lightbox-ui">
-
-</div>
 
 {% block cabezote %}
 
@@ -943,8 +939,9 @@
         $('.navbar-nav>li>a').on('click', function () {
             $('.navbar-collapse').collapse('hide');
         });
+        {% block onLoadScript %}
 
-
+        {% endblock %}
         if ('IntersectionObserver' in window) {
             var preloadImage = function (elemento) {
                 elemento.setAttribute('src', elemento.getAttribute('data-src'));
@@ -975,20 +972,13 @@
                 })
             }, {
                 root: null,
-                rootMargin: "100px"
+                rootMargin: "10px"
             });
 
             var elementToObserve = document.getElementsByTagName('img');
             for (var i = 0; i < elementToObserve.length; i++) {
                 if (elementToObserve[i].getAttribute('data-src')) {
                     myObserver.observe(elementToObserve[i]);
-                }
-            }
-
-            var elementVideoToObserve = document.getElementsByTagName('iframe');
-            for (var i = 0; i < elementVideoToObserve.length; i++) {
-                if (elementVideoToObserve[i].getAttribute('data-src')) {
-                    myObserver.observe(elementVideoToObserve[i]);
                 }
             }
 
@@ -1008,6 +998,13 @@
             var galerias = document.getElementsByClassName('mdb-lightbox');
             for (var i = 0; i < galerias.length; i++) {
                 myObserver.observe(galerias[i]);
+            }
+
+            var elementVideoToObserve = document.getElementsByTagName('iframe');
+            for (var i = 0; i < elementVideoToObserve.length; i++) {
+                if (elementVideoToObserve[i].getAttribute('data-src')) {
+                    myObserver.observe(elementVideoToObserve[i]);
+                }
             }
 
         } else {
@@ -1035,11 +1032,6 @@
             defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
             defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
         }
-
-
-        {% block onLoadScript %}
-
-        {% endblock %}
     }
 
     window.onload = inicial;
@@ -1054,6 +1046,10 @@
             });
     }
 </script>
+<!--Main Navigation-->
+<div id="mdb-lightbox-ui">
+
+</div>
 </body>
 
 </html>

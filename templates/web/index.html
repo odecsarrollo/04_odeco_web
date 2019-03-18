@@ -23,6 +23,10 @@
             border: black solid 1px;
             cursor: pointer;
         }
+
+        .intro {
+            min-height: 2000px;
+        }
     </style>
     {% include 'web/base/menu.html' with es_menu_index=True %}
 
@@ -31,7 +35,7 @@
             <div class="flex-center">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-12 col-md-6 wow fadeIn">
+                        <div class="col-12 col-md-6">
                             <figure class="flex-center">
                                 {% if index_configuracion.overlay_url %}<a
                                     href="{{ index_configuracion.overlay_url }}" rel="noopener"
@@ -54,11 +58,11 @@
             <div class="full-bg-img flex-center">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-8 col-sm-6 d-none d-sm-block wow fadeIn">
+                        <div class="col-8 col-sm-6 d-none d-sm-block">
                             <figure class="flex-center" id="logo_index">
                             </figure>
                         </div>
-                        <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
+                        <div class="col-md-12 text-center">
                             <div>
                                 <h3 class="white-text font-bold odeco-font mb-2">
                                     {% if LANGUAGE_CODE == 'en' %}
@@ -69,7 +73,7 @@
                                 </h3>
                             </div>
                         </div>
-                        <div class="col-12 wow fadeIn">
+                        <div class="col-12">
                             {% botones_soluciones %}
                         </div>
                     </div>
