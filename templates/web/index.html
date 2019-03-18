@@ -23,10 +23,6 @@
             border: black solid 1px;
             cursor: pointer;
         }
-
-        .intro {
-            min-height: 800px;
-        }
     </style>
     {% include 'web/base/menu.html' with es_menu_index=True %}
 
@@ -59,14 +55,11 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-8 col-sm-6 d-none d-sm-block wow fadeIn">
-                            <figure class="flex-center">
-                                <img class="img-fluid" data-src="{% static 'web/img/marca_agua_orange.png' %}" alt="">
+                            <figure class="flex-center" id="logo_index">
                             </figure>
                         </div>
                         <div class="col-md-12 text-center wow fadeIn" data-wow-delay="0.2s">
                             <div>
-                                {#                                <h1 class="white-text brand-name font-up font-bold">{{ index_configuracion.header_titulo }}</h1>#}
-                                {#                            <h5 class="white-text">Our 24 Hour's Services</h5>#}
                                 <h3 class="white-text font-bold odeco-font mb-2">
                                     {% if LANGUAGE_CODE == 'en' %}
                                         {{ index_configuracion.header_text_en }}
@@ -76,7 +69,7 @@
                                 </h3>
                             </div>
                         </div>
-                        <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="col-12 wow fadeIn">
                             {% botones_soluciones %}
                         </div>
                     </div>
@@ -127,7 +120,16 @@
                 {% endif %}
             }
         });
-
+        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+        if (width > 425) {
+            var logo_imagen_url = "{% static 'web/img/marca_agua_orange.png' %}";
+            var imagen = document.createElement('img');
+            imagen.src = logo_imagen_url;
+            imagen.className = "img-fluid";
+            imagen.alt = 'Logo Odecopack';
+            var logo_index = document.getElementById('logo_index');
+            logo_index.appendChild(imagen);
+        }
     {% endblock %}
 </script>
 {% block content %}
@@ -137,5 +139,4 @@
     <div class="container-fluid">
         {% include 'web/clientes.html' %}
     </div>
-
 {% endblock %}
