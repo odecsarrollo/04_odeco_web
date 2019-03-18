@@ -1,5 +1,5 @@
 @font-face {
-  font-display: auto;
+  font-display: swap;
   font-family: "odecopack";
   src: url("../fonts/odecopack.eot");
   src: url("../fonts/odecopack.eot?#iefix") format("embedded-opentype"), url("../fonts/odecopack.woff") format("woff"), url("../fonts/odecopack.ttf") format("truetype"), url("../fonts/odecopack.svg#odecopack") format("svg");
@@ -52,7 +52,7 @@ font-style normal,
   content: "\67";
 }
 @font-face {
-  font-display: auto;
+  font-display: swap;
   font-family: 'FontOdecopack';
   src: url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.eot") format('embedded-opentype'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff2") format('woff2'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.woff") format('woff'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.ttf") format('truetype'), url("../font/handel-gothic-d-bold/Handel_Gothic_D_Bold.svg") format('svg');
   font-weight: normal;
