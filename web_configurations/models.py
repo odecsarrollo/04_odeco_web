@@ -12,6 +12,10 @@ class IndexConfiguration(SingletonModel):
         new_filename = get_image_name('Header', filename)
         return "web/img/index/%s" % new_filename
 
+    def overlay_publicidad_imagen_upload_to(instance, filename):
+        new_filename = get_image_name('Overlay', filename)
+        return "web/img/index/%s" % new_filename
+
     header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
     header_text = models.TextField(max_length=150, default='Aqui la descripción', null=True, blank=True)
     header_text_en = models.TextField(max_length=150, default='Aqui la descripción Ingles', null=True, blank=True)
@@ -50,7 +54,7 @@ class IndexConfiguration(SingletonModel):
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
         format='JPEG',
         options={'quality': 70},
-        upload_to=header_imagen_upload_to,
+        upload_to=overlay_publicidad_imagen_upload_to,
         verbose_name='Imagen Overlay Publicidad (1024 x 768)',
         null=True,
         blank=True
