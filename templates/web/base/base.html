@@ -95,6 +95,26 @@
             -webkit-tap-highlight-color: transparent
         }
 
+        .boton_whatsaap {
+            position: fixed;
+            font-size: 3rem;
+            cursor: pointer;
+            bottom: 40px;
+            right: 40px;
+        }
+
+        .boton_whatsaap a {
+            color: #ed6b00;
+        }
+
+        .boton_whatsaap a:hover,
+        .boton_whatsaap a:visited,
+        .boton_whatsaap a:focus,
+        .boton_whatsaap a:active,
+        .boton_whatsaap a:link {
+            color: #ed6b00;
+        }
+
         [role=button], a, area, button, input, label, select, summary, textarea {
             touch-action: manipulation
         }
@@ -828,6 +848,14 @@
 
 <main>
     <div id="fb-root"></div>
+    {% if general_configuracion.whatsaap %}
+        <div class="boton_whatsaap">
+            <a target="_blank"
+               href="{{ general_configuracion.whatsaap }}">
+                <i class="fa fa-whatsapp"></i>
+            </a>
+        </div>
+    {% endif %}
     {% block content %}
 
     {% endblock %}

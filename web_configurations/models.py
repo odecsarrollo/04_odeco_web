@@ -104,6 +104,7 @@ class GeneralConfiguration(SingletonModel):
     texto_habeas_data = HTMLField('Habeas Data', default='Información Habeas Data', null=True, blank=True)
     texto_habeas_data_en = HTMLField('Habeas Data Ingles', default='Información Habeas Data', null=True, blank=True)
     facebook = models.CharField(max_length=200, null=True, blank=True)
+    whatsaap = models.CharField(max_length=200, null=True, blank=True)
     instagram = models.CharField(max_length=200, null=True, blank=True)
     linkedin = models.CharField(max_length=200, null=True, blank=True)
     youtube = models.CharField(max_length=200, null=True, blank=True)
