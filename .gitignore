@@ -4,3 +4,4 @@ odecopackdb
 /static/web/sass/mdb/*
 /media/*
 /comandos.txt
+/secretsLocal.json
