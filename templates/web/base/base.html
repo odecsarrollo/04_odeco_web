@@ -186,20 +186,6 @@
             cursor: pointer;
             color: #fff
         }
-
-        .fa {
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: 400;
-            font-stretch: normal;
-            line-height: 1;
-            font-family: FontAwesome;
-            font-size: inherit;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased
-        }
-
         .collapse {
             display: none
         }
@@ -820,7 +806,6 @@
     <title>Odecopack - {% block title %}{% endblock %}</title>
     <!-- Font Awesome -->
     <noscript>
-        <link media="screen" rel="stylesheet" href="{% static 'web/css/font-awesome.min.css' %}">
         <!-- Bootstrap core CSS -->
         <link media="screen" href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
         <!-- Material Design Bootstrap -->
@@ -831,6 +816,9 @@
               rel="stylesheet">
     </noscript>
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+          integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+          crossorigin="anonymous">
 </head>
 
 <body>
@@ -853,7 +841,7 @@
         <div class="boton_whatsaap">
             <a target="_blank"
                href="{{ general_configuracion.whatsaap }}">
-                <i class="fa fa-whatsapp"></i>
+                <i class="fab fa-whatsapp"></i>
             </a>
         </div>
     {% endif %}
@@ -955,7 +943,6 @@
         });
         defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
         defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
-        defer_css_load("{% static 'web/css/font-awesome.min.css' %}");
         defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
         defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
 

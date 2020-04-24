@@ -8,7 +8,7 @@
 
             <!--Header-->
             <div class="modal-header darken-3 white-text color-1-odecopack">
-                <h4 class="title"><i class="fa fa-pencil"></i>{% trans "CONTÁCTENOS" %}</h4>
+                <h4 class="title"><i class="fas fa-pencil"></i>{% trans "CONTÁCTENOS" %}</h4>
                 <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,31 +20,31 @@
                     {% csrf_token %}
 
                     <div class="md-form form-sm">
-                        <i class="fa fa-envelope prefix"></i>
+                        <i class="fas fa-pencil-alt prefix"></i>
                         <input name="nombre" type="text" id="form19" class="form-control" required>
                         <label for="form19">{% trans 'Nombre'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
-                        <i class="fa fa-envelope prefix"></i>
+                        <i class="fas fa-envelope prefix"></i>
                         <input name="correo" type="email" id="form20" class="form-control" required>
                         <label for="form20">{% trans 'correo'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
-                        <i class="fa fa-tag prefix"></i>
+                        <i class="fas fa-tag prefix"></i>
                         <input name="empresa" type="text" id="form44" class="form-control" required>
                         <label for="form44">{% trans 'EMPRESA'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
-                        <i class="fa fa-tag prefix"></i>
+                        <i class="fas fa-tag prefix"></i>
                         <input name="asunto" type="text" id="form21" class="form-control" required>
                         <label for="form21">{% trans 'asunto'|title %}</label>
                     </div>
 
                     <div class="md-form form-sm">
-                        <i class="fa fa-pencil prefix"></i>
+                        <i class="fas fa-pencil prefix"></i>
                         <textarea name="texto" style="min-height: 150px" rows="40" type="text" id="form8"
                                   class="md-textarea mb-0"
                                   required></textarea>
@@ -79,7 +79,7 @@
 
                     <div class="text-center mt-1-half">
                         <button type="submit" class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %} <i
-                                class="fa fa-send ml-1"></i>
+                                class="fas fa-paper-plane ml-1"></i>
                         </button>
                     </div>
                 </form>
