@@ -13,11 +13,11 @@ def add_watermark(image, watermark):
 
     if image_x > image_y:
         escala_y = watermark_y / watermark_x
-        nuevo_watermark_x = image_x * 0.2
+        nuevo_watermark_x = image_x * 0.15
         nuevo_watermark_y = nuevo_watermark_x * escala_y
     else:
         escala_y = watermark_y / watermark_x
-        nuevo_watermark_x = image_x * 0.3
+        nuevo_watermark_x = image_x * 0.25
         nuevo_watermark_y = nuevo_watermark_x * escala_y
 
     new_size = (int(nuevo_watermark_x), int(nuevo_watermark_y))
@@ -25,7 +25,7 @@ def add_watermark(image, watermark):
 
     watermark_x, watermark_y = rgba_watermark.size
     rgba_image.paste(rgba_watermark,
-                     ((image_x - watermark_x - int(image_x * 0.05)), (image_y - watermark_y - int(image_y * 0.05))),
+                     ((image_x - watermark_x - int(image_x * 0.05)), (image_y - watermark_y)),
                      rgba_watermark)
 
     return rgba_image
