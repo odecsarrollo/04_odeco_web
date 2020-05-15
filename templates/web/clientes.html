@@ -1,34 +1,41 @@
 {% load i18n static cache solo_tags custom_operators %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
-<section id="clientes" class="section background-white pt-4 clientes">
+
+
+<section id="clientes_industrias" class="section background-white pt-4 clientes">
     {% cache 345600 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}
-        {% with clientes_lista=clientes_list %}
-            {% if clientes_lista %}
+        {% with industrias_list=industrias_list %}
+            {% if industrias_list %}
                 <div class="container-fluid">
                     <div class="container py-3">
                         <h1 class="section-heading h1 pt-4 text-center text-sm-left">
                             {% trans "CLIENTES" %}</h1>
                         <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">
                             <div class="carousel-inner" role="listbox">
-                                {% for cliente in clientes_lista %}
-                                    {% if forloop.counter0|divisibleby:6 or forloop.first %}
+                                {% for industria in industrias_list %}
+                                    {% if forloop.counter0 or forloop.first %}
                                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
                                         <div class="view">
                                         <div class="row justify-content-center">
                                     {% endif %}
-
-                                <div class="col-4 col-sm-3 flex-center">
-                                    <picture>
-                                        <source type="image/webp" data-srcset="{{ cliente.logo_webp.url }}">
-                                        <source type="image/png" data-srcset="{{ cliente.logo.url }}">
-                                        <img data-src="{{ cliente.logo.url }}"
-                                             alt="{{ cliente.nombre }} es cliente de Odecopack"
-                                             class="img-fluid"/>
-                                    </picture>
+                                <div class="col-12">
+                                    <h4 class="text-center">
+                                        {{ industria.nombre }}
+                                    </h4>
                                 </div>
-
-                                {% if forloop.counter|divisibleby:6 or forloop.last %}
+                                {% for cliente in industria.clientes.all %}
+                                    <div class="col-3 col-sm-2 flex-center">
+                                        <picture>
+                                            <source type="image/webp" data-srcset="{{ cliente.logo_webp.url }}">
+                                            <source type="image/png" data-srcset="{{ cliente.logo.url }}">
+                                            <img data-src="{{ cliente.logo.url }}"
+                                                 alt="Automatización para la industria {{ industria.nombre }} para {{ cliente.nombre }}"
+                                                 class="img-fluid"/>
+                                        </picture>
+                                    </div>
+                                {% endfor %}
+                                {% if forloop.counter or forloop.last %}
                                     </div>
                                     </div>
                                     </div>
@@ -54,12 +61,10 @@
                             </div>
 
                             <ol class="carousel-indicators d-none d-sm-flex">
-                                {% for cliente in clientes_lista %}
-                                    {% if forloop.counter0|divisibleby:6 or forloop.first %}
-                                        <li data-target="#carousel-clientes"
-                                            data-slide-to="{{ forloop.counter0|carrousel_indicator_index:'6' }}"
-                                            {% if forloop.first %}class="active"{% endif %}></li>
-                                    {% endif %}
+                                {% for industria in industrias_list %}
+                                    <li data-target="#carousel-clientes"
+                                        data-slide-to="{{ forloop.counter0|carrousel_indicator_index:'6' }}"
+                                        {% if forloop.first %}class="active"{% endif %}></li>
                                 {% endfor %}
                             </ol>
                         </div>
@@ -69,3 +74,73 @@
         {% endwith %}
     {% endcache %}
 </section>
+
+
+{#<section id="clientes" class="section background-white pt-4 clientes">#}
+{#    {% cache 345600 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}#}
+{#    {% with clientes_lista=clientes_list %}#}
+{#        {% if clientes_lista %}#}
+{#            <div class="container-fluid">#}
+{#                <div class="container py-3">#}
+{#                    <h1 class="section-heading h1 pt-4 text-center text-sm-left">#}
+{#                        {% trans "CLIENTES" %}</h1>#}
+{#                    <div id="carousel-clientes" class="carousel slide carousel-multi-item" data-ride="carousel">#}
+{#                        <div class="carousel-inner" role="listbox">#}
+{#                            {% for cliente in clientes_lista %}#}
+{#                                {% if forloop.counter0|divisibleby:6 or forloop.first %}#}
+{#                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">#}
+{#                                    <div class="view">#}
+{#                                    <div class="row justify-content-center">#}
+{#                                {% endif %}#}
+{##}
+{#                            <div class="col-4 col-sm-3 flex-center">#}
+{#                                <picture>#}
+{#                                    <source type="image/webp" data-srcset="{{ cliente.logo_webp.url }}">#}
+{#                                    <source type="image/png" data-srcset="{{ cliente.logo.url }}">#}
+{#                                    <img data-src="{{ cliente.logo.url }}"#}
+{#                                         alt="{{ cliente.nombre }} es cliente de Odecopack"#}
+{#                                         class="img-fluid"/>#}
+{#                                </picture>#}
+{#                            </div>#}
+{##}
+{#                            {% if forloop.counter|divisibleby:6 or forloop.last %}#}
+{#                                </div>#}
+{#                                </div>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                        <a class="carousel-control-prev d-none d-sm-flex" href="#carousel-clientes" role="button"#}
+{#                           data-slide="prev">#}
+{#                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>#}
+{#                            <span class="sr-only">Anterior</span>#}
+{#                        </a>#}
+{#                        <a class="carousel-control-next d-none d-sm-flex" href="#carousel-clientes" role="button"#}
+{#                           data-slide="next">#}
+{#                            <span class="carousel-control-next-icon" aria-hidden="true"></span>#}
+{#                            <span class="sr-only">Siguiente</span>#}
+{#                        </a>#}
+{##}
+{#                        <div class="controls-top d-sm-none">#}
+{#                            <a class="btn-floating" href="#carousel-clientes" data-slide="prev"><i#}
+{#                                    class="fas fa-chevron-left"></i></a>#}
+{#                            <a class="btn-floating" href="#carousel-clientes" data-slide="next"><i#}
+{#                                    class="fas fa-chevron-right"></i></a>#}
+{#                        </div>#}
+{##}
+{#                        <ol class="carousel-indicators d-none d-sm-flex">#}
+{#                            {% for cliente in clientes_lista %}#}
+{#                                {% if forloop.counter0|divisibleby:6 or forloop.first %}#}
+{#                                    <li data-target="#carousel-clientes"#}
+{#                                        data-slide-to="{{ forloop.counter0|carrousel_indicator_index:'6' }}"#}
+{#                                        {% if forloop.first %}class="active"{% endif %}></li>#}
+{#                                {% endif %}#}
+{#                            {% endfor %}#}
+{#                        </ol>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
+{#    {% endwith %}#}
+{#    {% endcache %}#}
+{#</section>#}

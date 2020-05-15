@@ -11,7 +11,7 @@ from django_redis import get_redis_connection
 
 from odecopack.mixin import RecaptchaMixin
 from web_empresa.models import Aliado, GaleriaFotoEmpresa
-from web_clientes.models import Cliente
+from web_clientes.models import Cliente, ClienteIndustria
 
 from mailchimp3 import MailChimp
 
@@ -23,7 +23,8 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['aliados_list'] = Aliado.objects.all()
-        context['clientes_list'] = Cliente.objects.all().order_by('orden')
+        context['industrias_list'] = ClienteIndustria.objects.prefetch_related('clientes').all().order_by('orden')
+        # context['clientes_list'] = Cliente.objects.all().order_by('orden')
         context['galeria_fotos_empresa_list'] = GaleriaFotoEmpresa.objects.filter(activo=True).order_by('orden')
         return context
 
@@ -60,7 +61,6 @@ class SendContactenosView(RecaptchaMixin, View):
         empresa = request.POST.get('empresa', None)
 
         if self.revisar_recaptcha():
-
             mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
                 asunto,
                 nombre,
