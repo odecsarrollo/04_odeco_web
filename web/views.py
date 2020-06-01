@@ -95,7 +95,7 @@ class SendContactenosView(RecaptchaMixin, View):
                 subject=asunto,
                 body=mensaje,
                 from_email='Contactenos Odecopack SAS<webmaster@odecopack.co>',
-                to=['odecopack@odecopack.com'],
+                to=['info@odecopack.com'],
                 reply_to=[correo]
             )
 
