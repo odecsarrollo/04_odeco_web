@@ -173,6 +173,30 @@ header .full-bg-img {
 .cabezote .card-text {
   color: #fff;
 }
+.cuadros-contadores {
+  width: 100%;
+  padding: 30px;
+}
+.cuadros-contadores .cuadro {
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.cuadros-contadores .cuadro.borde_derecho {
+  border-right: 1px solid #ed6b00;
+}
+.cuadros-contadores .cuadro.borde_abajo {
+  border-bottom: 1px solid #ed6b00;
+}
+.cuadros-contadores .cuadro .contenido_cuadro {
+  text-align: center;
+}
+.cuadros-contadores .cuadro .contenido_cuadro .elementor-counter-number {
+  font-size: 2rem;
+  color: #000;
+  font-weight: bold;
+  line-height: 1em;
+}
 .intro {
   min-height: inherit !important;
 }

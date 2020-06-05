@@ -75,6 +75,7 @@ header
     background-size cover
     background-repeat no-repeat
     background-position center
+
   .hm-black-strong-1
   .full-bg-img
     background-color rgba(0, 0, 0, 0.6)
@@ -91,22 +92,26 @@ header
 
 .barra-soluciones
   font-family FontOdecopack
+
   .botones-soluciones
     .boton
       margin 0 !important
       padding 0 !important
       text-align center !important
+
       .contenido
         height 100%
         background-color white
         color gray
         border 1px solid $odecopack-color_5
+
       .contenido:hover
         border none
         background-image url("../img/fondo_botones_hover.jpg")
         background-repeat no-repeat
         background-size auto
         color white !important
+
     a
       color inherit
       text-decoration inherit
@@ -116,20 +121,50 @@ header
   background-repeat no-repeat !important
   background-size cover !important
   min-height 500px
+
   .card
     background rgba(0, 0, 0, 0.4)
     color white
+
   .left
     position absolute
     left 0
+
   .right
     position absolute
     right 0
+
   .card-text
     color white
 
+.cuadros-contadores
+  width 100%
+  padding 30px
+
+  .cuadro
+    padding 10px
+    padding-top 20px
+    padding-bottom 20px
+
+    &.borde_derecho
+      border-right 1px solid $odecopack-color_1
+
+    &.borde_abajo
+      border-bottom 1px solid $odecopack-color_1
+
+    .contenido_cuadro
+      text-align center
+
+      .elementor-counter-number
+        font-size 2rem
+        color #000000
+        font-weight bold
+        line-height 1em
+
+
 .intro
   min-height inherit !important
+
   .barra-soluciones
     .botones-soluciones
       .boton
@@ -137,8 +172,10 @@ header
           color white
           background-color inherit
           border none
+
           img
             display inline !important
+
       a
         color inherit
         text-decoration inherit
@@ -146,27 +183,37 @@ header
 .index
   .navbar
     background-color transparent
+
     .show
       background-color $odecopack-color_1
+
   .navbar-toggler-icon
     cursor pointer
     color white
+
   .nav-item
     &.right-border
       border-right 1px solid white
+
   .nav-link
     color white
+
   .galeria-menu
     .nav-link
       color black
+
   .top-nav-collapse
     background-color white
+
     .show
       background-color white !important
+
     .nav-link
       color black !important
+
     .navbar-toggler-icon
       color black !important
+
     .nav-item
       &.right-border
         border-right 1px solid $odecopack-color_1
@@ -222,9 +269,11 @@ footer
     font-size 0.8rem
     background-color transparent
     box-shadow none
+
   .nav-link.active
     background-color $odecopack-color_1 !important
     color white !important
+
   .md-pills
     li
       padding 0 !important
@@ -232,10 +281,13 @@ footer
 .index-empresa
   p
     color: #757575;
+
   .botones-empresa
     height 100%
+
     .boton
       padding 1px
+
       .contenido
         height 100%
         background-color white
@@ -249,12 +301,15 @@ hr
   overflow hidden
   background #e5e5e5
   height 250px
+
   &.streak-lg
     height 400px
+
   &.streak-photo
     background-size cover
     background-position center
     background-repeat no-repeat
+
   &.no-flex
     padding-top 3.125rem
     padding-bottom 3.125rem
@@ -263,6 +318,7 @@ hr
 @media (max-width: 576px)
   .cabezote
     min-height 250px
+
     h3
       font-size 1rem
 
@@ -314,22 +370,27 @@ hr
   .lista
     .item
       height 100%
+
     .ver_mas
       position absolute
       left 10px
       bottom 0
+
   .navbar-soluciones
     font-size 0.7rem
     color white !important
     z-index 100
+
     .navbar-nav-soluciones
       font-family FontOdecopack
       flex-direction (inherit)
+
       .nav-link-soluciones
         padding 0.5rem
         margin-left 0.5rem
         font-style normal
         border-radius (25px)
+
   .btn-floating-categoria
     font-family FontOdecopack
     font-weight bold
@@ -346,6 +407,7 @@ hr
 .formulario
   .texto-legal
     font-size 12px
+
   input,
   textarea
     padding-left 10px !important
@@ -354,18 +416,22 @@ hr
   .controls-top
     .fa
       background-color $odecopack-color_1
+
   .carousel-control-prev-icon,
   .carousel-control-next-icon
     background-color $odecopack-color_1
+
   .carousel-indicators
     li
       background-color $odecopack-color_2
+
     .active
       background-color $odecopack-color_1
 
 .carousel-control-
   &next
     right -2rem
+
   &prev
     left -2rem
 

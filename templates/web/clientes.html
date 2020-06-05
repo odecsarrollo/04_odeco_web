@@ -3,7 +3,7 @@
 {% get_solo 'web_configurations.CacheConfiguration' as cache_configuracion %}
 
 
-<section id="clientes_industrias" class="section background-white pt-4 clientes">
+<section id="clientes" class="section background-white pt-4 clientes">
     {% cache 345600 index_cache_clientes cache_configuracion.clientes_update LANGUAGE_CODE %}
         {% with industrias_list=industrias_list %}
             {% if industrias_list %}
