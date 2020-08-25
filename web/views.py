@@ -62,15 +62,16 @@ class SendContactenosView(RecaptchaMixin, View):
         empresa = request.POST.get('empresa', None)
 
         if self.revisar_recaptcha():
-            mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
+            mensaje = 'Asunto: %s \r\nDe: %s \r\nCorreo: %s \r\nTeléfono: %s \r\nEmpresa: %s \r\n\r\nMensaje:\r\n%s' % (
                 asunto,
                 nombre,
                 correo,
+                telefono,
                 empresa,
                 texto
             )
 
-            mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nTelefono: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
+            mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nTeléfono: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
                 translation.ugettext(
                     'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente'),
                 asunto,
