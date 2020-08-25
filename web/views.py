@@ -56,6 +56,7 @@ class SendContactenosView(RecaptchaMixin, View):
     def post(self, request, *args, **kwargs):
         correo = request.POST.get('correo', None)
         nombre = request.POST.get('nombre', None)
+        telefono = request.POST.get('telefono', None)
         asunto = request.POST.get('asunto', None)
         texto = request.POST.get('texto', None)
         empresa = request.POST.get('empresa', None)
@@ -69,11 +70,12 @@ class SendContactenosView(RecaptchaMixin, View):
                 texto
             )
 
-            mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
+            mensaje2 = '%s:\r\n \r\n \r\nAsunto: %s \r\nDe: %s \r\nTelefono: %s \r\nCorreo: %s \r\nEmpresa: %s \r\n\r\nMensaje: \r\n%s \r\n \r\n %s' % (
                 translation.ugettext(
                     'Su mensaje con la siguiente información, para Odecopack, se ha enviado correctamente'),
                 asunto,
                 nombre,
+                telefono,
                 correo,
                 empresa,
                 texto,

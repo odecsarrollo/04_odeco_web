@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-24 10:57-0500\n"
-"PO-Revision-Date: 2018-08-24 11:11-0456\n"
+"POT-Creation-Date: 2020-08-25 10:21-0500\n"
+"PO-Revision-Date: 2020-08-25 10:22-0456\n"
 "Last-Translator: b'  <fabio.garcia.sanchez@gmail.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,33 +27,37 @@ msgid "Español"
 msgstr "Spanish"
 
 #: templates/web/base/contactenos.html:11 templates/web/base/menu.html:45
-#: web/views.py:96
+#: web/views.py:109
 msgid "CONTÁCTENOS"
 msgstr "CONTACT"
 
-#: templates/web/base/contactenos.html:25 templates/web/base/footer.html:52
+#: templates/web/base/contactenos.html:25 templates/web/base/footer.html:43
 #: web_soluciones/models.py:46
 msgid "Nombre"
 msgstr "Name"
 
-#: templates/web/base/contactenos.html:31 templates/web/base/footer.html:59
+#: templates/web/base/contactenos.html:31 templates/web/base/footer.html:51
 msgid "correo"
 msgstr "Email"
 
-#: templates/web/base/contactenos.html:37 templates/web/base/footer.html:66
+#: templates/web/base/contactenos.html:37 templates/web/base/footer.html:59
 #: templates/web/base/menu.html:20
 msgid "EMPRESA"
 msgstr "COMPANY"
 
-#: templates/web/base/contactenos.html:43 templates/web/base/footer.html:72
+#: templates/web/base/contactenos.html:43 templates/web/base/footer.html:74
 msgid "asunto"
 msgstr "subject"
 
-#: templates/web/base/contactenos.html:51 templates/web/base/footer.html:79
+#: templates/web/base/contactenos.html:49 templates/web/base/footer.html:67
+msgid "telefono"
+msgstr "Phone Number"
+
+#: templates/web/base/contactenos.html:57 templates/web/base/footer.html:82
 msgid "mensaje"
 msgstr "message"
 
-#: templates/web/base/contactenos.html:54
+#: templates/web/base/contactenos.html:60
 msgid ""
 "\n"
 "                            ODECOPACK SAS le informa que los datos personales que se recolectan\n"
@@ -64,7 +68,7 @@ msgstr ""
 "\n"
 "ODECOPACK SAS informs you that the personal data that we collect throught this form will be manage in safe and trusted way according to the colombian law 1581 from 2012 about data protecction."
 
-#: templates/web/base/contactenos.html:60
+#: templates/web/base/contactenos.html:66
 #, fuzzy
 #| msgid ""
 #| "\n"
@@ -87,19 +91,19 @@ msgstr ""
 "\n"
 "ODECOPACK SAS informs you that the personal data that we collect throught this form will be manage in safe and trusted way according to the colombian law 1581 from 2012 about data protecction."
 
-#: templates/web/base/contactenos.html:73 templates/web/base/footer.html:101
+#: templates/web/base/contactenos.html:87 templates/web/base/footer.html:114
 msgid "Enviar"
 msgstr "send"
 
-#: templates/web/base/footer.html:8
+#: templates/web/base/footer.html:14
 msgid "Información de Contacto"
 msgstr "Contact Information"
 
-#: templates/web/base/footer.html:42
+#: templates/web/base/footer.html:32
 msgid "Formulario de contacto"
 msgstr "Contact Form"
 
-#: templates/web/base/footer.html:84
+#: templates/web/base/footer.html:87
 msgid ""
 "\n"
 "                                        ODECOPACK SAS le informa que los datos personales que se recolectan\n"
@@ -111,11 +115,19 @@ msgstr ""
 "\n"
 "ODECOPACK SAS informs you that the personal data that we collect throught this form will be manage in safe and trusted way according to the colombian law 1581 from 2012 about data protecction."
 
-#: templates/web/base/footer.html:91
+#: templates/web/base/footer.html:94
+#, fuzzy
+#| msgid ""
+#| "\n"
+#| "                                            En caso de que desee RETIRAR o MODIFICAR su información de nuestras bases de\n"
+#| "                                            datos por favor envíe su solicitud al correo:  protecciondatos@odecopack.com , o comuníquese al\n"
+#| "                                            teléfono: 4856565\n"
+#| "                                        "
 msgid ""
 "\n"
 "                                            En caso de que desee RETIRAR o MODIFICAR su información de nuestras bases de\n"
-"                                            datos por favor envíe su solicitud al correo:  protecciondatos@odecopack.com , o comuníquese al\n"
+"                                            datos por favor envíe su solicitud al correo: protecciondatos@odecopack.com\n"
+"                                            , o comuníquese al\n"
 "                                            teléfono: 4856565\n"
 "                                        "
 msgstr ""
@@ -126,7 +138,7 @@ msgstr ""
 msgid "SOLUCIONES"
 msgstr "SOLUTIONS"
 
-#: templates/web/base/menu.html:31 templates/web/clientes.html:11
+#: templates/web/base/menu.html:31 templates/web/clientes.html:13
 msgid "CLIENTES"
 msgstr "CUSTOMERS"
 
@@ -156,7 +168,7 @@ msgid "Cliente"
 msgstr "Client"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:49
-#: templates/web/soluciones/item.html:97
+#: templates/web/soluciones/item.html:92
 msgid "Ver más"
 msgstr "More"
 
@@ -165,17 +177,17 @@ msgid "Testimonios"
 msgstr "Testimonies"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:168
-#: templates/web/soluciones/item.html:144
+#: templates/web/soluciones/item.html:139
 msgid "Galería"
 msgstr "Gallery"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:213
-#: templates/web/soluciones/item.html:189
+#: templates/web/soluciones/item.html:184
 msgid "Videos"
 msgstr "Videos"
 
 #: templates/web/casos_exito/caso_exito_item_detail.html:231
-#: templates/web/soluciones/item.html:223
+#: templates/web/soluciones/item.html:222
 msgid "Cerrar"
 msgstr "Close"
 
@@ -183,24 +195,24 @@ msgstr "Close"
 msgid "Casos de Éxito"
 msgstr "Success Stories"
 
-#: templates/web/empresa.html:166
+#: templates/web/empresa.html:181
 msgid "NUESTROS ALIADOS"
 msgstr "OUR PARTNERS"
 
-#: templates/web/soluciones/item.html:206
+#: templates/web/soluciones/item.html:203
 msgid "Recursos"
 msgstr "Resources"
 
-#: web/views.py:63
+#: web/views.py:75
 msgid ""
 "Su mensaje con la siguiente información, para Odecopack, se ha enviado "
 "correctamente"
 msgstr "Your message with the follow information has been sent successfully"
 
-#: web/views.py:69
+#: web/views.py:82
 msgid "Pronto estaremos en contacto."
 msgstr "We will contact you as soon as possible."
 
-#: web/views.py:94
+#: web/views.py:107
 msgid "Su envío de correo a Odecopack"
 msgstr "Your sent message"

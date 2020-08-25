@@ -98,8 +98,8 @@ STATICFILES_FINDERS = (
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 
 # 'EMAIL_IS_LOCAL'
-if not str_to_bool(get_secret("EMAIL_SERVER", "EMAIL_IS_LOCAL")):
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# if not str_to_bool(get_secret("EMAIL_SERVER", "EMAIL_IS_LOCAL")):
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-host
 EMAIL_HOST = get_secret("EMAIL_SERVER", "EMAIL_HOST")
