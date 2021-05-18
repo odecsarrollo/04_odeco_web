@@ -1,6 +1,6 @@
 from django.contrib import messages
 
-from odecopack import settings
+from django.conf import settings
 import requests
 
 

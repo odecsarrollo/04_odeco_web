@@ -6,6 +6,10 @@ odecopackdb
 /comandos.txt
 /secretsLocal.json
 # Elastic Beanstalk Files
-.elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+env
+.ebextensions/00_enviroment_variables.config
+secretsLocal.json
+docker/volumes
+

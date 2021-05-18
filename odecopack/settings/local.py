@@ -59,29 +59,6 @@ THIRD_PART_APPS = [
 
 INSTALLED_APPS = INSTALLED_APPS + THIRD_PART_APPS
 
-# ########## CACHE CONFIGURATION
-# # See: https://docs.djangoproject.com/en/dev/ref/settings/#caches
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#     }
-# }
-# ######### END CACHE CONFIGURATION
-
-# ########## DATABASE CONFIGURATION
-# # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-# DATABASES = {
-#     'default': {
-#         'ENGINE': get_secret("DATABASE_LOCAL", "ENGINE"),
-#         'NAME': get_secret("DATABASE_LOCAL", "NAME"),
-#         'USER': get_secret("DATABASE_LOCAL", "USER"),
-#         'PASSWORD': get_secret("DATABASE_LOCAL", "PASSWORD"),
-#         'HOST': get_secret("DATABASE_LOCAL", "HOST"),
-#         'PORT': get_secret("DATABASE_LOCAL", "PORT")
-#     }
-# }
-# ########## END DATABASE CONFIGURATION
-
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATIC_URL = '/static/'

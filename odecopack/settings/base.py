@@ -12,10 +12,10 @@ from sys import path
 from django.utils.translation import ugettext_lazy as _
 
 
-def str_to_bool(s):
-    if s == 'True':
+def str_to_bool(s:str):
+    if s.lower() == 'true':
         return True
-    elif s == 'False':
+    elif s.lower() == 'false':
         return False
     else:
         raise ValueError
