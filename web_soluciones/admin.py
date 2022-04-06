@@ -61,7 +61,9 @@ class ItemSolucionImagenInline(admin.TabularInline):
     fields = [
         'admin_imagen_thumbnail',
         'descripcion',
+        'descripcion_en',
         'alt_seo',
+        'alt_seo_en',
         'orden',
         'imagen',
         'marca_agua'

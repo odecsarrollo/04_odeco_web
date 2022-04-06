@@ -20,7 +20,15 @@
                         <img
                                 class="img-fluid"
                                 data-src="{{ item.imagen_principal.url }}"
-                                alt="Imagen perfil item solución de {{ item.nombre }}"
+                                {% if LANGUAGE_CODE == 'en' %}
+                                    {% if item.nombre_en %}
+                                        alt="Image profile item solution of {{ item.nombre_en }}"
+                                    {% else %}
+                                        alt="Imagen perfil item solución de {{ item.nombre }}"
+                                    {% endif %}
+                                {% else %}
+                                    alt="Imagen perfil item solución de {{ item.nombre }}"
+                                {% endif %}
                         >
                     </a>
                 </div>
@@ -62,17 +70,41 @@
                                                    data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                     <div class="view overlay hm-white-slight z-depth-2">
                                                         <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                {% if imagen.alt_seo %}
-                                                             alt="{{ imagen.alt_seo }}"
+                                                             {% if LANGUAGE_CODE == 'en' %}
+                                                                {% if imagen.alt_seo_en %}
+                                                                    alt="{{ imagen.alt_seo_en }}"
+                                                                {% else %}
+                                                                    {% if imagen.alt_seo %}
+                                                                        alt="{{ imagen.alt_seo }}"
+                                                                    {% endif %}
                                                                 {% endif %}
+                                                            {% else %}
+                                                                {% if imagen.alt_seo %}
+                                                                    alt="{{ imagen.alt_seo }}"
+                                                                {% endif %}
+                                                            {% endif %}
                                                         >
                                                     </div>
                                                 </a>
                                                 <div class="caption">
                                                     <h3>
-                                                        {{ item.nombre }}
+                                                        {% if LANGUAGE_CODE == 'en' %}
+                                                            {% if item.nombre_en %}
+                                                                {{ item.nombre_en|upper }}
+                                                            {% else %}
+                                                                {{ item.nombre|upper }}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            {{ item.nombre|upper }}
+                                                        {% endif %}
                                                     </h3>
-                                                    {% if imagen.descripcion %}
+                                                    {% if LANGUAGE_CODE == 'en' %}
+                                                        {% if imagen.descripcion_en %}
+                                                            <p>{{ imagen.descripcion_en }}</p>
+                                                        {% else %}
+                                                            <p>{{ imagen.descripcion }}</p>
+                                                        {% endif %}
+                                                    {% else %}
                                                         <p>{{ imagen.descripcion }}</p>
                                                     {% endif %}
                                                 </div>
@@ -156,17 +188,41 @@
                                                        data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                         <div class="view overlay hm-white-slight z-depth-2">
                                                             <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                    {% if imagen.alt_seo %}
-                                                                 alt="{{ imagen.alt_seo }}"
+                                                                 {% if LANGUAGE_CODE == 'en' %}
+                                                                    {% if imagen.alt_seo_en %}
+                                                                        alt="{{ imagen.alt_seo_en }}"
+                                                                    {% else %}
+                                                                        {% if imagen.alt_seo %}
+                                                                            alt="{{ imagen.alt_seo }}"
+                                                                        {% endif %}
                                                                     {% endif %}
+                                                                {% else %}
+                                                                    {% if imagen.alt_seo %}
+                                                                        alt="{{ imagen.alt_seo }}"
+                                                                    {% endif %}
+                                                                {% endif %}
                                                             >
                                                         </div>
                                                     </a>
                                                     <div class="caption">
                                                         <h3>
-                                                            {{ item.nombre }}
+                                                            {% if LANGUAGE_CODE == 'en' %}
+                                                                {% if item.nombre_eng %}
+                                                                    {{item.nombre_eng}}
+                                                                {% else %}
+                                                                    {{item.nombre}}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {{item.nombre}}
+                                                            {% endif %}
                                                         </h3>
-                                                        {% if imagen.descripcion %}
+                                                        {% if LANGUAGE_CODE == 'en' %}
+                                                            {% if imagen.descripcion_en %}
+                                                                <p>{{ imagen.descripcion_en }}</p>
+                                                            {% else %}
+                                                                <p>{{ imagen.descripcion }}</p>
+                                                            {% endif %}
+                                                        {% else %}
                                                             <p>{{ imagen.descripcion }}</p>
                                                         {% endif %}
                                                     </div>

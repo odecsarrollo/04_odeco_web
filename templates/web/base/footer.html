@@ -13,9 +13,9 @@
             <div class="col-12 col-md-6 col-lg-3 mt-2">
                 <h6 class="title font-bold">{% trans 'Información de Contacto' %}</h6>
                 {% if LANGUAGE_CODE == 'en' %}
-                    <p>{{ general_configuracion.horarios_de_atencion_en|safe }}</p>
+                <p>{{ general_configuracion.horarios_de_atencion_en|safe }}</p>
                 {% else %}
-                    <p>{{ general_configuracion.horarios_de_atencion|safe }}</p>
+                <p>{{ general_configuracion.horarios_de_atencion|safe }}</p>
                 {% endif %}
                 <p>{{ general_configuracion.numeros_contacto|safe }}</p>
                 <p>{{ general_configuracion.correos_contacto|safe }}</p>
@@ -83,27 +83,29 @@
                                     </div>
 
                                 </div>
-                                <div class="options text-center mt-1 texto-legal">
-                                    {% blocktrans %}
+                                {% if LANGUAGE_CODE != 'en' %}
+                                    <div class="options text-center mt-1 texto-legal">
+                                        {% blocktrans %}
                                         ODECOPACK SAS le informa que los datos personales que se recolectan
                                         a través de este formulario serán tratados de manera segura y confiable de
                                         acuerdo
                                         con nuestras políticas y acorde a la Ley 1581 de 2012 sobre protección de Datos.
-                                    {% endblocktrans %}
-                                    <p>
-                                        {% blocktrans %}
+                                        {% endblocktrans %}
+                                        <p>
+                                            {% blocktrans %}
                                             En caso de que desee RETIRAR o MODIFICAR su información de nuestras bases de
                                             datos por favor envíe su solicitud al correo: protecciondatos@odecopack.com
                                             , o comuníquese al
                                             teléfono: 4856565
-                                        {% endblocktrans %}
-                                    </p>
-                                    <div class="text-center">
-                                        <a target="_blank" href="{% url 'web:tratamiento_datos_personales' %}">
-                                            VER POLITICA DE TRATAMIENTO DE DATOS PERSONALES
-                                        </a>
+                                            {% endblocktrans %}
+                                        </p>
+                                        <div class="text-center">
+                                            <a target="_blank" href="{% url 'web:tratamiento_datos_personales' %}">
+                                                VER POLITICA DE TRATAMIENTO DE DATOS PERSONALES
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                {% endif %}
                                 <div class="col-12 center">
                                     <div class="g-recaptcha"
                                          data-sitekey="6Le3hHkUAAAAABDNyS-p8Y2mgf2PSf1oZmCEcKb0"></div>
@@ -111,7 +113,8 @@
                                 <div class="col-md-12">
                                     <div class="center-on-small-only">
                                         <button type="submit"
-                                                class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %}</button>
+                                                class="btn mb-2 color-1-odecopack">{% trans 'Enviar' %}
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -123,7 +126,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container-fluid">
-            © 2017 Copyright: Odecopack
+            {{ general_configuracion.copyright }}
         </div>
     </div>
 </footer>

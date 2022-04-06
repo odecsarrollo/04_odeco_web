@@ -12,7 +12,7 @@ from sys import path
 from django.utils.translation import ugettext_lazy as _
 
 
-def str_to_bool(s:str):
+def str_to_bool(s: str):
     if s.lower() == 'true':
         return True
     elif s.lower() == 'false':
@@ -65,7 +65,6 @@ MY_APPS = [
 ]
 
 THIRD_PART_APPS = [
-    'import_export',
     'solo',
     'tinymce',
     'imagekit',
@@ -198,3 +197,6 @@ TINYMCE_DEFAULT_CONFIG = {
 
 IMAGEKIT_WATERMARK_IMAGE = os.path.join(SITE_ROOT, 'static/web/img/logo_foto_blanco.png')
 IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/logo_foto_naranja.png')
+
+IMAGEKIT_SPEC_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_dot_hash'
+IMAGEKIT_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_dot_hash'

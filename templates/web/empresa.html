@@ -6,21 +6,57 @@
     <section id="empresa_section" class="section mt-3">
         <h1 class="section-heading h1 pt-4 text-center text-sm-left">{{ empresa_configuracion.titulo|upper }}</h1>
         <div class="row index-empresa">
-            {% if empresa_configuracion.video %}
-                <div class="col-12 col-sm-6 p-0 m-0 m-auto">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe
-                                class="embed-responsive-item p-0"
-                                title="video_constitucional"
-                                data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
-                                allowfullscreen></iframe>
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if empresa_configuracion.video_en %}
+                    <div class="col-12 col-sm-6 p-0 m-0 m-auto">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe
+                                    class="embed-responsive-item p-0"
+                                    title="video_constitucional"
+                                    data-src="{{ empresa_configuracion.video_en }}?rel=0&amp;showinfo=0" frameborder="0"
+                                    allowfullscreen></iframe>
+                        </div>
                     </div>
-                </div>
+                {% else %}
+                    {% if empresa_configuracion.video %}
+                        <div class="col-12 col-sm-6 p-0 m-0 m-auto">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe
+                                        class="embed-responsive-item p-0"
+                                        title="video_constitucional"
+                                        data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if empresa_configuracion.video %}
+                    <div class="col-12 col-sm-6 p-0 m-0 m-auto">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe
+                                    class="embed-responsive-item p-0"
+                                    title="video_constitucional"
+                                    data-src="{{ empresa_configuracion.video }}?rel=0&amp;showinfo=0" frameborder="0"
+                                    allowfullscreen></iframe>
+                        </div>
+                    </div>
+                {% endif %}
             {% endif %}
+
             <div class="col-12 col-sm-6 m-0 p-0 {% if not empresa_configuracion.video %} m-auto {% endif %}">
                 <div class="contenido">
-                    <img class="img-fluid" data-src="{% static 'web/img/datos-empresa.png' %}"
-                         alt="Imagen Datos Empresa">
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if empresa_configuracion.imagen_info_empresa_en %}
+                            <img class="img-fluid" data-src="{{empresa_configuracion.imagen_info_empresa_en.url}}"
+                             alt="Image About Company">
+                        {% endif %}
+                    {% else %}
+                        {% if empresa_configuracion.imagen_info_empresa %}
+                            <img class="img-fluid" data-src="{{empresa_configuracion.imagen_info_empresa.url}}"
+                             alt="Imagen Datos Empresa">
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
             <div class="col-12 col-md-7 col-lg-8 mt-3 mt-sm-0 dark-grey-text" style="margin: auto !important;">
