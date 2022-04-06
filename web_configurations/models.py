@@ -109,6 +109,7 @@ class GeneralConfiguration(SingletonModel):
     linkedin = models.CharField(max_length=200, null=True, blank=True)
     youtube = models.CharField(max_length=200, null=True, blank=True)
     twitter = models.CharField(max_length=200, null=True, blank=True)
+    copyright = models.CharField(max_length=80, null=True, blank=True, default='© 2021 Copyright: Odecopack')
     version_css_cache = models.CharField(max_length=20, default='')
 
     def __unicode__(self):
@@ -123,6 +124,10 @@ class LaEmpresaConfiguration(SingletonModel):
         new_filename = get_image_name('La Empresa Principal', filename)
         return "web/img/empr/%s" % new_filename
 
+    def imagen_info_upload_to(instance, filename):
+        new_filename = get_image_name('Info', filename)
+        return "web/img/empr/%s" % new_filename
+
     titulo = models.CharField(max_length=150, default='Aqui el titulo')
     texto = HTMLField('Descripcion Empresa', default='Aqui la descripción')
     texto_en = HTMLField('Descripcion Empresa Ingles', default='Aqui la descripción en ingles')
@@ -135,7 +140,26 @@ class LaEmpresaConfiguration(SingletonModel):
         null=True,
         blank=True
     )
+    imagen_info_empresa = ProcessedImageField(
+        processors=[SmartResize(width=570, height=362, upscale=False)],
+        format='JPEG',
+        options={'quality': 70},
+        upload_to=imagen_info_upload_to,
+        verbose_name='Imagen Informacion Empresa (570x362)',
+        null=True,
+        blank=True
+    )
+    imagen_info_empresa_en = ProcessedImageField(
+        processors=[SmartResize(width=570, height=362, upscale=False)],
+        format='JPEG',
+        options={'quality': 70},
+        upload_to=imagen_info_upload_to,
+        verbose_name='Imagen Informacion Empresa Ingles (570x362)',
+        null=True,
+        blank=True
+    )
     video = models.CharField(max_length=500, null=True, blank=True)
+    video_en = models.CharField(max_length=500, null=True, blank=True)
 
     def __unicode__(self):
         return "La Empresa"

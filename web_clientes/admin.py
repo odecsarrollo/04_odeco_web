@@ -4,7 +4,7 @@ from web_clientes.models import Cliente, ClienteIndustria
 
 
 class ClienteIndustriaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'orden']
+    list_display = ['nombre', 'nombre_en', 'orden']
     list_editable = ['orden']
 
     def get_queryset(self, request):

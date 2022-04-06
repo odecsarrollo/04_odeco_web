@@ -9,7 +9,8 @@ from web_configurations.models import CacheConfiguration
 
 
 class ClienteIndustria(models.Model):
-    nombre = models.CharField(max_length=200)
+    nombre = models.CharField(max_length=200, unique=True)
+    nombre_en = models.CharField(max_length=200)
     orden = models.PositiveIntegerField(default=0)
 
     def __str__(self):

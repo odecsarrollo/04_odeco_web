@@ -148,7 +148,9 @@ class ItemSolucionImagen(models.Model):
     item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes')
     orden = models.PositiveIntegerField(default=0)
     alt_seo = models.CharField(max_length=125, default='', blank=True, null=True)
+    alt_seo_en = models.CharField(max_length=125, default='', blank=True, null=True)
     descripcion = models.TextField(null=True, blank=True)
+    descripcion_en = models.TextField(null=True, blank=True)
     imagen = ProcessedImageField(
         processors=[ResizeToFit(width=1024, height=768, upscale=False)],
         format='JPEG',
