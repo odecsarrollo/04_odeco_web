@@ -25,7 +25,7 @@ class IndustriaCasoExito(models.Model):
 
 class CasoExito(TimeStampedModel):
     def imagen_principal_upload_to(instance, filename):
-        new_filename = get_image_name('Caso Exito principal', filename)
+        new_filename = get_image_name(clase='Caso Exito principal', filename=filename)
         return "web/img/casexi/%s" % new_filename
 
     nombre = models.CharField(max_length=120, verbose_name='Nombre')
@@ -69,7 +69,7 @@ class CasoExitoImagen(models.Model):
     )
 
     def imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Imagen Caso Exito', filename)
+        new_filename = get_image_name(clase='Imagen Caso Exito', filename=filename)
         return "web/img/casexi/%s" % new_filename
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

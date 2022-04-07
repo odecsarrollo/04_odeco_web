@@ -9,11 +9,11 @@ from web.utils import get_image_name
 
 class IndexConfiguration(SingletonModel):
     def header_imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Header', filename)
+        new_filename = get_image_name(clase='Header', filename=filename)
         return "web/img/index/%s" % new_filename
 
     def overlay_publicidad_imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Overlay', filename)
+        new_filename = get_image_name(clase='Overlay', filename=filename)
         return "web/img/index/%s" % new_filename
 
     header_titulo = models.CharField(max_length=150, default='Aqui el titulo')
@@ -70,7 +70,7 @@ class IndexConfiguration(SingletonModel):
 
 class CasosExitoConfiguration(SingletonModel):
     def header_imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Header', filename)
+        new_filename = get_image_name(clase='Header', filename=filename)
         return "web/img/casexi/%s" % new_filename
 
     header_text = models.TextField(max_length=150, verbose_name='Titulo', default='Aqui la descripción', null=True,
@@ -96,7 +96,7 @@ class CasosExitoConfiguration(SingletonModel):
 
 
 class GeneralConfiguration(SingletonModel):
-    direccion = models.CharField(max_length=200, default='Dirección aquí', verbose_name='Dirección')
+    direccion = models.CharField(max_length=200, verbose_name='Dirección', null=True, blank=True)
     horarios_de_atencion = HTMLField('Horarios de Atención', default='Texto Horarios de Atención aquí')
     horarios_de_atencion_en = HTMLField('Horarios de Atención Ingles', default='Texto Horarios de Atención aquí')
     numeros_contacto = HTMLField('Numeros de Contacto', default='Numeros de contacto', null=True, blank=True)
@@ -121,11 +121,11 @@ class GeneralConfiguration(SingletonModel):
 
 class LaEmpresaConfiguration(SingletonModel):
     def imagen_principal_upload_to(instance, filename):
-        new_filename = get_image_name('La Empresa Principal', filename)
+        new_filename = get_image_name(clase='La Empresa Principal', filename=filename)
         return "web/img/empr/%s" % new_filename
 
     def imagen_info_upload_to(instance, filename):
-        new_filename = get_image_name('Info', filename)
+        new_filename = get_image_name(clase='Info', filename=filename)
         return "web/img/empr/%s" % new_filename
 
     titulo = models.CharField(max_length=150, default='Aqui el titulo')
