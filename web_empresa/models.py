@@ -26,7 +26,7 @@ class MixingCacheConfiguration(object):
 class Aliado(MixingCacheConfiguration, models.Model):
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Aliado', instance.nombre)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name(clase=clase, filename=filename)
         return "web/img/empr/%s" % new_filename
 
     nombre = models.CharField(max_length=60)
@@ -59,7 +59,7 @@ class GaleriaFotoEmpresa(MixingCacheConfiguration, TimeStampedModel):
 
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Galeria', instance.nombre)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name(clase=clase, filename=filename)
         return "web/img/empr/%s" % new_filename
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
@@ -127,7 +127,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
 
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Imagen Galeria', instance.galeria.nombre)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name(clase=clase, filename=filename)
         return "web/img/empr/%s" % new_filename
 
     galeria = models.ForeignKey(GaleriaFotoEmpresa, related_name='mis_imagenes', on_delete=models.PROTECT)

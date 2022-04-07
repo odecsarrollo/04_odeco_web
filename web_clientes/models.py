@@ -32,7 +32,7 @@ class ClienteIndustria(models.Model):
 class Cliente(models.Model):
     def imagen_upload_to(instance, filename):
         clase = ('%s %s') % ('Cliente', instance.nombre)
-        new_filename = get_image_name(clase, filename)
+        new_filename = get_image_name(clase=clase, filename=filename)
         return "web/img/clien/%s" % new_filename
 
     nombre = models.CharField(max_length=60)

@@ -36,11 +36,11 @@ class CategoriaItemSolucion(models.Model):
 
 class Solucion(TimeStampedModel):
     def header_imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Header', filename)
+        new_filename = get_image_name(filename=filename)
         return "web/img/solu/%s" % new_filename
 
     def imagen_boton_upload_to(instance, filename):
-        new_filename = get_image_name('Boton Solucion', filename)
+        new_filename = get_image_name(filename=filename)
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120, verbose_name=_('Nombre'))
@@ -89,7 +89,7 @@ class Solucion(TimeStampedModel):
 
 class ItemSolucion(models.Model):
     def imagen_principal_upload_to(instance, filename):
-        new_filename = get_image_name('Solucion Imagen principal', filename)
+        new_filename = get_image_name(clase='Solucion Imagen principal', filename=filename)
         return "web/img/solu/%s" % new_filename
 
     nombre = models.CharField(max_length=120)
@@ -130,7 +130,7 @@ class ItemSolucion(models.Model):
         verbose_name_plural = 'Items Soluciones'
 
 
-class ItemSolucionImagen(models.Model):
+class ItemSolucionImagen(TimeStampedModel):
     CHOICES_MARCA_AGUA = (
         (0, 'Ninguna'),
         (1, 'Blanca'),
@@ -138,7 +138,7 @@ class ItemSolucionImagen(models.Model):
     )
 
     def imagen_upload_to(instance, filename):
-        new_filename = get_image_name('Imagen Solucion', filename)
+        new_filename = get_image_name(filename=filename)
         return "web/img/solu/%s" % new_filename
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

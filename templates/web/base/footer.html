@@ -23,9 +23,12 @@
             <div class="col-12 col-md-6 col-lg-3 mt-2">
                 <div id="map-container" class="z-depth-1" style="height: 200px">
                 </div>
-
-                <p class="text-center"><i class="fas fa-map-marker"
-                                          aria-hidden="true"></i> {{ general_configuracion.direccion }}</p>
+                {% if general_configuracion.direccion %}
+                    <p class="text-center">
+                        <i class="fas fa-map-marker" aria-hidden="true"></i>
+                        {{ general_configuracion.direccion }}
+                    </p>
+                {% endif %}
             </div>
             <div class="col-12 col-md-12 col-lg-6 mt-2">
                 <section class="section">
