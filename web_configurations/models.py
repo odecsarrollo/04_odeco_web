@@ -1,6 +1,6 @@
 from django.db import models
 from solo.models import SingletonModel
-from tinymce import HTMLField
+from tinymce.models import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFit
 

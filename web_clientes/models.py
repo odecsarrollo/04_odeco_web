@@ -36,7 +36,8 @@ class Cliente(models.Model):
         return "web/img/clien/%s" % new_filename
 
     nombre = models.CharField(max_length=60)
-    industria = models.ForeignKey(ClienteIndustria, null=True, blank=True, related_name='clientes')
+    industria = models.ForeignKey(ClienteIndustria, null=True, blank=True, related_name='clientes',
+                                  on_delete=models.PROTECT)
     logo = ProcessedImageField(
         processors=[ResizeToFit(width=190, height=150, upscale=False)],
         format='PNG',

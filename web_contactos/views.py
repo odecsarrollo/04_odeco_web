@@ -5,7 +5,7 @@ from .models import ClienteContacto
 from braces.views import LoginRequiredMixin
 
 
-class RecoleccionContactoView(LoginRequiredMixin,CreateView):
+class RecoleccionContactoView(LoginRequiredMixin, CreateView):
     model = ClienteContacto
     login_url = "/admin/login/"
     fields = '__all__'

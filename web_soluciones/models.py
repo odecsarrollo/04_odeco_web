@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from tinymce import HTMLField
+from tinymce.models import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
 from django.utils.translation import gettext_lazy as _
@@ -104,7 +104,8 @@ class ItemSolucion(models.Model):
     mas_en = HTMLField('Texto Item Solución en Ingles', null=True,
                        blank=True)
     orden = models.PositiveIntegerField(default=0)
-    categoria_item = models.ForeignKey(CategoriaItemSolucion, related_name='mis_items', null=True, blank=True)
+    categoria_item = models.ForeignKey(CategoriaItemSolucion, related_name='mis_items', null=True, blank=True,
+                                       on_delete=models.PROTECT)
 
     activo = models.BooleanField(default=False)
     imagen_principal = ProcessedImageField(
@@ -145,7 +146,7 @@ class ItemSolucionImagen(models.Model):
         self.item_solucion.solucion.save()
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
-    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes')
+    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_imagenes', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
     alt_seo = models.CharField(max_length=125, default='', blank=True, null=True)
     alt_seo_en = models.CharField(max_length=125, default='', blank=True, null=True)
@@ -178,7 +179,7 @@ class ItemSolucionImagen(models.Model):
 
 class ItemSolucionVideo(models.Model):
     video = models.CharField(max_length=500)
-    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_videos')
+    item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_videos', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

@@ -1,6 +1,6 @@
 from django.db import models
 
-from tinymce import HTMLField
+from tinymce.models import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import ResizeToFill, ResizeToFit
 
@@ -38,10 +38,11 @@ class CasoExito(TimeStampedModel):
     descripcion_en = HTMLField('Descripción Ingles', null=True, blank=True)
 
     orden = models.PositiveIntegerField(default=0)
-    industria = models.ForeignKey(IndustriaCasoExito, related_name='mis_casos_exito')
+    industria = models.ForeignKey(IndustriaCasoExito, related_name='mis_casos_exito', on_delete=models.PROTECT)
     fecha_entrega = models.DateField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
-    cliente = models.ForeignKey(Cliente, related_name='mis_casos_exito', null=True, blank=True)
+    cliente = models.ForeignKey(Cliente, related_name='mis_casos_exito', null=True, blank=True,
+                                on_delete=models.PROTECT)
     activo = models.BooleanField(default=False)
     imagen_principal = ProcessedImageField(
         processors=[ResizeToFit(width=400, height=200, upscale=False)],
@@ -77,7 +78,7 @@ class CasoExitoImagen(models.Model):
         self.caso_exito.save()
 
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)
-    caso_exito = models.ForeignKey(CasoExito, related_name='mis_imagenes')
+    caso_exito = models.ForeignKey(CasoExito, related_name='mis_imagenes', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
     alt_seo = models.CharField(max_length=125, default='', blank=True, null=True)
     descripcion = models.TextField(null=True, blank=True)
@@ -101,7 +102,7 @@ class CasoExitoImagen(models.Model):
 
 class CasoExitoVideo(models.Model):
     video = models.CharField(max_length=500)
-    caso_exito = models.ForeignKey(CasoExito, related_name='mis_videos')
+    caso_exito = models.ForeignKey(CasoExito, related_name='mis_videos', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
@@ -110,7 +111,7 @@ class CasoExitoVideo(models.Model):
 
 
 class CasoExitoTestimonio(models.Model):
-    caso_exito = models.ForeignKey(CasoExito, related_name='mis_testimonios')
+    caso_exito = models.ForeignKey(CasoExito, related_name='mis_testimonios', on_delete=models.PROTECT)
     nombre_persona = models.CharField(max_length=200)
     cargo = models.CharField(max_length=200, null=True, blank=True)
     testimonio = models.TextField()

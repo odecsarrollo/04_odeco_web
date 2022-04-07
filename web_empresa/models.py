@@ -130,7 +130,7 @@ class GaleriaFotoEmpresaImagen(models.Model):
         new_filename = get_image_name(clase, filename)
         return "web/img/empr/%s" % new_filename
 
-    galeria = models.ForeignKey(GaleriaFotoEmpresa, related_name='mis_imagenes')
+    galeria = models.ForeignKey(GaleriaFotoEmpresa, related_name='mis_imagenes', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
     descripcion = models.TextField(null=True, blank=True)
     marca_agua = models.PositiveIntegerField(choices=CHOICES_MARCA_AGUA, default=2)

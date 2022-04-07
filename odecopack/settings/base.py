@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from sys import path
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 
 def str_to_bool(s: str):
@@ -180,17 +180,18 @@ STATICFILES_DIRS = [
 
 ############ TINYMCE CONFIGURATION
 TINYMCE_DEFAULT_CONFIG = {
-    'selector': 'textarea',
-    'height': 300,
-    'theme': 'modern',
-    'plugins': [
-        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-        'searchreplace wordcount visualblocks visualchars code fullscreen',
-        'insertdatetime media nonbreaking save table contextmenu directionality',
-        'emoticons template paste textcolor colorpicker textpattern imagetools',
-        'autoresize'
-    ],
-    'toolbar1': 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    "height": "320px",
+    "width": "960px",
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code "
+               "fullscreen insertdatetime media table paste code help wordcount spellchecker",
+    "toolbar": "undo redo | bold italic underline strikethrough | fontsizeselect formatselect | alignleft "
+               "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor "
+               "backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+               "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+               "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+    "language": "es",  # To force a specific language instead of the Django current language.
 }
 ############ END TINYMCE CONFIGURATION
 
@@ -200,3 +201,5 @@ IMAGEKIT_WATERMARK_IMAGE_ORANGE = os.path.join(SITE_ROOT, 'static/web/img/logo_f
 
 IMAGEKIT_SPEC_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_dot_hash'
 IMAGEKIT_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_dot_hash'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
