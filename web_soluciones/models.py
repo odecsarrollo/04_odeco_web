@@ -176,6 +176,9 @@ class ItemSolucionImagen(models.Model):
         format='WEBP'
     )
 
+    def get_absolute_url(self):
+        return reverse('web_soluciones:item_solucion_image', kwargs={"pk": self.pk})
+
 
 class ItemSolucionVideo(models.Model):
     video = models.CharField(max_length=500)

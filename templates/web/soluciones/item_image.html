@@ -1,0 +1,5 @@
+{% load imagekit i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<div>
+    <img src="{{ object.imagen.url }}" alt="{{object.alt_seo}}">
+</div>
