@@ -25,7 +25,6 @@ urlpatterns = [
     path('soluciones/', include(('web_soluciones.urls', 'web_soluciones'), namespace='web_soluciones')),
     path('casos_exito/', include(('web_casos_exito.urls', 'web_casos_exito'), namespace='web_casos_exito')),
     path('web/', include(('web.urls', 'web'), namespace='web')),
-    path('feria/', include(('web_contactos.urls', 'web_contactos'), namespace='contactos')),
     path('tinymce/', include('tinymce.urls')),
     path('rosetta/', include('rosetta.urls')),
 ]

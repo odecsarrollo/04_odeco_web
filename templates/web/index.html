@@ -89,52 +89,52 @@
 {% endblock %}
 
 <script>
-    {% block final_scripts %}
-        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-        {% if index_configuracion.overlay_publicidad %}
-            function onOverlayPublicidad() {
-                document.getElementById("overlay").style.display = "block";
-            }
-            function offOverlayPublicidad() {
-                document.getElementById("overlay").style.display = "none";
-            }
+  {% block final_scripts %}
+    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+    {% if index_configuracion.overlay_publicidad %}
+      function onOverlayPublicidad() {
+        document.getElementById("overlay").style.display = "block";
+      }
+      function offOverlayPublicidad() {
+        document.getElementById("overlay").style.display = "none";
+      }
+    {% endif %}
+    {% if index_configuracion.overlay_publicidad %}
+      onOverlayPublicidad();
+    {% endif %}
+  {% endblock %}
+  {% block onLoadScript %}
+    {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
+    WebpIsSupported(function (isSupported) {
+      if (isSupported) {
+        {% if index_configuracion.header_imagen %}
+          if (window.matchMedia("(max-width: 600px)").matches) {
+            document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_cell_webp.url }})";
+          } else {
+            document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_webp.url }})";
+          }
         {% endif %}
-        {% if index_configuracion.overlay_publicidad %}
-            onOverlayPublicidad();
+      } else {
+        {% if index_configuracion.header_imagen %}
+          if (window.matchMedia("(max-width: 600px)").matches) {
+            document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_cell.url }})";
+          } else {
+            document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_normal.url }})";
+          }
         {% endif %}
-    {% endblock %}
-    {% block onLoadScript %}
-        {% get_solo 'web_configurations.IndexConfiguration' as index_configuracion %}
-        WebpIsSupported(function (isSupported) {
-            if (isSupported) {
-                {% if index_configuracion.header_imagen %}
-                    if (window.matchMedia("(max-width: 600px)").matches) {
-                        document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_cell_webp.url }})";
-                    } else {
-                        document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_webp.url }})";
-                    }
-                {% endif %}
-            } else {
-                {% if index_configuracion.header_imagen %}
-                    if (window.matchMedia("(max-width: 600px)").matches) {
-                        document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_cell.url }})";
-                    } else {
-                        document.getElementById('home').style.backgroundImage = "url({{ index_configuracion.header_imagen_normal.url }})";
-                    }
-                {% endif %}
-            }
-        });
-        var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-        if (width > 425) {
-            var logo_imagen_url = "{% static 'web/img/marca_agua_orange.png' %}";
-            var imagen = document.createElement('img');
-            imagen.src = logo_imagen_url;
-            imagen.className = "img-fluid";
-            imagen.alt = 'Logo Odecopack';
-            var logo_index = document.getElementById('logo_index');
-            logo_index.appendChild(imagen);
-        }
-    {% endblock %}
+      }
+    });
+    const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    if (width > 425) {
+      const logo_imagen_url = "{% static 'web/img/marca_agua_orange.png' %}";
+      const imagen = document.createElement('img');
+      imagen.src = logo_imagen_url;
+      imagen.className = "img-fluid";
+      imagen.alt = 'Logo Odecopack';
+      const logo_index = document.getElementById('logo_index');
+      logo_index.appendChild(imagen);
+    }
+  {% endblock %}
 </script>
 {% block content %}
     <div class="container-fluid p-0 m-0">

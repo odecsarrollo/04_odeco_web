@@ -22,12 +22,12 @@
                                 data-src="{{ item.imagen_principal.url }}"
                                 {% if LANGUAGE_CODE == 'en' %}
                                     {% if item.nombre_en %}
-                                        alt="Image profile item solution of {{ item.nombre_en }}"
+                                alt="Image profile item solution of {{ item.nombre_en }}"
                                     {% else %}
-                                        alt="Imagen perfil item solución de {{ item.nombre }}"
+                                alt="Imagen perfil item solución de {{ item.nombre }}"
                                     {% endif %}
                                 {% else %}
-                                    alt="Imagen perfil item solución de {{ item.nombre }}"
+                                alt="Imagen perfil item solución de {{ item.nombre }}"
                                 {% endif %}
                         >
                     </a>
@@ -70,19 +70,19 @@
                                                    data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                     <div class="view overlay hm-white-slight z-depth-2">
                                                         <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                             {% if LANGUAGE_CODE == 'en' %}
-                                                                {% if imagen.alt_seo_en %}
-                                                                    alt="{{ imagen.alt_seo_en }}"
+                                                                {% if LANGUAGE_CODE == 'en' %}
+                                                                    {% if imagen.alt_seo_en %}
+                                                             alt="{{ imagen.alt_seo_en }}"
+                                                                    {% else %}
+                                                                        {% if imagen.alt_seo %}
+                                                             alt="{{ imagen.alt_seo }}"
+                                                                        {% endif %}
+                                                                    {% endif %}
                                                                 {% else %}
                                                                     {% if imagen.alt_seo %}
-                                                                        alt="{{ imagen.alt_seo }}"
+                                                             alt="{{ imagen.alt_seo }}"
                                                                     {% endif %}
                                                                 {% endif %}
-                                                            {% else %}
-                                                                {% if imagen.alt_seo %}
-                                                                    alt="{{ imagen.alt_seo }}"
-                                                                {% endif %}
-                                                            {% endif %}
                                                         >
                                                     </div>
                                                 </a>
@@ -188,19 +188,19 @@
                                                        data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
                                                         <div class="view overlay hm-white-slight z-depth-2">
                                                             <img data-src="{{ imagen.imagen_thumbnail.url }}"
-                                                                 {% if LANGUAGE_CODE == 'en' %}
-                                                                    {% if imagen.alt_seo_en %}
-                                                                        alt="{{ imagen.alt_seo_en }}"
+                                                                    {% if LANGUAGE_CODE == 'en' %}
+                                                                        {% if imagen.alt_seo_en %}
+                                                                 alt="{{ imagen.alt_seo_en }}"
+                                                                        {% else %}
+                                                                            {% if imagen.alt_seo %}
+                                                                 alt="{{ imagen.alt_seo }}"
+                                                                            {% endif %}
+                                                                        {% endif %}
                                                                     {% else %}
                                                                         {% if imagen.alt_seo %}
-                                                                            alt="{{ imagen.alt_seo }}"
+                                                                 alt="{{ imagen.alt_seo }}"
                                                                         {% endif %}
                                                                     {% endif %}
-                                                                {% else %}
-                                                                    {% if imagen.alt_seo %}
-                                                                        alt="{{ imagen.alt_seo }}"
-                                                                    {% endif %}
-                                                                {% endif %}
                                                             >
                                                         </div>
                                                     </a>
@@ -208,12 +208,12 @@
                                                         <h3>
                                                             {% if LANGUAGE_CODE == 'en' %}
                                                                 {% if item.nombre_eng %}
-                                                                    {{item.nombre_eng}}
+                                                                    {{ item.nombre_eng }}
                                                                 {% else %}
-                                                                    {{item.nombre}}
+                                                                    {{ item.nombre }}
                                                                 {% endif %}
                                                             {% else %}
-                                                                {{item.nombre}}
+                                                                {{ item.nombre }}
                                                             {% endif %}
                                                         </h3>
                                                         {% if LANGUAGE_CODE == 'en' %}

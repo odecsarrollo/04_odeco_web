@@ -186,6 +186,7 @@
             cursor: pointer;
             color: #fff
         }
+
         .collapse {
             display: none
         }
@@ -854,216 +855,216 @@
     {% include 'web/base/footer.html' %}
 {% endblock %}
 <script>
-    function preventPassiveListener(ev) {
-        //ev.preventDefault();
+  function preventPassiveListener(ev) {
+    //ev.preventDefault();
+  }
+
+  const suportPassive = suportPassiveListeners();
+  document.addEventListener('touchstart', preventPassiveListener, suportPassive ? {passive: true} : false);
+  document.addEventListener('wheel', preventPassiveListener, suportPassive ? {passive: true} : false);
+  document.addEventListener('mousewheel', preventPassiveListener, suportPassive ? {passive: true} : false);
+  document.addEventListener('touchmove', preventPassiveListener, suportPassive ? {passive: true} : false);
+
+  function defer_script_load(script_file, defer, async, callback) {
+    const giftofspeed = document.createElement('script');
+    giftofspeed.src = script_file;
+    giftofspeed.defer = defer;
+    giftofspeed.async = async;
+    const godefer = document.getElementsByTagName('script')[0];
+    if (callback) {
+      godefer.addEventListener('load', function (e) {
+        callback(null, e);
+      }, false);
+    }
+    godefer.parentNode.insertBefore(giftofspeed, godefer);
+  }
+
+  function defer_css_load(css_file) {
+    const giftofspeed = document.createElement('link');
+    giftofspeed.rel = 'stylesheet';
+    giftofspeed.href = css_file;
+    const godefer = document.getElementsByTagName('link')[0];
+    godefer.parentNode.insertBefore(giftofspeed, godefer);
+  }
+
+  function WebpIsSupported(callback) {
+    // If the browser doesn't has the method createImageBitmap, you can't display webp format
+    if (!window.createImageBitmap) {
+      callback(false);
+      return;
     }
 
-    var suportPassive = suportPassiveListeners();
-    document.addEventListener('touchstart', preventPassiveListener, suportPassive ? {passive: true} : false);
-    document.addEventListener('wheel', preventPassiveListener, suportPassive ? {passive: true} : false);
-    document.addEventListener('mousewheel', preventPassiveListener, suportPassive ? {passive: true} : false);
-    document.addEventListener('touchmove', preventPassiveListener, suportPassive ? {passive: true} : false);
+    // Base64 representation of a white point image
+    const webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
 
-    function defer_script_load(script_file, defer, async, callback) {
-        var giftofspeed = document.createElement('script');
-        giftofspeed.src = script_file;
-        giftofspeed.defer = defer;
-        giftofspeed.async = async;
-        var godefer = document.getElementsByTagName('script')[0];
-        if (callback) {
-            godefer.addEventListener('load', function (e) {
-                callback(null, e);
-            }, false);
+    // Retrieve the Image in Blob Format
+    fetch(webpdata).then(function (response) {
+      return response.blob();
+    }).then(function (blob) {
+      // If the createImageBitmap method succeeds, return true, otherwise false
+      createImageBitmap(blob).then(function () {
+        callback(true);
+      }, function () {
+        callback(false);
+      });
+    });
+  }
+
+  function suportPassiveListeners() {
+    let supportsPassive = false;
+    try {
+      const opts = Object.defineProperty({}, 'passive', {
+        get: function () {
+          supportsPassive = true;
         }
-        godefer.parentNode.insertBefore(giftofspeed, godefer);
+      });
+      window.addEventListener("testPassive", null, opts);
+      window.removeEventListener("testPassive", null, opts);
+    } catch (e) {
     }
+    return supportsPassive
+  }
 
-    function defer_css_load(css_file) {
-        var giftofspeed = document.createElement('link');
-        giftofspeed.rel = 'stylesheet';
-        giftofspeed.href = css_file;
-        var godefer = document.getElementsByTagName('link')[0];
-        godefer.parentNode.insertBefore(giftofspeed, godefer);
-    }
+  function initMap() {
+    const uluru = {lat: 3.464009, lng: -76.510884};
+    const map = new google.maps.Map(document.getElementById('map-container'), {
+      zoom: 15,
+      center: uluru
+    });
+    const marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+  }
 
-    function WebpIsSupported(callback) {
-        // If the browser doesn't has the method createImageBitmap, you can't display webp format
-        if (!window.createImageBitmap) {
-            callback(false);
-            return;
-        }
+  function inicial() {
+    defer_css_load("{% static 'web/sass/mdb.min.css' %}");
+    defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
+      new WOW().init();
+    });
+    defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
+    defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
+    defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
+    defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
 
-        // Base64 representation of a white point image
-        var webpdata = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAEAAQAcJaQAA3AA/v3AgAA=';
+    {% if not debug and user.is_anonymous %}
+      window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+      };
+      ga.l = +new Date;
+      ga('create', 'UA-107233875-1', 'auto');
+      ga('send', 'pageview');
+      defer_script_load("https://www.google-analytics.com/analytics.js", true, false, null);
+    {% endif %}
+    $('.navbar-nav>li>a').on('click', function () {
+      $('.navbar-collapse').collapse('hide');
+    });
+    {% block onLoadScript %}
 
-        // Retrieve the Image in Blob Format
-        fetch(webpdata).then(function (response) {
-            return response.blob();
-        }).then(function (blob) {
-            // If the createImageBitmap method succeeds, return true, otherwise false
-            createImageBitmap(blob).then(function () {
-                callback(true);
-            }, function () {
-                callback(false);
-            });
-        });
-    }
-
-    function suportPassiveListeners() {
-        var supportsPassive = false;
-        try {
-            var opts = Object.defineProperty({}, 'passive', {
-                get: function () {
-                    supportsPassive = true;
-                }
-            });
-            window.addEventListener("testPassive", null, opts);
-            window.removeEventListener("testPassive", null, opts);
-        } catch (e) {
-        }
-        return supportsPassive
-    }
-
-    function initMap() {
-        var uluru = {lat: 3.464009, lng: -76.510884};
-        var map = new google.maps.Map(document.getElementById('map-container'), {
-            zoom: 15,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
-
-    function inicial() {
-        defer_css_load("{% static 'web/sass/mdb.min.css' %}");
-        defer_script_load("{% static 'web/js/mdb.min.js' %}", false, false, function () {
-            new WOW().init();
-        });
-        defer_script_load("{% static 'web/js/popper.min.js' %}", true, false, null);
-        defer_script_load("{% static 'web/js/bootstrap.min.js' %}", false, false, null);
-        defer_css_load("{% static 'web/css/bootstrap.min.css' %}");
-        defer_css_load("{% static 'web/css/style.min.css' %}?version={{ general_configuracion.version_css_cache }}hola");
-
-        {% if not debug and user.is_anonymous %}
-            window.ga = window.ga || function () {
-                (ga.q = ga.q || []).push(arguments)
-            };
-            ga.l = +new Date;
-            ga('create', 'UA-107233875-1', 'auto');
-            ga('send', 'pageview');
-            defer_script_load("https://www.google-analytics.com/analytics.js", true, false, null);
-        {% endif %}
-        $('.navbar-nav>li>a').on('click', function () {
-            $('.navbar-collapse').collapse('hide');
-        });
-        {% block onLoadScript %}
-
-        {% endblock %}
-        if ('IntersectionObserver' in window) {
-            var preloadImage = function (elemento) {
-                elemento.setAttribute('src', elemento.getAttribute('data-src'));
-            };
-            var preloadSource = function (elemento) {
-                elemento.setAttribute('srcset', elemento.getAttribute('data-srcset'));
-            };
-
-            var myObserver = new IntersectionObserver(function (entries, self) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        if (entry.target.getAttribute('data-src')) {
-                            preloadImage(entry.target);
-                        } else if (entry.target.getAttribute('data-srcset')) {
-                            preloadSource(entry.target);
-                        } else if (entry.target.className === 'mdb-lightbox') {
-                            $(function () {
-                                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-                            });
-                        } else if (entry.target.id === 'map-container') {
-                            defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
-                            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
-                        } else if (entry.target.id === 'recaptcha_contactanos') {
-                            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
-                        }
-                        self.unobserve(entry.target);
-                    }
-                })
-            }, {
-                root: null,
-                rootMargin: "10px"
-            });
-
-            var elementToObserve = document.getElementsByTagName('img');
-            for (var i = 0; i < elementToObserve.length; i++) {
-                if (elementToObserve[i].getAttribute('data-src')) {
-                    myObserver.observe(elementToObserve[i]);
-                }
-            }
-
-            var elementSourceToObserve = document.getElementsByTagName('source');
-            for (var i = 0; i < elementSourceToObserve.length; i++) {
-                if (elementSourceToObserve[i].getAttribute('data-srcset')) {
-                    myObserver.observe(elementSourceToObserve[i]);
-                }
-            }
-
-            var map_container = document.getElementById('map-container');
-            myObserver.observe(map_container);
-
-            var recaptcha_container = document.getElementById('recaptcha_contactanos');
-            myObserver.observe(recaptcha_container);
-
-            var galerias = document.getElementsByClassName('mdb-lightbox');
-            for (var i = 0; i < galerias.length; i++) {
-                myObserver.observe(galerias[i]);
-            }
-
-            var elementVideoToObserve = document.getElementsByTagName('iframe');
-            for (var i = 0; i < elementVideoToObserve.length; i++) {
-                if (elementVideoToObserve[i].getAttribute('data-src')) {
-                    myObserver.observe(elementVideoToObserve[i]);
-                }
-            }
-
-        } else {
-            var vidDefer = document.getElementsByTagName('iframe');
-            for (var i = 0; i < vidDefer.length; i++) {
-                if (vidDefer[i].getAttribute('data-src')) {
-                    vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
-                }
-            }
-            var imgDefer = document.getElementsByTagName('img');
-            for (var i = 0; i < imgDefer.length; i++) {
-                if (imgDefer[i].getAttribute('data-src')) {
-                    imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
-                }
-            }
-            var sourceDefer = document.getElementsByTagName('script');
-            for (var i = 0; i < sourceDefer.length; i++) {
-                if (sourceDefer[i].getAttribute('data-srcset')) {
-                    sourceDefer[i].setAttribute('src', sourceDefer[i].getAttribute('data-srcset'));
-                }
-            }
-            $(function () {
-                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
-            });
-            defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
-            defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
-        }
-    }
-
-    window.onload = inicial;
-    {% block final_scripts %}
     {% endblock %}
+    if ('IntersectionObserver' in window) {
+      const preloadImage = function (elemento) {
+        elemento.setAttribute('src', elemento.getAttribute('data-src'));
+      };
+      const preloadSource = function (elemento) {
+        elemento.setAttribute('srcset', elemento.getAttribute('data-srcset'));
+      };
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-            .register("{% static 'web/js/sw_odecopack.js' %}")
-            .then(function () {
-                console.log("Service Worker Registered");
-            });
+      const myObserver = new IntersectionObserver(function (entries, self) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (entry.target.getAttribute('data-src')) {
+              preloadImage(entry.target);
+            } else if (entry.target.getAttribute('data-srcset')) {
+              preloadSource(entry.target);
+            } else if (entry.target.className === 'mdb-lightbox') {
+              $(function () {
+                $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+              });
+            } else if (entry.target.id === 'map-container') {
+              defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
+              defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
+            } else if (entry.target.id === 'recaptcha_contactanos') {
+              defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
+            }
+            self.unobserve(entry.target);
+          }
+        })
+      }, {
+        root: null,
+        rootMargin: "10px"
+      });
+
+      const elementToObserve = document.getElementsByTagName('img');
+      for (let i = 0; i < elementToObserve.length; i++) {
+        if (elementToObserve[i].getAttribute('data-src')) {
+          myObserver.observe(elementToObserve[i]);
+        }
+      }
+
+      const elementSourceToObserve = document.getElementsByTagName('source');
+      for (let i = 0; i < elementSourceToObserve.length; i++) {
+        if (elementSourceToObserve[i].getAttribute('data-srcset')) {
+          myObserver.observe(elementSourceToObserve[i]);
+        }
+      }
+
+      const map_container = document.getElementById('map-container');
+      myObserver.observe(map_container);
+
+      const recaptcha_container = document.getElementById('recaptcha_contactanos');
+      myObserver.observe(recaptcha_container);
+
+      const galerias = document.getElementsByClassName('mdb-lightbox');
+      for (let i = 0; i < galerias.length; i++) {
+        myObserver.observe(galerias[i]);
+      }
+
+      const elementVideoToObserve = document.getElementsByTagName('iframe');
+      for (let i = 0; i < elementVideoToObserve.length; i++) {
+        if (elementVideoToObserve[i].getAttribute('data-src')) {
+          myObserver.observe(elementVideoToObserve[i]);
+        }
+      }
+
+    } else {
+      let vidDefer = document.getElementsByTagName('iframe');
+      for (let i = 0; i < vidDefer.length; i++) {
+        if (vidDefer[i].getAttribute('data-src')) {
+          vidDefer[i].setAttribute('src', vidDefer[i].getAttribute('data-src'));
+        }
+      }
+      let imgDefer = document.getElementsByTagName('img');
+      for (let i = 0; i < imgDefer.length; i++) {
+        if (imgDefer[i].getAttribute('data-src')) {
+          imgDefer[i].setAttribute('src', imgDefer[i].getAttribute('data-src'));
+        }
+      }
+      let sourceDefer = document.getElementsByTagName('script');
+      for (let i = 0; i < sourceDefer.length; i++) {
+        if (sourceDefer[i].getAttribute('data-srcset')) {
+          sourceDefer[i].setAttribute('src', sourceDefer[i].getAttribute('data-srcset'));
+        }
+      }
+      $(function () {
+        $("#mdb-lightbox-ui").load("{% static 'web/mdb-addons/mdb-lightbox-ui.html' %}");
+      });
+      defer_script_load("https://maps.googleapis.com/maps/api/js?key=AIzaSyDnHDS9_MmBdyoGZgKYTkqb2C5ii6lvFaU&callback=initMap", true, false);
+      defer_script_load("https://www.google.com/recaptcha/api.js", false, false, null);
     }
+  }
+
+  window.onload = inicial;
+  {% block final_scripts %}
+  {% endblock %}
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register("{% static 'web/js/sw_odecopack.js' %}")
+      .then(function () {
+        console.log("Service Worker Registered");
+      });
+  }
 </script>
 </body>
 

@@ -61,7 +61,6 @@ MY_APPS = [
     'web_soluciones',
     'web_empresa',
     'web_clientes',
-    'web_contactos',
     'web_casos_exito',
 ]
 

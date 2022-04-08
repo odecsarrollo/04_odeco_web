@@ -108,38 +108,38 @@
     </div>
 {% endblock %}
 <script>
-    {% block onLoadScript %}
-        $('.modal').on('hide.bs.modal', function (e) {
-            var $if = $(e.delegateTarget).find('iframe');
-            var src = '';
-            for (i = 0; i < $if.length; i++) {
-                src = $if[i].src;
-                $if[i].src = '/empty.html';
-                $if[i].src = src;
-            }
-        });
+  {% block onLoadScript %}
+    $('.modal').on('hide.bs.modal', function (e) {
+      const $if = $(e.delegateTarget).find('iframe');
+      let src = '';
+      for (let i = 0; i < $if.length; i++) {
+        src = $if[i].src;
+        $if[i].src = '/empty.html';
+        $if[i].src = src;
+      }
+    });
 
-        $('.modal').on('show.bs.modal', function (e) {
+    $('.modal').on('show.bs.modal', function (e) {
 
-            {% if user.is_anonymous %}
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: e.target.title,
-                    eventAction: 'click',
-                    eventLabel: e.target.id
-                });
-            {% else %}
-                {% if user.is_authenticated and user.tercero %}
-                    {% if user.tercero.es_cliente %}
-                        ga('send', {
-                            hitType: 'event',
-                            eventCategory: e.target.title,
-                            eventAction: 'click',
-                            eventLabel: e.target.id
-                        });
-                    {% endif %}
-                {% endif %}
-            {% endif %}
+      {% if user.is_anonymous %}
+        ga('send', {
+          hitType: 'event',
+          eventCategory: e.target.title,
+          eventAction: 'click',
+          eventLabel: e.target.id
         });
-    {% endblock %}
+      {% else %}
+        {% if user.is_authenticated and user.tercero %}
+          {% if user.tercero.es_cliente %}
+            ga('send', {
+              hitType: 'event',
+              eventCategory: e.target.title,
+              eventAction: 'click',
+              eventLabel: e.target.id
+            });
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    });
+  {% endblock %}
 </script>

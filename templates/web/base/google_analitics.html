@@ -1,22 +1,22 @@
 <!-- Google Analytics -->
 {% if not debug %}
     <script>
-        window.ga = window.ga || function () {
-            (ga.q = ga.q || []).push(arguments)
-        };
-        ga.l = +new Date;
-        ga('create', 'UA-107233875-1', 'auto');
-        ga('send', 'pageview');
+      window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+      };
+      ga.l = +new Date;
+      ga('create', 'UA-107233875-1', 'auto');
+      ga('send', 'pageview');
     </script>
     <script defer src='https://www.google-analytics.com/analytics.js'></script>
 {% else %}
     <script>
-        window.ga = window.ga || function () {
-            (ga.q = ga.q || []).push(arguments)
-        };
-        ga.l = +new Date;
-        ga('create', 'UA-85067049-1', 'auto');
-        ga('send', 'pageview');
+      window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+      };
+      ga.l = +new Date;
+      ga('create', 'UA-85067049-1', 'auto');
+      ga('send', 'pageview');
     </script>
     <script defer src='https://www.google-analytics.com/analytics.js'></script>
 {% endif %}
