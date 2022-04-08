@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'^soluciones/', include('web_soluciones.urls', namespace='web_soluciones')),
     url(r'^casos_exito/', include('web_casos_exito.urls', namespace='web_casos_exito')),
     url(r'^web/', include('web.urls', namespace='web')),
-    url(r'^feria/', include('web_contactos.urls', namespace='contactos')),
     url(r'^tinymce/', include('tinymce.urls')),
     url(r'^rosetta/', include('rosetta.urls')),
 ]
