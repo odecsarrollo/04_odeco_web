@@ -1,5 +1,4 @@
 from django.contrib.sitemaps import Sitemap
-from django.urls import reverse
 
 from web_soluciones.models import ItemSolucionImagen, Solucion
 
@@ -18,5 +17,5 @@ class ItemSolutionsSitemap(Sitemap):
     def items(self):
         return ItemSolucionImagen.objects.order_by('id').all()
 
-    # def lastmod(self, obj):
-    #     return obj.escort_web_profile_cache_datetime
+    def lastmod(self, obj):
+        return obj.modified or obj.created
