@@ -16,7 +16,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav {% if es_menu_index == True %} smooth-scroll {% endif %}">
                 <li class="nav-item right-border">
-                    <a class="nav-link" href="{% if es_menu_index == False %}{% url 'index' %}{% endif %}#empresa_section"
+                    <a class="nav-link"
+                       href="{% if es_menu_index == False %}{% url 'index' %}{% endif %}#empresa_section"
                        data-offset="70">{% trans "EMPRESA" %} <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
@@ -80,7 +81,8 @@
                 {% endif %}
                 {% if general_configuracion.whatsaap %}
                     <li class="nav-item">
-                        <a class="nav-link" rel="noopener" target="_blank" href="{{ general_configuracion.whatsaap }}"><i
+                        <a class="nav-link" rel="noopener" target="_blank"
+                           href="{{ general_configuracion.whatsaap }}"><i
                                 class="fab fa-whatsapp"></i></a>
                     </li>
                 {% endif %}
