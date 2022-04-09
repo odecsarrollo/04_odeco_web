@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc7d3eaae1df638e5b11378693f76115a8b8d9dd07dace6f3ade3f46fe0f3967"
+            "sha256": "8d47751b398f86dbfcaf504db0ca3a9b117ef3a4196216556074849d489f99d2"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -189,11 +189,11 @@
         },
         "mailchimp3": {
             "hashes": [
-                "sha256:0a03b9982dd0f07893d8d26091696fcf4af885a050eeb4d524e80b21104f63ba",
-                "sha256:6b33b3004bc28fc5e4b89f41dab3f17707ac97400a56bc514e90f50c6dd01eec"
+                "sha256:2c78992e1e993d65e5e2405d91ab0a4381c80e95672d140444354a4ff7b074f0",
+                "sha256:a89fc886b8e47f21a732c36106b2b1c5a748aaf67bafd4b5a5f06a8425abe7b7"
             ],
             "index": "pypi",
-            "version": "==2.0.18"
+            "version": "==3.0.17"
         },
         "microsofttranslator": {
             "hashes": [
