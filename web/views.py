@@ -82,17 +82,19 @@ class SendContactenosView(RecaptchaMixin, View):
                 texto,
                 translation.ugettext('Pronto estaremos en contacto.')
             )
-
-            client = MailChimp(mc_user=settings.MAILCHIMP_USERNAME, mc_api=settings.MAILCHIMP_API_KEY)
-            client.lists.members.create_or_update(list_id=settings.MAILCHIMP_LIST_ID, subscriber_hash=correo, data={
-                'email_address': correo,
-                'status': 'subscribed',
-                'status_if_new': 'subscribed',
-                'merge_fields': {
-                    'FNAME': nombre,
-                    'COMPANY': empresa
-                },
-            })
+            try:
+                client = MailChimp(mc_user=settings.MAILCHIMP_USERNAME, mc_api=settings.MAILCHIMP_API_KEY)
+                client.lists.members.create_or_update(list_id=settings.MAILCHIMP_LIST_ID, subscriber_hash=correo, data={
+                    'email_address': correo,
+                    'status': 'subscribed',
+                    'status_if_new': 'subscribed',
+                    'merge_fields': {
+                        'FNAME': nombre,
+                        'COMPANY': empresa
+                    },
+                })
+            except Exception:
+                pass
 
             email = EmailMessage(
                 subject=asunto,
