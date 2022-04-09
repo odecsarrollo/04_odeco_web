@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-awsebcli = "==3.10.1"
+awsebcli = "==3.14.5"
 
 [packages]
 django = "==1.11.29"
@@ -21,6 +21,7 @@ django-redisboard = "==3.0.2"
 django-debug-toolbar = "==1.8"
 django-model-utils = "==3.0.0"
 mailchimp3 = "==2.0.18"
+mysqlclient = "==2.1.0"
 
 [requires]
 python_version = "3.8"
