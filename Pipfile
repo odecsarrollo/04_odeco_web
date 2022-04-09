@@ -21,7 +21,7 @@ django-redisboard = "==3.0.2"
 django-debug-toolbar = "==1.8"
 django-model-utils = "==3.0.0"
 mailchimp3 = "==2.0.18"
-mysqlclient = "==2.1.0"
+mysqlclient = "==1.4.6"
 
 [requires]
 python_version = "3.8"
