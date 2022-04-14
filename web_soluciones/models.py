@@ -1,10 +1,11 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 from tinymce.models import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _, get_language
 
 from model_utils.models import TimeStampedModel
 
@@ -51,6 +52,7 @@ class Solucion(TimeStampedModel):
                          blank=True)
     orden = models.PositiveIntegerField(default=0)
     slug = models.SlugField(null=True, blank=True)
+    slug_en = models.SlugField(null=True, blank=True)
 
     header_imagen = ProcessedImageField(
         processors=[SmartResize(width=2560, height=588, upscale=False)],
@@ -75,8 +77,11 @@ class Solucion(TimeStampedModel):
         return super().delete(using, keep_parents)
 
     def get_absolute_url(self):
-        if self.slug:
-            return reverse('web_soluciones:solucion_detail_slug', kwargs={"slug": self.slug})
+        english_language = get_language() == 'en'
+        if english_language and self.slug_en:
+            return reverse('web_soluciones:solucion_detail_slug_en', kwargs={"slug_en": self.slug_en})
+        if not english_language and self.slug:
+            return reverse('web_soluciones:solucion_detail', kwargs={"slug": self.slug})
         return reverse('web_soluciones:solucion_detail', kwargs={"pk": self.pk})
 
     def __str__(self):
@@ -176,7 +181,14 @@ class ItemSolucionImagen(TimeStampedModel):
         format='WEBP'
     )
 
+    slug = models.SlugField(null=True, blank=True)
+
     def get_absolute_url(self):
+        english_language = get_language() == 'en'
+        if english_language:
+            return reverse('web_soluciones:item_solucion_image_en', kwargs={"slug": self.slug})
+        if self.slug:
+            return reverse('web_soluciones:item_solucion_image', kwargs={"slug": self.slug})
         return reverse('web_soluciones:item_solucion_image', kwargs={"pk": self.pk})
 
 

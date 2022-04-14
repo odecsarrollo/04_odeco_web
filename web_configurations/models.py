@@ -110,6 +110,8 @@ class GeneralConfiguration(SingletonModel):
     youtube = models.CharField(max_length=200, null=True, blank=True)
     twitter = models.CharField(max_length=200, null=True, blank=True)
     copyright = models.CharField(max_length=80, null=True, blank=True, default='© 2021 Copyright: Odecopack')
+    tag_description = models.TextField(max_length=160, blank=True, null=True)
+    tag_description_en = models.TextField(max_length=160, blank=True, null=True)
     version_css_cache = models.CharField(max_length=20, default='')
 
     def __unicode__(self):

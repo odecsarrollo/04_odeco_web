@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import HttpResponseRedirect
 from django.utils.decorators import method_decorator
+from django.utils.text import slugify
 from django.views.decorators.gzip import gzip_page
 from django.utils import translation
 from django.views.generic import TemplateView, View
@@ -15,12 +16,25 @@ from web_clientes.models import Cliente, ClienteIndustria
 
 from mailchimp3 import MailChimp
 
+from web_soluciones.models import ItemSolucionImagen
+from web_soluciones.models import Solucion
+
 
 @method_decorator(gzip_page, name='dispatch')
 class IndexView(TemplateView):
     template_name = 'web/index.html'
 
     def get_context_data(self, **kwargs):
+        soluciones = [solucion for solucion in Solucion.objects.all() if not solucion.slug_en]
+        for solucion_sin_slug_en in soluciones:
+            solucion_sin_slug_en.slug_en = slugify(solucion_sin_slug_en.nombre_en)
+            solucion_sin_slug_en.save()
+
+        imagen_soluciones = [imagen for imagen in ItemSolucionImagen.objects.all() if not imagen.slug]
+        for imagen_sin_slug_es in imagen_soluciones:
+            imagen_sin_slug_es.slug = slugify(imagen_sin_slug_es.imagen.name.split('.')[0])
+            imagen_sin_slug_es.save()
+
         context = super().get_context_data(**kwargs)
         context['aliados_list'] = Aliado.objects.all()
         context['industrias_list'] = ClienteIndustria.objects.prefetch_related('clientes').all().order_by('orden')

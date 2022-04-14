@@ -46,7 +46,7 @@ class SolucionAdmin(admin.ModelAdmin):
     list_display = ['id', 'nombre', 'nombre_en', 'orden']
     list_editable = ['orden', 'nombre', 'nombre_en']
 
-    prepopulated_fields = {"slug": ("nombre",)}
+    prepopulated_fields = {"slug": ("nombre",), "slug_en": ("nombre_en",)}
 
     def get_queryset(self, request):
         return super().get_queryset(request).order_by('orden')

@@ -5,6 +5,27 @@
 <html lang="{{ LANGUAGE_CODE }}" class="{% block html_class %}{% endblock %}">
 
 <head>
+    {% if LANGUAGE_CODE == 'en' %}
+        <meta name="author" content="Odecopack"/>
+        {% if general_configuracion.tag_description_en %}
+            <meta
+                    name="description"
+                    content="{{ general_configuracion.tag_description_en }}"
+            />
+        {% endif %}
+    {% else %}
+        <meta name="author" content="Odecopack SAS"/>
+        {% if general_configuracion.tag_description %}
+            <meta
+                    name="description"
+                    content="{{ general_configuracion.tag_description }}"
+            />
+        {% endif %}
+    {% endif %}
+    <meta property="og:image" content="{% static "web/img/icono_192_192.png" %}"/>
+    <meta property="og:title" content="Odecopack"/>
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}"/>
+
     <script defer type="text/javascript" src="{% static 'web/js/jquery-3.2.1.min.js' %}"></script>
     <style>
         html {

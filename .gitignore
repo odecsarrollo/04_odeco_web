@@ -3,7 +3,7 @@
 odecopackdb
 /static/web/sass/mdb/*
 /media/*
-/comandos.txt
+/comands.txt
 /secretsLocal.json
 # Elastic Beanstalk Files
 !.elasticbeanstalk/*.cfg.yml

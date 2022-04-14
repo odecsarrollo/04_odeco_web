@@ -1,5 +1,58 @@
-{% load imagekit i18n %}
+{% extends 'web/base/base.html' %}
+{% load imagekit i18n inclusion_tags %}
 {% get_current_language as LANGUAGE_CODE %}
-<div>
-    <img src="{{ object.imagen.url }}" alt="{{object.alt_seo}}">
-</div>
+
+{% block title %}
+    {% if LANGUAGE_CODE == 'en' %}
+        {% if imagen.item_solucion.nombre_en %}
+            Image {{ imagen.item_solucion.nombre_en }}
+        {% else %}
+            Imagen {{ imagen.item_solucion.nombre }}
+        {% endif %}
+    {% else %}
+        Imagen {{ imagen.item_solucion.nombre }}
+    {% endif %}
+    {{ imagen.id }}
+{% endblock %}
+
+{% block content %}
+    <div class="container pt-5 mt-5">
+        <div class="row justify-content-center pt-3">
+            <img src="{{ imagen.imagen.url }}"
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if imagen.alt_seo_en %}
+                 alt="{{ imagen.alt_seo_en }}"
+                        {% else %}
+                            {% if imagen.alt_seo %}
+                 alt="{{ imagen.alt_seo }}"
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if imagen.alt_seo %}
+                 alt="{{ imagen.alt_seo }}"
+                        {% endif %}
+                    {% endif %}
+            >
+        </div>
+        <div class="row justify-content-center">
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if imagen.descripcion_en %}
+                    {{ imagen.descripcion_en }}
+                {% else %}
+                    {% if imagen.descripcion %}
+                        {{ imagen.descripcion }}
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if imagen.descripcion %}
+                    {{ imagen.descripcion }}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 pl-3 pr-3 pt-2 pl-sm-0 pr-sm-0 order-2 order-sm-1">
+            {% botones_soluciones %}
+        </div>
+    </div>
+{% endblock %}
