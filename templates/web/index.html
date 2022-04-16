@@ -3,7 +3,7 @@
 {% get_current_language as LANGUAGE_CODE %}
 
 {% block title %}
-    Inicio
+    {% if LANGUAGE_CODE == 'en' %} Home {% else %} Inicio {% endif %}
 {% endblock %}
 
 {% block html_class %}

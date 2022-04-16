@@ -8,18 +8,12 @@
     {% if LANGUAGE_CODE == 'en' %}
         <meta name="author" content="Odecopack"/>
         {% if general_configuracion.tag_description_en %}
-            <meta
-                    name="description"
-                    content="{{ general_configuracion.tag_description_en }}"
-            />
+            <meta name="description" content="{{ general_configuracion.tag_description_en }}"/>
         {% endif %}
     {% else %}
         <meta name="author" content="Odecopack SAS"/>
         {% if general_configuracion.tag_description %}
-            <meta
-                    name="description"
-                    content="{{ general_configuracion.tag_description }}"
-            />
+            <meta name="description" content="{{ general_configuracion.tag_description }}"/>
         {% endif %}
     {% endif %}
     <meta property="og:image" content="{% static "web/img/icono_192_192.png" %}"/>
@@ -823,8 +817,6 @@
     <meta name="theme-color" content="#ed6b00"/>
     <link rel="manifest" href="{% static 'manifest.json' %}">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description"
-          content="Su aliado tecnológico en líneas y procesos de producción. Somos una compania con 25 años de participacion en el mercado nacional e internacional. Involucrandonos en todas las necesidades del proceso productivo de los diferentes sectores industriales.">
     <title>Odecopack - {% block title %}{% endblock %}</title>
     <!-- Font Awesome -->
     <noscript>
@@ -838,9 +830,15 @@
               rel="stylesheet">
     </noscript>
     <link rel="icon" href="{% static 'web/img/favicon.ico' %}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+
+    {#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"#}
+    {#          integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"#}
+    {#          crossorigin="anonymous">#}
+
+    <link rel="preload" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" as="style"
           integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
-          crossorigin="anonymous">
+          crossorigin="anonymous"
+          onload="this.onload=null;this.rel='stylesheet'">
 </head>
 
 <body>

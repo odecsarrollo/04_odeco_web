@@ -50,7 +50,8 @@
                             </div>
                             {% if items_list %}
                                 {% if categoria_list|length > 1 %}
-                                    <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block">
+                                    <nav class="navbar navbar-soluciones navbar-expand-lg scrolling-navbar d-none d-md-block"
+                                         style="box-shadow:none; position: sticky; top:60px;">
                                         <ul class="navbar-nav navbar-nav-soluciones smooth-scroll">
                                             {% for categoria in categoria_list %}
                                                 {% if categoria.grouper %}
