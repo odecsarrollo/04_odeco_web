@@ -1,0 +1,75 @@
+{% load imagekit i18n custom_operators %}
+<div class="modal fade right" id="{{ item.id|slugify }}-{{ item.nombre|slugify }}"
+     title="{{ item.solucion.nombre|slugify }}" tabindex="-1"
+     role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg item" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header color-1-odecopack">
+                <h2 class="modal-title w-100 h2-responsive" id="myModalLabel">
+                    <strong>{% default_internationalization item.nombre|upper item.nombre_en|upper %}</strong>
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!--Body-->
+            <div class="modal-body">
+                {% default_internationalization item.mas|safe item.mas_en|safe %}
+                {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden" %}
+                    {% if imagenes_lista %}
+                        <h4 class="h4-responsive mt-2">{% trans 'Galería' %}</h4>
+                        <div class="pl-4 pr-4">
+                            <div class="galeria">
+                                <div class="mdb-lightbox">
+                                    <div class="row">
+                                        {% for imagen in imagenes_lista %}
+                                            {% if imagen.imagen %}
+                                                {% if imagen.marca_agua == 1 %}
+                                                    {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                                {% elif imagen.marca_agua == 2 %}
+                                                    {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                                {% else %}
+                                                    {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                                {% endif %}
+
+                                                <figure class="col-4 col-md-2 p-1 m-0">
+                                                    <a href="{{ imagen_procesada.url }}"
+                                                       data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
+                                                        <div class="view overlay hm-white-slight z-depth-2">
+                                                            <img data-src="{{ imagen.imagen_thumbnail.url }}"
+                                                                 alt="{% default_internationalization imagen.alt_seo imagen.alt_seo_en '' %}">
+                                                        </div>
+                                                    </a>
+                                                    <div class="caption">
+                                                        <h3>{% default_internationalization item.nombre|upper item.nombre_en|upper '' %}</h3>
+                                                        <p>{% default_internationalization imagen.descripcion imagen.descripcion_en '' %}</p>
+                                                    </div>
+                                                </figure>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                {% with videos_list=item.mis_videos.all|dictsort:"orden" %}
+                    {% include 'web/soluciones/item_videos.html' with videos_list=videos_list %}
+                {% endwith %}
+                {% with documentos_list=item.mis_documentos.all|dictsort:"orden" %}
+                    {% include 'web/soluciones/item_documentos.html' with documentos_list=documentos_list %}
+                {% endwith %}
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+                <button type="button" class="btn color-1-odecopack" data-dismiss="modal">{% trans 'Cerrar' %}</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Modal -->

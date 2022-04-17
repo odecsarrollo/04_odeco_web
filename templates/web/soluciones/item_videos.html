@@ -1,0 +1,20 @@
+{% load i18n custom_operators %}
+{% if videos_list %}
+    <h4 class="h4-responsive mt-2">{% trans 'Videos' %}</h4>
+    <div class="row">
+        {% for video in videos_list %}
+            {% if video.en_ingles or video.en_espanol %}
+                <div class="col-12 col-md-6 col-lg-4 p-1 m-0">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item p-0"
+                                title="{{ video.item_solucion.nombre }}-{{ video.id }}"
+                                data-src="{{ video.video }}?rel=0&amp;showinfo=0"
+                                frameborder="0"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

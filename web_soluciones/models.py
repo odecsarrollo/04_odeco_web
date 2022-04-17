@@ -1,7 +1,7 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.text import slugify
 from tinymce.models import HTMLField
 from imagekit.models import ProcessedImageField, ImageSpecField
 from pilkit.processors import SmartResize, ResizeToFill, ResizeToFit
@@ -196,6 +196,8 @@ class ItemSolucionVideo(models.Model):
     video = models.CharField(max_length=500)
     item_solucion = models.ForeignKey(ItemSolucion, related_name='mis_videos', on_delete=models.PROTECT)
     orden = models.PositiveIntegerField(default=0)
+    en_ingles = models.BooleanField(default=False)
+    en_espanol = models.BooleanField(default=True)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)
@@ -207,14 +209,22 @@ class Documento(models.Model):
         return "web/img/solu/docu/%s" % filename
 
     documento = models.FileField(upload_to=documento_upload)
-    nombre = models.CharField(max_length=120)
+    nombre = models.CharField(max_length=120, blank=True, null=True)
+    nombre_en = models.CharField(max_length=120, blank=True, null=True)
     orden = models.PositiveIntegerField(default=0)
     icono = models.CharField(max_length=120)
     item_solucion = models.ManyToManyField(ItemSolucion, related_name='mis_documentos')
-    activo = models.BooleanField(default=False)
+    en_ingles = models.BooleanField(default=False)
+    en_espanol = models.BooleanField(default=True)
+
+    def clean(self):
+        if self.en_ingles and not self.nombre_en:
+            raise ValidationError({"nombre_en": "Si esta en ingles, debería tener un nombre en ingles"})
+        if self.en_espanol and not self.nombre:
+            raise ValidationError({"nombre": "Si esta en español, debería tener un nombre en español"})
 
     def __str__(self):
-        return self.nombre
+        return self.nombre or self.nombre_en or self.id
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         super().save(force_insert, force_update, using, update_fields)

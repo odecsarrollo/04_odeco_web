@@ -28,7 +28,8 @@ class DocumentoAdmin(admin.ModelAdmin):
         'documento',
         'orden',
         'icono',
-        'activo'
+        'en_ingles',
+        'en_espanol',
     ]
 
     filter_horizontal = ['item_solucion', ]
@@ -81,7 +82,9 @@ class ItemSolucionVideoInline(admin.TabularInline):
     model = ItemSolucionVideo
     fields = [
         'orden',
-        'video'
+        'video',
+        'en_ingles',
+        'en_espanol',
     ]
     extra = 1
 

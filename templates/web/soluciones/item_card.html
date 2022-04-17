@@ -1,0 +1,74 @@
+{% load imagekit i18n custom_operators %}
+<div class="col-12 col-md-6 col-lg-4 p-1">
+    <div class="card card-body item">
+        <h5 class="card-title">
+            {% default_internationalization item.nombre|title item.nombre_en|title %}
+        </h5>
+        <div class="row mb-4">
+            {% if item.imagen_principal %}
+                <div class="col-12 text-center">
+                    <a href="#" data-toggle="modal" data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
+                        <img
+                                class="img-fluid"
+                                data-src="{{ item.imagen_principal.url }}"
+                                alt="{% default_internationalization "Imagen perfil item solución de "|add:item.nombre_en|upper "Image profile item solution of "|add:item.nombre_en|upper %}"
+                        >
+                    </a>
+                </div>
+            {% endif %}
+
+
+            <div class="col-12 mt-2 mb-2">
+                <p class="card-text text-justify">
+                    {% default_internationalization item.descripcion_corta item.descripcion_corta_en %}
+                </p>
+            </div>
+
+            {% with imagenes_lista=item.mis_imagenes.all|dictsort:"orden"|slice:":3" %}
+                {% if imagenes_lista %}
+                    <div class="col-12 pl-4 pr-4">
+                        <div class="galeria">
+                            <div class="mdb-lightbox">
+                                <div class="row">
+                                    {% for imagen in imagenes_lista %}
+                                        {% if imagen.imagen %}
+                                            {% if imagen.marca_agua == 1 %}
+                                                {% generateimage 'webpage:watermark' source=imagen.imagen as imagen_procesada %}
+                                            {% elif imagen.marca_agua == 2 %}
+                                                {% generateimage 'webpage:watermark_orange' source=imagen.imagen as imagen_procesada %}
+                                            {% else %}
+                                                {% generateimage 'webpage:normal' source=imagen.imagen as imagen_procesada %}
+                                            {% endif %}
+
+                                            <figure class="col-4 col-md-4 p-1 m-0 d-none d-sm-block">
+                                                <a href="{{ imagen_procesada.url }}"
+                                                   data-size="{{ imagen_procesada.width|stringformat:"d" }}x{{ imagen_procesada.height|stringformat:"d" }}">
+                                                    <div class="view overlay hm-white-slight z-depth-2">
+                                                        <img data-src="{{ imagen.imagen_thumbnail.url }}"
+                                                             alt="{% default_internationalization imagen.alt_seo imagen.alt_seo_en '' %}"
+                                                        >
+                                                    </div>
+                                                </a>
+                                                <div class="caption">
+                                                    <h3>{% default_internationalization item.nombre|upper item.nombre_en|upper %}</h3>
+                                                    <p>{% default_internationalization imagen.descripcion imagen.descripcion_en '' %}</p>
+                                                </div>
+                                            </figure>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <div class="ver_mas">
+            <a href="#" class="black-text d-flex flex-row-reverse" data-toggle="modal"
+               data-target="#{{ item.id|slugify }}-{{ item.nombre|slugify }}">
+                <h5 class="waves-effect">{% trans 'Ver más' %} <i class="fas fa-chevron-right"></i></h5>
+            </a>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{% load i18n custom_operators %}
+{% if documentos_list %}
+    <h4 class="h4-responsive mt-2">{% trans 'Recursos' %}</h4>
+    <ul>
+        {% for documento in documentos_list %}
+            {% if documento.en_ingles and documento.nombre_en or documento.en_espanol and documento.nombre %}
+                <li>
+                    <a href="{{ documento.documento.url }}"
+                       target="_blank"
+                    >
+                        {% default_internationalization documento.nombre|title documento.nombre_en|title %} - <i
+                            class="{{ documento.icono }}"
+                            aria-hidden="true"></i>
+                        <small>({{ documento.documento.size|filesizeformat }})</small>
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}

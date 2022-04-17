@@ -1,7 +1,13 @@
+from django.db.models import Prefetch
+from django.db.models import Q
 from django.views.decorators.gzip import gzip_page
 from django.utils.decorators import method_decorator
 from django.views.generic.detail import DetailView
 
+from django.utils.translation import get_language
+
+from .models import Documento
+from .models import ItemSolucionVideo
 from .models import Solucion, ItemSolucion, ItemSolucionImagen
 
 
@@ -20,6 +26,15 @@ class SolucionDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         id = self.object.pk
+        english_language = get_language() == 'en'
+
+        if english_language:
+            videos_queryset = ItemSolucionVideo.objects.filter(en_ingles=True)
+            documentos_queryset = Documento.objects.filter(en_ingles=True, nombre_en__isnull=False)
+        else:
+            videos_queryset = ItemSolucionVideo.objects.filter(en_espanol=True)
+            documentos_queryset = Documento.objects.filter(en_espanol=True, nombre__isnull=False)
+
         qs_mis_items = ItemSolucion.objects.filter(
             solucion__id=id,
             activo=True
@@ -28,8 +43,8 @@ class SolucionDetailView(DetailView):
             'categoria_item'
         ).prefetch_related(
             'mis_imagenes',
-            'mis_documentos',
-            'mis_videos'
+            Prefetch('mis_documentos', queryset=documentos_queryset),
+            Prefetch('mis_videos', queryset=videos_queryset)
         ).all()
         context['mis_items'] = qs_mis_items
         return context
